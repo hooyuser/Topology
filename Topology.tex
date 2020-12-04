@@ -1,0 +1,517 @@
+\documentclass{report}
+% Comment the following line to NOT allow the usage of umlauts
+\usepackage[utf8]{inputenc}
+% Uncomment the following line to allow the usage of graphics (.png, .jpg)
+\usepackage{geometry}
+\geometry{left=3cm,right=3cm,top=3cm,bottom=3cm}
+
+\usepackage[usenames,dvipsnames]{color}
+\usepackage[colorlinks,linkcolor=NavyBlue,anchorcolor=red,citecolor=green]{hyperref}
+\usepackage{graphicx}
+\usepackage{enumerate}
+\usepackage{multirow}
+\usepackage{float}
+\usepackage{bm}
+\usepackage{array,makecell}
+\usepackage[table,xcdraw]{xcolor}
+\usepackage{amsmath,amsfonts}
+\usepackage{amssymb}
+\usepackage{siunitx}
+\usepackage[thmmarks,amsmath]{ntheorem}
+\usepackage{tikz}
+
+\theorembodyfont{\upshape}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{example}{Example}[section]
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[section]
+\theoremstyle{nonumberplain}
+\theoremheaderfont{\itshape}
+\theorembodyfont{\normalfont}
+\theoremsymbol{\\ \rightline{$\square$}}
+\newtheorem{proof}{Proof.}
+
+
+
+% Start the document
+\begin{document}
+	\begin{center}	
+	~\\ 
+	\vspace{6em} 
+	\textsc{\Huge TOPOLOGY}	
+	~\\
+	\vspace{2.5em} 
+	{\Large }
+	~\\
+	\vspace{6em}
+	\textsf{Huyi Chen}
+	~\\
+	\vspace{5in}  
+	{\large Latest Update: \today}
+	\end{center}
+
+% Create a new 1st level heading
+\chapter{Preliminaries}
+
+\section{Naive Set Theory}
+	Suppose that $A_\alpha,A,B_\alpha,B$ are sets and $I$ is some index set. We have
+\begin{itemize}	
+	\item $A\cap\left(\bigcup\limits_{\alpha\in I}B_\alpha\right)=\bigcup\limits_{\alpha\in I}\left(A\cap B_\alpha\right)\ $, $A\cup\left(\bigcap\limits_{\alpha\in I}B_\alpha\right)=\bigcap\limits_{\alpha\in I}\left(A\cup B_\alpha\right)$.
+	\item $\left(\bigcup\limits_{\alpha\in I}A_\alpha\right)^C=\bigcap\limits_{\alpha\in I}A_\alpha^{\,C}\ $, $\left(\bigcap\limits_{\alpha\in I}A_\alpha\right)^C=\bigcup\limits_{\alpha\in I}A_\alpha^{\,C}$ 
+	\item $E-\bigcup\limits_{\alpha\in I}A_\alpha=\bigcap\limits_{\alpha\in I}\left(E-A_\alpha\right)\ $, $E-\bigcap\limits_{\alpha\in I}A_\alpha=\bigcup\limits_{\alpha\in I}\left(E-A_\alpha\right)\ $ 
+\end{itemize} 
+Let $f:X\to Y$ be a map. Suppose that $A_\alpha,A,E\subset X$ and $B_\alpha,B,F\subset Y$. We have
+\begin{itemize}	
+	\item $f\left(\bigcup\limits_{\alpha\in I}A_\alpha\right)=\bigcup\limits_{\alpha\in I}f\left(A_\alpha\right)\ $, $f\left(\bigcap\limits_{\alpha\in I}A_\alpha\right)\subset\bigcap\limits_{\alpha\in I}f\left(A_\alpha\right)\ $, $f(E-A)\supset f(E)-f(A)$.	
+	\item $f^{-1}\left(\bigcup\limits_{\alpha\in I}B_\alpha\right)=\bigcup\limits_{\alpha\in I}f^{-1}\left(B_\alpha\right)\ $, $f^{-1}\left(\bigcap\limits_{\alpha\in I}B_\alpha\right)=\bigcap\limits_{\alpha\in I}f^{-1}\left(B_\alpha\right)\ $, $f^{-1}(F-B)=f^{-1}(F)-f^{-1}(B)$.
+	\item $A\subset f^{-1}(f(A))\ $, $B\supset f(f^{-1}(B))$.
+\end{itemize}
+
+\chapter{General Topology}
+\section{Topological space}
+
+\begin{definition}[topological space]
+	A \emph{topological space} is an ordered pair $(X,\tau)$, where $X$ is a set and $\tau\subset\mathcal{P}(X)$ is a collection of subsets of $X$, satisfying the following axioms:
+	\begin{enumerate}	
+		\item $\varnothing\in \tau$, $X\in \tau$.	
+		\item If $A_i\in\tau\;(i\in I)$, then $\bigcup\limits_{i\in I}A_i\in \tau$, 
+		\item If $A_i\in\tau\;(i=1,2,\cdots,n)$, then $\bigcap\limits_{i=1}^nA_i\in \tau$.
+	\end{enumerate}
+\noindent The elements of $\tau$ are called \emph{open sets} and the collection $\tau$ is called a \emph{topology} on $X$.
+\end{definition}
+	
+\noindent In this chapter we always assume that $(X,\tau)$ is a topological space.
+
+
+\begin{definition}[closed set]
+	Suppose that $A$ is a subset of $X$. $A$ is a \emph{closed set} if and only if $A^C$ is an open set.
+\end{definition}
+
+\begin{proposition}
+	Assume that $\mathcal{F}\subset\mathcal{P}(X)$ is a collection of all closed sets of $(X,\tau)$.
+	\begin{enumerate}	
+	\item $\varnothing\in \mathcal{F}$, $X\in \mathcal{F}$.	
+	\item If $A_i\in\mathcal{F}\;(i\in I)$, then $\bigcap\limits_{i\in I}A_i\in \mathcal{F}$, 
+	\item If $A_i\in\mathcal{F}\;(i=1,2,\cdots,n)$, then $\bigcup\limits_{i=1}^nA_i\in \mathcal{F}$.
+	\end{enumerate}
+\end{proposition}
+\begin{proof}~\\ 
+	\begin{enumerate}	
+		\item \vspace{-1em}$\varnothing\in \tau\implies\varnothing^C=X\in \mathcal{F} \ $. $X\in \tau\implies X^C=\varnothing\in \mathcal{F}$.	
+		\item $A_i\in\mathcal{F}\;(i\in I)\implies A_i^C\in\tau\;(i\in I)\implies\bigcup\limits_{i\in I}A_i^C\in \tau\implies \left(\bigcap\limits_{i\in I}A_i\right)^C\in \tau\implies\bigcap\limits_{i\in I}A_i\in\mathcal{F}$. 
+		\item $A_i\in\mathcal{F}\;(i=1,\cdots,n)\implies A_i^C\in\tau\;(i=1,\cdots,n)\implies\bigcap\limits_{i=1}^nA_i^C\in \tau\implies \left(\bigcup\limits_{i=1}^nA_i\right)^C\in \tau\implies\bigcup\limits_{i=1}^nA_i\in\mathcal{F}$.
+	\end{enumerate}
+\end{proof}
+
+\begin{definition}[neighborhood]
+Given a point $x\in X$, a set $N\subset X$ is the \emph{neighborhood} of $x$ if there exists an open set $O\in\tau$ such that $x\in O\subset N$. The collection of all neighborhoods of $x$ is denoted by $\mathcal{N}(x)$.
+\end{definition}
+
+\begin{proposition}
+	Suppose that $x\in X$.
+	\begin{enumerate}	
+		\item $N\in\mathcal{N}(x)\implies x\in N$ 
+		\item $N_1,N_2\in\mathcal{N}(x)\implies N_1\cap N_2\in\mathcal{N}(x)$
+		\item $N\in\mathcal{N}(x)\bigwedge N\subset U\subset X\implies U\in\mathcal{N}(x)$
+		\item $N\in\mathcal{N}(x)\implies \exists M\in\mathcal{N}(x),\ (M\subset N)\bigwedge(\,\forall y\in M,M\in\mathcal{N}(y)\hspace{1pt})$
+	\end{enumerate}
+\end{proposition}
+\begin{proof}~\\ \vspace{-1em}
+	\begin{enumerate}	
+		\item $N\in\mathcal{N}(x)\implies x\in O\subset N \implies x\in N$.
+		\item $N_1,N_2\in\mathcal{N}(x)\implies x\in O_1\subset N_1 \bigwedge x\in O_2\subset N_2\implies x\in O_1\cap O_2\subset N_1\cap N_2$.
+		\item $N\in\mathcal{N}(x)\bigwedge N\subset U\subset X\implies x\in O\subset N\subset U\implies U\in\mathcal{N}(x)$.
+		\item If $N\in\mathcal{N}(x)$, then there exists $O\in\tau$ such that $x\in O\subset N$. Note that $O\in \mathcal{N}(x)$ and
+		\[
+		\forall y\in O,y\in O\subset O\implies\forall y\in O,O\in\mathcal{N}(y).
+		\]
+		We affirm that $O$ is the set $M$ that we are looking for.
+	\end{enumerate}
+\end{proof}
+\begin{definition}[limit point]
+	Suppose that $A$ is a subset of $X$. A point $x\in X$ is a \emph{limit point} of $A$, if every neighbourhood of $x$ contains at least one point of $A$ different from $x$ itself,
+	or alternatively, if for any open set $O$ containing $x$,
+	\[
+	O\cap(A-\{x\})\ne\varnothing.
+	\]
+    The set of all limit points of $A$ is said to be the \emph{derived set} of $A$, denoted by $A'$.
+\end{definition}
+
+\begin{proposition}
+	Suppose that $A$ and $B$ are subsets of $X$.
+	\begin{enumerate}	
+	\item $\varnothing'=\varnothing$ 
+	\item $(A \cup B)'=A'\cup B' $
+	\item $A \subset B \Longrightarrow A' \subset B'$
+	\item $A'' \subset A' \cup A $
+	\item $a \in A' \Longrightarrow a \in(A-\{a\})' $
+	\end{enumerate}
+\end{proposition}
+\begin{proof}~\\ \vspace{-1em}
+	\begin{enumerate}	
+		\item For any point $x\in X$ and for any neighborhood $N\in\mathcal{N}(x)$, we have $N\cap(\varnothing-\{x\})=\varnothing$. It implies that empty set has no limit points.
+		\item Omitted.
+	\end{enumerate}
+\end{proof}
+
+\begin{definition}[closure]
+Suppose that $A$ is a subset of $X$. The \emph{closure} of $A$ is the smallest closed set containing $A$, denoted by $\overline{A}$.
+\end{definition}
+
+\begin{proposition}
+	The following propositions are equivalent:
+	\begin{enumerate}	
+		\item $S$ is the closure of $A$.
+		\item $S=\bigcap\limits_{F_\alpha\in\mathcal{F}:A\subset F_\alpha}F_\alpha$, where $\mathcal{F}$ is a collection of all closed sets of $X$.
+		\item $S=A\cup A'$.
+		\item $S=\{x\in X: \forall N\in\mathcal{N}(x),N\cap A\ne\varnothing\}$.
+	\end{enumerate}
+\end{proposition}
+
+\begin{proof}~\\ \vspace{-1em}
+	\begin{enumerate}	
+		\item Omitted.
+	\end{enumerate}
+\end{proof}
+\begin{proposition}
+Suppose that $A$ and $B$ are subsets of $X$.
+	\begin{enumerate}
+		\item $\overline{\varnothing}=\varnothing$.	
+		\item $\overline{A \cup B}=\overline{A}\cup\overline{B}$,  $\overline{A \cap B}\subset\overline{A}\cap\overline{B}$.
+		\item $A\subset\overline{A}$.
+		\item $\overline{\left(\overline{A}\right)}=\overline{A}$.
+	\end{enumerate}
+\end{proposition}
+
+\begin{proof}~\\ \vspace{-1em}
+	\begin{enumerate}	
+		\item Omitted.
+	\end{enumerate}
+\end{proof}
+
+\begin{definition}[frontier]
+	Suppose that $A$ is a subset of $X$. The \emph{frontier} of $A$ denoted by $\partial A$ is defined as
+	\[
+	\partial A=\overline{A}\cap\overline{A^C}.
+	\] A point $x$ is called an \emph{boundary point} of $A$ if $x\in \partial A$.
+\end{definition}
+
+\begin{definition}[interior]
+	Suppose that $A$ is a subset of $X$. The \emph{interior} of $A$ is the largest open set contained by $A$, denoted by $A^{\circ}$. A point $x$ is called an \emph{interior point} of $A$ if $x\in A^{\circ}$.
+\end{definition}
+
+\begin{proposition}
+	The following propositions are equivalent:
+	\begin{enumerate}	
+		\item $S$ is the interior of $A$.
+		\item $S=\bigcup\limits_{O_\alpha\in\tau:O_\alpha\subset A}O_\alpha$.
+		\item $S=A-\partial A$.
+		\item $S=\{x\in X:\exists N\in\mathcal{N}(x),N_x\subset A\}$.
+	\end{enumerate}
+\end{proposition}
+\begin{proof}~\\ \vspace{-1em}
+	\begin{enumerate}	
+		\item Omitted.
+	\end{enumerate}
+\end{proof}
+\begin{proposition}
+	Suppose that $A$ and $B$ are subsets of $X$.
+	\begin{enumerate}
+		\item $\varnothing^{\circ}=\varnothing$.	
+		\item $(A \cup B)^{\circ}=A^{\circ}\cup B^{\circ}$,  $(A \cap B)^{\circ}\supset A^{\circ}\cap B^{\circ}$.
+		\item $A\supset A^{\circ}$.
+		\item $\left(A^{\circ}\right)^{\circ}=A^{\circ}$.
+	\end{enumerate}
+\end{proposition}
+
+\begin{proof}~\\ \vspace{-1em}
+	\begin{enumerate}	
+		\item Omitted.
+	\end{enumerate}
+\end{proof}
+
+\begin{proposition}
+	The following propositions are equivalent:
+	\begin{enumerate}
+		\item $F$ is a closed set.	
+		\item $F'\subset F$.
+		\item $\overline{F}=F$.
+	\end{enumerate}
+\end{proposition}
+\begin{proof}~\\ \vspace{-1em}
+	\begin{enumerate}	
+		\item Omitted.
+	\end{enumerate}
+\end{proof}
+
+\begin{proposition}
+	The following propositions are equivalent:
+	\begin{enumerate}
+		\item $F$ is an open set.	
+		\item $\partial F\cap F=\varnothing$.
+		\item $F^\circ=F$.
+		\item $\forall x\in F,F\in \mathcal{N}(x)$.
+	\end{enumerate}
+\end{proposition}
+\begin{proof}~\\ \vspace{-1em}
+	\begin{enumerate}	
+		\item Omitted.
+	\end{enumerate}
+\end{proof}
+
+\begin{proposition}
+	Suppose that $A$ is a subset of $X$.
+	\begin{enumerate}	
+		\item $(\overline{A})^C=(A^C)^{\circ}$
+		\item $(A^{\circ})^C=\overline{A^C}$
+	\end{enumerate}
+\end{proposition}
+\begin{proof}~\\ \vspace{-1em}
+	\begin{enumerate}	
+		\item Omitted.
+	\end{enumerate}
+\end{proof}
+
+\begin{definition}[dense set]
+	A subset $A$ of a topological space $X$ is called dense in $X$ if  $\overline{A}=X$.
+\end{definition}
+\begin{proposition}
+	The following propositions are equivalent:
+	\begin{enumerate}
+		\item $A$ is dense in $X$.	
+		\item For any point $x \in X$ and for any neighborhood $N\in\mathcal{N}(x)$, $N\cap A\ne \varnothing$.
+	\end{enumerate}
+\end{proposition}
+\begin{proof}~\\ \vspace{-1em}
+	\begin{enumerate}	
+		\item Omitted.
+	\end{enumerate}
+\end{proof}
+
+\begin{definition}
+	Let $\mathcal{B}$ is a collection of subsets of $X$, the collection of subsets generated by $\mathcal{B}$ is defined as
+	\[
+	\langle\mathcal{B}\rangle=\left\{A\in 2^X:A=\bigcup_{i\in I} B_i,B_i\in\mathcal{B}\right\}.
+	\]
+\end{definition}
+\begin{definition}[base]
+	 Let $\mathcal{B}$ be a collection of subsets of the topological space $(X,\tau)$. $B$ is a \emph{base} for $(X,\tau)$ if 
+	 $\langle\mathcal{B}\rangle=\tau$.
+\end{definition}
+\begin{proposition}
+	Let $\mathcal{B}$ be a collection of subsets of the topological space $(X,\tau)$. The following propositions are equivalent:
+	\begin{enumerate}
+		\item $\mathcal{B}$ is a base for $X$. 
+		\item Elements in $\mathcal{B}$ cover $X$ and $\forall B_1,B_2\in\mathcal{B}$, $\forall x\in B_1\cap B_2$, $\exists B_3\in B_1\cap B_2$ such that $x\in B_3$.
+	\end{enumerate}
+\end{proposition}
+\begin{definition}[second-countable space]
+	A \emph{second-countable} space, also called a completely separable space, is a topological space whose topology has a countable base. 
+\end{definition}
+
+We have several separation axioms in topological spaces denoted by $\mathrm{T}_r$, $r=0,1,2,2\frac{1}{2},3,3\frac{1}{2},4,5,6$.
+\begin{definition}[Hausdorff space/$\mathrm{T}_2$ space]
+	A topological space $X$ is a \emph{Hausdorff space}, separated space or $\mathrm{T}_2$ space if for any two distinct points $x,y\in X$ there exists a neighbourhood $U$ of $x$ and a neighbourhood $V$ of $y$ such that $U\cap V=\varnothing$. 
+\end{definition}
+\begin{definition}[normal space/$\mathrm{T}_4$ space]
+	A topological space $X$ is a \emph{normal space} or $\mathrm{T}_4$ space if, given any disjoint closed sets $E$ and $F$ in $X$, there are neighbourhoods $U$ of $E$ and $V$ of $F$ such that $U\cap V=\varnothing$. 
+\end{definition}
+
+\begin{definition}[compact topological space]
+	Formally, a topological space $X$ is called \emph{compact} if each of its open covers has a finite subcover. That is, $X$ is compact if for every collection $\mathcal{C}$ of open subsets of $X$ such that
+	\[
+	X=\bigcup_{C \in \mathcal{C}} C
+	\]
+	there is a finite subset $\mathcal{F}$ of $\mathcal{C}$ such that
+	\[
+	X=\bigcup_{F \in \mathcal{F}} F
+	\]
+\end{definition}
+A subset $K$ of a topological space $X$ is said to be compact if it is compact as a subspace (in the subspace topology).
+
+\chapter{Concrete Examples}
+A topological space $X$ is called locally Euclidean if there is a non-negative integer $n$ such that every point in $X$ has a neighbourhood which is homeomorphic to real n-dimensional space $\mathbb{R}^n$.
+
+\indent A topological manifold is a locally Euclidean Hausdorff space. In this chapter we focus on some concrete topological manifolds to develop a topological intuition. Topological manifold will be called manifold in brief whenever we mention it.
+
+\section{One-dimensional manifolds}
+\subsection{Real affine line $\mathbb{R}^1$}
+The real line $\mathbb{R}^1$ carries a standard topology, which can be introduced from the metric defined above. The real line is homeomorphic to any open interval $(a, b)\in\mathbb{R}$.
+\begin{center}
+	\begin{tikzpicture} 
+	\path (-4,0.5) node (name1) {$\mathbb{R}^1$};
+	\path (4,0.5) node (name2) {$(a,b)$};
+	\draw (-6,0) -- (-2,0); 
+	\draw (name1); 
+	\draw (0,0) node {$\cong$};
+	\draw (2,0) circle [radius=2pt] (2.05,0)-- (5.95,0)(6,0) circle [radius=2pt]; 
+	\draw (name2); 
+	\end{tikzpicture}
+\end{center}
+One homeomorphic mapping is
+\begin{align*}
+	f:\mathbb{R}^1\longrightarrow(a, b),\qquad
+	 x\longmapsto \frac{b-a}{\pi}\arctan\left(x\right)+\frac{a+b}{2}.
+\end{align*}
+
+\subsection{Circle $S^1$}
+The circle $S^1$ is defined by $S^1=\{(x,y)\in\mathbb{R}^2|x^2+y^2=1\}$. $S^1$ can be described as $S^1\cong \mathbb{R}^1\cup\{\infty\}$, which is real line plus a single point representing infinity in both directions. Therefore, if a single point $P$ is removed from a circle, it becomes homeomorphic to $\mathbb{R}^1$. 
+\begin{center}
+	\begin{tikzpicture} 
+	\path (3,0.25) node (name1) {$\mathbb{R}^1$};
+	\path (1.1,0.75) node (name2) {$S^1$};
+	\draw (0,0) circle [radius=1cm];
+	\draw (-4,0) -- (4,0) ;
+	\draw[dashed] (0,1) -- (0.5,-0.866025) ;
+	\draw (0,1.3) node {$P(\infty)$} ;
+	\draw (0,1) circle [radius=2pt] ;
+	\end{tikzpicture}
+\end{center}
+This homeomorphism is exactly the stereographic projection of $P$. Take $P=(0,1)$ and the stereographic projection is given by
+\begin{align*}
+pr:S^1-P\longrightarrow \mathbb{R}^1,\qquad &(x, y) \longmapsto X=\frac{x}{1-y}, \\
+pr^{-1}:\mathbb{R}^1\longrightarrow S^1-P,\qquad &X \longmapsto(x, y)=\left(\frac{2X}{X^{2}+1}, \frac{X^{2}-1}{X^{2}+1}\right).
+\end{align*}
+
+\subsection{Real projective line $P^1(\mathbb{R})$}
+Real projective line $P^1(\mathbb{R})$ is the set of equivalence classes of $\mathbb{R}^2-{(0,0)}$ under the equivalence relation $\sim$ defined by $x\sim y$ if there is a nonzero real number $\lambda$ such that $x = \lambda y$. Given any representative element $(x,y)\in \mathbb{R}^2-{(0,0)}$, the equivalence class of $(x,y)$ is denoted in the form of homogeneous coordinates $[x:y]$. Clearly we have $[x:y]=[\lambda x:\lambda y]$ for any nonzero $\lambda\in \mathbb{R}$. 
+
+\indent Real projective line consists of all 1-dimensional subspace of $\mathbb{R}^2$. 
+\begin{center}
+	\begin{tikzpicture} 
+	\draw[very thick] (-4.5,1) -- (4.5,1) ;
+	\draw (-4.5,0) -- (4.5,0) ;
+	\draw (0,-2) -- (0,2);
+	\draw (-2,-2) -- (2,2);
+	\draw (-3.2,-2) -- (3.2,2);
+	\draw (-1,-2) -- (1,2);
+	\draw (2,-2) -- (-2,2);
+	\draw (3.2,-2) -- (-3.2,2);
+	\draw (1,-2) -- (-1,2);
+	\draw (4.4,2) -- (-4.4,-2);
+	\draw (4.4,-2) -- (-4.4,2);
+	\draw (-4.7,1) node[left] {$[x:1]=\mathbb{R}^1$};
+	\draw (-4.7,0) node[left] {$[1:0]=\infty$};
+	\end{tikzpicture}
+\end{center}
+By introduce the continuous mapping
+\begin{align*}
+r:P^1(\mathbb{R})&\longrightarrow\mathbb{R}^1\cup\{\infty\},\\
+[x:y]&\longmapsto \frac{x}{y},
+\end{align*}
+we can clearly see $P^1(\mathbb{R})\cong S^1$.
+$P^1(\mathbb{R})$ can be constructed by identifying the antipodal points of $S^1$.
+\begin{center}
+	\begin{tikzpicture} 
+	\draw (1.4,0) arc [start angle=0, end angle=177, radius=1.4cm];
+	\draw[dashed] (1.4,0) arc [start angle=0, end angle=-175, radius=1.4cm];
+	\draw (-3.5,0) -- (3.5,0) ;
+	\draw (0,-2) -- (0,2);
+	\draw (-2,-2) -- (2,2);
+	\draw (-3.5,-2) -- (3.5,2);
+	\draw (-1,-2) -- (1,2);
+	\draw (2,-2) -- (-2,2);
+	\draw (3.5,-2) -- (-3.5,2);
+	\draw (1,-2) -- (-1,2);
+	\draw (3.5,1) -- (-3.5,-1);
+	\draw (3.5,-1) -- (-3.5,1);
+	\draw (-1.4,0) circle [radius=2pt];
+	\filldraw (1.4,0) circle [radius=2pt];
+	\end{tikzpicture}
+\end{center}
+
+\section{Two-dimensional manifolds}
+\subsection{Real affine plane $\mathbb{R}^2$}
+The real affine plane $\mathbb{R}^2$ carries a standard topology. $\mathbb{R}^2$ is homeomorphic to any open region $G\in\mathbb{R}$.
+Since the mapping $(x,y)\mapsto x+\mathrm{i}y$ is a homeomorphism, we have $\mathbb{R}^2\cong \mathbb{C}$.
+
+\subsection{Sphere $S^2$}
+The circle $S^2$ is defined by $S^2=\{(x,y,z)\in\mathbb{R}^3|x^2+y^2+z^2=1\}$. Similarly we have $S^2\cong \mathbb{R}^2\cup\{\infty\}$ and the stereographic projection of $P=(0,0,1)$
+\begin{align*}
+pr:S^2-P\longrightarrow \mathbb{R}^2,\qquad &(x, y,z) \longmapsto (X,Y)=\left(\frac{x}{1-z}, \frac{y}{1-z}\right), \\
+pr^{-1}:\mathbb{R}^1\longrightarrow S^1-P,\qquad &(X,Y) \longmapsto(x, y,z)=\left(\frac{2 X}{X^{2}+Y^{2}+1}, \frac{2 Y}{X^{2}+Y^{2}+1}, \frac{X^{2}+Y^{2}-1}{X^{2}+Y^{2}+1}\right).
+\end{align*}
+Sphere $S^2$ can be described by a square with some edges identified as follows
+\begin{center}
+	\begin{tikzpicture} 
+	\fill[fill=gray!12] (-1,-1) --(1,-1)--(1,1)--(-1,1)-- cycle;
+	\draw [color=orange,thick,-latex] (-1,-1) -- node [color=black,pos=0.5,below]{$b$} (1,-1);
+	\draw [color=cyan,thick,-latex] (-1,1) -- node [color=black,pos=0.5,left]{$a$} (-1,-1);
+	\draw [color=orange,thick,-latex] (1,1)--node [color=black,pos=0.5,right]{$b$}(1,-1);
+	\draw [color=cyan,thick,-latex] (-1,1)-- node [color=black,pos=0.5,above]{$a$} (1,1);
+	\end{tikzpicture}
+\end{center}
+
+\subsection{Real projective plane $P^2(\mathbb{R})$}
+Real projective plane $P^2(\mathbb{R})=(\mathbb{R}^3-\{(0,0,0)\})/\sim$ where $x\sim y$ whenever there is a nonzero real number $\lambda$ such that $x = \lambda y$. $P^2(\mathbb{R})\cong\mathbb{R}^2\sqcup P^1(\mathbb{R})\cong\mathbb{R}^2\sqcup\mathbb{R}^1\sqcup\{\infty\}$.
+\begin{center}
+	\begin{tikzpicture} 
+	\draw[dashed] (-2,0,-2) -- (2,0,-2)-- (2,0,2)-- (-2,0,2)--(-2,0,-2);
+	\filldraw[fill=gray!12] (-2,2,-2) -- (2,2,-2)-- (2,2,2)-- (-2,2,2)--(-2,2,-2);
+	\draw  (1.5,0,-1.5)-- (-1.5,0,1.5);
+	\draw  (0,0,-1.5)-- (0,0,1.5);
+	\draw  (1.5,0,0)-- (-1.5,0,0);
+	\draw (0,-2,0) -- (0,-0.75,0);
+	\draw (0,0,0) -- (0,1.25,0);
+	\draw (0,2,0) -- (0,3,0);
+	\draw (2,-2,1) -- (0.68,-0.68,0.34);
+	\draw (0,0,0) -- (-1,1,-0.5);
+	\draw (-1.5,1.5,-0.75) -- (-2.4,2.4,-1.2);
+	\draw (-2.1,0,2) node[left]{$[x:y:0]=P^1(\mathbb{R})$};
+	\draw (-2.1,2,2) node[left]{$[x:y:1]=\mathbb{R}^2$};
+	\end{tikzpicture}
+\end{center}
+$P^2(\mathbb{R})$ can be constructed by identifying the antipodal points of $S^2$, which can be represented by $S^2/\{1,-1\}$. $P^2(\mathbb{R})$ can also be constructed from a closed unit disk $\overline{D^2}$ by identifying the antipodal points of the boundary $\partial \overline{D^2}=S^1$. Another way to describe $P^2(\mathbb{R})$ is a square with some edges identified as follows
+\begin{center}
+	\begin{tikzpicture} 
+	\fill[fill=gray!12] (-1,-1) --(1,-1)--(1,1)--(-1,1)-- cycle;
+	\draw [color=cyan,thick,-latex]  (1,-1)-- node [color=black,pos=0.5,below]{$a$} (-1,-1);
+	\draw [color=orange,thick,-latex](-1,-1) -- node [color=black,pos=0.5,left]{$b$} (-1,1) ;
+	\draw [color=orange,thick,-latex] (1,1)--node [color=black,pos=0.5,right]{$b$}(1,-1);
+	\draw [color=cyan,thick,-latex] (-1,1)-- node [color=black,pos=0.5,above]{$a$} (1,1);
+	\end{tikzpicture}
+\end{center}
+\subsection{Complex projective line $P^1(\mathbb{C})$}
+Real projective line $P^1(\mathbb{R})$ is the set of equivalence classes of $\mathbb{R}^2-{(0,0)}$ under the equivalence relation $\sim$ defined by $x\sim y$ if there is a nonzero real number $\lambda$ such that $x = \lambda y$. We have the following homeomorphisms $P^1(\mathbb{C})\cong \mathbb{C}\cup\{\infty\}\cong \mathbb{R}^2\cup\{\infty\}\cong S^2$.
+\subsection{Torus $T^2$}
+A torus $T^2$ is a closed surface defined as the product of two circles $S^1 \times S^1$.
+Torus can be described by a square with some edges identified as follows
+\begin{center}
+	\begin{tikzpicture} 
+	\fill[fill=gray!12] (-1,-1) --(1,-1)--(1,1)--(-1,1)-- cycle;
+	\draw [color=cyan,thick,-latex] (-1,-1) -- node [color=black,pos=0.5,below]{$a$} (1,-1);
+	\draw [color=orange,thick,-latex] (-1,1)-- node [color=black,pos=0.5,left]{$b$}(-1,-1)  ;
+	\draw [color=orange,thick,-latex] (1,1)--node [color=black,pos=0.5,right]{$b$}(1,-1);
+	\draw [color=cyan,thick,-latex] (-1,1)-- node [color=black,pos=0.5,above]{$a$} (1,1);
+	\end{tikzpicture}
+\end{center}
+\subsection{Möbius strip}
+Möbius strip can be described by a square with some edges identified as follows
+\begin{center}
+	\begin{tikzpicture} 
+	\fill[fill=gray!12] (-1,-1) --(1,-1)--(1,1)--(-1,1)-- cycle;
+	\draw [color=cyan,thick,-latex] (1,-1) -- node [color=black,pos=0.5,below]{$a$} (-1,-1);
+	\draw [color=black,thick,dashed](-1,-1) -- node [color=black,pos=0.5,left]{$b$} (-1,1) ;
+	\draw [color=black,thick,dashed] (1,1)--node [color=black,pos=0.5,right]{$b$}(1,-1);
+	\draw [color=cyan,thick,-latex] (-1,1)-- node [color=black,pos=0.5,above]{$a$} (1,1);
+	\end{tikzpicture}
+\end{center}
+\subsection{Klein bottle}
+
+Klein bottle can be described by a square with some edges identified as follows
+\begin{center}
+	\begin{tikzpicture} 
+	\fill[fill=gray!12] (-1,-1) --(1,-1)--(1,1)--(-1,1)-- cycle;
+	\draw [color=cyan,thick,-latex] (-1,-1) -- node [color=black,pos=0.5,below]{$a$} (1,-1);
+	\draw [color=orange,thick,-latex](-1,-1) -- node [color=black,pos=0.5,left]{$b$} (-1,1) ;
+	\draw [color=orange,thick,-latex] (1,1)--node [color=black,pos=0.5,right]{$b$}(1,-1);
+	\draw [color=cyan,thick,-latex] (-1,1)-- node [color=black,pos=0.5,above]{$a$} (1,1);
+	\end{tikzpicture}
+\end{center}
+
+
+
+
+\end{document}
+
