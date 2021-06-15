@@ -18,6 +18,7 @@
 \usepackage{amssymb}
 \usepackage{siunitx}
 \usepackage[thmmarks,amsmath]{ntheorem}
+\usepackage[all]{xy}
 \usepackage{tikz}
 
 \theorembodyfont{\upshape}
@@ -329,6 +330,61 @@ We have several separation axioms in topological spaces denoted by $\mathrm{T}_r
 	\]
 \end{definition}
 A subset $K$ of a topological space $X$ is said to be compact if it is compact as a subspace (in the subspace topology).
+\section{Basic Construction}
+\subsection{Subspace Topology}
+
+\subsection{Quotient Topology}
+\begin{definition}[quotient space]
+	Let $(X,\tau)$ be a topological space and $\sim$ be a equivalence relation on $X$. Let $\pi:X\to X/\sim$ be the projection. 
+	The \emph{quotient space} of $X$ is the set $X/\sim$ equiped with the following topology
+	\[
+	\tau_\sim:=\{A\in 2^{X/\sim}\mid \pi^{-1}(A)\in \tau\},
+	\]
+	which is called \emph{quotient topology}.
+\end{definition}
+
+It is easy to check that $\pi$ is a continuous surjection from $(X,\tau)$ to $(X/\sim\,,\tau_\sim)$.
+
+\begin{proposition}
+	 For any topological space $(Y,\sigma)$ and any continuous mapping $f:X\to Y$ such that $a\sim b$ implies $f(a) = f(b)$ for all $a,b \in X$, there exists a unique continuous mapping $\bar{f}:X/\sim\;\to Y$ such that the following diagram commutes.
+	
+	\[\xymatrix{
+		X\ar[r]^{f\quad}\ar[d]_{\pi}  &Y\\
+		X/\sim\ar@{-->}[ru]_{\exists!\bar{f}}&  
+	}\]
+\end{proposition}
+
+
+\begin{proof}
+	Define
+	\begin{align*}
+		\bar{f}:X/\sim&\longrightarrow Y,\\
+		[x]&\longmapsto f(x).
+	\end{align*}
+	It is clear that $\bar{f}$ is well-defined. Since for all $B\in \sigma$,
+	\[
+	\pi^{-1}\left(\bar{f}^{-1}(B)\right)=\pi^{-1}\left(\{[x]\in X/\sim| f(x)\in B\}\right)=\{x\in X| f(x)\in B\}=f^{-1}(B)\in \tau,
+	\]
+	we have
+	\[
+	\bar{f}^{-1}(B)\in \tau_\sim,
+	\]
+	which implies $\bar{f}$ is continuous. If there exists a function $g:X/\sim\;\to Y$ such that $f=g\circ\pi$, then for all $[x]\in X/\sim$, we see
+	\[
+	g([x])=g(\pi(x))=f(x)\implies g=\bar{f}.
+	\]
+\end{proof}
+
+
+\subsection{Product Topology}
+
+
+\chapter{Basic Notions}
+\section{CW Complex}
+A $k$-cell is a $k$-dimensional disc
+\[
+D^k=\{x\in\mathbf{R}^k:\ |x|\leq 1\}.
+\]
 
 \chapter{Concrete Examples}
 A topological space $X$ is called locally Euclidean if there is a non-negative integer $n$ such that every point in $X$ has a neighbourhood which is homeomorphic to real n-dimensional space $\mathbb{R}^n$.
@@ -493,7 +549,7 @@ Möbius strip can be described by a square with some edges identified as follows
 	\fill[fill=gray!12] (-1,-1) --(1,-1)--(1,1)--(-1,1)-- cycle;
 	\draw [color=cyan,thick,-latex] (1,-1) -- node [color=black,pos=0.5,below]{$a$} (-1,-1);
 	\draw [color=black,thick,dashed](-1,-1) -- node [color=black,pos=0.5,left]{$b$} (-1,1) ;
-	\draw [color=black,thick,dashed] (1,1)--node [color=black,pos=0.5,right]{$b$}(1,-1);
+	\draw [color=black,thick,dashed] (1,1)--node [color=black,pos=0.5,right]{$c$}(1,-1);
 	\draw [color=cyan,thick,-latex] (-1,1)-- node [color=black,pos=0.5,above]{$a$} (1,1);
 	\end{tikzpicture}
 \end{center}
@@ -509,8 +565,13 @@ Klein bottle can be described by a square with some edges identified as follows
 	\draw [color=cyan,thick,-latex] (-1,1)-- node [color=black,pos=0.5,above]{$a$} (1,1);
 	\end{tikzpicture}
 \end{center}
-
-
+\section{Other manifolds}
+\subsection{Real projective space $P^n(\mathbb{R})$}
+Real projective plane $P^n(\mathbb{R})=(\mathbb{R}^{n+1}-\{\mathbf{0}\})/\sim$ where $x\sim y$ whenever there is a nonzero real number $\lambda$ such that $x = \lambda y$. In general, we have 
+$$
+P^n(\mathbb{R})\cong S^n/\{\pm 1\}\cong D^n\sqcup (\partial D^n/{\pm 1})= D^n\sqcup (S^{n-1}/\{\pm 1\})\cong D^n\sqcup P^{n-1}(\mathbb{R})\cong \overline{D^n}\sqcup_{\partial D^n} P^{n-1}(\mathbb{R}),
+$$
+where $D^n:=\{x\in\mathbb{R}^{n+1}:\Vert x\Vert\le1\}$. 
 
 
 \end{document}
