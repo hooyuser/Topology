@@ -1,8 +1,2 @@
-
-Topology.aux
-Topology.out
-*.log
-*.aux
-*.thm
-*.gz
-*.out
+*.*
+!*.tex
