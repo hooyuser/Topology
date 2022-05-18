@@ -438,17 +438,24 @@ We say a path is a \emph{loop} if $p(0)=p(1)$.
 		g\cdot f:[0,1] &\longrightarrow X\\
 		t &\longmapsto \begin{cases}
 			f(2t)&\text{if }t\in\left[0,\frac{1}{2}\right],\\
-			g(2t-1)&\text{if }t\in\left(\left.\frac{1}{2},1\right]\right.
+			g(2t-1)&\text{if }t\in\left(\left.\frac{1}{2},1\right]\right. .
 		\end{cases}
 	\end{align*}
 \end{definition}
-\begin{definition}[fundamental group]
-	Given a topological space $X$ and a point $x\in X$, define $\pi_1(X, x)$ to be the set of equivalence classes of loops that start and end at $x$. $(\pi_1(X, x),\cdot)$ is a group, called the fundamental group of $X$, where the group operation $\cdot$ is defined as $[g]\cdot[f]:=[g\cdot f]$.
+\begin{definition}[composition of equivalent classes of paths]
+	Suppose $f: [0,1] \longrightarrow X$ is a path from $x$ to $y$ and $g: [0,1] \longrightarrow X$ is a path from $y$ to $z$. The \emph{composition of $[f]$ and $[g]$} denoted by $[g]\cdot [f]$ is defined as follows
+	\[
+		[g]\cdot [f]:=[g\cdot f].
+	\]
 \end{definition}
 \begin{proof}
-	First, we will show that the group operation $\cdot$ is well-defined. Suppose $f_1\sim f_2$, $g_1\sim g_2$, $h_f$ is a homotopy rel end points from $f_1$ to $f_2$, and $h_g$ is a homotopy rel end points from $g_1$ to $g_2$. Then
+	We will show that the composition of equivalent classes of paths is well-defined, namely 
+	\[
+		f_1\sim f_2,\;g_1\sim g_2\implies [g_1\cdot f_1] = [g_2\cdot f_2].
+	\]
+	Suppose $f_1\sim f_2$, $g_1\sim g_2$, $h_f$ is a homotopy rel end points from $f_1$ to $f_2$, and $h_g$ is a homotopy rel end points from $g_1$ to $g_2$. then
 	\begin{align*}
-		h_g\cdot h_f:[0,1]\times [0,1] &\longrightarrow X\\
+		h_g\cdot h_f:[0,1]\times [0,1] &\longrightarrow x\\
 		(s,t) &\longmapsto \begin{cases}
 			h_f(2s, t)&\text{if }s\in\left[0,\frac{1}{2}\right],\\
 			h_g(2s-1, t)&\text{if }s\in\left(\left.\frac{1}{2},1\right]\right.
@@ -471,9 +478,33 @@ We say a path is a \emph{loop} if $p(0)=p(1)$.
 			g_2(2s-1)&\text{if }s\in\left(\left.\frac{1}{2},1\right]\right.
 		\end{cases}=\left(g_2\cdot f_2\right)(s).
 	\end{align*}
-	Thus we have $g_1\cdot f_1\sim g_2\cdot f_2$, will implies $\cdot$ is well-defined.
+	Thus we have $g_1\cdot f_1\sim g_2\cdot f_2$, which implies $\cdot$ is well-defined.
 
-	Then we will show that $\cdot$ is associative, that is, $[h]\cdot\left([g]\cdot[f]\right)=\left([h]\cdot[g]\right)\cdot[f]$ or equivalently $[h\cdot(g\cdot f)]=[(h\cdot g)\cdot f]$. It is sufficient to show that $h\cdot(g\cdot f)\sim (h\cdot g)\cdot f$. Define $H:[0,1]\times[0,1]\to X$ as
+\end{proof}
+\begin{definition}[inverse of path]
+	Let $p: [0,1] \longrightarrow X$ is a path from $x$ to $y$. The \emph{inverse of path $p$} denoted by $p^{-1}$ is defined to be a path from $y$ to $x$ as follows
+	\begin{align*}
+		p^{-1}:[0,1]&\longrightarrow X\\
+		t &\longmapsto p(1-t).
+	\end{align*}
+\end{definition}
+\begin{definition}[inverse of equivalent class of paths]
+	Let $X$ be a topological space and $p:[0,1]\to X$ be a path. Then the \emph{inverse of path $p$} denoted by $[p]^{-1}$ is defined as follows
+	\begin{align*}
+		[p]^{-1}:=[p^{-1}].
+	\end{align*}
+\end{definition}
+\begin{proof}
+	We will show that the inverse of equivalent classes of paths is well-defined, namely 
+	\[
+		f_1\sim f_2\implies [f_1]^{-1} = [f_2]^{-1}.
+	\]
+\end{proof}
+\begin{definition}[fundamental group]
+	Given a topological space $X$ and a point $x\in X$, define $\pi_1(X, x)$ to be the set of equivalence classes of loops that start and end at $x$. $(\pi_1(X, x),\cdot)$ is a group, called the fundamental group of $X$, where the group operation $\cdot$ is defined as $[g]\cdot[f]:=[g\cdot f]$.
+\end{definition}
+\begin{proof}
+	First we will show that $\cdot$ is associative, that is, $[h]\cdot\left([g]\cdot[f]\right)=\left([h]\cdot[g]\right)\cdot[f]$ or equivalently $[h\cdot(g\cdot f)]=[(h\cdot g)\cdot f]$. It is sufficient to show that $h\cdot(g\cdot f)\sim (h\cdot g)\cdot f$. Define $H:[0,1]\times[0,1]\to X$ as
 	\[
 		H(s,t)=\begin{cases}
 			f\left(\frac{4s}{t+1}\right)&\text{if }s\in\left[0,\frac{t+1}{4}\right],\\
