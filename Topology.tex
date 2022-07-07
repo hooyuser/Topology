@@ -65,25 +65,9 @@
 \newpage
 \tableofcontents
 % Create a new 1st level heading
-\chapter{Preliminaries}
-
-\section{Naive Set Theory}
-Suppose that $A_\alpha,A,B_\alpha,B$ are sets and $I$ is some index set. We have
-\begin{itemize}
-	\item $A\cap\left(\bigcup\limits_{\alpha\in I}B_\alpha\right)=\bigcup\limits_{\alpha\in I}\left(A\cap B_\alpha\right)\ $, $A\cup\left(\bigcap\limits_{\alpha\in I}B_\alpha\right)=\bigcap\limits_{\alpha\in I}\left(A\cup B_\alpha\right)$.
-	\item $\left(\bigcup\limits_{\alpha\in I}A_\alpha\right)^C=\bigcap\limits_{\alpha\in I}A_\alpha^{\,C}\ $, $\left(\bigcap\limits_{\alpha\in I}A_\alpha\right)^C=\bigcup\limits_{\alpha\in I}A_\alpha^{\,C}$
-	\item $E-\bigcup\limits_{\alpha\in I}A_\alpha=\bigcap\limits_{\alpha\in I}\left(E-A_\alpha\right)\ $, $E-\bigcap\limits_{\alpha\in I}A_\alpha=\bigcup\limits_{\alpha\in I}\left(E-A_\alpha\right)\ $
-\end{itemize}
-Let $f:X\to Y$ be a map. Suppose that $A_\alpha,A,E\subset X$ and $B_\alpha,B,F\subset Y$. We have
-\begin{itemize}
-	\item $f\left(\bigcup\limits_{\alpha\in I}A_\alpha\right)=\bigcup\limits_{\alpha\in I}f\left(A_\alpha\right)\ $, $f\left(\bigcap\limits_{\alpha\in I}A_\alpha\right)\subset\bigcap\limits_{\alpha\in I}f\left(A_\alpha\right)\ $, $f(E-A)\supset f(E)-f(A)$.
-	\item $f^{-1}\left(\bigcup\limits_{\alpha\in I}B_\alpha\right)=\bigcup\limits_{\alpha\in I}f^{-1}\left(B_\alpha\right)\ $, $f^{-1}\left(\bigcap\limits_{\alpha\in I}B_\alpha\right)=\bigcap\limits_{\alpha\in I}f^{-1}\left(B_\alpha\right)\ $, $f^{-1}(F-B)=f^{-1}(F)-f^{-1}(B)$.
-	\item $A\subset f^{-1}(f(A))\ $, $B\supset f(f^{-1}(B))$.
-\end{itemize}
 
 \chapter{General Topology}
 \section{Topological space}
-
 \begin{definition}[topological space]
 	A \emph{topological space} is an ordered pair $(X,\tau)$, where $X$ is a set and $\tau\subset\mathcal{P}(X)$ is a collection of subsets of $X$, satisfying the following axioms:
 	\begin{enumerate}
