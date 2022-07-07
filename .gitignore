@@ -1,3 +1,7 @@
-*.*
-!*.tex
-!*.sty
+*.aux
+*.log
+*.out
+*.pdf
+*.synctex.gz
+*.toc
+*.thm
