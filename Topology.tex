@@ -2,6 +2,7 @@
 % Comment the following line to NOT allow the usage of umlauts
 \usepackage[utf8]{inputenc}
 % Uncomment the following line to allow the usage of graphics (.png, .jpg)
+
 \usepackage{geometry}
 \geometry{left=3cm,right=3cm,top=3cm,bottom=3cm}
 
@@ -25,6 +26,8 @@
 \usepackage[all]{xy}
 \usepackage{tikz}
 
+\usepackage{quiver}
+
 \theorembodyfont{\upshape}
 \newtheorem{definition}{Definition}[section]
 \newtheorem{example}{Example}[section]
@@ -38,6 +41,8 @@
 \newtheorem{proof}{Proof.}
 
 \newcommand{\Top}{\mathsf{Top}}
+\newcommand{\Grp}{\mathsf{Grp}}
+\newcommand{\Grpd}{\mathsf{Grpd}}
 \newcommand{\Obj}{\mathrm{Obj}}
 \newcommand{\Hom}{\mathrm{Hom}}
 
@@ -453,7 +458,7 @@ We say a path is a \emph{loop} if $p(0)=p(1)$.
 	\[
 		f_1\sim f_2,\;g_1\sim g_2\implies [g_1\cdot f_1] = [g_2\cdot f_2].
 	\]
-	Suppose $f_1\sim f_2$, $g_1\sim g_2$, $h_f$ is a homotopy rel end points from $f_1$ to $f_2$, and $h_g$ is a homotopy rel end points from $g_1$ to $g_2$. then
+	Suppose $f_1\sim f_2$, $g_1\sim g_2$, $h_f$ is a homotopy rel end points from $f_1$ to $f_2$, and $h_g$ is a homotopy rel end points from $g_1$ to $g_2$. Then
 	\begin{align*}
 		h_g\cdot h_f:[0,1]\times [0,1] &\longrightarrow x\\
 		(s,t) &\longmapsto \begin{cases}
@@ -479,13 +484,14 @@ We say a path is a \emph{loop} if $p(0)=p(1)$.
 		\end{cases}=\left(g_2\cdot f_2\right)(s).
 	\end{align*}
 	Thus we have $g_1\cdot f_1\sim g_2\cdot f_2$, which implies $\cdot$ is well-defined.
+	Suppose $f_1\sim f_2$, $h$ is a homotopy rel end points from $f_1$ to $f_2$. Then
 
 \end{proof}
 \begin{definition}[inverse of path]
 	Let $p: [0,1] \longrightarrow X$ is a path from $x$ to $y$. The \emph{inverse of path $p$} denoted by $p^{-1}$ is defined to be a path from $y$ to $x$ as follows
 	\begin{align*}
 		p^{-1}:[0,1]&\longrightarrow X\\
-		t &\longmapsto p(1-t).
+		s &\longmapsto p(1-s).
 	\end{align*}
 \end{definition}
 \begin{definition}[inverse of equivalent class of paths]
@@ -497,8 +503,15 @@ We say a path is a \emph{loop} if $p(0)=p(1)$.
 \begin{proof}
 	We will show that the inverse of equivalent classes of paths is well-defined, namely 
 	\[
-		f_1\sim f_2\implies [f_1]^{-1} = [f_2]^{-1}.
+		p_1\sim p_2\implies [p_1]^{-1} = [p_2]^{-1}.
 	\]
+	Suppose $p_1\sim p_2$ and $h$ is a homotopy rel end points from $p_2$ to $p_2$. Then $r(s,t):=h(1-s, t)$
+	is a homotopy rel end points from $p_1^{-1}$ to $p_2^{-1}$, because for all $s\in[0,1]$,
+	\begin{align*}
+		r(s,0)&=h(1-s,0)=p_1(1-s)=p_1^{-1}(s),\\
+		r(s,1)&=h(1-s,1)=p_2(1-s)=p_2^{-1}(s).
+	\end{align*}
+	Thus we have $p_1^{-1}\sim p_2^{-1}$, which implies $[p]^{-1}$ is well-defined.
 \end{proof}
 \begin{definition}[fundamental group]
 	Given a topological space $X$ and a point $x\in X$, define $\pi_1(X, x)$ to be the set of equivalence classes of loops that start and end at $x$. $(\pi_1(X, x),\cdot)$ is a group, called the fundamental group of $X$, where the group operation $\cdot$ is defined as $[g]\cdot[f]:=[g\cdot f]$.
@@ -544,15 +557,47 @@ We say a path is a \emph{loop} if $p(0)=p(1)$.
 	\end{align*}
 	We can show that $c_x\cdot f\sim f$ and $f\cdot c_x\sim f$, which means $[c_x]$ is the identity of the group $\pi_1(X,x)$. 
 
-	Given any $[f]\in \pi_1(X,x)$, it is easy to check 
-	\[
-		\left[f\right]^{-1}:=\{g\in \pi_1(X,x)\mid g(s)=f(1-s),\forall s\in[0,1]\}\in \pi_1(X,x)
-	\]
-	and $[f]^{-1}[f]=[f][f]^{-1}=[c_x]$.
+	Given any $[f]\in \pi_1(X,x)$, it is easy to check $\left[f\right]^{-1}\in \pi_1(X,x)$ and $[f]^{-1}\cdot[f]=[f]\cdot[f]^{-1}=[c_x]$.
 \end{proof}
 \begin{definition}[fundamental groupoid]
 	Let $X$ be a topological space. Define $\Pi_1(X)$ to a category, where $\Obj(\Pi_1(X))=X$ and $\Hom_{\Pi_1(X)}(x,y)=\{[f]\mid f:[0,1]\to X \text{ is a path from $x$ to $y$}\}$. $\Pi_1(X)$ is a groupoid and called the fundamental groupoid of $X$.
 \end{definition}
+\begin{definition}[fundamental groupoid functor]
+	Define $\Pi_1:\Top\to\Grpd$ as follows
+	\[\begin{tikzcd}
+		X & {\Pi_1(X)}\\
+		Y & {\Pi_1(Y)} 
+		\arrow["f"', from=1-1, to=2-1]
+		\arrow["{\Pi_1(f):=[p]\mapsto[f\circ p]}", from=1-2, to=2-2]
+		\arrow[from=1-1, to=1-2]
+		\arrow[from=2-1, to=2-2]
+	\end{tikzcd}\]
+\end{definition}
+\begin{proof}
+	First, we will show that $\Pi_1(f)$ is well-defined, namely for any two paths $p_1$ and $p_2$ in $X$,
+	\[
+		p_1\sim p_2 \implies [f\circ p_1] = [f\circ p_2].
+	\]
+	Suppose $p_1\sim p_2$ and $h$ is a homotopy rel end points from $p_2$ to $p_2$. Then $r(s,t):=f(h(s, t))$
+	is a homotopy rel end points from $f\circ p_1$ to $f\circ p_2$, because for all $s\in[0,1]$,
+	\begin{align*}
+		r(s,0)&=f(h(s,0))=f(p_1(s))=f\circ p_1(s),\\
+		r(s,1)&=f(h(s,1))=f(p_2(s))=f\circ p_2(s).
+	\end{align*}
+	Thus we have $f\circ p_1\sim f\circ p_2$, which implies $\Pi_1(f)$ is well-defined.
+	To verify the functinality of $\Pi_1$, we have to show that
+	\[
+		\Pi_1(g\circ f) = \Pi_1(g)\circ\Pi_1(f),
+	\]
+	or equivalently for all $[p]\in \Pi_1(X)$,
+	\[
+		[(g\circ f)\circ p]=[g\circ (f\circ p)],
+	\]
+	which clearly holds. 
+\end{proof}
+
+
+
 
 \chapter{Concrete Examples}
 A topological space $X$ is called locally Euclidean if there is a non-negative integer $n$ such that every point in $X$ has a neighbourhood which is homeomorphic to real n-dimensional space $\mathbb{R}^n$.
