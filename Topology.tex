@@ -9,7 +9,8 @@
 \usepackage[usenames,dvipsnames]{color}
 \usepackage[table,xcdraw]{xcolor}
 \usepackage[colorlinks,linkcolor=NavyBlue,citecolor=green, urlcolor=green]{hyperref}
-
+\hypersetup{pdfborder=0 0 0}
+\hypersetup{colorlinks}
 
 \usepackage{graphicx}
 \usepackage{enumerate}
@@ -45,6 +46,14 @@
 \newcommand{\Grpd}{\mathsf{Grpd}}
 \newcommand{\Obj}{\mathrm{Obj}}
 \newcommand{\Hom}{\mathrm{Hom}}
+
+\tikzset{%
+    add_padding/.style={%
+        execute at end picture={\path (current bounding box.north)--++(0,0.3cm);
+        }
+    },
+    background rectangle/.style={fill=blue!30}
+}
 
 % Start the document
 \begin{document}
@@ -580,8 +589,165 @@ We say a path is a \emph{loop} if $p(0)=p(1)$.
 	which clearly holds. 
 \end{proof}
 
+\chapter{Homology}
+\section{Simplicial homology}
 
+\begin{definition}[geometrically independent]
+	Let $\left\{a_0, a_1, \cdots, a_k\right\}$ be points in $\mathbb{R}^n$. This set is said to be \emph{geometrically independent} if the vectors
+$$
+a_1-a_0, \quad a_2-a_0, \quad \cdots, \quad a_k-a_0
+$$
+are linearly independent (as in linear algebra).
+\end{definition}
 
+\begin{definition}[$k$-simplex]
+Let $\left\{a_0, a_1, \ldots, a_k\right\}$ be a geometrically independent set in $\mathbb{R}^n$. A $\emph{$k$-simplex } \sigma$ spanned by these points is defined by
+$$
+\left\{x\in \mathbb{R}^n\;\left|\; x=\sum_{i=0}^k t_i a_i,\;\sum_{i=0}^k t_i=1,\;t_i \geq 0\text{ for }i = 0,1,\cdots, k\right.\right\}.
+$$
+\end{definition}
+
+\noindent A $k$-simplex spanned by $a_0, a_1, \ldots, a_k$ is the convex hull of these points.
+\begin{definition}
+Let $\sigma$ be a $k$-simplex spanned by $\left\{a_0, a_1, \ldots, a_k\right\}$.
+\begin{enumerate}
+	\item The points $a_0, a_1, \ldots, a_k$ are called the \emph{vertices} of $\sigma$.
+	\item The number $k$ is the \emph{dimension} of $\sigma$.
+	\item Any simplex spanned by a subset of $\left\{a_0, a_1, \cdots, a_k\right\}$ is called a \emph{face} of $\sigma$. 
+	\item The face spanned by $\left\{a_0, a_1, \cdots, a_k\right\}-\left\{a_i\right\}$ for some $i$ is called the \emph{face opposite} to $a_i$.
+	\item A face of $\sigma$ is called a \emph{proper face} if it is not equal to $\sigma$.
+	\item The union of all proper faces of $\sigma$ is called the \emph{boundary} of $\sigma$, denoted by $\partial \sigma$.
+	\item $\sigma-\partial \sigma$ is called the \emph{interior} of $\sigma$.
+\end{enumerate}
+\end{definition}
+\begin{definition}[simplicial complex]
+A \emph{simplicial complex} $K$ is a collection of simplices in $\mathbb{R}^n$ (of possibly varying dimensions) such that
+\begin{enumerate}
+	\item Any face of a simplex in $K$ is also in $K$.
+	\item The intersection of any two simplices in $K$ is a face of each of the two simplices, whenever the the intersection is non-empty.
+\end{enumerate}
+\end{definition}
+
+\begin{definition}[subcomplex]
+Let $K$ be a simplicial complex. If $L\subset K$ and $L$ is a simplicial complex, then $L$ is called a \emph{subcomplex} of $K$.
+\end{definition}
+\begin{definition}[$p$-skeleton]
+Given a simplicial complex $K$, the collection of all simplices of $K$ of dimension at $\operatorname{most} p$ is called the $\emph{$p$-skeleton}$ of $K$ and is denoted $K^{(p)}$.
+\end{definition}
+For example, $K^{(0)}$ is the set of vertices of $K$. $K^{(p)}$ is a subcomplex of $K$.
+
+\begin{definition}[dimension of a simplicial complex]
+If there exists an integer $N$ such that
+$$
+K^{(N-1)} \neq K \quad \text { and } \quad K^{(p)}=K \text { for }p\ge N ,
+$$
+then $K$ is said to have \emph{dimension} $N$. Otherwise it is said to have infinite dimension.
+\end{definition}
+\begin{definition}[finite simplicial complex]
+A simplicial complex $K$ is said to be \emph{finite} if $K^{(0)}$ is finite.
+\end{definition}
+
+\begin{definition}[realization of a simplicial complex]
+The realization of a simplicial complex $K$ is a topological space $(|K|, \tau)$ such that
+\begin{enumerate}
+	\item $|K|$ is the union of all simplices in $K$, that is $|K|=\bigcup_{\sigma\in K}\sigma$.
+	\item $F\subset |K|$ is a closed set in $(|K|, \tau)\iff$ for all simplices $\sigma\in K$, $F\cap \sigma$ is a closed set in $(\sigma,\nu_\sigma)$, where $\nu_\sigma$ is the subspace topology of Euclidean topology.
+\end{enumerate}
+\end{definition}
+For finite simplicial complexes $K$ with finite dimension, the topology $\tau$ coincides with the subspace topology of Euclidean topology. 
+\begin{definition}[triangulation]
+	A \emph{triangulation} of a topological space $X$ is a simplicial complex $K$ together with a homeomorphism $\phi:|K|\to X$.
+\end{definition}
+All smooth manifolds are triangulable. For example, torus admits the following triangulation:
+\begin{center}
+	\begin{tikzpicture}[add_padding, x=1.5cm,y=1.5cm]
+		\fill[fill=gray!12] (-1,-1)--(1,-1)--(1,1)--(-1,1)-- cycle;
+		\draw [color=black!40!green,thick] (-1,-1) --
+		node [color=black,pos=0,below]{$a$}
+		node [color=black,pos=1/3,below]{$b$}
+		node [color=black,pos=2/3,below]{$c$}
+		node [color=black,pos=1,below]{$a$}(1,-1);
+		\draw [color=black!40!green,thick] (-1,1/3)--		
+		node [color=black,pos=0.27,above]{$e$} 
+		 (1,1/3);
+		\draw [color=black!40!green,thick] (-1,-1/3)--
+		node [color=black,pos=0.27,above]{$h$} 
+		node [color=black,pos=0.60,above]{$i$} (1,-1/3);
+		\draw [color=black!40!green,thick] (-1/3,-1)--(-1/3,1);
+		\draw [color=black!40!green,thick] (1/3,-1)--node [color=black,pos=0.74,left]{$f$}(1/3,1);
+		\draw [color=black!40!green,thick] (1/3,-1)--(1,-1/3);
+		\draw [color=black!40!green,thick] (-1/3,-1)--(1,1/3);
+		\draw [color=black!40!green,thick] (-1,-1)--(1,1);
+		\draw [color=black!40!green,thick] (-1,-1/3)--(1/3,1);
+		\draw [color=black!40!green,thick] (-1,1/3)--(-1/3,1);
+		\draw [color=black!40!green,thick] (-1,1)--
+		node [color=black,pos=0.27,left]{$d$} 
+		node [color=black,pos=0.61,left]{$g$} (-1,-1);
+		\draw [color=black!40!green,thick] (1,1)--
+		node [color=black,pos=0.27,right]{$d$} 
+		node [color=black,pos=0.61,right]{$g$} (1,-1);
+		\draw [color=black!40!green,thick] (-1,1)-- 
+		node [color=black,pos=0,above]{$a$} 
+		node [color=black,pos=1/3,above]{$b$} 
+		node [color=black,pos=2/3,above]{$c$}
+		node [color=black,pos=1,above]{$a$} 
+		(1,1);
+	\end{tikzpicture}
+\end{center}
+
+\begin{definition}[orientation of simplex]
+	Suppose $\sigma$ is a $k$-simplex spanned by $\left\{a_0, a_1, \ldots, a_k\right\}$. Let $V_{\sigma}$ to be the set of all ordered $k+1$-tuples of vertices of $\sigma$:
+	\begin{align*}
+		V_{\sigma}=\left\{\left(a_{s(0)},a_{s(1)},\cdots,a_{s(k)}\right)\mid s\in \mathrm{Sym}\left(\left\{0,1,\cdots,k\right\}\right)\right\}.
+	\end{align*}
+	Then $\sim$ is an equivalence relation on $V_{\sigma}$, where $\sim$ is defined by
+	\begin{align*}
+		\left(a_{s(0)},\cdots,a_{s(k)}\right)\sim\left(a_{s'(0)},\cdots,a_{s'(k)}\right)\iff \mathrm{sgn}(s)=\mathrm{sgn}(s').
+	\end{align*}
+	An orientation of $\sigma$ is a equivalence class of $V_{\sigma}/\sim$, denoted by
+	\begin{align*}
+		\left[a_{s(0)},a_{s(1)},\cdots,a_{s(k)}\right].
+	\end{align*}
+\end{definition}
+Every $k$-simplex has exactly $2$ orientations.
+\begin{definition}[oriented simplex]
+	Let $\sigma$ be a $k$-simplex spanned by $\left\{a_0, a_1, \ldots, a_k\right\}$. An \emph{oriented $k$-simplex} is a pair $\left(\sigma, \left[a_{s(0)},a_{s(1)},\cdots,a_{s(k)}\right]\right)$, where $\sigma$ is a $k$-simplex and $\left[a_{s(0)},a_{s(1)},\cdots,a_{s(k)}\right]$ is an orientation of $\sigma$. The oriented $k$-simplex can be denoted by $\left\langle a_{s(0)},a_{s(1)},\cdots,a_{s(k)}\right\rangle$.
+\end{definition}
+
+\begin{definition}[chain group]
+	Let $K$ be a simplicial complex and $F(K)$ be the free abelian group generated by all the oriented $k$-simplices in $K$. The $k$\emph{-chain group} of $K$, denoted by $C_k(K)$, is defined as $F(K)$ modulo the relations
+	\begin{align*}
+		\left\langle a_{0}, \cdots ,a_{i},\cdots,a_{j},\cdots a_{k}\right\rangle=-\left\langle a_{0},\cdots ,a_{j},\cdots,a_{i},\cdots,a_{k}\right\rangle.
+	\end{align*}
+\end{definition}
+$C_k(K)$ is a free abelian group.
+\begin{definition}[boundary homomorphism]
+	Given a simplicial complex $K$, we can define the boundary homomorphism $\partial_k:C_k(K)\rightarrow C_{k-1}(K)$ on the basis of $C_k(K)$ by
+	\begin{align*}
+		\partial_k\left\langle a_{0},a_{1},\cdots,a_{k}\right\rangle=\sum_{i=0}^k(-1)^{i}\left\langle a_{0},a_{1},\cdots,a_{i-1},a_{i+1},\cdots,a_{k}\right\rangle,
+	\end{align*}
+	and then extend it to the whole $C_k(K)$ linearly.
+\end{definition}
+
+\begin{definition}[cycle group]
+	Let $K$ be a simplicial complex. The $k$-cycle group of $K$, denoted by $Z_k(K)$,  is defined as $\ker\partial_k$.
+\end{definition}
+
+\begin{definition}[boundary group]
+	Let $K$ be a simplicial complex. The $k$-boundary group of $K$, denoted by $B_k(K)$, is defined as $\mathrm{im}\,\partial_{k+1}$.
+\end{definition}
+
+\begin{proposition}[chain complex]
+	Let $K$ be a simplicial complex. Then we have $\partial_k\circ\partial_{k+1}=0$ or equivalently $B_k(K)\subset Z_k(K)$. Therefore we have a chain complex 
+	\begin{align*}
+		\cdots\stackrel{\partial_{k+2}}{\longrightarrow}  C_{k+1}(K)\stackrel{\partial_{k+1}}{\longrightarrow} C_{k}(K)\stackrel{\partial_{k}}{\longrightarrow} \cdots\stackrel{\partial_{2}}{\longrightarrow}  C_1(K)\stackrel{\partial_{1}}{\longrightarrow} C_0(K)\stackrel{\partial_{0}}{\longrightarrow}  0
+	\end{align*}
+	in $\mathsf{Ch}(\mathsf{Ab})$. 
+\end{proposition}
+
+\begin{definition}[simplical homology group]
+	For a simplicial complex $K$, the $k$-th homology group, $H_k(K)$ is defined to be the quotient group $Z_k(K) / B_k(K)$. An element of $H_k(K)$ is called a $k$-dimensional homology class of $K$. We say cycles $z_1, z_2\in Z_k(K)$ are homologous, written as $z_1\sim z_2$, if $z_1-z_2 \in B_k(K)$. 
+\end{definition}
 
 \chapter{Concrete Examples}
 A topological space $X$ is called locally Euclidean if there is a non-negative integer $n$ such that every point in $X$ has a neighbourhood which is homeomorphic to real n-dimensional space $\mathbb{R}^n$.
