@@ -101,6 +101,10 @@
 
 \noindent In this chapter we always assume that $(X,\tau)$ is a topological space.
 
+\begin{definition}[discrete topology]
+	Let $X$ be a set. The \emph{discrete topology} on $X$ is $2^X$.
+\end{definition}
+The discrete topology is the finest possible topology on the set $X$.
 
 \begin{definition}[closed set]
 	Suppose that $A$ is a subset of $X$. $A$ is a \emph{closed set} if and only if $A^C$ is an open set.
@@ -398,6 +402,15 @@ It is easy to check that $\pi$ is a continuous surjection from $(X,\tau)$ to $(X
 
 
 \subsection{Product Topology}
+
+\subsection{Disjoint Union Topology}
+\begin{definition}[Disjoint Union Topology]
+	Let $\left\{(X_\alpha,\tau_\alpha)\right\}_{\alpha\in I}$ be a collection of topological spaces. Let $X=\sqcup_{\alpha\in I}X_\alpha$ and $i_\alpha:X_\alpha\to X$ be the inclusions. The \emph{disjoint union} of $\left\{(X_\alpha,\tau_\alpha)\right\}_{\alpha\in I}$ is the set $X$ equiped with the following topology
+	\[
+		\tau:=\left\{U\in 2^{X}\mid i_{\alpha}^{-1}(U)\in \tau_\alpha\text{ for any }\alpha\in I\right\},
+	\]
+	which is called \emph{disjoint union topology}. 
+\end{definition}
 \section{Connectedness}
 
 \section{Compactness}
@@ -525,7 +538,8 @@ We say a path is a \emph{loop} if $p(0)=p(1)$.
 $$
 \pi_0(X):=X / \sim.
 $$
-The elements in $\pi_0(X)$ are called \emph{path components} of $X$. $\pi_0$ can be viewed as a functor from $\mathsf{Top}$ to $\mathsf{Set}$
+The elements in $\pi_0(X)$ are called \emph{path components} of $X$. \\
+$\pi_0$ can be viewed as a functor from $\mathsf{Top}$ to $\mathsf{Set}$
 \begin{equation*}
 	\begin{tikzcd}
 		\mathsf{Top}&[-25pt]&[+10pt]&[-30pt]\mathsf{Set}&[-30pt]&[-30pt] \\ [-15pt] 
@@ -534,14 +548,44 @@ The elements in $\pi_0(X)$ are called \emph{path components} of $X$. $\pi_0$ can
 		Y & & & \pi_0(Y)&\ni&\left[f(x)\right]
 	\end{tikzcd}
 \end{equation*}
-% \begin{equation*}
-% 	\begin{tikzcd}
-% 		X  \arrow[dd, "f"{left}] &[-25pt] & [+10pt] & [-30pt] \pi_0(X) \arrow[dd, "\pi_0(f):=[p]\mapsto[f\circ p]"]\\ [-10pt] 
-% 										&  \phantom{.}\arrow[r, "\pi_0", squigarrow]&\phantom{.}  &   \\[-10pt] 
-% 		Y & & & \pi_0(Y)
-% 	\end{tikzcd}
-% \end{equation*}
 \end{definition}
+\begin{proposition}
+	The functor $\pi_0:\mathsf{Top}\to \mathsf{Set}$ preserves pruduct, i.e. $$
+	\pi_0\left(\prod_{i\in I} X_\alpha\right)\cong\prod_{\alpha\in I} \pi_0\left(X_\alpha\right).
+	$$
+\end{proposition}
+\begin{proposition}
+	The functor $\pi_0:\mathsf{Top}\to \mathsf{Set}$ preserves copruduct, i.e. $$
+	\pi_0\left(\coprod_{i\in I} X_\alpha\right)\cong\coprod_{\alpha\in I} \pi_0\left(X_\alpha\right).
+	$$
+\end{proposition}
+\begin{proof}
+	The universal property of coproducts gives
+	\begin{equation*}
+		\begin{tikzcd}		
+			& \pi_0\left(\coprod\limits_{\alpha\in I} X_\alpha\right) \\ [10pt]
+			\pi_0\left(X_\alpha\right) \arrow[ru, "\pi_0\left(i_\alpha\right)"] \arrow[r, "\left(i_\alpha \right)_{*}"']
+			& \coprod\limits_{\alpha\in I} \pi_0\left(X_\alpha\right)
+			\arrow[u, "\varphi:\;\left({[x],}\alpha\right)\mapsto{[(x,\alpha)]}"'] 
+		\end{tikzcd}			
+	\end{equation*}
+	It is clear that $\varphi$ is surjective. Suppose $[(x,\alpha_1)]=[(y,\alpha_2)]$. Note that the map
+	\begin{align*}
+		p: \coprod_{\alpha\in I} X_\alpha& \longrightarrow I\\
+		(x, \alpha) &\longmapsto \alpha
+	\end{align*}
+	is continuous, where we equip $I$ with the discrete topology. If $\gamma$ is a path in $\coprod_\alpha X_\alpha$, then $p \gamma$ is a path in $I$, hence must be constant. So only points within the same summand of the coproduct can be connected by a path, i.e. $\alpha_1=\alpha_2$. Define
+	\begin{align*}
+		\iota: X_{\alpha_1} \times\{\alpha_1\}&\longrightarrow  X_{\alpha_1}\\
+		(x, \alpha_1) &\longmapsto x
+	\end{align*}
+	Then we have
+	\[
+		\pi_0(\iota)\left([(x,\alpha_1)]\right)=\pi_0(\iota)\left([(y,\alpha_1)]\right)\implies [x]=[y]\implies ([x],\alpha_1)=([y],\alpha_1),
+	\]
+	which implies $\varphi$ is injective. Therefore, $\varphi$ is an isomorphism.
+\end{proof}
+Note that generally a topological space is not the disjoint union of its connected components. For example, consider $\mathbb{Q}$ with the subspace topology of the Euclidean topology. The connected components of $\mathbb{Q}$ are singletons and disjoint union of them is $\mathbb{Q}$ with the discrete topology.
 
 \section{Fundamental groupoid}
 \begin{definition}[fundamental group]
@@ -596,14 +640,16 @@ The elements in $\pi_0(X)$ are called \emph{path components} of $X$. $\pi_0$ can
 \end{definition}
 \begin{definition}[fundamental groupoid functor]
 	Define $\Pi_1:\Top\to\Grpd$ as follows
-	\[\begin{tikzcd}
-		X & {\Pi_1(X)}\\
-		Y & {\Pi_1(Y)} 
-		\arrow["f"', from=1-1, to=2-1]
-		\arrow["{\Pi_1(f):=[p]\mapsto[f\circ p]}", from=1-2, to=2-2]
-		\arrow[from=1-1, to=1-2]
-		\arrow[from=2-1, to=2-2]
-	\end{tikzcd}\]
+	\[
+	\begin{tikzcd}
+		X  \arrow[dd, "f"{name=L, left}] 
+		&[-25pt] & [+10pt] 
+		& [-30pt] \Pi_1(X) \arrow[dd, "\Pi_1(f)"{name=R}]&[-30pt]\ni
+		&[-30pt]\left[p\right]\arrow[dd,mapsto]\\ [-10pt] 
+		&  \phantom{.}\arrow[r, "\Pi_1", squigarrow]&\phantom{.}  &   \\[-10pt] 
+		Y & & & \Pi_1(Y)&\ni&\left[f\circ p\right]
+	\end{tikzcd}
+	\]
 \end{definition}
 \begin{proof}
 	First, we will show that $\Pi_1(f)$ is well-defined, namely for any two paths $p_1$ and $p_2$ in $X$,
@@ -670,6 +716,7 @@ A \emph{simplicial complex} $K$ is a collection of simplices in $\mathbb{R}^n$ (
 \begin{definition}[subcomplex]
 Let $K$ be a simplicial complex. If $L\subset K$ and $L$ is a simplicial complex, then $L$ is called a \emph{subcomplex} of $K$.
 \end{definition}
+
 \begin{definition}[$p$-skeleton]
 Given a simplicial complex $K$, the collection of all simplices of $K$ of dimension at $\operatorname{most} p$ is called the $\emph{$p$-skeleton}$ of $K$ and is denoted $K^{(p)}$.
 \end{definition}
@@ -924,13 +971,44 @@ Suppose $\{e_0,\cdots,e_{k+1}\}$ is the vertices of $\Delta^{k+1}$. $l_i$ embeds
 	\]
 \end{proof}
 
-\begin{proposition}
-	Corresponding to the decomposition of a space $X$ into its path-components ${X_\alpha}$ there is an isomorphism of $H_n(X)$ with the direct sum $\oplus_\alpha H_n\left(X_\alpha\right)$.
-\end{proposition}
+\begin{definition}[singular homology group]
+	Given a topological space $X$, the \emph{$k$-th homology group} $H_k(X)$ is defined to be the quotient group $Z_k(X) / B_k(X)$. \\
+	The $k$-th singular homology group functor $H_k:\mathsf{Top}\to\mathsf{Ab}$ is the composition of the singular complex functor with the homology functor
+	\begin{align*}
+		\mathsf{Top}\xrightarrow{C_{\boldsymbol{\cdot}}} \mathsf{Ch}(\mathsf{Ab})\xrightarrow{H_k'} \mathsf{Ab}
+	\end{align*}
+	which can be written explicitly as follows
+	\begin{equation*}
+		\begin{tikzcd}
+			X  \arrow[dd, "f"{name=L, left}] &[-25pt] & [+10pt] & [-30pt] H_k(X) \arrow[dd, "f_*"{name=R}]&[-30pt]\ni&[-30pt]\sigma +B_k(X)\arrow[dd,mapsto]\\ [-10pt] 
+			&  \phantom{.}\arrow[r, "H_k", squigarrow]&\phantom{.}  &   \\[-10pt] 
+			Y & & & H_k(Y)&\ni&f\circ \sigma+B_k(Y)
+		\end{tikzcd}
+	\end{equation*}
+\end{definition}
 
 \begin{proposition}
- If $X$ is nonempty and path-connected, then $H_0(X) \approx \mathbb{Z}$. Hence for any space $X, H_0(X)$ is a direct sum of $\mathbb{Z}$'s, one for each path-component of $X$.
+For any topological space $X$, we have a natural isomorphism 
+$$
+H_n(X)\cong\bigoplus_{\alpha\in \pi_0(X)} H_n\left(X_\alpha\right),
+$$ 
+where $X_\alpha$ are path-components of $X$. Especially, we have $H_0(X)\cong \mathbb{Z}^{\oplus \pi_0(X)}$. 
 \end{proposition}
+\begin{proof}
+	First we apply the functor $C_k:\mathsf{Top}\to\mathsf{Ab}$ to the inclusions $i_\alpha:X_\alpha \hookrightarrow X$ to get $C_k(i_\alpha)$, that is,
+	\begin{align*}
+		\left(i_\alpha\right)_*: C_k(X_\alpha)&\longrightarrow C_k(X)\\
+                   \sigma &\longmapsto i_\alpha\circ \sigma
+	\end{align*}
+	Then the unversal property of copruduct gives a unique homomorphism $\varphi$ such that the following diagram commutes
+	\begin{equation*}
+		\begin{tikzcd}		
+			& C_{k-1}(X) \\ [10pt]
+			C_{k}(X_\alpha) \arrow[ru, "\varphi"] \arrow[r, "\left(i_\alpha \right)_{*}"']
+			& \bigoplus\limits_{\alpha\in \pi_0(X)} C_n\left(X_\alpha\right) \arrow[u, "\varphi"'] 
+		\end{tikzcd}			
+	\end{equation*}
+\end{proof}
 
 \chapter{Concrete Examples}
 A topological space $X$ is called locally Euclidean if there is a non-negative integer $n$ such that every point in $X$ has a neighbourhood which is homeomorphic to real n-dimensional space $\mathbb{R}^n$.
