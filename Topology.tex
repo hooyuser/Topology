@@ -66,6 +66,48 @@
         }
     }
 
+\usetikzlibrary{decorations.markings, arrows.meta}
+\tikzset{
+  ->-/.style args={#1}{
+    decoration={
+      markings,
+      mark=at position .67 with {\arrow[thick]{Triangle[length=#1]}}
+    },
+    postaction={decorate}
+  },
+  ->-/.default=3mm
+}
+
+\tikzset{
+  -<-/.style args={#1}{
+    decoration={
+      markings,
+      mark=at position .33 with {\arrowreversed[thick]{Triangle[length=#1]}}
+    },
+    postaction={decorate}
+  },
+  -<-/.default=3mm
+}
+% \tikzset{
+%   ->-/.style={
+%     decoration={
+%       markings,
+%       mark=at position .67 with {\arrow[thick]{Triangle[length=3mm]}}
+%     },
+%     postaction={decorate}
+%   }
+% }
+
+% \tikzset{
+%   -<-/.style={
+%     decoration={
+%       markings,
+%       mark=at position .33 with {\arrowreversed[thick]{Triangle[length=3mm]}}
+%     },
+%     postaction={decorate}
+%   }
+% }
+
 % Start the document
 \begin{document}
 \begin{center}
@@ -1039,7 +1081,7 @@ where $X_\alpha$ are path-components of $X$. Especially, we have $H_0(X)\cong \m
 	$$
 	H_k(X)=H_k'(C_k(X))\cong H_k'\left(\bigoplus_{\alpha\in \pi_0(X)} C_k\left(X_\alpha\right)\right).
 	$$ 
-	In general, for any AB5 category $\mathsf{A}$, the homology functor $H_k:C_.(\mathsf{A})\to \mathsf{A}$ preserves coproduct. In particular, $\mathsf{Ab}$ is an AB5 category. Therefore, we completes the proof.
+	In general, for any AB5 category $\mathsf{A}$, the homology functor $H_k:C_\text{\hspace{-1pt}\huge$.$\hspace{-1pt}}(\mathsf{A})\to \mathsf{A}$ preserves coproduct. In particular, $\mathsf{Ab}$ is an AB5 category. Therefore, we completes the proof.
 \end{proof}
 
 \begin{proposition}[homotopy induces chain homotopy]
@@ -1210,7 +1252,7 @@ $P^1(\mathbb{R})$ can be constructed by identifying the antipodal points of $S^1
 	\end{tikzpicture}
 \end{center}
 
-\section{Two-dimensional manifolds}
+\section{Two-dimensional manifolds: examples}
 \subsection{Real affine plane $\mathbb{R}^2$}
 The real affine plane $\mathbb{R}^2$ carries a standard topology. $\mathbb{R}^2$ is homeomorphic to any open region $G\in\mathbb{R}$.
 Since the mapping $(x,y)\mapsto x+\mathrm{i}y$ is a homeomorphism, we have $\mathbb{R}^2\cong \mathbb{C}$.
@@ -1298,7 +1340,82 @@ Klein bottle can be described by a square with some edges identified as follows
 		\draw [color=cyan,thick,-latex] (-1,1)-- node [color=black,pos=0.5,above]{$a$} (1,1);
 	\end{tikzpicture}
 \end{center}
+\section{Compact two-dimensional manifolds: classification}
+\subsection{Orientable surfaces}
+Orientable surface of genus $g$ is a surface that has $g$ holes. It is denoted by $S_g$. For $g\ge 1$, $S_g$ can be described by a $4g$-gon with some edges identified as follows
+\begin{center}
+	\begin{tikzpicture}
+		\def\n{16} % Number of sides
+		\def\radius{3cm} % Radius of the circumscribed circle
+		\pgfmathsetmacro\startAngle{90} % Starting angle (top point)
+	  
+		% Define the vertices
+		\foreach \i in {1,...,\n} {
+		  \pgfmathsetmacro\angle{\startAngle + 360/\n * (\i - 1)}
+		  \coordinate (V\i) at (\angle:\radius);
+		}
+		% Fill the interior region
+		\fill[gray!8] (V1)
+		\foreach \i in {2,...,\n} {
+			-- (V\i)
+		} -- cycle;
+		\foreach \i in {1,...,\n} {
+		  % Plot the vertices
+		  \fill[black!40] (V\i) circle (2.4pt);
+		}
 
+		  % Draw the edges with arrowheads
+		  \draw[->-, line width=1.1pt, color=orange] (V1) -- (V2) node[shift={(0, 0.05)}, midway, above] {$a_1$};
+		  \draw[->-, line width=1.1pt, color=cyan] (V2) -- (V3) node[shift={(-0.1, 0.05)}, midway, above] {$b_1$};
+		  \draw[-<-, line width=1.1pt, color=orange] (V3) -- (V4) node[shift={(-0.2, 0)}, midway, above] {$a_1$};
+		  \draw[-<-, line width=1.1pt, color=cyan] (V4) -- (V5) node[shift={(-0.3, -0.2)}, midway, above] {$b_1$};
+		  \draw[->-, line width=1.1pt, color=magenta!80] (V5) -- (V6) node[shift={(-0.3, -0.3)}, midway, above] {$a_2$};
+		  \draw[->-, line width=1.1pt, color=teal] (V6) -- (V7) node[shift={(-0.2, 0.1)}, midway, below] {$b_2$};
+		  \draw[-<-, line width=1.1pt, color=magenta!80] (V7) -- (V8) node[shift={(-0.1, -0.05)}, midway, below] {$a_2$};
+		  \draw[-<-, line width=1.1pt, color=teal] (V8) -- (V9) node[shift={(0, -0.02)}, midway, below] {$b_2$};
+		  \draw[dashed] (V9) -- (V10);
+		  \draw[dashed] (V10) -- (V11);
+		  \draw[dashed] (V11) -- (V12);
+		  \draw[dashed] (V12) -- (V13);
+		  \draw[->-, line width=1.1pt, color=brown] (V13) -- (V14) node[shift={(0, -0.02)}, midway, right] {$a_g$};
+		  \draw[->-, line width=1.1pt, color=lime!40!gray] (V14) -- (V15) node[shift={(0, 0.1)}, midway, right] {$b_g$};
+		  \draw[-<-, line width=1.1pt, color=brown] (V15) -- (V16) node[shift={(0.15, -0.05)}, midway, above] {$b_g$};
+		  \draw[-<-, line width=1.1pt, color=lime!40!gray] (V16) -- (V1) node[shift={(0.05, 0)}, midway, above] {$b_g$};
+	  \end{tikzpicture}
+\end{center}
+
+\subsection{Non-orientable surfaces}
+Non-orientable surface of genus $g$ is a surface that has  $g$ cross-caps attached to a sphere. It is denoted by $N_g$. For $g\ge 1$, $N_g$ can be described by a $2g$-gon with some edges identified as follows
+\begin{center}
+\begin{tikzpicture}[scale=0.85]
+	\def\n{8} % Number of sides
+	\def\radius{3cm} % Radius of the circumscribed circle
+	\pgfmathsetmacro\startAngle{90} % Starting angle (top point)
+  
+	% Draw the vertices
+	\foreach \i in {1,...,\n} {
+	  \pgfmathsetmacro\angle{\startAngle + 360/\n * (\i - 1)}
+	  \coordinate (V\i) at (\angle:\radius);
+	}
+	\fill[gray!8] (V1)
+		\foreach \i in {2,...,\n} {
+			-- (V\i)
+		} -- cycle;
+	\foreach \i in {1,...,\n} {
+	  \fill[black!40] (V\i) circle (2.9pt);
+	}
+  
+	% Draw the edges with arrowheads
+	\draw[->-={5mm}, line width=1.1pt, color=orange] (V1) -- (V2) node[shift={(-0.1, 0.07)}, midway, above] {$a_1$};
+	\draw[->-={5mm}, line width=1.1pt, color=orange] (V2) -- (V3) node[shift={(-0.06, 0.05)}, midway, left] {$a_1$};
+	\draw[->-={5mm}, line width=1.1pt, color=cyan] (V3) -- (V4) node[shift={(-0.06, -0.12)}, midway, left] {$a_2$};
+	\draw[->-={5mm}, line width=1.1pt, color=cyan] (V4) -- (V5) node[shift={(-0.1, -0.07)}, midway, below] {$a_2$};
+	\draw[dashed] (V5) -- (V6);
+	\draw[dashed] (V6) -- (V7);
+	\draw[->-={5mm}, line width=1.1pt, color=magenta!80] (V7) -- (V8) node[shift={(0.06, 0.1)}, midway, right] {$a_g$};
+	\draw[->-={5mm}, line width=1.1pt, color=magenta!80] (V8) -- (V1) node[shift={(0.1, 0.02)}, midway, above] {$a_g$};
+  \end{tikzpicture}
+\end{center}
 \section{Other manifolds}
 \subsection{Real projective space $P^n(\mathbb{R})$}
 Real projective plane $P^n(\mathbb{R})=(\mathbb{R}^{n+1}-\{\mathbf{0}\})/\sim$ where $x\sim y$ whenever there is a nonzero real number $\lambda$ such that $x = \lambda y$. In general, we have
