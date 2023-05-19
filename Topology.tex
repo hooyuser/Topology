@@ -485,11 +485,32 @@ It is easy to check that $\pi$ is a continuous surjection from $(X,\tau)$ to $(X
 
 \chapter{Basic Notions}
 \section{CW Complex}
-A $k$-cell is a $k$-dimensional closed disc
+A $n$-cell is a $n$-dimensional closed disc
 \[
-	D^k=\{x\in\mathbf{R}^k:\ |x|\leq 1\}.
+	D^n=\{x\in\mathbf{R}^n:\ |x|\le 1\}.
 \]
-
+Let $X_{-1}=\varnothing$ be the $-1$-skeleton. The $n$-skeleton $X_n$ of a CW complex is constructed recursively by gluing a collection of $n$-cells $D^n_i\,(i\in I)$ onto the $(n-1)$-skeleton $X_{n-1}$. Given the attaching maps $\varphi_i:\partial D^n_i\to X_{n-1}$ and the inclusion maps $\iota_i:\partial D_n\to \bigsqcup\limits_{i\in I}\partial D_n$, the universal property of coproduct leads to an attaching map $\varphi:\bigsqcup\limits_{i\in I}\partial D^n_i\to X_{n-1}$  
+\[\xymatrix{
+	\partial D^n_i\ar[rd]^{\varphi_i}\ar[d]_{\iota_i}&\\
+	\bigsqcup\limits_{i\in I}\partial D^n_i\ar@{-->}[r]_{\exists!\varphi} &X_{n-1}
+		}\]
+which can glue these $n$-cells all at once. The gluing process is described by the pushout diagram
+\[
+	X_{n}:=X_{n-1}\cup_{\varphi}\bigsqcup\limits_{i\in I} D^n_i
+\]
+\[\xymatrix{
+	\bigsqcup\limits_{i\in I}\partial D^n_i\ar[r]^{\varphi}\ar[d]_{\iota}  &X_{n-1}\ar[d]_{}\\
+	\bigsqcup\limits_{i\in I} D^n_i\ar@{->}[r]_{}&X_{n}
+		}\]
+By taking colimit over directed set category
+$$
+\varnothing=X_{-1} \rightarrow X_0 \rightarrow X_1 \rightarrow X_2 \rightarrow \cdots
+$$
+we obtain the CW complex $X$
+\[
+	X=\varinjlim X_n
+\]
+with a weak topology satisfying a subset $U \subset X$ is open iff $U \cap D^n_i$ is open for each cell $D^n_i$.
 \chapter{Fundamental Groupoid}
 \section{Homotopy}
 \begin{definition}[path]	
@@ -1342,7 +1363,7 @@ Klein bottle can be described by a square with some edges identified as follows
 \end{center}
 \section{Compact two-dimensional manifolds: classification}
 \subsection{Orientable surfaces}
-Orientable surface of genus $g$ is a surface that has $g$ holes. It is denoted by $S_g$. For $g\ge 1$, $S_g$ can be described by a $4g$-gon with some edges identified as follows
+Orientable surface of genus $g$ is a surface that has $g$ holes. It is denoted by $M_g$. For $g\ge 1$, $M_g$ can be described by a $4g$-gon with some edges identified as follows
 \begin{center}
 	\begin{tikzpicture}
 		\def\n{16} % Number of sides
@@ -1383,7 +1404,16 @@ Orientable surface of genus $g$ is a surface that has $g$ holes. It is denoted b
 		  \draw[-<-, line width=1.1pt, color=lime!40!gray] (V16) -- (V1) node[shift={(0.05, 0)}, midway, above] {$b_g$};
 	  \end{tikzpicture}
 \end{center}
+The fundamental group of $M_g$ is given by
+\begin{equation*}
+	\pi_1(M_g)=\langle a_1,b_1,\dots,a_g,b_g\mid [a_1,b_1]\dots[a_g,b_g]=1\rangle,
+\end{equation*}
+where $[a,b]=aba^{-1}b^{-1}$ is the commutator of $a$ and $b$. 
 
+The cellular chain complex of $M_g$ is given by
+\begin{equation*}
+	0\longrightarrow \mathbb{Z} \overset{d_1}{\longrightarrow} \mathbb{Z}^{\oplus 2g}\overset{d_0}{\longrightarrow} \mathbb{Z}\longrightarrow 0,
+\end{equation*}
 \subsection{Non-orientable surfaces}
 Non-orientable surface of genus $g$ is a surface that has  $g$ cross-caps attached to a sphere. It is denoted by $N_g$. For $g\ge 1$, $N_g$ can be described by a $2g$-gon with some edges identified as follows
 \begin{center}
