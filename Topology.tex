@@ -510,7 +510,7 @@ we obtain the CW complex $X$
 \[
 	X=\varinjlim X_n
 \]
-with a weak topology satisfying a subset $U \subset X$ is open iff $U \cap D^n_i$ is open for each cell $D^n_i$.
+with a weak topology satisfying a subset $U \subset X$ is closed iff $U \cap D^n_i$ is closed for each cell $D^n_i$.
 \chapter{Fundamental Groupoid}
 \section{Homotopy}
 \begin{definition}[path]	
@@ -752,6 +752,15 @@ Note that generally a topological space is not the disjoint union of its connect
 	\]
 	which clearly holds. 
 \end{proof}
+
+\section{Covering spaces}
+\begin{definition}
+	Let $X$ be a topological space. A covering of $X$ is a continuous map
+$$
+\pi: E \rightarrow X
+$$
+such that there exists a discrete space $D$ and for every $x \in X$ an open neighborhood $U \subset X$, such that $\pi^{-1}(U)=\bigsqcup_{d \in D} V_d$ and $\left.\pi\right|_{V_d}: V_d \rightarrow U$ is a homeomorphism for every $d \in D$. Often, the notion of a covering is used for the covering space $E$ as well as for the map $\pi: E \rightarrow X$. The open sets $V_d$ are called sheets, which are uniquely determined up to
+\end{definition}
 
 \chapter{Homology}
 \section{Simplicial homology}
