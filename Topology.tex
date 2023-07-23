@@ -388,6 +388,10 @@ then there exists unique topology
 on $X$ such that $\mathcal{B}$ is a base for $(X,\tau)$.
 \end{proposition}
 
+\begin{proposition}[characterisation of continuity via subbasis]
+	Let $f: X \rightarrow Y$ be a function between topological spaces $X, Y$, and let $\mathcal{B}$ be a subbasis of the topology of $Y$. If $f^{-1}(V)$ is open in $X$ for all $V \in \mathcal{B}$, then $f$ is continuous.
+\end{proposition}
+
 \begin{definition}[separable space]
 	A topological space is called \emph{separable} if it contains a countable, dense subset.
 \end{definition}
@@ -1138,12 +1142,13 @@ where $X_\alpha$ are path-components of $X$. Especially, we have $H_0(X)\cong \m
 			& X\times I \arrow[r, "h"] & Y
 		\end{tikzcd}			
 	\end{equation*}
-
-	\begin{align*}
+	\[
+	\begin{aligned}
 		g-f &= h\circ i_1 - h\circ i_0\\
 		&= h\circ (i_1-i_0)\\
 		&= 1
-	\end{align*}
+	\end{aligned}
+	\]
 \end{proof}
 
 \begin{proposition}[homotopy invariance of singular homology]
