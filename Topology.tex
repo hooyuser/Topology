@@ -515,6 +515,62 @@ we obtain the CW complex $X$
 	X=\varinjlim X_n
 \]
 with a weak topology satisfying a subset $U \subset X$ is closed iff $U \cap D^n_i$ is closed for each cell $D^n_i$.
+
+\section{Fiber Bundle}
+\begin{definition}[fiber bundle]
+	A \emph{fiber bundle} over a topological space $X$ consists of
+	\begin{enumerate}[(i)]
+		 \item a topological space $E$ (total space)
+		 \item a continuous surjection $\pi:E\to X$ (bundle projection)
+		 \item a topological space $F$ (fiber)
+	\end{enumerate}
+	where the following compatibility condition is satisfied: for each $x\in X$ there exists an open neighborhood $U$ of $x$ in $X$ and a homeomorphism $\phi:\pi^{-1}(U)\to U\times F$ such that
+	the following diagram commutes
+		\[\xymatrix{
+			\pi^{-1}(U)\ar[rd]_{\pi}\ar[rr]^{\phi}  & &U\times F\ar[ld]^{\pi_1}\\
+			&U&
+			}\]
+	The map $\phi$ is called a \emph{local trivialization} of the fiber bundle $E$ over $U$.
+\end{definition}
+
+\begin{definition}[vector bundle]
+	A \emph{vector bundle} over a topological space $X$ consists of
+	\begin{enumerate}[(i)]
+		 \item a topological space $E$ (total space)
+		 \item a continuous surjection $\pi:E\to X$ (bundle projection)
+		 \item finite-dimensional real vector space structures on the fiber $\pi^{-1}(x)$ for all $x\in X$,
+	\end{enumerate}
+	where the following compatibility condition is satisfied: for each $x\in X$ there exists an open neighborhood $U$ of $x$ in $X$ and a homeomorphism $\phi:\pi^{-1}(U)\to U\times \mathbb{R}^k$ such that
+	\begin{enumerate}[(i)]
+		\item the following diagram commutes
+		\[\xymatrix{
+			\pi^{-1}(U)\ar[rd]_{\pi}\ar[rr]^{\phi}  & &U\times \mathbb{R}^k\ar[ld]^{\pi_1}\\
+			&U&
+			}\]
+		\item for any $x\in U$, $\left.\phi\right|_{\pi^{-1}(x)}:\pi^{-1}(x)\to \{x\}\times \mathbb{R}^k$ is a linear isomorphism.
+	\end{enumerate}
+	The map $\phi$ is called a \emph{local trivialization} of the vector bundle $E$ over $U$.	
+\end{definition}
+Since the map 
+\[
+	\begin{aligned}
+		\mathrm{kv}:X&\longrightarrow \mathbb{Z}_{\ge 0}\\
+		x&\longmapsto \dim \pi^{-1}(x)
+	\end{aligned}
+\]
+is locally constant, it must be constant on each connected component of $X$. If $\mathrm{kv}(x)=k$ for all $x\in X$, then $k$ is called the \emph{rank} of the vector bundle, and $E$ is said to be a \emph{vector bundle of rank $k$}.
+
+\begin{definition}[vector bundle morphisms]
+	A morphism from the vector bundle $\pi_1: E_1\to X_1$ to the vector bundle $\pi_2: E_2\to X_2$ is a pair $(f,g)$ of continuous maps $f:E_1\to E_2$ and $g:X_1\to X_2$ such that the following diagram commutes
+	\[\xymatrix{
+		E_1\ar[d]_{\pi_1}\ar[r]^{f}  & E_2\ar[d]^{\pi_2}\\
+		X_1\ar[r]_{g}&X_2
+		}\]
+	and for each $x\in X_1$, the map $\left.f\right|_{\pi_1^{-1}(x)}:\pi_1^{-1}(x)\to \pi_2^{-1}(g(x))$ is a linear map.
+\end{definition}
+
+All vector bundles together with bundle morphisms forms a category, denoted by $\mathsf{VecBun}$.
+
 \chapter{Fundamental Groupoid}
 \section{Homotopy}
 \begin{definition}[path]	
@@ -556,7 +612,7 @@ We say a path is a \emph{loop} if $p(0)=p(1)$.
 	\]
 \end{definition}
 \begin{proof}
-	We will show that the composition of equivalent classes of paths is well-defined, namely 
+	We will show that the composition of equivalent classes of paths is                                                                  well-defined, namely 
 	\[
 		f_1\sim f_2,\;g_1\sim g_2\implies [g_1\cdot f_1] = [g_2\cdot f_2].
 	\]
