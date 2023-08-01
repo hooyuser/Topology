@@ -474,6 +474,32 @@ It is easy to check that $\pi$ is a continuous surjection from $(X,\tau)$ to $(X
 	which is called \emph{disjoint union topology}. 
 \end{definition}
 \section{Connectedness}
+\begin{definition}[connected topological space]
+	A topological space $X$ is \emph{connected} if it is not the union of two disjoint nonempty open sets.
+\end{definition}
+\begin{definition}[locally connected topological space]
+	A topological space $X$ is \emph{locally connected} if for every $x\in X$ and every open set $U$ containing $x$, there is a connected open set $V$ such that $x\in V\subseteq U$.
+\end{definition}
+Local connectedness does not imply connectedness, e.g. two disjoint open intervals in $\mathbb {R}$ for example; and connectedness does not imply local connectedness, e.g. the topologist's sine curve $$\left\{\left(x, \sin \frac{1}{x}\right): x \in(0,1]\right\} \cup\{(0,0)\}.$$
+\begin{definition}[path connected]
+	A topological space $X$ is \emph{path connected} if for every $x,y\in X$, there is a continuous function $f:[0,1]\to X$ such that $f(0)=x$ and $f(1)=y$.
+\end{definition}
+\begin{definition}[locally path connected]
+	A topological space $X$ is \emph{locally path connected} if for every $x\in X$ and every open set $U$ containing $x$, there is a path connected open set $V$ such that $x\in V\subseteq U$.
+\end{definition}
+
+\begin{proposition}
+	Here are some propositions about connectedness.
+	\begin{itemize}
+		\item Continuous image of a connected space is connected. 
+		\item Continuous image of a path-connected space is path-connected.
+		\item A path-connected space is connected.
+		\item A locally path-connected space is locally connected.
+		\item A locally path-connected space is path-connected if and only if it is connected.
+		\item Every manifold is locally path-connected.
+	\end{itemize}
+	
+\end{proposition}
 
 \section{Compactness}
 \begin{definition}[compact topological space]
@@ -813,13 +839,26 @@ Note that generally a topological space is not the disjoint union of its connect
 	which clearly holds. 
 \end{proof}
 
+\chapter{Covering spaces}
 \section{Covering spaces}
 \begin{definition}
 	Let $X$ be a topological space. A covering of $X$ is a continuous map
 $$
-\pi: E \rightarrow X
+p: E \rightarrow X
 $$
-such that there exists a discrete space $D$ and for every $x \in X$ an open neighborhood $U \subset X$, such that $\pi^{-1}(U)=\bigsqcup_{d \in D} V_d$ and $\left.\pi\right|_{V_d}: V_d \rightarrow U$ is a homeomorphism for every $d \in D$. Often, the notion of a covering is used for the covering space $E$ as well as for the map $\pi: E \rightarrow X$. The open sets $V_d$ are called sheets, which are uniquely determined up to
+such that there exists a discrete space $D$ and for every $x \in X$ an open neighborhood $U \subset X$, such that $p^{-1}(U)=\bigsqcup_{d \in D} V_d$ and $\left.p\right|_{V_d}: V_d \rightarrow U$ is a homeomorphism for every $d \in D$. Often, the notion of a covering is used for the covering space $E$ as well as for the map $p: E \rightarrow X$. The open sets $V_d$ are called sheets.
+\end{definition}
+A covering space is a fiber bundle with discrete fiber $D$, illustrated as follows
+\[\xymatrix{
+			p^{-1}(U)\ar[rd]_{p}\ar[rr]^{\phi}  & &U\times D\ar[ld]^{p_1}\\
+			&U&
+			}\]
+\begin{definition}[lifting]
+	Let $p:E\to X$ and $f:Y\to X$ be continuous maps. A lifting of $f$ along $p$ is a continuous map $\tilde{f}:Y\to E$ such that the following diagram commutes
+	\[\xymatrix{
+			& E\ar[d]^{p}\\
+			Y\ar[ur]^{\tilde{f}}\ar[r]_{f} &X
+			}\]
 \end{definition}
 
 \chapter{Homology}
