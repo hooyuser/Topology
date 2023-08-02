@@ -40,6 +40,7 @@
 \theoremsymbol{\\ \rightline{$\square$}}
 \newtheorem{proof}{Proof.}
 
+\newcommand{\midv}{\,\middle\vert\,}
 \newcommand{\Top}{\mathsf{Top}}
 \newcommand{\Grp}{\mathsf{Grp}}
 \newcommand{\Grpd}{\mathsf{Grpd}}
@@ -409,6 +410,9 @@ We have several separation axioms in topological spaces denoted by $\mathrm{T}_r
 \end{definition}
 
 A subset $K$ of a topological space $X$ is said to be compact if it is compact as a subspace (in the subspace topology).
+\begin{definition}[local homeomorphism]
+	A map $f:X\to Y$ is a \emph{local homeomorphism} if for any $x\in X$, there exists a neighbourhood $U$ of $x$ such that $f(U)$ is open in $Y$ and $f|_U:U\to f(U)$ is a homeomorphism.
+\end{definition}
 \section{Basic Construction}
 \subsection{Subspace Topology}
 \begin{definition}[subspace topology]
@@ -842,17 +846,20 @@ Note that generally a topological space is not the disjoint union of its connect
 \chapter{Covering spaces}
 \section{Covering spaces}
 \begin{definition}
-	Let $X$ be a topological space. A covering of $X$ is a continuous map
+	Let $X$ be a topological space. A \emph{covering} of $X$ is a continuous map
 $$
 p: E \rightarrow X
 $$
-such that there exists a discrete space $D$ and for every $x \in X$ an open neighborhood $U \subset X$, such that $p^{-1}(U)=\bigsqcup_{d \in D} V_d$ and $\left.p\right|_{V_d}: V_d \rightarrow U$ is a homeomorphism for every $d \in D$. Often, the notion of a covering is used for the covering space $E$ as well as for the map $p: E \rightarrow X$. The open sets $V_d$ are called sheets.
+such that there exists a discrete space $D$ and for every $x \in X$ an open neighborhood $U \subset X$, such that $p^{-1}(U)=\bigsqcup_{d \in D} V_d$ and $\left.p\right|_{V_d}: V_d \rightarrow U$ is a homeomorphism for every $d \in D$. Such open neighborhood $U$ is called a \emph{fundamental neighborhood} for $x$. Often, the notion of a covering is used for the covering space $E$ as well as for the map $p: E \rightarrow X$. The open sets $V_d$ are called sheets.
 \end{definition}
 A covering space is a fiber bundle with discrete fiber $D$, illustrated as follows
 \[\xymatrix{
 			p^{-1}(U)\ar[rd]_{p}\ar[rr]^{\phi}  & &U\times D\ar[ld]^{p_1}\\
 			&U&
 			}\]
+\begin{proposition}
+	The projection $p:E\to X$ is a local homeomorphism.
+\end{proposition}
 \begin{definition}[lifting]
 	Let $p:E\to X$ and $f:Y\to X$ be continuous maps. A lifting of $f$ along $p$ is a continuous map $\tilde{f}:Y\to E$ such that the following diagram commutes
 	\[\xymatrix{
@@ -860,7 +867,64 @@ A covering space is a fiber bundle with discrete fiber $D$, illustrated as follo
 			Y\ar[ur]^{\tilde{f}}\ar[r]_{f} &X
 			}\]
 \end{definition}
+Throughout this chapter, we assume that all given spaces are connected and locally path
+connected.
 
+\begin{lemma}
+	Let $p: E \rightarrow X$ be a covering. Then the diagonal $D=\{(e, e) \in E \times E \mid e\in E\}$ is open and closed in $Z=\{(e_1, e_2) \in E \times E \mid p(e_1)=p(e_2)\}$.
+\end{lemma}
+\begin{proof}
+	Given any $(e,e)\in D$, suppose $U$ is a fundamental neighborhood of $p(e)$ and $V_e$ is the corresponding sheet such that $\left.p\right|_{V_e}:V_e\to U$ is a homeomorphism. Then for any $e_1,e_2\in V_e$, we have
+	\[
+		p(e_1)=p(e_2)\implies e_1=e_2,
+	\]
+	which implies $Z \cap\left(V_e \times V_e\right)=W_e$ is contained in $D$. Note $W_e$ is an open neighbourhood of $(e, e)$ in $Z$. We see $D$ is open in $Z$.
+
+	Given any $(e_1,e_2)\in Z-D$, suppose $U$ is a fundamental neighborhood of $p(e_1)=p(e_2)$ and $V_{e_1}$ and $V_{e_2}$ are the sheets such that $\left.p\right|_{V_{e_1}}:V_{e_1}\to U$, $\left.p\right|_{V_{e_2}}:V_{e_2}\to U$ are a homeomorphisms. Since $e_1 \ne e_2$, we have $V_{e_1} \cap V_{e_2}=\varnothing$ and $\left(V_{e_1}\times V_{e_2}\right)\cap D=\varnothing$. Hence $Z \cap\left(V_{e_1} \times V_{e_2} \right)$  is contained in $Z-D$. Note that $Z \cap\left(V_{e_1} \times V_{e_2} \right)$ is an open neighbourhood of $(e_1,e_2)$ in $Z$. This shows that $Z- D$ is also open.
+\end{proof}
+
+\begin{proposition}[uniqueness of liftings]
+Let $p: E \rightarrow X$ be a covering. Let $\tilde{f}_1, \tilde{f}_2: Y \rightarrow E$ be liftings of $f: Y \rightarrow X$. Suppose $\tilde{f}_1(y_0)=\tilde{f}_2(y_0)$ for some $y_0\in Y$. If $Y$ is connected, then $\tilde{f}_1=\tilde{f}_2$.
+\end{proposition}
+\begin{proof}
+	Suppose $Z=\{(e_1, e_2) \in E \times E \mid p(e_1)=p(e_2)\}$ and $D=\{(e, e) \in E \times E \mid e\in E\}$. We can define a continuous map
+	\begin{align*}
+		g: Y &\longrightarrow Z\\
+		y &\longmapsto \left(\tilde{f}_1(y), \tilde{f}_2(y)\right)
+	\end{align*}
+	 By assumption, $g(y_0)\in D$, which guarantees $g^{-1}(D)$ is nonempty. By lemma 4.1.1, we see $g^{-1}(D)$ is open and closed in $Y$. If $Y$ is connected, then $g^{-1}(D)=Y\implies g(Y)\subseteq D$. In other words, we have
+	 \[
+		\left\{\left(\tilde{f}_1(y), \tilde{f}_2(y)\right) \midv y \in Y\right\} \subseteq\{(e, e) \in E \times E \mid e\in E\}.
+		\]
+	Therefore, we show that	$\tilde{f}_1=\tilde{f}_2$.
+\end{proof}
+
+\begin{proposition}[path lifting]
+	Let $p: E \to X$ be a covering, let $x \in X$, and let $e, e^{\prime}$ be any two points in $p^{-1}(x)$. A path $f: I \to B$ with $f(0)=x$ lifts uniquely to a path $\tilde{f}: I \to E$ such that $\tilde{f}(0)=e$ and $p \circ \tilde{f}=f$.
+\end{proposition}
+\begin{proof}
+	Suppose $\mathcal{F}=\left\{U_\alpha\right\}_{\alpha\in A}$ is a collection of fundamental neighborhoods such that $\cup_{\alpha\in A}U_\alpha=X$. Let $f:I\to X$ be a path with $f(0)=x$. Then $\left\{f^{-1}(U_\alpha)\right\}_{\alpha\in A}$ is an open cover of $I$, so has a finite subcover $\left\{f^{-1}(U_{i})\right\}_{i=1}^m$. Let $0=t_0<t_1<\cdots<t_n=1$ be such that $f([t_{k-1},t_k])\subseteq U_{i_k}$ where $1\le i_k \le m$. \\
+	We will construct a sequence of maps $\tilde{f}_k:[t_{k-1},t_k]\to E$ by induction on $k$. Suppose $k=0$. Note that $f(0)=x\in U_{i_0}$ and there exists a homeomorphism $\left.p\right|_{V_0}: E\supseteq V_0\to U_{i_0}$ such that $\left.p\right|_{V_0}(e)=x$. We can define $\tilde{f}_0=\left(\left.p\right|_{V_0}\right)^{-1}\circ f|_{[t_0,t_1]}$ and check that $\tilde{f}_0$ is a lifting of $f|_{[t_0,t_1]}$ such that $\tilde{f}_0(0)=e$. \\
+	Suppose we have constructed $\tilde{f}_0,\tilde{f}_1,\cdots,\tilde{f}_{k-1}$. Note that $f(t_{k})=p\left(\tilde{f}_{k-1}(t_k)\right)\in U_{i_k}$ and there exists a homeomorphism $\left.p\right|_{V_k}: E\supseteq V_k\to U_{i_k}$ such that $\left.p\right|_{V_{k}}\left(\tilde{f}_{k-1}(t_k)\right)=f(t_k)$. We can define $\tilde{f}_k=\left(\left.p\right|_{V_k}\right)^{-1}\circ f|_{[t_k,t_{k+1}]}$ and check that $\tilde{f}_k$ is a lifting of $f|_{[t_k,t_{k+1}]}$ such that $\tilde{f}_k(t_{k})=\tilde{f}_{k-1}(t_{k})$. \\
+	By defining 
+	\[
+		\tilde{f}(t)=\tilde{f}_k(t)\text{ for }t_{k}\le t\le t_{k+1},	
+	\]
+	we can connect the sequence of maps $\tilde{f}_k$ to get a path $\tilde{f}:I\to E$ such that $\tilde{f}(0)=e$ and $p\circ \tilde{f}=f$. Since $I$ is connected, we know $\tilde{f}$ is unique.
+\end{proof}
+
+\begin{proposition}[unique path lifting]
+	Let $p: E \to X$ be a covering, let $x \in X$, and let $e, e^{\prime}$ be any two points in $p^{-1}(x)$.
+	\begin{enumerate}[(i)]
+		\item A path $f: I \to B$ with $f(0)=x$ lifts uniquely to a path $\tilde{f}: I \to E$ such that $\tilde{f}(0)=e$ and $p \circ \tilde{f}=f$.
+		\item Equivalent paths $f_1 \sim f_2: I \to X$ that start at $x$ lift to equivalent paths $\tilde{f}_1\sim \tilde{f}_2: I \to E$ that start at $e$, hence $\tilde{f}_1(1)=\tilde{f}_2(1)$, i.e $\tilde{f}_1$ and $\tilde{f}_2$ end at the same point in $E$.
+		\item $p_*: \pi_1(E, e) \to \pi_1(B, b)$ is a monomorphism.
+		\item $p_*\left(\pi_1\left(E, e^{\prime}\right)\right)$ is conjugate to $p_*\left(\pi_1(E, e)\right)$.
+		\item As e' runs through $F_b$, the groups $p_*\left(\pi_1\left(E, e^{\prime}\right)\right)$ run through all conjugates of $p_*\left(\pi_1(E, e)\right)$ in $\pi_1(B, b)$.
+	\end{enumerate}
+\end{proposition}
+\begin{proof}
+\end{proof}
 \chapter{Homology}
 \section{Simplicial homology}
 
