@@ -586,102 +586,111 @@ All vector bundles together with bundle morphisms forms a category, denoted by $
 \chapter{Fundamental Groupoid}
 \section{Homotopy}
 \dfn{Path}{	
-	A \textbf{path} in a topological space $X$ is defined as a continuous function $p:[0,1]\to X$. $p$ is said to be from $x$ to $y$ if $p(0)=x$ and $p(1)=y$.
+	A \textbf{path} in a topological space $X$ is defined as a continuous function $\gamma:[0,1]\to X$. $\gamma$ is said to be from $x$ to $y$ if $\gamma(0)=x$ and $\gamma(1)=y$.
 }
-We say a path is a \textbf{loop} if $p(0)=p(1)$.
+We say a path is a \textbf{loop} if $\gamma(0)=\gamma(1)$.
 
 \dfn{Homotopy}{
-	A \textbf{homotopy} between two continuous functions $f$ and $g$ from a topological space $X$ to a topological space $Y$ is defined to be a continuous function $h: X \times[0,1] \rightarrow Y$ such that $h(x, 0)=f(x)$ and $H(x, 1)=g(x)$ for all $x \in X$.
+	A \textbf{homotopy} between two continuous functions $f:X\to Y$ and $g:X\to Y$ is defined to be a continuous function $H: X \times[0,1] \rightarrow Y$ such that $H(x, 0)=f(x)$ and $H(x, 1)=g(x)$ for all $x \in X$.
+}
+Homotopy is an equivalence relation.
+\prop{Continuous Maps Preserve Homotopy}{
+	if $f_0:X\to Y$ and $f_1:X\to Y$ are homotopic and $g:Y\to Z$ is a continuous map between topological spaces, then $g\circ f_0:X\to Z$ and $g\circ f_1:X\to Z$ are homotopic.
+}
+\pf{ 
+	Let $H:X\times [0,1]\to Y$ be a homotopy between $f_0$ and $f_1$. Then $g\circ H:X\times [0,1]\to Z$ is a homotopy between $g\circ f_0$ and $g\circ f_1$ since $g\circ H$ is continuous and
+	\[
+	(g\circ H)(x,0)=g\circ f_0(x)\quad\text{and}\quad (g\circ H)(x,1)=g\circ f_1(x)	
+	\]
+	for all $x\in X$.
 }
 \dfn{Relative Homotopy}{
-	Let $h: X \times[0,1] \rightarrow Y$ be a homotopy from $f:X\to Y$ to $g:X\to Y$ and $K$ be a subset of $X$. We say $h$ is \textbf{homotopy relative to $K$} if $h(k, t)=f(k)=g(k)$ for all $k \in K$ and $t \in[0,1]$. 
+	Let $H: X \times[0,1] \rightarrow Y$ be a homotopy from $f:X\to Y$ to $g:X\to Y$ and $K$ be a subset of $X$. We say $H$ is \textbf{homotopy relative to $K$} if $H(k, t)=f(k)=g(k)$ for all $k \in K$ and $t \in[0,1]$. 
 }
 \dfn{Homotopy Rel End Points}{
-	Let $x,y$ be two points in a topological space $X$. If $p:[0,1]\to X$ and $q:[0,1]\to X$ are two paths from $x$ to $y$, then a \textbf{homotopy rel end points from $p$ to $q$} is defined as a homotopy relative to $\{x, y\}$ from $p$ to $q$.
+	Let $x,y$ be two points in a topological space $X$. If $\gamma_1:[0,1]\to X$ and $\gamma_2:[0,1]\to X$ are two paths from $x$ to $y$, then a \textbf{homotopy rel end points from $\gamma_1$ to $\gamma_2$} is defined as a homotopy relative to $\{x, y\}$ from $\gamma_1$ to $\gamma_2$.
 }
 \dfn{Equivalent Paths}{
-	Let $X$ be a topological space. Suppose $f: [0,1] \longrightarrow X$ is a path from $x$ to $y$ are \textbf{equivalent} if they are homotopic rel end points. That is, there must exist a homotopy $h: [0,1] \times [0,1] \longrightarrow X$ such that
+	Let $X$ be a topological space. Suppose $\gamma_0,\gamma_1: [0,1] \longrightarrow X$ are paths from $x$ to $y$. $\gamma_0$ and $\gamma_1$ are \textbf{equivalent} if they are homotopic rel end points. That is, there must exist a homotopy $H: [0,1] \times [0,1] \longrightarrow X$ such that
 	$$
-	h(s, 0)=f(s), \quad h(s, 1)=g(s), \quad h(0, t)=x, \quad h(1, t)=y
+	H(s, 0)=\gamma_0(s), \quad H(s, 1)=\gamma_1(s), \quad H(0, t)=x, \quad H(1, t)=y
 	$$
-	for all $s,t \in [0,1]$. Write $[f]$ for the equivalence class of $f$. Write $f\sim g$ if $f$ is equivalent to $g$.
+	for all $s,t \in [0,1]$. Write $[\gamma]$ for the equivalence class of $\gamma$. Write $\gamma\sim \psi$ if $\gamma$ is equivalent to $\psi$.
 }
 
 \dfn{Composition Of Paths}{
-	Let $x,y,z$ be $3$ points in a topological space $X$. Suppose $f: [0,1] \longrightarrow X$ is a path from $x$ to $y$ and $g: [0,1] \longrightarrow X$ is a path from $y$ to $z$. The \textbf{composition of path $f$ and $g$} denoted by $g\cdot f$ is defined to be a path from $x$ to $z$ as follows
+	Let $x,y,z$ be $3$ points in a topological space $X$. Suppose $\gamma: [0,1] \longrightarrow X$ is a path from $x$ to $y$ and $\psi: [0,1] \longrightarrow X$ is a path from $y$ to $z$. The \textbf{composition of path $\gamma$ and $\psi$} denoted by $\gamma\cdot \psi$ is defined to be a path from $x$ to $z$ as follows
 	\begin{align*}
-		g\cdot f:[0,1] &\longrightarrow X\\
+		\gamma\cdot \psi:[0,1] &\longrightarrow X\\
 		t &\longmapsto \begin{cases}
-			f(2t)&\text{if }t\in\left[0,\frac{1}{2}\right],\\
-			g(2t-1)&\text{if }t\in\left(\left.\frac{1}{2},1\right]\right. .
+			\gamma(2t)&\text{if }t\in\left[0,\frac{1}{2}\right],\\
+			\psi(2t-1)&\text{if }t\in\left(\left.\frac{1}{2},1\right]\right. .
 		\end{cases}
 	\end{align*}
 }
 \dfn{Composition Of Equivalent Classes Of Paths}{
-	Suppose $f: [0,1] \longrightarrow X$ is a path from $x$ to $y$ and $g: [0,1] \longrightarrow X$ is a path from $y$ to $z$. The \textbf{composition of $[f]$ and $[g]$} denoted by $[g]\cdot [f]$ is defined as follows
+	Suppose $\gamma: [0,1] \longrightarrow X$ is a path from $x$ to $y$ and $\psi: [0,1] \longrightarrow X$ is a path from $y$ to $z$. The \textbf{composition of $[\gamma]$ and $[\psi]$} denoted by $[\gamma]\cdot [\psi]$ is defined as follows
 	\[
-		[g]\cdot [f]:=[g\cdot f].
+		[\gamma]\cdot [\psi]:=[\gamma\cdot \psi].
 	\]
 }
 \pf{
 	We will show that the composition of equivalent classes of paths is                                                                  well-defined, namely 
 	\[
-		f_1\sim f_2,\;g_1\sim g_2\implies [g_1\cdot f_1] = [g_2\cdot f_2].
+		\gamma_0\sim \gamma_1,\;\psi_0\sim \psi_1\implies [\gamma_0\cdot \psi_0] = [\gamma_1\cdot\psi_1].
 	\]
-	Suppose $f_1\sim f_2$, $g_1\sim g_2$, $h_f$ is a homotopy rel end points from $f_1$ to $f_2$, and $h_g$ is a homotopy rel end points from $g_1$ to $g_2$. Then
+	Suppose $\gamma_0\sim \gamma_1$, $\psi_0\sim \psi_1$, $H_{\gamma}$ is a homotopy rel end points from $\gamma_0$ to $\gamma_1$, and $H_{\psi}$ is a homotopy rel end points from $\psi_0$ to $\psi_1$. Then
 	\begin{align*}
-		h_g\cdot h_f:[0,1]\times [0,1] &\longrightarrow x\\
+		H_{\gamma}\cdot H_{\psi}:[0,1]\times [0,1] &\longrightarrow x\\
 		(s,t) &\longmapsto \begin{cases}
-			h_f(2s, t)&\text{if }s\in\left[0,\frac{1}{2}\right],\\
-			h_g(2s-1, t)&\text{if }s\in\left(\left.\frac{1}{2},1\right]\right.
+			H_{\gamma}(2s, t)&\text{if }s\in\left[0,\frac{1}{2}\right]\\
+			H_{\psi}(2s-1, t)&\text{if }s\in\left(\left.\frac{1}{2},1\right]\right.
 		\end{cases}
 	\end{align*}
-	is a homotopy rel end points from $g_1\cdot f_1$ to $g_2\cdot f_2$, because for all $s\in[0,1]$,
+	is a homotopy rel end points from $\gamma_0\cdot\psi_0$ to $\gamma_1\cdot\psi_1$, because for all $s\in[0,1]$,
 	\[\begin{aligned}
-		\left(h_g\cdot h_f\right)(s, 0)&=\begin{cases}
-			h_f(2s, 0)&\text{if }s\in\left[0,\frac{1}{2}\right],\\
-			h_g(2s-1, 0)&\text{if }s\in\left(\left.\frac{1}{2},1\right]\right.
+		\left(H_{\gamma}\cdot H_{\psi}\right)(s, 0)&=\begin{cases}
+			H_{\gamma}(2s, 0)&\text{if }s\in\left[0,\frac{1}{2}\right]\\
+			H_{\psi}(2s-1, 0)&\text{if }s\in\left(\left.\frac{1}{2},1\right]\right.
 		\end{cases}=\begin{cases}
-			f_1(2s)&\text{if }s\in\left[0,\frac{1}{2}\right],\\
-			g_1(2s-1)&\text{if }s\in\left(\left.\frac{1}{2},1\right]\right.
-		\end{cases}=\left(g_1\cdot f_1\right)(s),\\
-		\left(h_g\cdot h_f\right)(s, 1)&=\begin{cases}
-			h_f(2s, 1)&\text{if }s\in\left[0,\frac{1}{2}\right],\\
-			h_g(2s-1, 1)&\text{if }s\in\left(\left.\frac{1}{2},1\right]\right.
+			\gamma_0(2s)&\text{if }s\in\left[0,\frac{1}{2}\right]\\
+			\psi_0(2s-1)&\text{if }s\in\left(\left.\frac{1}{2},1\right]\right.
+		\end{cases}=\left(\gamma_0\cdot \psi_0\right)(s),\\
+		\left(H_{\gamma}\cdot H_{\psi}\right)(s, 1)&=\begin{cases}
+			H_{\gamma}(2s, 1)&\text{if }s\in\left[0,\frac{1}{2}\right]\\
+			H_{\psi}(2s-1, 1)&\text{if }s\in\left(\left.\frac{1}{2},1\right]\right.
 		\end{cases}=\begin{cases}
-			f_2(2s)&\text{if }s\in\left[0,\frac{1}{2}\right],\\
-			g_2(2s-1)&\text{if }s\in\left(\left.\frac{1}{2},1\right]\right.
-		\end{cases}=\left(g_2\cdot f_2\right)(s).
+			\gamma_1(2s)&\text{if }s\in\left[0,\frac{1}{2}\right]\\
+			\psi_1(2s-1)&\text{if }s\in\left(\left.\frac{1}{2},1\right]\right.
+		\end{cases}=\left(\gamma_1\cdot \psi_1\right)(s).
 	\end{aligned}\]
-	Thus we have $g_1\cdot f_1\sim g_2\cdot f_2$, which implies $\cdot$ is well-defined.
-	Suppose $f_1\sim f_2$, $h$ is a homotopy rel end points from $f_1$ to $f_2$. Then
-
+	Thus we have $\gamma_0\cdot \psi_0\sim \gamma_1\cdot \psi_1$, which implies $\cdot$ is well-defined.
 }
 \dfn{Inverse Of Path}{
-	Let $p: [0,1] \longrightarrow X$ is a path from $x$ to $y$. The \textbf{inverse of path $p$} denoted by $p^{-1}$ is defined to be a path from $y$ to $x$ as follows
+	Let $\gamma: [0,1] \longrightarrow X$ is a path from $x$ to $y$. The \textbf{inverse of path $f$} denoted by $\gamma^{-1}$ is defined to be a path from $y$ to $x$ as follows
 	\begin{align*}
-		p^{-1}:[0,1]&\longrightarrow X\\
-		s &\longmapsto p(1-s).
+		\gamma^{-1}:[0,1]&\longrightarrow X\\
+		s &\longmapsto \gamma(1-s).
 	\end{align*}
 }
 \dfn{Inverse Of Equivalent Class Of Paths}{
-	Let $X$ be a topological space and $p:[0,1]\to X$ be a path. Then the \textbf{inverse of path $p$} denoted by $[p]^{-1}$ is defined as follows
+	Let $X$ be a topological space and $\gamma:[0,1]\to X$ be a path. Then the \textbf{inverse of path $\gamma$} denoted by $[\gamma]^{-1}$ is defined as follows
 	\begin{align*}
-		[p]^{-1}:=[p^{-1}].
+		[\gamma]^{-1}:=[\gamma^{-1}].
 	\end{align*}
 }
 \pf{
 	We will show that the inverse of equivalent classes of paths is well-defined, namely 
 	\[
-		p_1\sim p_2\implies [p_1]^{-1} = [p_2]^{-1}.
+		\gamma_1\sim \gamma_2\implies [\gamma_1]^{-1} = [\gamma_2]^{-1}.
 	\]
-	Suppose $p_1\sim p_2$ and $h$ is a homotopy rel end points from $p_2$ to $p_2$. Then $r(s,t):=h(1-s, t)$
-	is a homotopy rel end points from $p_1^{-1}$ to $p_2^{-1}$, because for all $s\in[0,1]$,
+	Suppose $\gamma_1\sim \gamma_2$ and $H$ is a homotopy rel end points from $\gamma_2$ to $\gamma_2$. Then $r(s,t):=H(1-s, t)$
+	is a homotopy rel end points from $\gamma_1^{-1}$ to $\gamma_2^{-1}$, because for all $s\in[0,1]$,
 	\begin{align*}
-		r(s,0)&=h(1-s,0)=p_1(1-s)=p_1^{-1}(s),\\
-		r(s,1)&=h(1-s,1)=p_2(1-s)=p_2^{-1}(s).
+		r(s,0)&=H(1-s,0)=\gamma_1(1-s)=\gamma_1^{-1}(s),\\
+		r(s,1)&=H(1-s,1)=\gamma_2(1-s)=\gamma_2^{-1}(s).
 	\end{align*}
-	Thus we have $p_1^{-1}\sim p_2^{-1}$, which implies $[p]^{-1}$ is well-defined.
+	Thus we have $\gamma_1^{-1}\sim \gamma_2^{-1}$, which implies $[\gamma]^{-1}$ is well-defined.
 }
 
 \dfn{Path Component}{
@@ -796,43 +805,43 @@ Note that generally a topological space is not the disjoint union of its connect
 		X  \arrow[dd, "f"{name=L, left}] 
 		\&[-25pt] \& [+10pt] 
 		\& [-30pt] \Pi_1(X) \arrow[dd, "\Pi_1(f)"{name=R}]\&[-30pt]\ni
-		\&[-30pt]\left[p\right]\arrow[dd,mapsto]\\ [-10pt] 
+		\&[-30pt]\left[\gamma\right]\arrow[dd,mapsto]\\ [-10pt] 
 		\&  \phantom{.}\arrow[r, "\Pi_1", squigarrow]\&\phantom{.}  \&   \\[-10pt] 
-		Y \& \& \& \Pi_1(Y)\&\ni\&\left[f\circ p\right]
+		Y \& \& \& \Pi_1(Y)\&\ni\&\left[f\circ \gamma\right]
 	\end{tikzcd}
 	\]
 }
 \pf{
-	First, we will show that $\Pi_1(f)$ is well-defined, namely for any two paths $p_1$ and $p_2$ in $X$,
+	First, we will show that $\Pi_1(f)$ is well-defined, namely for any two paths $\gamma_1$ and $\gamma_2$ in $X$,
 	\[
-		p_1\sim p_2 \implies [f\circ p_1] = [f\circ p_2].
+		\gamma_1\sim \gamma_2 \implies [f\circ \gamma_1] = [f\circ \gamma_2].
 	\]
-	Suppose $p_1\sim p_2$ and $h$ is a homotopy rel end points from $p_2$ to $p_2$. Then $r(s,t):=f(h(s, t))$
-	is a homotopy rel end points from $f\circ p_1$ to $f\circ p_2$, because for all $s\in[0,1]$,
+	Suppose $\gamma_1\sim \gamma_2$ and $H$ is a homotopy rel end points from $\gamma_2$ to $\gamma_2$. Then $r(s,t):=f(H(s, t))$
+	is a homotopy rel end points from $f\circ \gamma_1$ to $f\circ \gamma_2$, because for all $s\in[0,1]$,
 	\begin{align*}
-		r(s,0)&=f(h(s,0))=f(p_1(s))=f\circ p_1(s),\\
-		r(s,1)&=f(h(s,1))=f(p_2(s))=f\circ p_2(s).
+		r(s,0)&=f(H(s,0))=f(\gamma_1(s))=f\circ \gamma_1(s),\\
+		r(s,1)&=f(H(s,1))=f(\gamma_2(s))=f\circ \gamma_2(s).
 	\end{align*}
-	Thus we have $f\circ p_1\sim f\circ p_2$, which implies $\Pi_1(f)$ is well-defined.
+	Thus we have $f\circ \gamma_1\sim f\circ \gamma_2$, which implies $\Pi_1(f)$ is well-defined.
 	To verify the functinality of $\Pi_1$, we have to show that
 	\[
 		\Pi_1(g\circ f) = \Pi_1(g)\circ\Pi_1(f),
 	\]
-	or equivalently for all $[p]\in \Pi_1(X)$,
+	or equivalently for all $[\gamma]\in \Pi_1(X)$,
 	\[
-		[(g\circ f)\circ p]=[g\circ (f\circ p)],
+		[(g\circ f)\circ \gamma]=[g\circ (f\circ \gamma)],
 	\]
 	which clearly holds. 
 }
 
 \chapter{Covering spaces}
 \section{Covering spaces}
-\dfn{}{
+\dfn{Covering}{
 	Let $X$ be a topological space. A \textbf{covering} of $X$ is a continuous map
 $$
-p: E \rightarrow X
+p: E \longrightarrow X
 $$
-such that there exists a discrete space $D$ and for every $x \in X$ an open neighborhood $U \subset X$, such that $p^{-1}(U)=\bigsqcup_{d \in D} V_d$ and $\left.p\right|_{V_d}: V_d \rightarrow U$ is a homeomorphism for every $d \in D$. Such open neighborhood $U$ is called a \textbf{fundamental neighborhood} for $x$. Often, the notion of a covering is used for the covering space $E$ as well as for the map $p: E \rightarrow X$. The open sets $V_d$ are called sheets.
+such that there exists a discrete space $D$ and for every $x \in X$ an open neighborhood $U \subset X$, such that $p^{-1}(U)=\bigsqcup_{d \in D} V_d$ and $\left.p\right|_{V_d}: V_d \rightarrow U$ is a homeomorphism for every $d \in D$. Such open neighborhood $U$ is called a \textbf{fundamental neighborhood} for $x$. The open sets $V_d$ are called \textbf{sheets}.
 }
 A covering space is a fiber bundle with discrete fiber $D$, illustrated as follows
 \[\xymatrix{
@@ -895,10 +904,25 @@ Let $p: E \rightarrow X$ be a covering. Let $\tilde{f}_1, \tilde{f}_2: Y \righta
 	we can connect the sequence of maps $\tilde{f}_k$ to get a path $\tilde{f}:I\to E$ such that $\tilde{f}(0)=e$ and $p\circ \tilde{f}=f$. Since $I$ is connected, we know $\tilde{f}$ is unique.
 }
 
-\prop{Unique Path Lifting}{
+\dfn{Homotopy Lifting Property}{
+	Define the inclusion $\iota_0:Y\to Y\times I,y\mapsto(y,0)$. A map $p: E \rightarrow X$ has the \textbf{homotopy lifting property} for the space $Y$ if the following holds: for each homotopy $f_\bullet: Y \times I \rightarrow X$ and each map $\tilde{f}_0: Y \rightarrow E$ such that $p \circ \tilde{f}_0=h \circ\iota_0$, there exists a homotopy $\tilde{f}_{\bullet}: Y \times I \rightarrow E$ with $p \circ \tilde{f}_{\bullet}=f_{\bullet}$ and $ \tilde{f}_{\bullet} \circ \iota_0=\tilde{f}_0$. In other words, homotopy lifting property means that whenever the outer square of the following diagram commutes, there exists a dashed arrow $\tilde{f}_{\bullet}$ such that the whole diagram commutes.
+	\[
+	\begin{tikzcd}[ampersand replacement=\&]
+		Y \arrow[r, "\tilde{f}_0"] \arrow[d, "\iota_0"', hook]                      \& E \arrow[d, "p"] \\ [+10pt]
+		Y\times I \arrow[r, "f_\bullet"'] \arrow[ru, "\tilde{f}_{\bullet}", dashed] \& X               
+	\end{tikzcd}
+	\]
+	We call $\tilde{f}_{\bullet}$ a lifting of $f_{\bullet}$ with initial condition $\tilde{f}_0$. The map $p$ is called a \textbf{fibration} if it has the homotopy lifting property for all spaces.
+}
+
+\thm{Covering is Fibration}{
+	A covering $p: E \rightarrow B$ is a fibration.
+}
+
+\prop{}{
 	Let $p: E \to X$ be a covering, let $x \in X$, and let $e, e^{\prime}$ be any two points in $p^{-1}(x)$.
 	\begin{enumerate}[(i)]
-		\item A path $f: I \to B$ with $f(0)=x$ lifts uniquely to a path $\tilde{f}: I \to E$ such that $\tilde{f}(0)=e$ and $p \circ \tilde{f}=f$.
+		\item Two paths $f_1, f_2: I \to X$ that start at $x$ are homotopic if and only if their images in $X$ are homotopic.
 		\item Equivalent paths $f_1 \sim f_2: I \to X$ that start at $x$ lift to equivalent paths $\tilde{f}_1\sim \tilde{f}_2: I \to E$ that start at $e$, hence $\tilde{f}_1(1)=\tilde{f}_2(1)$, i.e $\tilde{f}_1$ and $\tilde{f}_2$ end at the same point in $E$.
 		\item $p_*: \pi_1(E, e) \to \pi_1(B, b)$ is a monomorphism.
 		\item $p_*\left(\pi_1\left(E, e^{\prime}\right)\right)$ is conjugate to $p_*\left(\pi_1(E, e)\right)$.
