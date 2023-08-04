@@ -113,10 +113,11 @@
 % Create a new 1st level heading
 
 \chapter{General Topology}
-\section{Topological space}
+\section{Topological Space}
+\subsection{Axiomatic foundations of topological spaces}
 \dfn{Topological Space}{
-	A \textbf{topological space} is an ordered pair $(X,\tau)$, where $X$ is a set and $\tau\subset\mathcal{P}(X)$ is a collection of subsets of $X$, satisfying the following axioms:
-	\begin{enumerate}
+	A \textbf{topological space} is an ordered pair $(X,\tau)$, where $X$ is a set and $\tau\subseteq2^X $ is a collection of subsets of $X$, satisfying the following axioms:
+	\begin{enumerate}[(i)]
 		\item $\varnothing\in \tau$, $X\in \tau$.
 		\item If $A_i\in\tau\;(i\in I)$, then $\bigcup\limits_{i\in I}A_i\in \tau$,
 		\item If $A_i\in\tau\;(i=1,2,\cdots,n)$, then $\bigcap\limits_{i=1}^nA_i\in \tau$.
@@ -132,49 +133,98 @@
 The discrete topology is the finest possible topology on the set $X$.
 
 \dfn{Closed Set}{
-	Suppose that $A$ is a subset of $X$. $A$ is a \textbf{closed set} if and only if $A^C$ is an open set.
+	$A\in 2^X$ is a \textbf{closed set} if and only if $A^{\complement}$ is an open set.
+}
+\dfn{Closed Set Axioms}{
+	Assume that $\mathcal{C}\subseteq2^X $ is a collection of subsets of $X$. $\mathcal{C}$ is a topology via closed sets on $X$ if and only if
+	\begin{enumerate}[(i)]
+		\item $\varnothing\in \mathcal{C}$, $X\in \mathcal{C}$.
+		\item If $A_i\in\mathcal{C}\;(i\in I)$, then $\bigcap\limits_{i\in I}A_i\in \mathcal{C}$,
+		\item If $A_i\in\mathcal{C}\;(i=1,2,\cdots,n)$, then $\bigcup\limits_{i=1}^nA_i\in \mathcal{C}$.
+	\end{enumerate}
+	We can define open set via closed set: $A\in 2^X$ is a open set if and only if $A^{\complement}$ is an close set.
 }
 
-\prop{}{
-	Assume that $\mathcal{F}\subset\mathcal{P}(X)$ is a collection of all closed sets of $(X,\tau)$.
-	\begin{enumerate}
-		\item $\varnothing\in \mathcal{F}$, $X\in \mathcal{F}$.
-		\item If $A_i\in\mathcal{F}\;(i\in I)$, then $\bigcap\limits_{i\in I}A_i\in \mathcal{F}$,
-		\item If $A_i\in\mathcal{F}\;(i=1,2,\cdots,n)$, then $\bigcup\limits_{i=1}^nA_i\in \mathcal{F}$.
-	\end{enumerate}
-}
-\pf{~\\
-	\begin{enumerate}
-		\item \vspace{-1em}$\varnothing\in \tau\implies\varnothing^C=X\in \mathcal{F} \ $. $X\in \tau\implies X^C=\varnothing\in \mathcal{F}$.
-		\item $A_i\in\mathcal{F}\;(i\in I)\implies A_i^C\in\tau\;(i\in I)\implies\bigcup\limits_{i\in I}A_i^C\in \tau\implies \left(\bigcap\limits_{i\in I}A_i\right)^C\in \tau\implies\bigcap\limits_{i\in I}A_i\in\mathcal{F}$.
-		\item $A_i\in\mathcal{F}\;(i=1,\cdots,n)\implies A_i^C\in\tau\;(i=1,\cdots,n)\implies\bigcap\limits_{i=1}^nA_i^C\in \tau\implies \left(\bigcup\limits_{i=1}^nA_i\right)^C\in \tau\implies\bigcup\limits_{i=1}^nA_i\in\mathcal{F}$.
+\pf{
+	Topology $\tau$ via open sets $\rightarrow$ topology $\mathcal{C}$ via closed sets.\\
+	We can check the closed sets induced by $\tau$ satisfy the closed set axioms:
+	\begin{enumerate}[(i)]
+		\item $\varnothing\in \tau\implies\varnothing^{\complement}=X\in \mathcal{C} \ $. $X\in \tau\implies X^{\complement}=\varnothing\in \mathcal{C}$.
+		\item $A_i\in\mathcal{C}\;(i\in I)\implies A_i^{\complement}\in\tau\;(i\in I)\implies\bigcup\limits_{i\in I}A_i^{\complement}\in \tau\implies \left(\bigcap\limits_{i\in I}A_i\right)^{\complement}\in \tau\implies\bigcap\limits_{i\in I}A_i\in\mathcal{C}$.
+		\item $A_i\in\mathcal{C}\;(i=1,\cdots,n)\implies A_i^{\complement}\in\tau\;(i=1,\cdots,n)\implies\bigcap\limits_{i=1}^nA_i^{\complement}\in \tau\implies \left(\bigcup\limits_{i=1}^nA_i\right)^{\complement}\in \tau\implies\bigcup\limits_{i=1}^nA_i\in\mathcal{C}$.
 	\end{enumerate}
 }
 
 \dfn{Neighborhood}{
-	Given a point $x\in X$, a set $N\subset X$ is the \textbf{neighborhood} of $x$ if there exists an open set $O\in\tau$ such that $x\in O\subset N$. The collection of all neighborhoods of $x$ is denoted by $\mathcal{N}(x)$.
+	Given a point $x\in X$, a set $N\subseteq X$ is the \textbf{neighborhood} of $x$ if there exists an open set $O\in\tau$ such that $x\in O\subseteq N$. The collection of all neighborhoods of $x$ is denoted by $\mathcal{N}(x)$.
 }
 
-\prop{}{
-	Suppose that $x\in X$.
-	\begin{enumerate}
+\dfn{Neighborhood Axiom}{
+	Suppose that $x\in X$. $\mathcal{N}(x)$ is called a \textbf{neighborhood system} for $x$ if and only if
+	\begin{enumerate}[(i)] 
 		\item $N\in\mathcal{N}(x)\implies x\in N$
 		\item $N_1,N_2\in\mathcal{N}(x)\implies N_1\cap N_2\in\mathcal{N}(x)$
-		\item $N\in\mathcal{N}(x)\bigwedge N\subset U\subset X\implies U\in\mathcal{N}(x)$
-		\item $N\in\mathcal{N}(x)\implies \exists M\in\mathcal{N}(x),\ (M\subset N)\bigwedge(\,\forall y\in M,M\in\mathcal{N}(y)\hspace{1pt})$
+		\item $N\in\mathcal{N}(x)$ and $N\subseteq U\subseteq X\implies U\in\mathcal{N}(x)$
+		\item $N\in\mathcal{N}(x)\implies \exists M\in\mathcal{N}(x),\forall y\in M,N\in\mathcal{N}(y)\hspace{1pt}$
 	\end{enumerate}
+	$\{\mathcal{N}(x)\}_{x\in X}$ is a topology via neighborhoods on $X$. We can define open set via neighborhoods: $A\in 2^X$ is a open set if and only if for any $a\in A$, $A\in\mathcal{N}(a)$.
 }
-\pf{~\\ \vspace{-1em}
-	\begin{enumerate}
-		\item $N\in\mathcal{N}(x)\implies x\in O\subset N \implies x\in N$.
-		\item $N_1,N_2\in\mathcal{N}(x)\implies x\in O_1\subset N_1 \bigwedge x\in O_2\subset N_2\implies x\in O_1\cap O_2\subset N_1\cap N_2$.
-		\item $N\in\mathcal{N}(x)\bigwedge N\subset U\subset X\implies x\in O\subset N\subset U\implies U\in\mathcal{N}(x)$.
-		\item If $N\in\mathcal{N}(x)$, then there exists $O\in\tau$ such that $x\in O\subset N$. Note that $O\in \mathcal{N}(x)$ and
+\pf{
+	Topology $\tau$ via open sets $\rightarrow$ topology $\{\mathcal{N}(x)\}_{x\in X}$ via neighborhoods.\\
+	We can check the neighborhoods induced by $\tau$ satisfy the neighborhood axioms:
+	\begin{enumerate}[(i)]
+		\item $N\in\mathcal{N}(x)\implies x\in O\subseteq N \implies x\in N$.
+		\item $N_1,N_2\in\mathcal{N}(x)\implies x\in O_1\subseteq N_1 $ and $ x\in O_2\subseteq N_2\implies x\in O_1\cap O_2\subseteq N_1\cap N_2$.
+		\item $N\in\mathcal{N}(x)$ and $ N\subseteq U\subseteq X\implies x\in O\subseteq N\subseteq U\implies U\in\mathcal{N}(x)$.
+		\item If $N\in\mathcal{N}(x)$, then there exists $O\in\tau$ such that $x\in O\subseteq N$. Note that $O\in \mathcal{N}(x)$ and
 		      \[
-			      \forall y\in O,y\in O\subset O\implies\forall y\in O,O\in\mathcal{N}(y).
+			      \forall y\in O,y\in O\subseteq N\implies\forall y\in O,N\in\mathcal{N}(y).
 		      \]
 		      We affirm that $O$ is the set $M$ that we are looking for.
 	\end{enumerate}
+}
+
+\dfn{Filter}{
+	A subset $F$ of a poset $(P,\le)$ is called a \textbf{filter} if it is upward-closed and downward-directed; that is:
+	\begin{enumerate}[(i)]
+		\item (Nontriviality) $F\ne \varnothing$.
+		\item (Upward-closed) If $A \in F$ and $A \le B$, then $B \in F$.
+		\item (Downward-directed) If $A \in F$ and $B \in F$, then there exists $C \in F$ such that $C \le A$ and $C \le B$.
+	\end{enumerate}
+	If $F$ is a filter and $F \ne P$, then $F$ is said to be a \textbf{proper filter}. 
+}
+
+\dfn{Filter on a Set}{
+	Let $X$ be a set. A \textbf{filter on $X$} is a proper filter of $(2^X,\subseteq)$. Writing explicitly, a nonempty collection $\mathcal{F}\subseteq 2^X$ is a filter on $X$ if
+	\begin{enumerate}[(i)]
+		\item $\varnothing\notin\mathcal{F}$.
+		\item $A\in\mathcal{F}$ and $A\subseteq B\subseteq X\implies B\in\mathcal{F}$.
+		\item $A,B\in\mathcal{F}\implies A\cap B\in\mathcal{F}$.
+	\end{enumerate}
+}
+Note that (iii) is equivalent to: $A,B\in\mathcal{F}\implies \exists C\in\mathcal{F},\ C\subseteq A\cap B$, given the upward-closed condition (ii).
+
+We can see that for any $x\in X$, neighborhood system $\mathcal{N}(x)$ is a filter on $X$, called the \textbf{neighborhood filter} of $x$.
+
+\dfn{Filter Base}{
+	Let $X$ be a set. A \textbf{filter base on $X$} is a nonempty collection $\mathcal{B}\subseteq 2^X$ such that
+	\begin{enumerate}[(i)]
+		\item $\varnothing\notin\mathcal{B}$.
+		\item $A,B\in\mathcal{B}\implies \exists C\in\mathcal{B},\ C\subseteq A\cap B$.
+	\end{enumerate}
+}
+\dfn{Filter Generated by a Filter Base}{
+	Let $X$ be a set. Given a filter base $\mathcal{B}$ on $X$, the \textbf{filter generated by $\mathcal{B}$} is the collection
+	\[
+		\mathcal{F}=\{A\subseteq X\mid \exists B\in\mathcal{B},\ B\subseteq A\}.
+	\]
+	If a filter base $\mathcal{B}$ generates a filter $\mathcal{F}$, we say that $\mathcal{B}$ is a base of $\mathcal{F}$.
+}
+\dfn{Neighborhood Base}{
+	Let $X$ be a topological space. A \textbf{neighborhood base} for a point $x\in X$ is a base of the neighborhood filter $\mathcal{N}(x)$. Equivalently, $\mathcal{B}\subseteq\mathcal{N}(x)$ is a neighborhood base for $x$ if and only if for any $N\in\mathcal{N}(x)$, there exists $B\in\mathcal{B}$ such that $B\subseteq N$.
+}
+\prop{}{
+	The collection of all open neighbourhoods at a point forms a neighbourhood basis at that point.
 }
 \dfn{Limit Point}{
 	Suppose that $A$ is a subset of $X$. A point $x\in X$ is a \textbf{limit point} of $A$, if every neighbourhood of $x$ contains at least one point of $A$ different from $x$ itself,
@@ -185,13 +235,15 @@ The discrete topology is the finest possible topology on the set $X$.
 	The set of all limit points of $A$ is said to be the \textbf{derived set} of $A$, denoted by $A'$.
 }
 
+
+
 \prop{}{
 	Suppose that $A$ and $B$ are subsets of $X$.
-	\begin{enumerate}
+	\begin{enumerate}[(i)]
 		\item $\varnothing'=\varnothing$
 		\item $(A \cup B)'=A'\cup B' $
-		\item $A \subset B \Longrightarrow A' \subset B'$
-		\item $A'' \subset A' \cup A $
+		\item $A \subseteq B \Longrightarrow A' \subseteq B'$
+		\item $A'' \subseteq A' \cup A $
 		\item $a \in A' \Longrightarrow a \in(A-\{a\})' $
 	\end{enumerate}
 }
@@ -206,24 +258,24 @@ The discrete topology is the finest possible topology on the set $X$.
 	Suppose that $A$ is a subset of $X$. The \textbf{closure} of $A$ is the smallest closed set containing $A$, denoted by $\overline{A}$.
 }
 
-\prop{}{
+\prop{Equivalent Definitions of Closure}{
 	The following propositions are equivalent:
-	\begin{enumerate}
+	\begin{enumerate}[(i)] 
 		\item $S$ is the closure of $A$.
-		\item $S=\bigcap\limits_{F_\alpha\in\mathcal{F}:A\subset F_\alpha}F_\alpha$, where $\mathcal{F}$ is a collection of all closed sets of $X$.
+		\item $S=\bigcap\limits_{F_\alpha\in\mathcal{F}:A\subseteq F_\alpha}F_\alpha$, where $\mathcal{F}$ is a collection of all closed sets of $X$.
 		\item $S=A\cup A'$.
 		\item $S=\{x\in X: \forall N\in\mathcal{N}(x),N\cap A\ne\varnothing\}$.
 	\end{enumerate}
 }
 
 \pf{~\\ \vspace{-1em}
-	\begin{enumerate}
+	\begin{enumerate}[(i)] 
 		\item Omitted.
 	\end{enumerate}
 }
 \prop{}{
 	Suppose that $A$ and $B$ are subsets of $X$.
-	\begin{enumerate}
+	\begin{enumerate}[(i)] 
 		\item $\overline{\varnothing}=\varnothing$.
 		\item $\overline{A \cup B}=\overline{A}\cup\overline{B}$,  $\overline{A \cap B}\subset\overline{A}\cap\overline{B}$.
 		\item $A\subset\overline{A}$.
@@ -232,7 +284,7 @@ The discrete topology is the finest possible topology on the set $X$.
 }
 
 \pf{~\\ \vspace{-1em}
-	\begin{enumerate}
+	\begin{enumerate}[(i)] 
 		\item Omitted.
 	\end{enumerate}
 }
@@ -240,7 +292,7 @@ The discrete topology is the finest possible topology on the set $X$.
 \dfn{Frontier}{
 	Suppose that $A$ is a subset of $X$. The \textbf{frontier} of $A$ denoted by $\partial A$ is defined as
 	\[
-		\partial A=\overline{A}\cap\overline{A^C}.
+		\partial A=\overline{A}\cap\overline{A^{\complement}}.
 	\] A point $x$ is called an \textbf{boundary point} of $A$ if $x\in \partial A$.
 }
 
@@ -250,21 +302,21 @@ The discrete topology is the finest possible topology on the set $X$.
 
 \prop{}{
 	The following propositions are equivalent:
-	\begin{enumerate}
+	\begin{enumerate}[(i)] 
 		\item $S$ is the interior of $A$.
-		\item $S=\bigcup\limits_{O_\alpha\in\tau:O_\alpha\subset A}O_\alpha$.
+		\item $S=\bigcup\limits_{O_\alpha\in\tau:O_\alpha\subseteq A}O_\alpha$.
 		\item $S=A-\partial A$.
-		\item $S=\{x\in X:\exists N\in\mathcal{N}(x),N_x\subset A\}$.
+		\item $S=\{x\in X:\exists N\in\mathcal{N}(x),N_x\subseteq A\}$.
 	\end{enumerate}
 }
 \pf{~\\ \vspace{-1em}
-	\begin{enumerate}
+	\begin{enumerate}[(i)] 
 		\item Omitted.
 	\end{enumerate}
 }
 \prop{}{
 	Suppose that $A$ and $B$ are subsets of $X$.
-	\begin{enumerate}
+	\begin{enumerate}[(i)] 
 		\item $\varnothing^{\circ}=\varnothing$.
 		\item $(A \cup B)^{\circ}=A^{\circ}\cup B^{\circ}$,  $(A \cap B)^{\circ}\supset A^{\circ}\cap B^{\circ}$.
 		\item $A\supset A^{\circ}$.
@@ -273,28 +325,28 @@ The discrete topology is the finest possible topology on the set $X$.
 }
 
 \pf{~\\ \vspace{-1em}
-	\begin{enumerate}
+	\begin{enumerate}[(i)] 
 		\item Omitted.
 	\end{enumerate}
 }
 
 \prop{}{
 	The following propositions are equivalent:
-	\begin{enumerate}
+	\begin{enumerate}[(i)] 
 		\item $F$ is a closed set.
-		\item $F'\subset F$.
+		\item $F'\subseteq F$.
 		\item $\overline{F}=F$.
 	\end{enumerate}
 }
 \pf{~\\ \vspace{-1em}
-	\begin{enumerate}
+	\begin{enumerate}[(i)] 
 		\item Omitted.
 	\end{enumerate}
 }
 
 \prop{}{
 	The following propositions are equivalent:
-	\begin{enumerate}
+	\begin{enumerate}[(i)] 
 		\item $F$ is an open set.
 		\item $\partial F\cap F=\varnothing$.
 		\item $F^\circ=F$.
@@ -302,20 +354,20 @@ The discrete topology is the finest possible topology on the set $X$.
 	\end{enumerate}
 }
 \pf{~\\ \vspace{-1em}
-	\begin{enumerate}
+	\begin{enumerate}[(i)] 
 		\item Omitted.
 	\end{enumerate}
 }
 
 \prop{}{
 	Suppose that $A$ is a subset of $X$.
-	\begin{enumerate}
-		\item $(\overline{A})^C=(A^C)^{\circ}$
-		\item $(A^{\circ})^C=\overline{A^C}$
+	\begin{enumerate}[(i)] 
+		\item $(\overline{A})^{\complement}=(A^{\complement})^{\circ}$
+		\item $(A^{\circ})^{\complement}=\overline{A^{\complement}}$
 	\end{enumerate}
 }
 \pf{~\\ \vspace{-1em}
-	\begin{enumerate}
+	\begin{enumerate}[(i)] 
 		\item Omitted.
 	\end{enumerate}
 }
@@ -325,13 +377,13 @@ The discrete topology is the finest possible topology on the set $X$.
 }
 \prop{}{
 	The following propositions are equivalent:
-	\begin{enumerate}
+	\begin{enumerate}[(i)] 
 		\item $A$ is dense in $X$.
 		\item For any point $x \in X$ and for any neighborhood $N\in\mathcal{N}(x)$, $N\cap A\ne \varnothing$.
 	\end{enumerate}
 }
 \pf{~\\ \vspace{-1em}
-	\begin{enumerate}
+	\begin{enumerate}[(i)] 
 		\item Omitted.
 	\end{enumerate}
 }
@@ -344,7 +396,7 @@ The discrete topology is the finest possible topology on the set $X$.
 }
 \prop{}{
 	Suppose $(X,\tau)$ is a topological space and $\mathcal{B}\subseteq \tau $ is a collection of open sets of $X$. The following propositions are equivalent:
-	\begin{enumerate}
+	\begin{enumerate}[(i)] 
 		\item $\mathcal{B}$ is a base for $X$.
 		\item $\forall U\in \tau$, $\forall x\in U$, $\exists B\in\mathcal{B}$ such that $x\in B\subseteq U$. 
 	\end{enumerate}
@@ -352,7 +404,7 @@ The discrete topology is the finest possible topology on the set $X$.
 
 \prop{}{
 	If $\mathcal{B}$ is a base for $(X,\tau)$, it satisfies the following properties:
-\begin{enumerate}
+\begin{enumerate}[(i)] 
 	\item $\mathcal{B}$ covers $X$,
 	\item $\forall B_1,B_2\in\mathcal{B}$, $\forall x\in B_1\cap B_2$, $\exists B_3\in \mathcal{B}$ such that $x\in B_3\subseteq B_1\cap B_2$.
 \end{enumerate}
@@ -360,7 +412,7 @@ The discrete topology is the finest possible topology on the set $X$.
 
 \prop{}{
 	Suppose $X$ is a set and $\mathcal{B}\subseteq 2^X $ is a collection of subsets of $X$. If
-\begin{enumerate}
+\begin{enumerate}[(i)] 
 	\item $\mathcal{B}$ covers $X$,
 	\item $\forall B_1,B_2\in\mathcal{B}$, $\forall x\in B_1\cap B_2$, $\exists B_3\in \mathcal{B}$ such that $x\in B_3\subseteq B_1\cap B_2$,
 \end{enumerate}
@@ -379,6 +431,12 @@ on $X$ such that $\mathcal{B}$ is a base for $(X,\tau)$.
 	A topological space is called \textbf{separable} if it contains a countable, dense subset.
 }
 
+\dfn{First-Countable Space}{
+	A \textbf{first-countable} space is a topological space such that for any point $x$ in the space, there exists a countable neighbourhood base at $x$.
+}
+\ex{Metric Space is First-Countable}{
+	Let $(X,d)$ be a metric space. For any $x\in X$, we can choose a countable neighbourhood base $\{B_{1/n}(x)\}_{n=1}^\infty$ at $x$.
+}
 \dfn{Second-Countable Space}{
 	A \textbf{second-countable} space, also called a completely separable space, is a topological space whose topology has a countable base.
 }
@@ -394,6 +452,15 @@ We have several separation axioms in topological spaces denoted by $\mathrm{T}_r
 A subset $K$ of a topological space $X$ is said to be compact if it is compact as a subspace (in the subspace topology).
 \dfn{Local Homeomorphism}{
 	A map $f:X\to Y$ is a \textbf{local homeomorphism} if for any $x\in X$, there exists a neighbourhood $U$ of $x$ such that $f(U)$ is open in $Y$ and $f|_U:U\to f(U)$ is a homeomorphism.
+}
+\prop{Local Homeomorphism Transfers Local Properties}{
+	A local homeomorphism $f: X \rightarrow Y$ transfers "local" topological properties in both directions:
+	\begin{itemize}
+		\item $X$ is locally connected if and only if $f(X)$ is;
+		\item  $X$ is locally path-connected if and only if $f(X)$ is;
+		\item  $X$ is locally compact if and only if $f(X)$ is;
+		\item  $X$ is first-countable if and only if $f(X)$ is.
+	\end{itemize}
 }
 \section{Basic Construction}
 \subsection{Subspace Topology}
@@ -464,14 +531,14 @@ It is easy to check that $\pi$ is a continuous surjection from $(X,\tau)$ to $(X
 	A topological space $X$ is \textbf{connected} if it is not the union of two disjoint nonempty open sets.
 }
 \dfn{Locally Connected Topological Space}{
-	A topological space $X$ is \textbf{locally connected} if for every $x\in X$ and every open set $U$ containing $x$, there is a connected open set $V$ such that $x\in V\subseteq U$.
+	A space $X$ is called \textbf{locally connected at $x\in X$} if every neighborhood of $x$ contains a connected open neighborhood of $x$, that is, if the point $x$ has a neighborhood base consisting of connected open sets. A \textbf{locally connected space} is a topological space that is locally connected at each of its points.
 }
 Local connectedness does not imply connectedness, e.g. two disjoint open intervals in $\mathbb {R}$ for example; and connectedness does not imply local connectedness, e.g. the topologist's sine curve $$\left\{\left(x, \sin \frac{1}{x}\right): x \in(0,1]\right\} \cup\{(0,0)\}.$$
-\dfn{Path Connected}{
+\dfn{Path Connected Topological Space}{
 	A topological space $X$ is \textbf{path connected} if for every $x,y\in X$, there is a continuous function $f:[0,1]\to X$ such that $f(0)=x$ and $f(1)=y$.
 }
-\dfn{Locally Path Connected}{
-	A topological space $X$ is \textbf{locally path connected} if for every $x\in X$ and every open set $U$ containing $x$, there is a path connected open set $V$ such that $x\in V\subseteq U$.
+\dfn{Locally Path Connected Topological Space}{
+	A space $X$ is called \textbf{locally path connected at $x\in X$} if every neighborhood of $x$ contains a path connected open neighborhood of $x$, that is, if the point $x$ has a neighborhood base consisting of path connected open sets. A \textbf{locally path connected space} is a topological space that is locally path connected at each of its points.
 }
 
 \prop{}{
@@ -526,7 +593,7 @@ we obtain the CW complex $X$
 \[
 	X=\varinjlim X_n
 \]
-with a weak topology satisfying a subset $U \subset X$ is closed iff $U \cap D^n_i$ is closed for each cell $D^n_i$.
+with a weak topology satisfying a subset $U \subseteq X$ is closed iff $U \cap D^n_i$ is closed for each cell $D^n_i$.
 
 \section{Fiber Bundle}
 \dfn{Fiber Bundle}{
@@ -734,7 +801,7 @@ $\pi_0$ can be viewed as a functor from $\mathsf{Top}$ to $\mathsf{Set}$
 		p: \coprod_{\alpha\in I} X_\alpha& \longrightarrow I\\
 		(x, \alpha) &\longmapsto \alpha
 	\end{align*}
-	is continuous, where we equip $I$ with the discrete topology. If $\gamma$ is a path in $\coprod_\alpha X_\alpha$, then $p \gamma$ is a path in $I$, hence must be constant. So only points within the same summand of the coproduct can be connected by a path, i.e. $\alpha_1=\alpha_2$. Define
+	is continuous, where we equip $I$ with the discrete topology. If $\gamma$ is a path in $\coprod_\alpha X_\alpha$, then $p\circ\gamma$ is a path in $I$, hence must be constant. So only points within the same summand of the coproduct can be connected by a path, i.e. $\alpha_1=\alpha_2$. Define
 	\begin{align*}
 		\iota: X_{\alpha_1} \times\{\alpha_1\}&\longrightarrow  X_{\alpha_1}\\
 		(x, \alpha_1) &\longmapsto x
@@ -833,7 +900,27 @@ Note that generally a topological space is not the disjoint union of its connect
 	\]
 	which clearly holds. 
 }
-
+\dfn{Simply Connected Space}{
+	A topological space $X$ is called \textbf{simply connected} if it is path-connected and $\pi_1(X,x_0)$ is trivial for some $x_0\in X$.
+}
+\dfn{Locally Simply Connected Space}{
+	A topological space $X$ is called \textbf{locally simply connected} if for every $x\in X$ there exists an open 
+	neighborhood $U$ of $x$ such that $U$ is simply connected.
+}
+\dfn{Semi-locally Simply Connected Space}{
+	A topological space $X$ is called \textbf{semi-locally simply connected} if for every $x\in X$ there exists an open neighborhood $U$ of $x$ with the property that every loop in $U$ can be contracted to a single point within $X$.
+}
+\prop{}{
+	The following implications hold:
+	\begin{itemize}
+		\item simply connectedness $\implies$ semi-locally simply connected $+$ path-connected.
+		\item locally simply connected $\implies$ semi-locally simply connected $+$ locally path-connected.
+	\end{itemize}
+}
+\section{Homotopy Equivalence}
+\dfn{Homotopy Equivalence}{
+	Let $X$ and $Y$ be topological spaces. A continuous map $f:X\to Y$ is called a \textbf{homotopy equivalence} if there exists a continuous map $g:Y\to X$ such that $g\circ f\simeq \mathrm{id}_X$ and $f\circ g\simeq \mathrm{id}_Y$. In this case, we say $X$ and $Y$ are \textbf{homotopy equivalent} and write $X\simeq Y$.
+}
 \chapter{Covering spaces}
 \section{Covering spaces}
 \dfn{Covering}{
@@ -841,7 +928,7 @@ Note that generally a topological space is not the disjoint union of its connect
 $$
 p: E \longrightarrow X
 $$
-such that there exists a discrete space $D$ and for every $x \in X$ an open neighborhood $U \subset X$, such that $p^{-1}(U)=\bigsqcup_{d \in D} V_d$ and $\left.p\right|_{V_d}: V_d \rightarrow U$ is a homeomorphism for every $d \in D$. Such open neighborhood $U$ is called a \textbf{fundamental neighborhood} for $x$. The open sets $V_d$ are called \textbf{sheets}.
+such that there exists a discrete space $D$ and for every $x \in X$ an open neighborhood $U \subseteq X$, such that $p^{-1}(U)=\bigsqcup_{d \in D} V_d$ and $\left.p\right|_{V_d}: V_d \rightarrow U$ is a homeomorphism for every $d \in D$. Such open neighborhood $U$ is called a \textbf{fundamental neighborhood} for $x$. The open sets $V_d$ are called \textbf{sheets}.
 }
 A covering space is a fiber bundle with discrete fiber $D$, illustrated as follows
 \[\xymatrix{
@@ -926,7 +1013,7 @@ Let $p: E \rightarrow X$ be a covering. Let $\tilde{f}_1, \tilde{f}_2: Y \righta
 		\item Equivalent paths $f_1 \sim f_2: I \to X$ that start at $x$ lift to equivalent paths $\tilde{f}_1\sim \tilde{f}_2: I \to E$ that start at $e$, hence $\tilde{f}_1(1)=\tilde{f}_2(1)$, i.e $\tilde{f}_1$ and $\tilde{f}_2$ end at the same point in $E$.
 		\item $p_*: \pi_1(E, e) \to \pi_1(B, b)$ is a monomorphism.
 		\item $p_*\left(\pi_1\left(E, e^{\prime}\right)\right)$ is conjugate to $p_*\left(\pi_1(E, e)\right)$.
-		\item As e' runs through $F_b$, the groups $p_*\left(\pi_1\left(E, e^{\prime}\right)\right)$ run through all conjugates of $p_*\left(\pi_1(E, e)\right)$ in $\pi_1(B, b)$.
+		\item As $e'$ runs through $F_b$, the groups $p_*\left(\pi_1\left(E, e^{\prime}\right)\right)$ run through all conjugates of $p_*\left(\pi_1(E, e)\right)$ in $\pi_1(B, b)$.
 	\end{enumerate}
 }
 \pf{
@@ -952,7 +1039,7 @@ $$
 \noindent A $k$-simplex spanned by $a_0, a_1, \ldots, a_k$ is the convex hull of these points.
 \dfn{}{
 Let $\sigma$ be a $k$-simplex spanned by $\left\{a_0, a_1, \ldots, a_k\right\}$.
-\begin{enumerate}
+\begin{enumerate}[(i)] 
 	\item The points $a_0, a_1, \ldots, a_k$ are called the \textbf{vertices} of $\sigma$.
 	\item The number $k$ is the \textbf{dimension} of $\sigma$.
 	\item Any simplex spanned by a subset of $\left\{a_0, a_1, \cdots, a_k\right\}$ is called a \textbf{face} of $\sigma$. 
@@ -964,14 +1051,14 @@ Let $\sigma$ be a $k$-simplex spanned by $\left\{a_0, a_1, \ldots, a_k\right\}$.
 }
 \dfn{Simplicial Complex}{
 A \textbf{simplicial complex} $K$ is a collection of simplices in $\mathbb{R}^n$ (of possibly varying dimensions) such that
-\begin{enumerate}
+\begin{enumerate}[(i)] 
 	\item Any face of a simplex in $K$ is also in $K$.
 	\item The intersection of any two simplices in $K$ is a face of each of the two simplices, whenever the the intersection is non-empty.
 \end{enumerate}
 }
 
 \dfn{Subcomplex}{
-Let $K$ be a simplicial complex. If $L\subset K$ and $L$ is a simplicial complex, then $L$ is called a \textbf{subcomplex} of $K$.
+Let $K$ be a simplicial complex. If $L\subseteq K$ and $L$ is a simplicial complex, then $L$ is called a \textbf{subcomplex} of $K$.
 }
 
 \dfn{$p$-Skeleton}{
@@ -992,9 +1079,9 @@ A simplicial complex $K$ is said to be \textbf{finite} if $K^{(0)}$ is finite.
 
 \dfn{Realization Of A Simplicial Complex}{
 The realization of a simplicial complex $K$ is a topological space $(|K|, \tau)$ such that
-\begin{enumerate}
+\begin{enumerate}[(i)] 
 	\item $|K|$ is the union of all simplices in $K$, that is $|K|=\bigcup_{\sigma\in K}\sigma$.
-	\item $F\subset |K|$ is a closed set in $(|K|, \tau)\iff$ for all simplices $\sigma\in K$, $F\cap \sigma$ is a closed set in $(\sigma,\nu_\sigma)$, where $\nu_\sigma$ is the subspace topology of Euclidean topology.
+	\item $F\subseteq |K|$ is a closed set in $(|K|, \tau)\iff$ for all simplices $\sigma\in K$, $F\cap \sigma$ is a closed set in $(\sigma,\nu_\sigma)$, where $\nu_\sigma$ is the subspace topology of Euclidean topology.
 \end{enumerate}
 }
 For finite simplicial complexes $K$ with finite dimension, the topology $\tau$ coincides with the subspace topology of Euclidean topology. 
@@ -1081,7 +1168,7 @@ $C_k(K)$ is a free abelian group.
 }
 
 \prop{Chain Complex}{
-	Let $K$ be a simplicial complex. Then we have $\partial_k\circ\partial_{k+1}=0$ or equivalently $B_k(K)\subset Z_k(K)$. Therefore we have a chain complex 
+	Let $K$ be a simplicial complex. Then we have $\partial_k\circ\partial_{k+1}=0$ or equivalently $B_k(K)\subseteq Z_k(K)$. Therefore we have a chain complex 
 	\begin{align*}
 		\cdots\stackrel{\partial_{k+2}}{\longrightarrow}  C_{k+1}(K)\stackrel{\partial_{k+1}}{\longrightarrow} C_{k}(K)\stackrel{\partial_{k}}{\longrightarrow} \cdots\stackrel{\partial_{2}}{\longrightarrow}  C_1(K)\stackrel{\partial_{1}}{\longrightarrow} C_0(K)\stackrel{\partial_{0}}{\longrightarrow}  0
 	\end{align*}
@@ -1094,7 +1181,7 @@ $C_k(K)$ is a free abelian group.
 
 \section{Singular homology}
 \dfn{Standard Simplex}{
-	For $n \geq 0$, the \textbf{standard $n$-simplex} $\Delta^n$ is the set $\Delta^n \subset \mathbb{R}^{n+1}$ defined by
+	For $n \geq 0$, the \textbf{standard $n$-simplex} $\Delta^n$ is the set $\Delta^n \subseteq \mathbb{R}^{n+1}$ defined by
 $$
 \Delta^n=\left\{\left(t_0, \cdots, t_n\right) \in \mathbb{R}^{n+1}\,\middle\vert\, \sum_{i=0}^n t_i=1, t_i \geq 0 \text { for all } i\right\} .
 $$
@@ -1172,7 +1259,7 @@ Suppose $\{e_0,\cdots,e_{k+1}\}$ is the vertices of $\Delta^{k+1}$. $l_i$ embeds
 }
 
 \prop{}{
-	Let $X$ be a topological space. Then we have $B_k(X)\subset Z_k(X)$ or equivalently $\partial_k\circ\partial_{k+1}=0$.
+	Let $X$ be a topological space. Then we have $B_k(X)\subseteq Z_k(X)$ or equivalently $\partial_k\circ\partial_{k+1}=0$.
 }
 \pf{
 	\[
@@ -1276,7 +1363,7 @@ where $X_\alpha$ are path-components of $X$. Especially, we have $H_0(X)\cong \m
 	\]
 	which implies $\varphi$ is a monomorphism. 
 
-	For any map $\sigma:\Delta^k\to X$ in $C_k(X)$, since $\Delta^k$ is path-connected, there must be $\sigma(\Delta^k)\subset X_\alpha$, where $X_\alpha$ is a path-component of $X$. Let $\sigma_\alpha:\Delta^k\to X_\alpha$, $x\mapsto\sigma(x)$. Then we have $\varphi(\sigma_\alpha)=i_\alpha\circ\sigma_\alpha=\sigma$, which implies $\varphi$ is an epimorphism. Therefore, $\varphi$ is an isomorphism. Since functor $H_k'$ preserves isomorphism, we obtain
+	For any map $\sigma:\Delta^k\to X$ in $C_k(X)$, since $\Delta^k$ is path-connected, there must be $\sigma(\Delta^k)\subseteq X_\alpha$, where $X_\alpha$ is a path-component of $X$. Let $\sigma_\alpha:\Delta^k\to X_\alpha$, $x\mapsto\sigma(x)$. Then we have $\varphi(\sigma_\alpha)=i_\alpha\circ\sigma_\alpha=\sigma$, which implies $\varphi$ is an epimorphism. Therefore, $\varphi$ is an isomorphism. Since functor $H_k'$ preserves isomorphism, we obtain
 	$$
 	H_k(X)=H_k'(C_k(X))\cong H_k'\left(\bigoplus_{\alpha\in \pi_0(X)} C_k\left(X_\alpha\right)\right).
 	$$ 
@@ -1322,7 +1409,7 @@ where $X_\alpha$ are path-components of $X$. Especially, we have $H_0(X)\cong \m
 
 \section{Axiomatic homology theory}
 \dfn{The Category Of Pairs Of Topological Spaces $\mathsf{Top}_{(2)}$}{
-	The object of $\mathsf{Top}_{(2)}$ are pairs $(X, A)$ of topological spaces, where $A$ is a subspace of $X$. The morphisms between $(X, A)$ and $(Y, B)$ are continuous maps $f:X\to Y$ such that $f(A)\subset B$.
+	The object of $\mathsf{Top}_{(2)}$ are pairs $(X, A)$ of topological spaces, where $A$ is a subspace of $X$. The morphisms between $(X, A)$ and $(Y, B)$ are continuous maps $f:X\to Y$ such that $f(A)\subseteq B$.
 }
 
 \dfn{The Functor $K$}{
@@ -1345,7 +1432,7 @@ where $X_\alpha$ are path-components of $X$. Especially, we have $H_0(X)\cong \m
 	The axioms are:
 	\begin{itemize}
 		\item Homotopy: If $f:(X, A)\to (Y, B)$ is homotopic to $g:(X, A)\to (Y, B)$, then $H_n(f)=H_n(g)$ for all $n\in\mathbb{Z}$.
-		\item Excision: For any pair $(X, A)$, if $U$ is a subset of $A$ such that $\overline{U}\subset X^\circ$, then $$H_n(X,A)\cong H_n(X-U,A-U)$$
+		\item Excision: For any pair $(X, A)$, if $U$ is a subset of $A$ such that $\overline{U}\subseteq X^\circ$, then $$H_n(X,A)\cong H_n(X-U,A-U)$$
 		for all $n\in\mathbb{Z}$.
 		\item Dimension: Let $\left\{*\right\}$ be a one-point space. Then $H_n(\left\{*\right\}) = 0$ for all $n \neq 0$. Here $H_n(\left\{*\right\})$ is a shorthand for $H_n(\left\{*\right\}, \varnothing)$.
 		\item Additivity:
