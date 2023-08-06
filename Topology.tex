@@ -20,8 +20,6 @@
 \usepackage{tikz}
 \usepackage{quiver}
 
-
-
 \newcommand{\midv}{\,\middle\vert\,}
 \newcommand{\Top}{\mathsf{Top}}
 \newcommand{\Grp}{\mathsf{Grp}}
@@ -871,7 +869,7 @@ Note that generally a topological space is not the disjoint union of its connect
 	\begin{tikzcd}[ampersand replacement=\&]
 		X  \arrow[dd, "f"{name=L, left}] 
 		\&[-25pt] \& [+10pt] 
-		\& [-30pt] \Pi_1(X) \arrow[dd, "\Pi_1(f)"{name=R}]\&[-30pt]\ni
+		\& [-30pt] \Pi_1(X) \arrow[dd, "f_*"{name=R}]\&[-30pt]\ni
 		\&[-30pt]\left[\gamma\right]\arrow[dd,mapsto]\\ [-10pt] 
 		\&  \phantom{.}\arrow[r, "\Pi_1", squigarrow]\&\phantom{.}  \&   \\[-10pt] 
 		Y \& \& \& \Pi_1(Y)\&\ni\&\left[f\circ \gamma\right]
@@ -892,7 +890,7 @@ Note that generally a topological space is not the disjoint union of its connect
 	Thus we have $f\circ \gamma_1\sim f\circ \gamma_2$, which implies $\Pi_1(f)$ is well-defined.
 	To verify the functinality of $\Pi_1$, we have to show that
 	\[
-		\Pi_1(g\circ f) = \Pi_1(g)\circ\Pi_1(f),
+		(g\circ f)_* = g_*\circ f_*,
 	\]
 	or equivalently for all $[\gamma]\in \Pi_1(X)$,
 	\[
@@ -1019,7 +1017,7 @@ Let $p: E \rightarrow X$ be a covering and $f: Y \rightarrow X$ be a continuous 
 Taking $Y=\{*\}$ in the homotopy lifting property gives the following corollary.
 
 \prop{Unique Path Lifting}{
-	Let $p: E \to X$ be a covering. Suppose $x \in X$ and $e\in p^{-1}(x)$. A path $\gamma: I \to X$ with $\gamma(0)=x$ lifts uniquely to a path $\widetilde{\gamma}: I \to E$ such that $\widetilde{\gamma}(0)=e$ and $p \circ \widetilde{\gamma}=\gamma$.
+	Let $p: E \to X$ be a covering. Suppose $x \in X$ and $e\in p^{-1}(x)$. A path $\gamma: I \to X$ with $\gamma(0)=x$ lifts uniquely to a path $\widetilde{\gamma}: I \to E$ such that $\widetilde{\gamma}(0)=e$ and $p \circ \widetilde{\gamma}=\gamma$. We may use $\widetilde{\gamma}^e$ to denote this unique lifting if we want to emphasize the starting point $e$.
 	\[
 	\begin{tikzcd}[ampersand replacement=\&]
 		\{*\} \arrow[r, "c_e"] \arrow[d, "c_0"', hook]                      \& E \arrow[d, "p"] \\ [+8pt]
@@ -1038,7 +1036,8 @@ Taking $Y=\{*\}$ in the homotopy lifting property gives the following corollary.
 	we can connect the sequence of maps $\widetilde{f}_k$ to get a path $\widetilde{f}:I\to E$ such that $\widetilde{f}(0)=e$ and $p\circ \widetilde{f}=f$. Since $I$ is connected, we know $\widetilde{f}$ is unique.
 }
 
-\prop{Lifting of Homotopic Paths}{
+\prop[Lifting]{Lifting of Homotopic Paths}{
+	\label{my_proposition}
 	Let $p: E \to X$ be a covering. Suppose $x \in X$ and $e\in p^{-1}(x)$. If $\gamma_0 \sim \gamma_1: I \to X$ are homotopic paths that both start from $x$, then the lifted paths $\widetilde{\gamma}_0, \widetilde{\gamma}_1: I \to E$ that both start at $e$ are also homotopic. Moreover, if $\gamma_0,\gamma_1$ have the same end point, then $\widetilde{\gamma}_0, \widetilde{\gamma}_1$ also have then same end point.\\
 	Define 
 	\begin{align*}
@@ -1057,14 +1056,14 @@ Taking $Y=\{*\}$ in the homotopy lifting property gives the following corollary.
 	\]
 }
 \pf{
-	We have the following commutative diagram
+	We have the following diagram
 	\[
 	\begin{tikzcd}[ampersand replacement=\&]
 		I \arrow[d, "\iota_0"', hook]\arrow[r, "g\circ\iota_0"]\&(\{0\}\times I )\cup (I\times\partial I ) \arrow[r, "\eta"] \arrow[d, "i"', hook]                      \& E \arrow[d, "p"] \\ [+22pt]
 		I \times I\arrow[r, "g"']\&I \times I \arrow[r, "\gamma_\bullet"'] \arrow[ru, "\widetilde{\gamma}_\bullet", dashed] \& X               
 	\end{tikzcd}
 	\]
-	The $(g\circ\iota_0, g)$ is a isomorphism from $\iota_0$ to $i$, which is illustrated as follows
+	where the two squares are commutative. The $(g\circ\iota_0, g)$ is an isomorphism from $\iota_0$ to $i$, which is illustrated as follows
 	\begin{center}
 		\begin{tikzpicture}
 		% Draw the unit square with 90% gray line
@@ -1099,12 +1098,68 @@ Taking $Y=\{*\}$ in the homotopy lifting property gives the following corollary.
 		\node at (9.5,0.5) {$(\{0\}\times I )\cup (I\times\partial I )\xrightarrow{i}I\times I$};
 	\end{tikzpicture}
 	\end{center}
-	The homeomorphism $g$ maps the leftmost square to the rightmost square, and its restriction to $I\times\{0\}$ is also a homeomorphism which maps the orange line within the leftmost square to the orange line within the rightmost square.
+	The homeomorphism $g$ maps the leftmost square to the rightmost square, and its restriction to $I\times\{0\}$ is also a homeomorphism which maps the orange line within the leftmost square to the orange line within the rightmost square.\\
+	Suppose the unique homotopy lifting of $\gamma_{\bullet}\circ g$ is $h:I\times I \to E$, then we can take $\widetilde{\gamma}_\bullet=h\circ g^{-1}$ and check that it is a homotopy lifting of $\gamma_\bullet$ that makes the whole diagram commute. Suppose there exists another homotopy lifting $\widetilde{\gamma}_\bullet^\prime$ of $\gamma_\bullet$. Then by the uniqueness of $h$ we have $\widetilde{\gamma}_\bullet^\prime\circ g=\widetilde{\gamma}_\bullet\circ g=h$, which implies $\widetilde{\gamma}_\bullet^\prime=\widetilde{\gamma}_\bullet$.
 }
-
+\dfn{Star Set}{
+	Let $\mathsf{C}$ be a category and $x$ is an object of $\mathsf{C}$. The \textbf{star set} of $x$ in $\mathsf{C}$ is defined as
+	$\mathrm{St}(x)=\mathrm{Obj}\left(x/\mathsf{C}\right)$.
+}
+\dfn{Covering of Groupoid}{
+	Let $\mathsf{E}$ and $\mathsf{B}$ be two groupoids. A functor $p:\mathsf{E}\to\mathsf{B}$ is a \textbf{covering of groupoid} if it is surjective on objects and for each object $e$ of $\mathsf{E}$ 
+	\[
+		p:\mathrm{St}(e)\to\mathrm{St}(p(e))
+	\]
+	is a bijection.
+}
+\cor{Covering of Spaces Induces Covering of Groupoids}{
+	If $p : E \to X$ is a covering of spaces, then $p_*: \Pi_1(E) \to \Pi_1(X)$ is a covering of groupoid.
+}
+\pf{
+	This a corollary of \Cref{th:Lifting}. Suppose $p : E \to X$ is a covering of spaces and $e\in E$. Given a map $p_*:\mathrm{St}(e)\to\mathrm{St}(p(e))$, we can define
+	\begin{align*}
+		q^e:\mathrm{St}(p(e))&\to \mathrm{St}(e)\\
+		[\gamma]&\mapsto [\widetilde{\gamma}^e]
+	\end{align*}
+	which is well-defined since homotopic paths with the same starting point lift to homotopic paths with the same starting point. Then we can check that
+	\[
+		p_*\circ q^e([\gamma])=p([\widetilde{\gamma}^e])=[p\circ\widetilde{\gamma}^e]=[\gamma]
+	\]
+	and
+	\[
+		q^e\circ p_*([\gamma])=q^e([p\circ\gamma])=[\left(\widetilde{p\circ\gamma}\right)^e]=[\gamma],
+	\]
+	where $\left(\widetilde{p\circ\gamma}\right)^e=\gamma$ holds since $\gamma$ is a lifting of $p\circ\gamma$ starting at $e$.
+}
+\prop{}{
+	Suppose $p : E \to X$ is a covering of spaces and $e\in E$. Then $p_*: \pi_1(E, e) \to \pi_1(X, x)$ is a monomorphism.
+}
+\pf{ 
+	Let $[\gamma]\in \pi_1(E, e)$ be a loop based at $e$ such that $p_*([\gamma])=[c_x]$. $\gamma$  Since $c_e$ is a lifting of $c_x$ starting at $e$, we have $\gamma=c_e$, which implies $p_*$ is a monomorphism.
+}
 \dfn{Monodromy Action}{
-	Let $X$ be a topological space
+	Let $X$ be a topological space and $p:E\to X$ be a covering. The \textbf{monodromy of the covering $p$} is a functor $\mathrm{Fib}_E:\Pi_1(X)\to \mathsf{Set}$ defined as follows
+	\begin{equation*}
+		\begin{tikzcd}[ampersand replacement=\&]
+			\Pi_1(X)\&[-25pt]\&[+10pt]\&[-30pt]\mathsf{Set}\&[-30pt]\&[-30pt] \\ [-15pt] 
+			x  \arrow[dd, "{[\gamma]}"{left}] \& \&  \&  p^{-1}(x) \arrow[dd, "\mathrm{Fib}_E({[\gamma]})"]\&\ni\& e=\widetilde{\gamma}^e(0)\arrow[dd,mapsto]\\ [-10pt] 
+											\&  \phantom{.}\arrow[r, "\mathrm{Fib}_E", squigarrow]\&\phantom{.}  \&   \\[-10pt] 
+			y \& \& \& p^{-1}(y)\&\ni\& e'=\widetilde{\gamma}^e(1)
+		\end{tikzcd}
+	\end{equation*}
 }
+\pf
+{
+	Since equivalent paths lift to equivalent paths, $\mathrm{Fib}_E([\gamma])$ is a well-defined map independent of the choice of $\gamma$ in equivalence class $[\gamma]$. To show $\mathrm{Fib}_E$ is a functor, we need to check that $\mathrm{Fib}_E([\gamma\cdot\psi])=\mathrm{Fib}_E([\psi])\circ\mathrm{Fib}_E([\gamma])$. Since both $\widetilde{\gamma}^e\cdot\widetilde{\psi}^{\widetilde{\gamma}^e(1)}$ and $\widetilde{(\gamma\cdot\psi)}^e$ are liftings of $\gamma\cdot\psi$ starting at $e$, we have $\widetilde{\gamma}^e\cdot\widetilde{\psi}^{\widetilde{\gamma}^e(1)}=\widetilde{(\gamma\cdot\psi)}^e$. Then
+	\begin{align*}
+		\mathrm{Fib}_E([\gamma\cdot\psi])(e)&=\widetilde{(\gamma\cdot\psi)}^e(1)\\
+		&=\widetilde{\psi}^{\widetilde{\gamma}^e(1)}(1)\\
+		&=\mathrm{Fib}_E([\psi])(\widetilde{\gamma}^e(1))\\
+		&=\mathrm{Fib}_E([\psi])\circ\mathrm{Fib}_E([\gamma])(e).
+	\end{align*}
+	let $[c_x]$ be the identity element in $\pi_1(X,x)$, then $\mathrm{Fib}_E([c_x])$ is the identity map on $p^{-1}(x)$, hence $\mathrm{Fib}_E$ is a functor.
+}
+Monodromy functor can be viewed as a permutation representations of $\Pi_1(X)$. Specially, $\pi_1(X, x)$ acts on the fiber $p^{-1}(x)$ and makes it a $\pi_1(X, x)$-set. 
 
 \prop{}{
 	Let $p: E \to X$ be a covering, let $x \in X$, and let $e, e^{\prime}$ be any two points in $p^{-1}(x)$.
