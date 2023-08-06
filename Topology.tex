@@ -935,14 +935,14 @@ A covering space is a fiber bundle with discrete fiber $D$, illustrated as follo
 			p^{-1}(U)\ar[rd]_{p}\ar[rr]^{\phi}  & &U\times D\ar[ld]^{p_1}\\
 			&U&
 			}\]
-\prop{}{
+\prop{Covering Map}{
 	The projection $p:E\to X$ is a local homeomorphism.
 }
 \dfn{Lifting}{
-	Let $p:E\to X$ and $f:Y\to X$ be continuous maps. A lifting of $f$ along $p$ is a continuous map $\tilde{f}:Y\to E$ such that the following diagram commutes
+	Let $p:E\to X$ and $f:Y\to X$ be continuous maps. A lifting of $f$ along $p$ is a continuous map $\widetilde{f}:Y\to E$ such that the following diagram commutes
 	\[\xymatrix{
 			& E\ar[d]^{p}\\
-			Y\ar[ur]^{\tilde{f}}\ar[r]_{f} &X
+			Y\ar[ur]^{\widetilde{f}}\ar[r]_{f} &X
 			}\]
 }
 Throughout this chapter, we assume that all given spaces are connected and locally path
@@ -961,56 +961,156 @@ connected.
 	Given any $(e_1,e_2)\in Z-D$, suppose $U$ is a fundamental neighborhood of $p(e_1)=p(e_2)$ and $V_{e_1}$ and $V_{e_2}$ are the sheets such that $\left.p\right|_{V_{e_1}}:V_{e_1}\to U$, $\left.p\right|_{V_{e_2}}:V_{e_2}\to U$ are a homeomorphisms. Since $e_1 \ne e_2$, we have $V_{e_1} \cap V_{e_2}=\varnothing$ and $\left(V_{e_1}\times V_{e_2}\right)\cap D=\varnothing$. Hence $Z \cap\left(V_{e_1} \times V_{e_2} \right)$  is contained in $Z-D$. Note that $Z \cap\left(V_{e_1} \times V_{e_2} \right)$ is an open neighbourhood of $(e_1,e_2)$ in $Z$. This shows that $Z- D$ is also open.
 }
 
-\prop{Uniqueness Of Liftings}{
-Let $p: E \rightarrow X$ be a covering. Let $\tilde{f}_1, \tilde{f}_2: Y \rightarrow E$ be liftings of $f: Y \rightarrow X$. Suppose $\tilde{f}_1(y_0)=\tilde{f}_2(y_0)$ for some $y_0\in Y$. If $Y$ is connected, then $\tilde{f}_1=\tilde{f}_2$.
+\prop{Uniqueness of Liftings}{
+Let $p: E \rightarrow X$ be a covering and $f: Y \rightarrow X$ be a continuous map. Suppose $Y$ is connected. If $\widetilde{f}_1, \widetilde{f}_2: Y \rightarrow E$ be liftings of $f: Y \rightarrow X$ such that $\widetilde{f}_1(y_0)=\widetilde{f}_2(y_0)$ for some $y_0\in Y$, then $\widetilde{f}_1=\widetilde{f}_2$.
+\[
+	\begin{tikzcd}[ampersand replacement=\&]
+		\{y_0\} \arrow[r, "\theta"] \arrow[d, "i_{y_0}"', hook]                      \& E \arrow[d, "p"] \\ [+8pt]
+		Y \arrow[r, "f"'] \arrow[ru, "\widetilde{f}", dashed] \& X               
+	\end{tikzcd}
+	\]
+	In other words, given that the outer square of the diagram commutes, if there exists a diagonal arrow $\widetilde{f}:Y\to E$ such that the whole diagram commutes, then $\widetilde{f}$ is unique.
 }
 \pf{
 	Suppose $Z=\{(e_1, e_2) \in E \times E \mid p(e_1)=p(e_2)\}$ and $D=\{(e, e) \in E \times E \mid e\in E\}$. We can define a continuous map
 	\begin{align*}
 		g: Y &\longrightarrow Z\\
-		y &\longmapsto \left(\tilde{f}_1(y), \tilde{f}_2(y)\right)
+		y &\longmapsto \left(\widetilde{f}_1(y), \widetilde{f}_2(y)\right)
 	\end{align*}
 	 By assumption, $g(y_0)\in D$, which guarantees $g^{-1}(D)$ is nonempty. By lemma 4.1.1, we see $g^{-1}(D)$ is open and closed in $Y$. If $Y$ is connected, then $g^{-1}(D)=Y\implies g(Y)\subseteq D$. In other words, we have
 	 \[
-		\left\{\left(\tilde{f}_1(y), \tilde{f}_2(y)\right) \midv y \in Y\right\} \subseteq\{(e, e) \in E \times E \mid e\in E\}.
+		\left\{\left(\widetilde{f}_1(y), \widetilde{f}_2(y)\right) \midv y \in Y\right\} \subseteq\{(e, e) \in E \times E \mid e\in E\}.
 		\]
-	Therefore, we show that	$\tilde{f}_1=\tilde{f}_2$.
+	Therefore, we show that	$\widetilde{f}_1=\widetilde{f}_2$.
 }
 
-\prop{Path Lifting}{
-	Let $p: E \to X$ be a covering, let $x \in X$, and let $e, e^{\prime}$ be any two points in $p^{-1}(x)$. A path $f: I \to B$ with $f(0)=x$ lifts uniquely to a path $\tilde{f}: I \to E$ such that $\tilde{f}(0)=e$ and $p \circ \tilde{f}=f$.
-}
-\pf{
-	Suppose $\mathcal{F}=\left\{U_\alpha\right\}_{\alpha\in A}$ is a collection of fundamental neighborhoods such that $\cup_{\alpha\in A}U_\alpha=X$. Let $f:I\to X$ be a path with $f(0)=x$. Then $\left\{f^{-1}(U_\alpha)\right\}_{\alpha\in A}$ is an open cover of $I$, so has a finite subcover $\left\{f^{-1}(U_{i})\right\}_{i=1}^m$. Let $0=t_0<t_1<\cdots<t_n=1$ be such that $f([t_{k-1},t_k])\subseteq U_{i_k}$ where $1\le i_k \le m$. \\
-	We will construct a sequence of maps $\tilde{f}_k:[t_{k-1},t_k]\to E$ by induction on $k$. Suppose $k=0$. Note that $f(0)=x\in U_{i_0}$ and there exists a homeomorphism $\left.p\right|_{V_0}: E\supseteq V_0\to U_{i_0}$ such that $\left.p\right|_{V_0}(e)=x$. We can define $\tilde{f}_0=\left(\left.p\right|_{V_0}\right)^{-1}\circ f|_{[t_0,t_1]}$ and check that $\tilde{f}_0$ is a lifting of $f|_{[t_0,t_1]}$ such that $\tilde{f}_0(0)=e$. \\
-	Suppose we have constructed $\tilde{f}_0,\tilde{f}_1,\cdots,\tilde{f}_{k-1}$. Note that $f(t_{k})=p\left(\tilde{f}_{k-1}(t_k)\right)\in U_{i_k}$ and there exists a homeomorphism $\left.p\right|_{V_k}: E\supseteq V_k\to U_{i_k}$ such that $\left.p\right|_{V_{k}}\left(\tilde{f}_{k-1}(t_k)\right)=f(t_k)$. We can define $\tilde{f}_k=\left(\left.p\right|_{V_k}\right)^{-1}\circ f|_{[t_k,t_{k+1}]}$ and check that $\tilde{f}_k$ is a lifting of $f|_{[t_k,t_{k+1}]}$ such that $\tilde{f}_k(t_{k})=\tilde{f}_{k-1}(t_{k})$. \\
-	By defining 
-	\[
-		\tilde{f}(t)=\tilde{f}_k(t)\text{ for }t_{k}\le t\le t_{k+1},	
-	\]
-	we can connect the sequence of maps $\tilde{f}_k$ to get a path $\tilde{f}:I\to E$ such that $\tilde{f}(0)=e$ and $p\circ \tilde{f}=f$. Since $I$ is connected, we know $\tilde{f}$ is unique.
-}
+
 
 \dfn{Homotopy Lifting Property}{
-	Define the inclusion $\iota_0:Y\to Y\times I,y\mapsto(y,0)$. A map $p: E \rightarrow X$ has the \textbf{homotopy lifting property} for the space $Y$ if the following holds: for each homotopy $f_\bullet: Y \times I \rightarrow X$ and each map $\tilde{f}_0: Y \rightarrow E$ such that $p \circ \tilde{f}_0=h \circ\iota_0$, there exists a homotopy $\tilde{f}_{\bullet}: Y \times I \rightarrow E$ with $p \circ \tilde{f}_{\bullet}=f_{\bullet}$ and $ \tilde{f}_{\bullet} \circ \iota_0=\tilde{f}_0$. In other words, homotopy lifting property means that whenever the outer square of the following diagram commutes, there exists a dashed arrow $\tilde{f}_{\bullet}$ such that the whole diagram commutes.
+	Define the inclusion $\iota_0:Y\to Y\times I,y\mapsto(y,0)$, namely $\iota_0=\mathrm{id}\times c_0$. A map $p: E \rightarrow X$ has the \textbf{homotopy lifting property} for the space $Y$ if the following holds: 
+	\begin{itemize}
+		\item for each homotopy $f_\bullet: Y \times I \rightarrow X$, and
+		\item for each map $\widetilde{f}_0: Y \rightarrow E$ that lifts $f_0:=f_{\bullet} \circ\iota_0$, i.e. satisfies $p \circ \widetilde{f}_0=f_{\bullet} \circ\iota_0=f_0$,
+	\end{itemize}
+	there exists a homotopy $\widetilde{f}_{\bullet}: Y \times I \rightarrow E$ with $p \circ \widetilde{f}_{\bullet}=f_{\bullet}$ and $ \widetilde{f}_{\bullet} \circ \iota_0=\widetilde{f}_0$. In other words, homotopy lifting property means that whenever the outer square of the following diagram commutes, there exists a diagonal arrow $\widetilde{f}_{\bullet}:Y\times I\to E$ such that the whole diagram commutes.
 	\[
 	\begin{tikzcd}[ampersand replacement=\&]
-		Y \arrow[r, "\tilde{f}_0"] \arrow[d, "\iota_0"', hook]                      \& E \arrow[d, "p"] \\ [+10pt]
-		Y\times I \arrow[r, "f_\bullet"'] \arrow[ru, "\tilde{f}_{\bullet}", dashed] \& X               
+		Y \arrow[r, "\widetilde{f}_0"] \arrow[d, "\iota_0"', hook]                      \& E \arrow[d, "p"] \\ [+10pt]
+		Y\times I \arrow[r, "f_\bullet"'] \arrow[ru, "\widetilde{f}_{\bullet}", dashed] \& X               
 	\end{tikzcd}
 	\]
-	We call $\tilde{f}_{\bullet}$ a lifting of $f_{\bullet}$ with initial condition $\tilde{f}_0$. The map $p$ is called a \textbf{fibration} if it has the homotopy lifting property for all spaces.
+	We call $\widetilde{f}_{\bullet}$ a lifting of $f_{\bullet}$ with initial condition $\widetilde{f}_0$. The map $p$ is called a \textbf{fibration} if it has the homotopy lifting property for all spaces.
 }
 
 \thm{Covering is Fibration}{
-	A covering $p: E \rightarrow B$ is a fibration.
+	A covering $p: E \rightarrow B$ is a fibration. Moreover, the homotopy lifting is unique.
+}
+\pf{
+	First we can show homotopy lifting is unique if it exists. Suppose there exist two homotopies $\widetilde{f}_{\bullet}$ and $\widetilde{g}_{\bullet}$ either of which lifts $f_{\bullet}$ with initial condition $\widetilde{f}_0$. Then we have the following commutative diagram.
+	\[
+	\begin{tikzcd}[ampersand replacement=\&]
+		\{y\}\arrow[r, "i_y", hook]\arrow[d, "\iota_0"', hook]\&Y \arrow[r, "\widetilde{f}_0"] \arrow[d, "\iota_0"', hook]                      \& E \arrow[d, "p"] \\ [+13pt]
+		\{y\} \arrow[r, "i_y"', hook]  \times I\&Y\times I \arrow[r, "f_\bullet"'] \arrow[ru, "\widetilde{f}_{\bullet}", dashed] \& X               
+	\end{tikzcd}
+	\]
+	Since $\{y\}\times I$ is connected, according to the uniqueness of liftings, we see $\widetilde{f}_{\bullet}\circ i_y=\widetilde{g}_{\bullet}\circ i_y$. Note that $y$ is arbitrary, we have $\widetilde{f}_{\bullet}=\widetilde{g}_{\bullet}$.
+}
+
+Taking $Y=\{*\}$ in the homotopy lifting property gives the following corollary.
+
+\prop{Unique Path Lifting}{
+	Let $p: E \to X$ be a covering. Suppose $x \in X$ and $e\in p^{-1}(x)$. A path $\gamma: I \to X$ with $\gamma(0)=x$ lifts uniquely to a path $\widetilde{\gamma}: I \to E$ such that $\widetilde{\gamma}(0)=e$ and $p \circ \widetilde{\gamma}=\gamma$.
+	\[
+	\begin{tikzcd}[ampersand replacement=\&]
+		\{*\} \arrow[r, "c_e"] \arrow[d, "c_0"', hook]                      \& E \arrow[d, "p"] \\ [+8pt]
+		 I \arrow[r, "\gamma"'] \arrow[ru, "\widetilde{\gamma}", dashed] \& X               
+	\end{tikzcd}
+	\]
+}
+\pf{
+	We can also prove it independently. Suppose $\mathcal{F}=\left\{U_\alpha\right\}_{\alpha\in A}$ is a collection of fundamental neighborhoods such that $\cup_{\alpha\in A}U_\alpha=X$. Let $f:I\to X$ be a path with $f(0)=x$. Then $\left\{f^{-1}(U_\alpha)\right\}_{\alpha\in A}$ is an open cover of $I$, so has a finite subcover $\left\{f^{-1}(U_{i})\right\}_{i=1}^m$. Let $0=t_0<t_1<\cdots<t_n=1$ be such that $f([t_{k-1},t_k])\subseteq U_{i_k}$ where $1\le i_k \le m$. \\
+	We will construct a sequence of maps $\widetilde{f}_k:[t_{k-1},t_k]\to E$ by induction on $k$. Suppose $k=0$. Note that $f(0)=x\in U_{i_0}$ and there exists a homeomorphism $\left.p\right|_{V_0}: E\supseteq V_0\to U_{i_0}$ such that $\left.p\right|_{V_0}(e)=x$. We can define $\widetilde{f}_0=\left(\left.p\right|_{V_0}\right)^{-1}\circ f|_{[t_0,t_1]}$ and check that $\widetilde{f}_0$ is a lifting of $f|_{[t_0,t_1]}$ such that $\widetilde{f}_0(0)=e$. \\
+	Suppose we have constructed $\widetilde{f}_0,\widetilde{f}_1,\cdots,\widetilde{f}_{k-1}$. Note that $f(t_{k})=p\left(\widetilde{f}_{k-1}(t_k)\right)\in U_{i_k}$ and there exists a homeomorphism $\left.p\right|_{V_k}: E\supseteq V_k\to U_{i_k}$ such that $\left.p\right|_{V_{k}}\left(\widetilde{f}_{k-1}(t_k)\right)=f(t_k)$. We can define $\widetilde{f}_k=\left(\left.p\right|_{V_k}\right)^{-1}\circ f|_{[t_k,t_{k+1}]}$ and check that $\widetilde{f}_k$ is a lifting of $f|_{[t_k,t_{k+1}]}$ such that $\widetilde{f}_k(t_{k})=\widetilde{f}_{k-1}(t_{k})$. \\
+	By defining 
+	\[
+		\widetilde{f}(t)=\widetilde{f}_k(t)\text{ for }t_{k}\le t\le t_{k+1},	
+	\]
+	we can connect the sequence of maps $\widetilde{f}_k$ to get a path $\widetilde{f}:I\to E$ such that $\widetilde{f}(0)=e$ and $p\circ \widetilde{f}=f$. Since $I$ is connected, we know $\widetilde{f}$ is unique.
+}
+
+\prop{Lifting of Homotopic Paths}{
+	Let $p: E \to X$ be a covering. Suppose $x \in X$ and $e\in p^{-1}(x)$. If $\gamma_0 \sim \gamma_1: I \to X$ are homotopic paths that both start from $x$, then the lifted paths $\widetilde{\gamma}_0, \widetilde{\gamma}_1: I \to E$ that both start at $e$ are also homotopic. Moreover, if $\gamma_0,\gamma_1$ have the same end point, then $\widetilde{\gamma}_0, \widetilde{\gamma}_1$ also have then same end point.\\
+	Define 
+	\begin{align*}
+		\eta(s,t)=\begin{cases}
+			e & \text{if }s=0\text{ and }0\le t\le 1 \\
+			\widetilde{\gamma}_0(s) & \text{if }0\le s\le 1 \text{ and }t=0\\
+			\widetilde{\gamma}_1(s) & \text{if }0\le s\le 1 \text{ and }t=1\\
+		\end{cases}
+	\end{align*}
+	Given that the outer square of the following diagram commutes, there exists a unique diagonal arrow $\widetilde{\gamma}_\bullet:I\times I\to E$ such that the whole diagram commutes.
+	\[
+	\begin{tikzcd}[ampersand replacement=\&]
+		 (\{0\}\times I )\cup (I\times\partial I ) \arrow[r, "\eta"] \arrow[d, "i"', hook]                      \& E \arrow[d, "p"] \\ [+20pt]
+		I \times I \arrow[r, "\gamma_\bullet"'] \arrow[ru, "\widetilde{\gamma}_\bullet", dashed] \& X               
+	\end{tikzcd}
+	\]
+}
+\pf{
+	We have the following commutative diagram
+	\[
+	\begin{tikzcd}[ampersand replacement=\&]
+		I \arrow[d, "\iota_0"', hook]\arrow[r, "g\circ\iota_0"]\&(\{0\}\times I )\cup (I\times\partial I ) \arrow[r, "\eta"] \arrow[d, "i"', hook]                      \& E \arrow[d, "p"] \\ [+22pt]
+		I \times I\arrow[r, "g"']\&I \times I \arrow[r, "\gamma_\bullet"'] \arrow[ru, "\widetilde{\gamma}_\bullet", dashed] \& X               
+	\end{tikzcd}
+	\]
+	The $(g\circ\iota_0, g)$ is a isomorphism from $\iota_0$ to $i$, which is illustrated as follows
+	\begin{center}
+		\begin{tikzpicture}
+		% Draw the unit square with 90% gray line
+		\draw[thick, black!45] (0,0) rectangle (1,1);
+		% Draw the 3 specified lines with thick orange color
+		\draw[thick, black!45] (0,0) -- (0,1); % {0} x I
+		\draw[thick, orange] (0,0) -- (1,0); % I x {0}
+		\draw[thick, black!45] (0,1) -- (1,1); % I x {1}
+
+		% Draw a unit circle with radius 0.5
+		\draw[thick, black!45] (2.5,0.5) circle (0.5);
+		% Highlight 1/4 of the arc
+		\draw[thick, orange] (2.5,0.5) ++(225:0.5) arc (225:315:0.5);
+
+		% Draw a unit circle with radius 0.5
+		\draw[thick, black!45] (4.5,0.5) circle (0.5);
+		\draw[thick, orange] (4.5,0.5) ++(45:0.5) arc (45:315:0.5);
+
+		% Second square
+		\draw[thick, black!45] (6,0) rectangle (7,1); % fill the square with 90% grey
+		\draw[thick, orange] (6,0) -- (6,1); % left vertical line
+		\draw[thick, orange] (6,0) -- (7,0); % bottom horizontal line
+		\draw[thick, orange] (6,1) -- (7,1); % top horizontal line
+
+		% Arrow
+		\draw[->, thick] (1.3,0.5) -- (1.7,0.5);
+		\draw[->, thick] (3.3,0.5) -- (3.7,0.5);
+		\draw[->, thick] (5.3,0.5) -- (5.7,0.5);
+
+		% Labels
+		\node at (-1.1,0.5) {$I\xrightarrow{\iota_0}I\times I$};
+		\node at (9.5,0.5) {$(\{0\}\times I )\cup (I\times\partial I )\xrightarrow{i}I\times I$};
+	\end{tikzpicture}
+	\end{center}
+	The homeomorphism $g$ maps the leftmost square to the rightmost square, and its restriction to $I\times\{0\}$ is also a homeomorphism which maps the orange line within the leftmost square to the orange line within the rightmost square.
+}
+
+\dfn{Monodromy Action}{
+	Let $X$ be a topological space
 }
 
 \prop{}{
 	Let $p: E \to X$ be a covering, let $x \in X$, and let $e, e^{\prime}$ be any two points in $p^{-1}(x)$.
 	\begin{enumerate}[(i)]
 		\item Two paths $f_1, f_2: I \to X$ that start at $x$ are homotopic if and only if their images in $X$ are homotopic.
-		\item Equivalent paths $f_1 \sim f_2: I \to X$ that start at $x$ lift to equivalent paths $\tilde{f}_1\sim \tilde{f}_2: I \to E$ that start at $e$, hence $\tilde{f}_1(1)=\tilde{f}_2(1)$, i.e $\tilde{f}_1$ and $\tilde{f}_2$ end at the same point in $E$.
+		\item Equivalent paths $f_1 \sim f_2: I \to X$ that start at $x$ lift to equivalent paths $\widetilde{f}_1\sim \widetilde{f}_2: I \to E$ that start at $e$, hence $\widetilde{f}_1(1)=\widetilde{f}_2(1)$, i.e $\widetilde{f}_1$ and $\widetilde{f}_2$ end at the same point in $E$.
 		\item $p_*: \pi_1(E, e) \to \pi_1(B, b)$ is a monomorphism.
 		\item $p_*\left(\pi_1\left(E, e^{\prime}\right)\right)$ is conjugate to $p_*\left(\pi_1(E, e)\right)$.
 		\item As $e'$ runs through $F_b$, the groups $p_*\left(\pi_1\left(E, e^{\prime}\right)\right)$ run through all conjugates of $p_*\left(\pi_1(E, e)\right)$ in $\pi_1(B, b)$.
