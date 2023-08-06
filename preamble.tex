@@ -29,7 +29,7 @@
 %\usepackage{xifthen}
 %\usepackage{pdfpages}
 %\usepackage{transparent}
-
+\usepackage[nameinlink]{cleveref}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % SELF MADE COLORS
@@ -66,17 +66,18 @@
 
 % \definecolor{mydefnewbg}{HTML}{FFF0E0}
 % \definecolor{mydefnewfr}{HTML}{FF9900}
-\definecolor{mynavy}{rgb}{0.0, 0.0, 0.5} % RGB color model
+\definecolor{myRoyalBlue}{RGB}{50,60,150}
+\definecolor{myGreen}{RGB}{45,100,45}
+\definecolor{mynavy}{RGB}{56, 102, 148} % RGB color model
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % HYPERREF SETUP
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \hypersetup{
-	pdftitle={Differentiable Manifolds},
 	colorlinks=true,
-	linkcolor=doc!90,
-	citecolor=mynavy,
+	linkcolor=mynavy,
+	citecolor=BurntOrange,
 	bookmarksnumbered=true,
 	bookmarksopen=true,
 }
@@ -107,6 +108,7 @@
 	description font = \mdseries,
 	separator sign none,
 	segmentation style={solid, mytheoremfr},
+	label type=theorem
 }
 {th}
 
@@ -127,6 +129,7 @@
 	description font = \mdseries,
 	separator sign none,
 	segmentation style={solid, mytheoremfr},
+	label type=theorem
 }
 {th}
 
@@ -166,6 +169,7 @@
 	,description font = \mdseries
 	,separator sign none
 	,segmentation style={solid, myp!85!black}
+	,label type=corolary
 }
 {th}
 \tcbuselibrary{theorems,skins,hooks}
@@ -185,6 +189,7 @@
 	,description font = \mdseries
 	,separator sign none
 	,segmentation style={solid, myp!85!black}
+	,label type=corollary
 }
 {th}
 
@@ -209,6 +214,7 @@
 	,description font = \mdseries
 	,separator sign none
 	,segmentation style={solid, myg!85!black}
+	,label type=claim
 }
 {th}
 
@@ -229,6 +235,7 @@
 	,description font = \mdseries
 	,separator sign none
 	,segmentation style={solid, myg!85!black}
+	,label type=claim
 }
 {th}
 %================================
@@ -252,6 +259,7 @@
 	,description font = \mdseries
 	,separator sign none
 	,segmentation style={solid, mypropfr!85!black}
+	,label type=proposition
 }
 {th}
 
@@ -271,6 +279,7 @@
 	,description font = \mdseries
 	,separator sign none
 	,segmentation style={solid, mypropfr!85!black}
+	,label type=proposition
 }
 {th}
 %================================
@@ -294,6 +303,7 @@
 	,description font = \mdseries
 	,separator sign none
 	,segmentation style={solid, mylemmafr!85!black}
+	,label type=lemma
 }
 {th}
 
@@ -313,6 +323,7 @@
 	,description font = \mdseries
 	,separator sign none
 	,segmentation style={solid, mylemmafr!85!black}
+	,label type=lemma
 }
 {th}
 %================================
@@ -333,6 +344,7 @@
 	,description font = \mdseries
 	,separator sign none
 	,description delimiters parenthesis
+	,label type=example
 }
 {ex}
 
@@ -350,6 +362,7 @@
 	,description font = \mdseries
 	,separator sign none
 	,description delimiters parenthesis
+	,label type=example
 }
 {ex}
 
@@ -421,6 +434,7 @@
     ,description font = \mdseries
     ,separator sign none
     ,segmentation style={solid, mydefinitfr!85!black}
+	,label type=definition
 }
 {th}
 
@@ -440,6 +454,7 @@
     ,description font = \mdseries
     ,separator sign none
     ,segmentation style={solid, mydefinitfr!85!black}
+	,label type=definition
 }
 {th}
 
