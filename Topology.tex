@@ -515,6 +515,13 @@ It is easy to check that $\pi$ is a continuous surjection from $(X,\tau)$ to $(X
 
 
 \subsection{Product Topology}
+\dfn{Product Topology}{
+	Let $\left\{(X_\alpha,\tau_\alpha)\right\}_{\alpha\in I}$ be a collection of topological spaces. Let $X=\prod_{\alpha\in I}X_\alpha$ and $\pi_\alpha:X\to X_\alpha$ be the projections. The \textbf{product} of $\left\{(X_\alpha,\tau_\alpha)\right\}_{\alpha\in I}$ is the set $X$ equiped with the following topology
+	\[
+		\tau:=\left\{\prod_{\alpha\in I}U_\alpha\mid U_\alpha\in \tau_\alpha\text{ for any }\alpha\in I\right\},
+	\]
+	which is called \textbf{product topology}. 
+}
 
 \subsection{Disjoint Union Topology}
 \dfn{Disjoint Union Topology}{
@@ -524,6 +531,26 @@ It is easy to check that $\pi$ is a continuous surjection from $(X,\tau)$ to $(X
 	\]
 	which is called \textbf{disjoint union topology}. 
 }
+
+\subsection{Pushout}
+
+
+\dfn{Wedge Sum}{
+	Let $X$ and $Y$ be topological spaces. The \textbf{smash product} of $X$ and $Y$ is the following pushout in $\Top$
+	\[\xymatrix{
+	\{*\}\ar[r]^{c_y}\ar[d]_{c_x}  &Y\ar[d]_{}\\
+	X\ar@{->}[r]_{}&X\vee Y
+		}\]
+	Given a collection of pointed topological spaces $\left\{c_{x_\alpha}:\{*\}\to X_\alpha\right\}_{\alpha\in I}$, the \textbf{wedge sum} of them is the wide pushout or equivalently the following pushout
+	\[
+	\begin{tikzcd}[ampersand replacement=\&]
+		\coprod\limits_{\alpha\in I} \{*\} \arrow[r] \arrow[d] \& \coprod\limits_{\alpha\in I} X_{\alpha} \arrow[d] \\
+		\{*\} \arrow[r] \& \bigvee\limits_{\alpha\in I} X_\alpha \arrow[ul, phantom, "\ulcorner", very near start] 
+	\end{tikzcd}
+	\]
+}
+
+
 \section{Connectedness}
 \dfn{Connected Topological Space}{
 	A topological space $X$ is \textbf{connected} if it is not the union of two disjoint nonempty open sets.
@@ -532,11 +559,11 @@ It is easy to check that $\pi$ is a continuous surjection from $(X,\tau)$ to $(X
 	A space $X$ is called \textbf{locally connected at $x\in X$} if every neighborhood of $x$ contains a connected open neighborhood of $x$, that is, if the point $x$ has a neighborhood base consisting of connected open sets. A \textbf{locally connected space} is a topological space that is locally connected at each of its points.
 }
 Local connectedness does not imply connectedness, e.g. two disjoint open intervals in $\mathbb {R}$ for example; and connectedness does not imply local connectedness, e.g. the topologist's sine curve $$\left\{\left(x, \sin \frac{1}{x}\right): x \in(0,1]\right\} \cup\{(0,0)\}.$$
-\dfn{Path Connected Topological Space}{
-	A topological space $X$ is \textbf{path connected} if for every $x,y\in X$, there is a continuous function $f:[0,1]\to X$ such that $f(0)=x$ and $f(1)=y$.
+\dfn{Path-Connected Topological Space}{
+	A topological space $X$ is \textbf{path-connected} if for every $x,y\in X$, there is a continuous function $f:[0,1]\to X$ such that $f(0)=x$ and $f(1)=y$.
 }
-\dfn{Locally Path Connected Topological Space}{
-	A space $X$ is called \textbf{locally path connected at $x\in X$} if every neighborhood of $x$ contains a path connected open neighborhood of $x$, that is, if the point $x$ has a neighborhood base consisting of path connected open sets. A \textbf{locally path connected space} is a topological space that is locally path connected at each of its points.
+\dfn{Locally Path-Connected Topological Space}{
+	A space $X$ is called \textbf{locally path-connected at $x\in X$} if every neighborhood of $x$ contains a path-connected open neighborhood of $x$, that is, if the point $x$ has a neighborhood base consisting of path-connected open sets. A \textbf{locally path-connected space} is a topological space that is locally path-connected at each of its points.
 }
 
 \prop{}{
@@ -758,12 +785,12 @@ Homotopy is an equivalence relation.
 	Thus we have $\gamma_1^{-1}\sim \gamma_2^{-1}$, which implies $[\gamma]^{-1}$ is well-defined.
 }
 
-\dfn{Path Component}{
+\dfn{Path-Component}{
 	Given a topological space $X$, we can define an equivalence relation $\sim$ on $X$: $x \sim y$ if and only if there exists a path from $x$ to $y$. Then we define
 $$
 \pi_0(X):=X / \sim.
 $$
-The elements in $\pi_0(X)$ are called \textbf{path components} of $X$. \\
+The elements in $\pi_0(X)$ are called \textbf{path-components} of $X$. \\
 $\pi_0$ can be viewed as a functor from $\mathsf{Top}$ to $\mathsf{Set}$
 \begin{equation*}
 	\begin{tikzcd}[ampersand replacement=\&]
@@ -1016,7 +1043,7 @@ Let $p: E \rightarrow X$ be a covering and $f: Y \rightarrow X$ be a continuous 
 
 Taking $Y=\{*\}$ in the homotopy lifting property gives the following corollary.
 
-\prop{Unique Path Lifting}{
+\cor{Unique Path Lifting}{
 	Let $p: E \to X$ be a covering. Suppose $x \in X$ and $e\in p^{-1}(x)$. A path $\gamma: I \to X$ with $\gamma(0)=x$ lifts uniquely to a path $\widetilde{\gamma}: I \to E$ such that $\widetilde{\gamma}(0)=e$ and $p \circ \widetilde{\gamma}=\gamma$. We may use $\widetilde{\gamma}^e$ to denote this unique lifting if we want to emphasize the starting point $e$.
 	\[
 	\begin{tikzcd}[ampersand replacement=\&]
@@ -1131,17 +1158,17 @@ Taking $Y=\{*\}$ in the homotopy lifting property gives the following corollary.
 	\]
 	where $\left(\widetilde{p\circ\gamma}\right)^e=\gamma$ holds since $\gamma$ is a lifting of $p\circ\gamma$ starting at $e$.
 }
-\prop{}{
+\cor{}{
 	Suppose $p : E \to X$ is a covering of spaces and $e\in E$. Then $p_*: \pi_1(E, e) \to \pi_1(X, x)$ is a monomorphism.
 }
 \pf{ 
-	Let $[\gamma]\in \pi_1(E, e)$ be a loop based at $e$ such that $p_*([\gamma])=[c_x]$. $\gamma$  Since $c_e$ is a lifting of $c_x$ starting at $e$, we have $\gamma=c_e$, which implies $p_*$ is a monomorphism.
+	$p_*: \pi_1(E, e) \to \pi_1(X, x)$ as a map between sets is the restriction of the bijiection $p_*:\mathrm{St}(e)\to\mathrm{St}(p(e))$ to $\pi_1(E, e)$. Therefore it is injective, which implies $p_*$ is a monomorphism between groups.
 }
 \dfn{Monodromy Action}{
 	Let $X$ be a topological space and $p:E\to X$ be a covering. The \textbf{monodromy of the covering $p$} is a functor $\mathrm{Fib}_E:\Pi_1(X)\to \mathsf{Set}$ defined as follows
 	\begin{equation*}
 		\begin{tikzcd}[ampersand replacement=\&]
-			\Pi_1(X)\&[-25pt]\&[+10pt]\&[-30pt]\mathsf{Set}\&[-30pt]\&[-30pt] \\ [-15pt] 
+			\Pi_1(X)\&[-25pt]\&[+10pt]\&[-30pt]\mathsf{Set}\&[-20pt]\&[-30pt] \\ [-15pt] 
 			x  \arrow[dd, "{[\gamma]}"{left}] \& \&  \&  p^{-1}(x) \arrow[dd, "\mathrm{Fib}_E({[\gamma]})"]\&\ni\& e=\widetilde{\gamma}^e(0)\arrow[dd,mapsto]\\ [-10pt] 
 											\&  \phantom{.}\arrow[r, "\mathrm{Fib}_E", squigarrow]\&\phantom{.}  \&   \\[-10pt] 
 			y \& \& \& p^{-1}(y)\&\ni\& e'=\widetilde{\gamma}^e(1)
@@ -1161,12 +1188,117 @@ Taking $Y=\{*\}$ in the homotopy lifting property gives the following corollary.
 }
 Monodromy functor can be viewed as a permutation representations of $\Pi_1(X)$. Specially, $\pi_1(X, x)$ acts on the fiber $p^{-1}(x)$ and makes it a $\pi_1(X, x)$-set. 
 
+\dfn{Category of Coverings of $X$}{
+	Let $X$ be a topological space. The \textbf{category of coverings over $X$} is a category $\mathsf{Cov}_X$ defined as follows:
+	\begin{itemize}
+		\item The objects of $\mathsf{Cov}_X$ are all coverings of $X$.
+		\item The morphisms of between $p_1:E_1\to X$ and $p_2:E_2\to X$ are all continuous maps $f:E_1\to E_2$ such that the following diagram commutes
+		\begin{equation*}
+			\begin{tikzcd}[ampersand replacement=\&]
+				E_1 \arrow[rr, "f"] \arrow[rd, "p_1"'] \& \& E_2 \arrow[ld, "p_2"] \\ 
+				\& X \&
+			\end{tikzcd}
+		\end{equation*}
+	\end{itemize}
+}
+
+\dfn{Monodromy Functor $\mathrm{Fib}$}{
+	Monodromy functor $\mathrm{Fib}$ is defined as follows
+	\begin{equation*}
+		\begin{tikzcd}[ampersand replacement=\&]
+			\mathsf{Cov}_X\&[-25pt]\&[+10pt]\&[-30pt]\left[\Pi_1(X),\mathsf{Set}\right]\&[-30pt]\&[-30pt] \\ [-15pt] 
+			E_1  \arrow[dd, "f"{left}] \& \&  \& \mathrm{Fib}_{E_1} \arrow[dd, "\;\mathrm{Fib}(f)",Rightarrow]\\ [-10pt] 
+											\&  \phantom{.}\arrow[r, "\mathrm{Fib}", squigarrow]\&\phantom{.}  \&   \\[-10pt] 
+			E_2 \& \& \& \mathrm{Fib}_{E_2} \&\& 
+		\end{tikzcd}
+	\end{equation*}
+	where the natural transformation $\mathrm{Fib}(f)$ is defined as follows: 
+	\begin{equation*}
+		\begin{tikzcd}[ampersand replacement=\&]
+				\Pi_1(X)     \& x \arrow[r, "{[\gamma]}"]                                                  \&[+25pt] y                           \\
+							 \& p^{-1}_1(x) \arrow[dd, "\left.f\right|_{p_{\scalebox{0.5}{$1$}}^{\scalebox{0.5}{$-1$}}(x)}"'] \arrow[r, "{\mathrm{Fib}_{E_1}({[\gamma]})}"] \& p^{-1}_1(y) \arrow[dd, "\left.f\right|_{p_{\scalebox{0.5}{$1$}}^{\scalebox{0.5}{$-1$}}(y)}"] \\
+				\mathsf{Set} \&                                                                            \&                             \\
+							 \& p^{-1}_2(y) \arrow[r, "{\mathrm{Fib}_{E_2}({[\gamma]})}"]                  \& p^{-1}_2(x)                
+				\end{tikzcd}
+	\end{equation*}
+}
+\pf{
+	We need to first check the $\mathrm{Fib}(f)$ is natural. Suppose $e_1\in E_1$ and $e_2=f(e_1)\in E_2$. We need to show that $\mathrm{Fib}_{E_2}([\gamma])(e_2)=f(\mathrm{Fib}_{E_1}([\gamma])(e_1))$, i.e. $\widetilde{\gamma}^{e_2}(1)=f\circ \widetilde{\gamma}^{e_1}(1)$. Note that $p_2\circ \left(f\circ  \widetilde{\gamma}^{e_1}\right)=p_1\circ  \widetilde{\gamma}^{e_1}=\gamma$ and $f\circ  \widetilde{\gamma}^{e_1}(0)=f(e_1)=e_2$. We see both $f\circ  \widetilde{\gamma}^{e_1}$ and $\widetilde{\gamma}^{e_2}$ are liftings of $\gamma$ starting at $e_2$. Hence they are equal and we get $\widetilde{\gamma}^{e_2}(1)=f\circ \widetilde{\gamma}^{e_1}(1)$.\\
+	What left is to show that $\mathrm{Fib}$ is a functor. Suppose $f:E_1\to E_2$ and $g:E_2\to E_3$ are two morphisms in $\mathsf{Cov}_X$. Note $\mathrm{Fib}(f)$ is just a restriction of $f$, it clear to see $\mathrm{Fib}(g\circ f)=\mathrm{Fib}(g)\circ \mathrm{Fib}(f)$. Also, $\mathrm{Fib}([c_x])=\mathrm{id}_{p^{-1}(x)}$ for any $x\in X$. Hence $\mathrm{Fib}$ is a functor.
+}
+\prop{Fundamental Groupoid of Covering Space}{
+Let $p:E \to X$ be a covering. Then $\Pi_1(E)$ is isomorphic to the Grothendieck construction of the monodromy functor $\mathrm{Fib}_E: \Pi_1(X) \rightarrow \mathsf{Set}$
+$$
+\Pi_1(E) \cong \int_{\Pi_1(X)} \operatorname{Fib}_E
+$$
+
+whose
+\begin{itemize}
+	\item objects are pairs $(x, \widetilde{x})$ consisting of a point $x \in X$ and en element $\widetilde{x} \in \operatorname{Fib}_E(x)=p^{-1}(x)$;
+	\item morphisms between $(x, \widetilde{x})$ and $\left(y, \widetilde{y}\right)$ are morphisms $[\gamma]: x \rightarrow y$ in $\Pi_1(X)$ such that $\operatorname{Fib}_E([\gamma])(\widetilde{x})=\widetilde{y}$.
+\end{itemize}
+Here we view $\mathsf{Set}$ as a discrete category to obtain the Grothendieck construction of $\mathrm{Fib}_E: \Pi_1(X) \rightarrow \mathsf{Set}\to\mathsf{Cat}$. 
+}
+\pf{
+	Define a functor $G:\Pi_1(E)\to \int_{\Pi_1(X)} \operatorname{Fib}_E$ as follows:
+	\begin{equation*}
+		\begin{tikzcd}[ampersand replacement=\&]
+			\Pi_1(E)\&[-25pt]\&[+10pt]\&[-30pt]\int_{\Pi_1(X)} \operatorname{Fib}_E\&[-30pt]\&[-30pt] \\ [-15pt] 
+			\widetilde{x}  \arrow[dd, "{[\widetilde{\gamma}]}"{left}] \& \&  \& \left(p(\widetilde{x}),\widetilde{x}\right) \arrow[dd, "{\left[p\,\circ\widetilde{\gamma}\right]}"]\\ [-10pt] 
+											\&  \phantom{.}\arrow[r, "G", squigarrow]\&\phantom{.}  \&   \\[-10pt] 
+											\widetilde{y} \& \& \& \left(p(\widetilde{y}),\widetilde{y}\right) \&\& 
+		\end{tikzcd}
+	\end{equation*}
+	We can check $G([\gamma])$ is indeed a morphism because 
+	\[
+		\operatorname{Fib}_E(\left[p\circ\widetilde{\gamma}\right])(\widetilde{x})=\left(\widetilde{p\circ\widetilde{\gamma}}\right)^{\widetilde{x}}(1)=\widetilde{\gamma}^{\widetilde{x}}(1)=\widetilde{y}.
+	\]
+	And we can define another functor $F:\int_{\Pi_1(X)} \operatorname{Fib}_E\to \Pi_1(E)$ as follows:
+	\begin{equation*}
+		\begin{tikzcd}[ampersand replacement=\&]
+			\int_{\Pi_1(X)} \operatorname{Fib}_E\&[-25pt]\&[+10pt]\&[-30pt]\Pi_1(E)\&[-30pt]\&[-30pt] \\ [-15pt] 
+			\left(x,\widetilde{x}\right)  \arrow[dd, "{\left[{\gamma}\right]}"{left}] \& \&  \& \widetilde{x} \arrow[dd, "{[\widetilde{\gamma}^{\widetilde{x}}]}"]\\ [-10pt] 
+											\&  \phantom{.}\arrow[r, "F", squigarrow]\&\phantom{.}  \&   \\[-10pt] 
+											\left(y,\widetilde{y}\right) \& \& \& \widetilde{y} \&\& 
+		\end{tikzcd}
+	\end{equation*}
+	We can check $F([\gamma])$ is indeed a morphism because
+	\[
+		\widetilde{\gamma}^{\widetilde{x}}(1)=\operatorname{Fib}_E([\gamma])(\widetilde{x})=\widetilde{y}.
+	\]
+	Now we can check $F\circ G=\mathrm{id}_{\Pi_1(E)}$ and $G\circ F=\mathrm{id}_{\int_{\Pi_1(X)} \operatorname{Fib}_E}$. Hence $G$ is an isomorphism.
+}
+\prop{}{
+	Let $X$ be a path-connected topological space and let $E \rightarrow X$ be a covering. Then
+	\begin{itemize}
+		\item $E$ is path-connected if and only if $\mathrm{Fib}_E$ is a transitive action.
+		\item $E$ is simply connected if and only if $\mathrm{Fib}_E$ is a transitive and free action.
+	\end{itemize}
+}
+\pf{$E$ is path-connected if and only if for any $e_1,e_2\in E$ there exists a path $\psi$ in $E$ such that $\psi(0)=e_1$ and $\psi(1)=e_2$. According to the isomorphism $\Pi_1(E) \cong \int_{\Pi_1(X)} \operatorname{Fib}_E$, we see this is equivalent to that for any $e_1,e_2\in E$ there exists a path $\gamma$ in $X$ from $p(e_1)$ to $p(e_2)$ which lfits to $\psi$. Again this is equivalent to that for any $e_1,e_2\in E$ there exists a path $\gamma$ in $X$ such that $\mathrm{Fib}_E([\gamma])(e_1)=e_2$, i.e $\mathrm{Fib}_E$ is a transitive action.
+
+If $E$ is simply connected, then for any $e\in E$ we have $\pi(E,e)=[c_e]$ is trivial. Let $x=p(e)$. According to the isomorphism $\Pi_1(E) \cong \int_{\Pi_1(X)} \operatorname{Fib}_E$, we see this is equivalent to that $[c_x]$ is the unique loop in $\pi(X,x)$ which can lift to a loop in $E$ based at $e$. Therefore, $[c_x]$ is the only element in $\pi_1(X,x)$ such that $\mathrm{Fib}_E([c_x])(e)=e$. Hence $\mathrm{Fib}_E$ is a free action. The converse is similar.
+}
+
+\thm{Fundamental Theorem of Covering Spaces}{
+	Let $X$ be a locally path-connected and semi-locally simply connected topological space. Then the operations on
+	\begin{itemize}
+		\item extracting the monodromy $\operatorname{Fib}_E$ of a covering space $E$ over $X$
+		\item reconstructing a covering space from monodromy $\operatorname{Rec}(\rho)$
+	\end{itemize}
+	constitute an equivalence of categories
+	\begin{equation*}
+		\begin{tikzcd}[ampersand replacement=\&, row sep=tiny]
+			\mathsf{Cov}_X \arrow[rr, shift left=0.75ex, "\operatorname{Fib}"] \& \& \left[\Pi_1(X),\mathsf{Set}\right] \arrow[ll, shift left=0.75ex, "\operatorname{Rec}"]
+		\end{tikzcd}
+	\end{equation*}
+	between the category of covering spaces, and the category of permutation groupoid representations of the fundamental groupoid of $X$.
+}
+
+
 \prop{}{
 	Let $p: E \to X$ be a covering, let $x \in X$, and let $e, e^{\prime}$ be any two points in $p^{-1}(x)$.
 	\begin{enumerate}[(i)]
-		\item Two paths $f_1, f_2: I \to X$ that start at $x$ are homotopic if and only if their images in $X$ are homotopic.
-		\item Equivalent paths $f_1 \sim f_2: I \to X$ that start at $x$ lift to equivalent paths $\widetilde{f}_1\sim \widetilde{f}_2: I \to E$ that start at $e$, hence $\widetilde{f}_1(1)=\widetilde{f}_2(1)$, i.e $\widetilde{f}_1$ and $\widetilde{f}_2$ end at the same point in $E$.
-		\item $p_*: \pi_1(E, e) \to \pi_1(B, b)$ is a monomorphism.
 		\item $p_*\left(\pi_1\left(E, e^{\prime}\right)\right)$ is conjugate to $p_*\left(\pi_1(E, e)\right)$.
 		\item As $e'$ runs through $F_b$, the groups $p_*\left(\pi_1\left(E, e^{\prime}\right)\right)$ run through all conjugates of $p_*\left(\pi_1(E, e)\right)$ in $\pi_1(B, b)$.
 	\end{enumerate}
