@@ -759,16 +759,16 @@ Homotopy is an equivalence relation.
 	Thus we have $\gamma_0\cdot \psi_0\sim \gamma_1\cdot \psi_1$, which implies $\cdot$ is well-defined.
 }
 \dfn{Inverse Of Path}{
-	Let $\gamma: [0,1] \longrightarrow X$ is a path from $x$ to $y$. The \textbf{inverse of path $f$} denoted by $\gamma^{-1}$ is defined to be a path from $y$ to $x$ as follows
+	Let $\gamma: [0,1] \longrightarrow X$ is a path from $x$ to $y$. The \textbf{inverse of path $f$} denoted by $\gamma^{-}$ is defined to be a path from $y$ to $x$ as follows
 	\begin{align*}
-		\gamma^{-1}:[0,1]&\longrightarrow X\\
+		\gamma^{-}:[0,1]&\longrightarrow X\\
 		s &\longmapsto \gamma(1-s).
 	\end{align*}
 }
 \dfn{Inverse Of Equivalent Class Of Paths}{
 	Let $X$ be a topological space and $\gamma:[0,1]\to X$ be a path. Then the \textbf{inverse of path $\gamma$} denoted by $[\gamma]^{-1}$ is defined as follows
 	\begin{align*}
-		[\gamma]^{-1}:=[\gamma^{-1}].
+		[\gamma]^{-1}:=[\gamma^{-}].
 	\end{align*}
 }
 \pf{
@@ -777,12 +777,12 @@ Homotopy is an equivalence relation.
 		\gamma_1\sim \gamma_2\implies [\gamma_1]^{-1} = [\gamma_2]^{-1}.
 	\]
 	Suppose $\gamma_1\sim \gamma_2$ and $H$ is a homotopy rel end points from $\gamma_2$ to $\gamma_2$. Then $r(s,t):=H(1-s, t)$
-	is a homotopy rel end points from $\gamma_1^{-1}$ to $\gamma_2^{-1}$, because for all $s\in[0,1]$,
+	is a homotopy rel end points from $\gamma_1^{-}$ to $\gamma_2^{-}$, because for all $s\in[0,1]$,
 	\begin{align*}
-		r(s,0)&=H(1-s,0)=\gamma_1(1-s)=\gamma_1^{-1}(s),\\
-		r(s,1)&=H(1-s,1)=\gamma_2(1-s)=\gamma_2^{-1}(s).
+		r(s,0)&=H(1-s,0)=\gamma_1(1-s)=\gamma_1^{-}(s),\\
+		r(s,1)&=H(1-s,1)=\gamma_2(1-s)=\gamma_2^{-}(s).
 	\end{align*}
-	Thus we have $\gamma_1^{-1}\sim \gamma_2^{-1}$, which implies $[\gamma]^{-1}$ is well-defined.
+	Thus we have $\gamma_1^{-}\sim \gamma_2^{-}$, which implies $[\gamma]^{-1}$ is well-defined.
 }
 
 \dfn{Path-Component}{
@@ -1158,8 +1158,8 @@ Taking $Y=\{*\}$ in the homotopy lifting property gives the following corollary.
 	\]
 	where $\left(\widetilde{p\circ\gamma}\right)^e=\gamma$ holds since $\gamma$ is a lifting of $p\circ\gamma$ starting at $e$.
 }
-\cor{}{
-	Suppose $p : E \to X$ is a covering of spaces and $e\in E$. Then $p_*: \pi_1(E, e) \to \pi_1(X, x)$ is a monomorphism.
+\cor[GroupEmbedding]{Fundamental Group Embedding for Covering Spaces}{
+	Suppose $p : E \to X$ is a covering of spaces and $e\in E$. Then $p_*: \pi_1(E, e) \to \pi_1(X, x)$ is a monomorphism. The image $p_*(\pi_1(E, e))$ consists of all equivalent classes of loops in $X$ that lift to loops in $E$ based at $e$.
 }
 \pf{ 
 	$p_*: \pi_1(E, e) \to \pi_1(X, x)$ as a map between sets is the restriction of the bijiection $p_*:\mathrm{St}(e)\to\mathrm{St}(p(e))$ to $\pi_1(E, e)$. Therefore it is injective, which implies $p_*$ is a monomorphism between groups.
@@ -1295,7 +1295,20 @@ If $E$ is simply connected, then for any $e\in E$ we have $\pi(E,e)=[c_e]$ is tr
 	between the category of covering spaces, and the category of permutation groupoid representations of the fundamental groupoid of $X$.
 }
 
-
+\lemm{}{
+	Let $p:E\to X$ be a covering. Let $\psi_1$ and $\psi_2$ be paths in $E$ beginning in $e$ and $\gamma_1=p\circ \psi_1$ and $\gamma_2=p\circ \psi_2$ be their projections to $X$. Then $\psi_1(1)=\psi_2(1)$ if and only if $\gamma_1(1)=\gamma_2(1)$ and $\left[\gamma_1 \cdot \gamma_2^{-}\right]\in p_* \left(\pi_1(E, e)\right)$.
+}
+\pf{
+	If $\psi_1(1)=\psi_2(1)$, then $p_*\left(\left[\psi_1 \cdot \psi_2^{-}\right]\right)=\left[p_*(\psi_1) \cdot p_*(\psi_2^{-})\right]=\left[\gamma_1 \cdot \gamma_2^{-}\right]$. Conversely, by \Cref{th:GroupEmbedding}, we can lift the loop $\gamma_1 \cdot \gamma_2^{-}$ to a loop $\xi$ in $E$ based at $e$. Since for any $t\in [0,1]$,
+	\[
+	p\circ\xi\left(\frac{1}{2}t\right)=\gamma_1 \cdot \gamma_2^{-}\left(\frac{1}{2}t\right)=\gamma_1(t),
+	\]
+	we see both $\xi\left(\frac{1}{2}t\right)$ and $\psi_1(t)$ are liftings of $\gamma_1$ starting from $e$, which implies $\xi(\frac{1}{2})=\psi_1(1)$. Note $\xi^{-}$ is a lift of $\left(\gamma_1 \cdot \gamma_2^{-}\right)^{-}=\gamma_2 \cdot \gamma_1^{-}$. For any $t\in [0,1]$, we have
+	\[
+    p\circ \xi^{-}\left(\frac{1}{2}t\right)=\gamma_2 \cdot \gamma_1^{-}\left(\frac{1}{2}t\right)=\gamma_2(t).
+	\]
+	Therefore, both $\xi^{-}\left(\frac{1}{2}t\right)$ and $\psi_2(t)$ are liftings of $\gamma_2$ originating from $e$, which implies $\xi^{-}\left(\frac{1}{2}\right)=\psi_2(1)$. Since $\xi\left(\frac{1}{2}\right)=\xi^{-}\left(\frac{1}{2}\right)$, this demonstrates that $\psi_1(1)=\psi_2(1)$.
+}
 \prop{}{
 	Let $p: E \to X$ be a covering, let $x \in X$, and let $e, e^{\prime}$ be any two points in $p^{-1}(x)$.
 	\begin{enumerate}[(i)]
