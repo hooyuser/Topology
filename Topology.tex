@@ -925,6 +925,15 @@ Note that generally a topological space is not the disjoint union of its connect
 	\]
 	which clearly holds. 
 }
+\dfn{Connected Groupoid}{
+	A groupoid $\mathsf{G}$ is called \textbf{connected} if for any two objects $x,y$ of $\mathsf{G}$, $\Hom_{\mathsf{G}}(x,y)\ne \varnothing$.
+}
+\prop{Fundamental Groupoid of a Path-Connected Space is Connected}{
+	Let $X$ be a topological space. Then $\Pi_1(X)$ is connected if and only if $X$ is path-connected.
+}
+\pf{
+	$\Hom_{\Pi_1(X)}(x,y)\ne \varnothing$ if and only if there exists a path from $x$ to $y$.
+}
 \dfn{Simply Connected Space}{
 	A topological space $X$ is called \textbf{simply connected} if it is path-connected and $\pi_1(X,x_0)$ is trivial for some $x_0\in X$.
 }
@@ -934,6 +943,9 @@ Note that generally a topological space is not the disjoint union of its connect
 }
 \dfn{Semi-locally Simply Connected Space}{
 	A topological space $X$ is called \textbf{semi-locally simply connected} if for every $x\in X$ there exists an open neighborhood $U$ of $x$ with the property that every loop in $U$ can be contracted to a single point within $X$.
+
+	Equivalently, $X$ is semi-locally simply connected if for every $x\in X$ there exists an open neighborhood $U$ of $x$ such that the inclusion map $i:U\to X$ induces the trivial homomorphism $i_*:\pi_1(U,x)\to \pi_1(X,x)$.
+	
 }
 \prop{}{
 	The following implications hold:
@@ -945,6 +957,14 @@ Note that generally a topological space is not the disjoint union of its connect
 \section{Homotopy Equivalence}
 \dfn{Homotopy Equivalence}{
 	Let $X$ and $Y$ be topological spaces. A continuous map $f:X\to Y$ is called a \textbf{homotopy equivalence} if there exists a continuous map $g:Y\to X$ such that $g\circ f\simeq \mathrm{id}_X$ and $f\circ g\simeq \mathrm{id}_Y$. In this case, we say $X$ and $Y$ are \textbf{homotopy equivalent} and write $X\simeq Y$.
+}
+\dfn{Deformation Retraction}{
+	Let $X$ be a topological space and $A\subseteq X$. A \textbf{deformation retraction} of $X$ onto $A$ is a homotopy $H:X\times [0,1]\to X$ such that
+	\begin{itemize}
+		\item $H(x,0)=x$ for all $x\in X$;
+		\item $H(x,1)\in A$ for all $x\in X$;
+		\item $H(a,1)=a$ for all $a\in A$.
+	\end{itemize}
 }
 \chapter{Covering spaces}
 \section{Covering spaces}
@@ -1268,7 +1288,7 @@ Here we view $\mathsf{Set}$ as a discrete category to obtain the Grothendieck co
 	\]
 	Now we can check $F\circ G=\mathrm{id}_{\Pi_1(E)}$ and $G\circ F=\mathrm{id}_{\int_{\Pi_1(X)} \operatorname{Fib}_E}$. Hence $G$ is an isomorphism.
 }
-\prop{}{
+\prop[connectedness_and_monodromy]{}{
 	Let $X$ be a path-connected topological space and let $E \rightarrow X$ be a covering. Then
 	\begin{itemize}
 		\item $E$ is path-connected if and only if $\mathrm{Fib}_E$ is a transitive action.
@@ -1280,7 +1300,7 @@ Here we view $\mathsf{Set}$ as a discrete category to obtain the Grothendieck co
 If $E$ is simply connected, then for any $e\in E$ we have $\pi(E,e)=[c_e]$ is trivial. Let $x=p(e)$. According to the isomorphism $\Pi_1(E) \cong \int_{\Pi_1(X)} \operatorname{Fib}_E$, we see this is equivalent to that $[c_x]$ is the unique loop in $\pi(X,x)$ which can lift to a loop in $E$ based at $e$. Therefore, $[c_x]$ is the only element in $\pi_1(X,x)$ such that $\mathrm{Fib}_E([c_x])(e)=e$. Hence $\mathrm{Fib}_E$ is a free action. The converse is similar.
 }
 
-\thm{Fundamental Theorem of Covering Spaces}{
+\thm[fundamental_thm_covering_spaces]{Fundamental Theorem of Covering Spaces}{
 	Let $X$ be a locally path-connected and semi-locally simply connected topological space. Then the operations on
 	\begin{itemize}
 		\item extracting the monodromy $\operatorname{Fib}_E$ of a covering space $E$ over $X$
@@ -1309,6 +1329,45 @@ If $E$ is simply connected, then for any $e\in E$ we have $\pi(E,e)=[c_e]$ is tr
 	\]
 	Therefore, both $\xi^{-}\left(\frac{1}{2}t\right)$ and $\psi_2(t)$ are liftings of $\gamma_2$ originating from $e$, which implies $\xi^{-}\left(\frac{1}{2}\right)=\psi_2(1)$. Since $\xi\left(\frac{1}{2}\right)=\xi^{-}\left(\frac{1}{2}\right)$, this demonstrates that $\psi_1(1)=\psi_2(1)$.
 }
+
+\prop[lifting_criterion]{Lifting Criterion}{
+	Given a covering $p:\left(E, e\right) \rightarrow\left(X, x\right)$ and a map $f:\left(Y, y\right) \rightarrow\left(X, x\right)$ with $Y$ connected and locally path-connected, a lift $\widetilde{f}:\left(Y, y\right) \rightarrow\left(E, e\right)$ of $f$ exists iff $f_*\left(\pi_1\left(Y, y\right)\right) \subseteq p_*\left(\pi_1\left(E, e\right)\right)$.
+}
+\pf{ 
+	First note that $Y$ is path-connected because $Y$ is both connected and locally path-connected. If such lift $\widetilde{f}$ exists, then for any $f_*([\gamma])\in f_*\left(\pi_1\left(Y, y\right)\right)$, we have $$f_*([\gamma])=[f\circ\gamma]=[p\circ\widetilde{f}\circ\gamma]=p_*\left(\widetilde{f}_*([\gamma])\right)=p_*\left(\left[\widetilde{f}\circ\gamma\right]\right)\in p_*\left(\pi_1(E,e)\right),$$
+	which implies $f_*\left(\pi_1\left(Y, y\right)\right) \subseteq p_*\left(\pi_1\left(E, e\right)\right)$.
+}
+
+\prop[uniqueness_simply_connected_covering]{Uniqueness of Simply Connected Covering}{
+	If $X$ is a connected and locally path-connected topological space and $p_1:E_1\to X$ and $p_2:E_2\to X$ be two simply connected coverings, then $p_1$ and $p_2$ are isomorphic coverings.
+}
+\pf{
+	Let $p_1:E_1\to X$ and $p_2:E_2\to X$ be two simply connected coverings. Since $X$ is locally path-connected and $p_1,p_2$ are locally homeomorphisms, $E_1$ and $E_2$ are also locally path-connected. Suppose $p(e_1)=p(e_2)=x$ for some $e_1\in E_1$ and $e_2\in E_2$. Note $p_{1\,*}(\pi(E_1,e_1))=\{1_{\pi(X,x)}\}$. By \Cref{th:lifting_criterion}, there exists $f:(E_1,e_1)\to (E_2,e_2)$ such that $p_2\circ f=p_1$. Similarly, there exists $g:(E_2,e_2)\to (E_1,e_1)$ such that $p_1\circ g=p_2$. Since $p_1\circ (g\circ f)=p_2\circ f=p_1$ and $g\circ f(e_1)=e_1$, the uniqueness of lift guarantees $g\circ f=1_{E_1}$. Similarly we can show $f\circ g=1_{E_2}$. Therefore, $f$ is an isomorphism between $p_1$ and $p_2$.
+}
+\dfn{Universal Covering}{
+	Let $X$ be a topological space which is connected and locally path-connected. If $p: E \rightarrow X$ is a simply connected covering, then it is called a \textbf{universal covering} of $X$. If the universal covering of $X$ exists, it must be unique up to isomorphism.
+}
+\prop{Existence of Universal Covering}{
+	If $X$ is a topological space which is connected, locally path-connected and semi-locally simply connected, then the universal covering of $X$ exists.
+}
+\pf{
+	By \Cref{th:connectedness_and_monodromy} and \Cref{th:fundamental_thm_covering_spaces}, it is sufficient to show there exists a transitive and free representation of $\Pi_1(X)$. In fact, for any $x\in X$, the Hom functor $\mathrm{Hom}_{\Pi_1(X)}(x,-)$ is such a representation, which can be described as follows
+	\begin{equation*}
+		\begin{tikzcd}[ampersand replacement=\&]
+			\Pi_1(X)\&[-25pt]\&[+20pt]\&[-20pt]\mathsf{Set}\&[-20pt]\&[-30pt] \\ [-15pt] 
+			y_1  \arrow[dd, "{[\gamma]}"{left}] \& \&  \&  \mathrm{Hom}(x, y_1) \arrow[dd, "{[\gamma]_*}"]\&\ni\& {[\psi_1]}\arrow[dd,mapsto]\\ [-10pt] 
+											\&  \phantom{.}\arrow[r, "{\mathrm{Hom}(x{,} -)}", squigarrow]\&\phantom{.}  \&   \\[-10pt] 
+			y_2 \& \& \& \mathrm{Hom}(x, y_2)\&\ni\& {[\psi_1\cdot\gamma]}
+		\end{tikzcd}
+	\end{equation*}
+	The fundamental group $\pi_1(y,X)$ acts on $\mathrm{Hom}(x,y)$ by
+	\[
+	[\gamma]*[\psi]=[\psi\cdot \gamma].	
+	\]
+	For any $[\psi_1],[\psi_2]\in\mathrm{Hom}(x,y)$, there exists a loop $[\xi]=[\psi_1^{-}\cdot\psi_2]\in \pi_1(y,X)$ such that $[\xi]*[\psi_1]=[\psi_2]$. Therefore, the action is transitive. 
+	
+	Given $[\gamma]\in\pi_1(y,X)$, if $[\gamma]*[\psi]=[\psi]$, then $[\psi\cdot\gamma]=[\psi]$, which implies $[\gamma]=[\psi^{-}]\cdot[\psi\cdot\gamma]=[\psi^{-}]\cdot[\psi]=[c_y]$. Therefore, the action is free.
+}
 \prop{}{
 	Let $p: E \to X$ be a covering, let $x \in X$, and let $e, e^{\prime}$ be any two points in $p^{-1}(x)$.
 	\begin{enumerate}[(i)]
@@ -1317,6 +1376,7 @@ If $E$ is simply connected, then for any $e\in E$ we have $\pi(E,e)=[c_e]$ is tr
 	\end{enumerate}
 }
 \pf{
+	
 }
 \chapter{Homology}
 \section{Simplicial homology}
