@@ -1155,7 +1155,7 @@ Taking $Y=\{*\}$ in the homotopy lifting property gives the following corollary.
 \dfn{Covering of Groupoid}{
 	Let $\mathsf{E}$ and $\mathsf{B}$ be two groupoids. A functor $p:\mathsf{E}\to\mathsf{B}$ is a \textbf{covering of groupoid} if it is surjective on objects and for each object $e$ of $\mathsf{E}$ 
 	\[
-		p:\mathrm{St}(e)\to\mathrm{St}(p(e))
+		p^{e}:\mathrm{St}(e)\to\mathrm{St}(p(e))
 	\]
 	is a bijection.
 }
@@ -1163,18 +1163,18 @@ Taking $Y=\{*\}$ in the homotopy lifting property gives the following corollary.
 	If $p : E \to X$ is a covering of spaces, then $p_*: \Pi_1(E) \to \Pi_1(X)$ is a covering of groupoid.
 }
 \pf{
-	This a corollary of \Cref{th:Lifting}. Suppose $p : E \to X$ is a covering of spaces and $e\in E$. Given a map $p_*:\mathrm{St}(e)\to\mathrm{St}(p(e))$, we can define
+	This a corollary of \Cref{th:Lifting}. Suppose $p : E \to X$ is a covering of spaces and $e\in E$. Given a map $p_*^{e}:\mathrm{St}(e)\to\mathrm{St}(p(e))$, we can define
 	\begin{align*}
 		q^e:\mathrm{St}(p(e))&\to \mathrm{St}(e)\\
 		[\gamma]&\mapsto [\widetilde{\gamma}^e]
 	\end{align*}
 	which is well-defined since homotopic paths with the same starting point lift to homotopic paths with the same starting point. Then we can check that
 	\[
-		p_*\circ q^e([\gamma])=p([\widetilde{\gamma}^e])=[p\circ\widetilde{\gamma}^e]=[\gamma]
+		p_*^{e}\circ q^e([\gamma])=p([\widetilde{\gamma}^e])=[p\circ\widetilde{\gamma}^e]=[\gamma]
 	\]
 	and
 	\[
-		q^e\circ p_*([\gamma])=q^e([p\circ\gamma])=[\left(\widetilde{p\circ\gamma}\right)^e]=[\gamma],
+		q^e\circ p_*^{e}([\gamma])=q^e([p\circ\gamma])=\left[\left(\widetilde{p\circ\gamma}\right)^e\right]=[\gamma],
 	\]
 	where $\left(\widetilde{p\circ\gamma}\right)^e=\gamma$ holds since $\gamma$ is a lifting of $p\circ\gamma$ starting at $e$.
 }
@@ -1184,6 +1184,30 @@ Taking $Y=\{*\}$ in the homotopy lifting property gives the following corollary.
 \pf{ 
 	$p_*: \pi_1(E, e) \to \pi_1(X, x)$ as a map between sets is the restriction of the bijiection $p_*:\mathrm{St}(e)\to\mathrm{St}(p(e))$ to $\pi_1(E, e)$. Therefore it is injective, which implies $p_*$ is a monomorphism between groups.
 }
+
+\dfn{Monodromy Action (Groupoid Version)}{
+	Let $p:\mathsf{E}\to\mathsf{B}$ be a covering of groupoids. The \textbf{monodromy of the covering $p$} is a functor $\mathrm{Fib}_{\mathsf{E}}:\mathsf{B}\to\mathsf{Set}$ defined as follows
+	\begin{equation*}
+		\begin{tikzcd}[ampersand replacement=\&]
+			\mathsf{B}\&[-25pt]\&[+10pt]\&[-30pt]\mathsf{Set}\&[-20pt]\&[-30pt] \\ [-15pt] 
+			x  \arrow[dd, "{\gamma}"{left}] \& \&  \&  p^{-1}(x) \arrow[dd, "\mathrm{Fib}_\mathsf{E}({\gamma})"]\&\ni\& e\arrow[dd,mapsto]\\ [-10pt] 
+											\&  \phantom{.}\arrow[r, "\mathrm{Fib}_E", squigarrow]\&\phantom{.}  \&   \\[-10pt] 
+			y \& \& \& p^{-1}(y)\&\ni\& e'
+		\end{tikzcd}
+	\end{equation*}
+	where $e'$ is the target of the morphism $(p^e)^{-1}(\gamma)\in\mathrm{St}(e)$.
+}
+If we restricts $\mathrm{Fib}_{\mathsf{E}}$ to one object $x\in\mathsf{B}$, then we get a group action $\mathrm{Aut}_{\mathsf{B}}(x)\to\mathrm{Aut}_{\mathsf{Set}}(p^{-1}(x))$, which can also be written as
+\begin{align*}
+	\mathrm{Aut}_{\mathsf{B}}(x)\times p^{-1}(x) &\longrightarrow p^{-1}(x)\\
+	(\gamma, e) &\longmapsto \gamma\cdot e:=\mathrm{Fib}_{\mathsf{E}}(\gamma)(e)
+\end{align*}
+Given any $e\in p^{-1}(x)$, we have $\mathrm{Stab}_{\mathrm{Aut}_{\mathsf{B}}(x)}(e)=p(\mathrm{Aut}_{\mathsf{E}}(e))$ and the following $\mathrm{Aut}_{\mathsf{B}}(x)$-set isomorphism
+\begin{align*}
+	\mathrm{Aut}_{\mathsf{B}}(x)/p(\mathrm{Aut}_{\mathsf{E}}(e)) &\stackrel{\sim}{\longrightarrow} \mathrm{Aut}_{\mathsf{B}}(x)e\\
+	\gamma\hspace{1pt}p(\mathrm{Aut}_{\mathsf{E}}(e)) &\longmapsto \gamma\cdot e
+\end{align*}
+
 \dfn{Monodromy Action}{
 	Let $X$ be a topological space and $p:E\to X$ be a covering. The \textbf{monodromy of the covering $p$} is a functor $\mathrm{Fib}_E:\Pi_1(X)\to \mathsf{Set}$ defined as follows
 	\begin{equation*}
@@ -1300,6 +1324,32 @@ Here we view $\mathsf{Set}$ as a discrete category to obtain the Grothendieck co
 If $E$ is simply connected, then for any $e\in E$ we have $\pi(E,e)=[c_e]$ is trivial. Let $x=p(e)$. According to the isomorphism $\Pi_1(E) \cong \int_{\Pi_1(X)} \operatorname{Fib}_E$, we see this is equivalent to that $[c_x]$ is the unique loop in $\pi(X,x)$ which can lift to a loop in $E$ based at $e$. Therefore, $[c_x]$ is the only element in $\pi_1(X,x)$ such that $\mathrm{Fib}_E([c_x])(e)=e$. Hence $\mathrm{Fib}_E$ is a free action. The converse is similar.
 }
 
+\dfn{Reconstructing Functor $\mathrm{Rec}:\left[\Pi_1(X),\mathsf{Set}\right] \to\mathsf{Cov}_X$}{
+	Let $X$ be a locally path-connected and semi-locally simply connected topological space and let $\rho:\Pi_1(X)\to \mathsf{Set}$ be a functor. We define a covering space $E(\rho)$ of $X$ as follows:
+	\begin{itemize}
+		\item The underlying set of $E(\rho)$ is $\coprod_{x\in X}\rho(x)=\left\{(x,e)\mid x\in X,e\in\rho(x)\right\}$.
+		\item The topology on $E(\rho)$ is generated by the topological basis
+		\[
+			V_{U,x} = \left\{ \left(x,\rho([\gamma])(e) \right) \in E(\rho) \;\vert\; \gamma \,\text{is a path from}\, x \,\text{to}\, x'\in U ,\; e\in\rho(x)\right\},
+		\]
+		where $U\subseteq X$ is an path-connected open neighborhood of $x\in X$ such that $\pi_1(U,x) \to \pi_1(X,x)$ is trivial.
+	\end{itemize}
+	Then we can define 
+	\begin{align*}
+		p:E(\rho)&\longrightarrow X\\
+		(x,\rho(e))&\longmapsto x.
+	\end{align*}
+	and check $p$ is actually a covering. The reconstructing functor is defined as
+	\begin{equation*}
+		\begin{tikzcd}[ampersand replacement=\&]
+			\left[\Pi_1(X),\mathsf{Set}\right] \&[-25pt]\&[+10pt]\&[-30pt]\mathsf{Cov}_X\&[-20pt]\&[-30pt] \\ [-15pt] 
+			\rho_1  \arrow[dd, "f"{left}, Rightarrow] \& \&  \&  E(\rho_1)\arrow[dd, "\mathrm{Rec}_E(f)"]\&\ni\& (x,e)\arrow[dd,mapsto]\\ [-10pt] 
+											\&  \phantom{.}\arrow[r, "\mathrm{Rec}_E", squigarrow]\&\phantom{.}  \&   \\[-10pt] 
+			\rho_2 \& \& \& E(\rho_2)\&\ni\& (x, f_x(e))
+		\end{tikzcd}
+	\end{equation*}
+}
+
 \thm[fundamental_thm_covering_spaces]{Fundamental Theorem of Covering Spaces}{
 	Let $X$ be a locally path-connected and semi-locally simply connected topological space. Then the operations on
 	\begin{itemize}
@@ -1344,6 +1394,20 @@ If $E$ is simply connected, then for any $e\in E$ we have $\pi(E,e)=[c_e]$ is tr
 \pf{
 	Let $p_1:E_1\to X$ and $p_2:E_2\to X$ be two simply connected coverings. Since $X$ is locally path-connected and $p_1,p_2$ are locally homeomorphisms, $E_1$ and $E_2$ are also locally path-connected. Suppose $p(e_1)=p(e_2)=x$ for some $e_1\in E_1$ and $e_2\in E_2$. Note $p_{1\,*}(\pi(E_1,e_1))=\{1_{\pi(X,x)}\}$. By \Cref{th:lifting_criterion}, there exists $f:(E_1,e_1)\to (E_2,e_2)$ such that $p_2\circ f=p_1$. Similarly, there exists $g:(E_2,e_2)\to (E_1,e_1)$ such that $p_1\circ g=p_2$. Since $p_1\circ (g\circ f)=p_2\circ f=p_1$ and $g\circ f(e_1)=e_1$, the uniqueness of lift guarantees $g\circ f=1_{E_1}$. Similarly we can show $f\circ g=1_{E_2}$. Therefore, $f$ is an isomorphism between $p_1$ and $p_2$.
 }
+\dfn{Universal Covering of Groupoids}{
+	Let $p:\mathsf{E}\to \mathsf{B}$ be a covering of groupoids with $\mathsf{E}$, $\mathsf{B}$ being connected. $p$ is called a \textbf{universal covering of $\mathsf{B}$} if one of the following equivalent conditions holds:
+	\begin{itemize}
+		\item $p(\mathrm{Aut}_{\mathsf{E}}(e))$ is trivial
+		\item $\mathrm{Aut}_{\mathsf{B}}(x)$ acts freely on $p^{-1}(x)$
+	\end{itemize}
+}
+\prop{}{
+	If $p:\mathsf{E}\to \mathsf{B}$ is a universal covering of connected groupoids, then for any $x\in \mathsf{B}$, we have the following $\mathrm{Aut}_{\mathsf{B}}(x)$-set isomorphism: 
+	\begin{align*}
+		\mathrm{Aut}_{\mathsf{B}}(x) &\stackrel{\sim}{\longrightarrow} p^{-1}(x)\\
+		\gamma &\longmapsto \gamma\cdot e
+	\end{align*}
+}
 \dfn{Universal Covering}{
 	Let $X$ be a topological space which is connected and locally path-connected. If $p: E \rightarrow X$ is a simply connected covering, then it is called a \textbf{universal covering} of $X$. If the universal covering of $X$ exists, it must be unique up to isomorphism.
 }
@@ -1368,6 +1432,47 @@ If $E$ is simply connected, then for any $e\in E$ we have $\pi(E,e)=[c_e]$ is tr
 	
 	Given $[\gamma]\in\pi_1(y,X)$, if $[\gamma]*[\psi]=[\psi]$, then $[\psi\cdot\gamma]=[\psi]$, which implies $[\gamma]=[\psi^{-}]\cdot[\psi\cdot\gamma]=[\psi^{-}]\cdot[\psi]=[c_y]$. Therefore, the action is free.
 }
+
+\dfn{Normal Covering of Groupoids}{
+	Let $p:\mathsf{E}\to \mathsf{B}$ be a covering of groupoids with $\mathsf{E}$, $\mathsf{B}$ being connected. If $p(\mathrm{Aut}_{\mathsf{E}}(e))\lhd \mathrm{Aut}_{\mathsf{B}}(p(e))$, then $p$ is called a \textbf{normal covering of $p$}.
+}
+\dfn{Normal Covering}{
+	A covering $p: E \rightarrow X$ is called \textbf{normal} if for each $x \in X$ and any $e_1,e_2\in p^{-1}(x)$, there exists an isomorphism $\phi\in \mathrm{Aut}_{\mathsf{Cov}_X}(p)$ such that $\phi(e_1)=e_2$.
+}
+\prop{}{
+	Let $p:\left(E, e\right) \rightarrow\left(X, x\right)$ where $E$ is path-connected and $X$ is path-connected and locally path-connected. Let $H=p_*\left(\pi_1\left(E,e\right)\right) \subseteq \pi_1\left(X, x\right)$. Then
+	\begin{enumerate}[(i)]
+		\item This covering $p$ is normal if and only if $H\lhd\pi_1\left(X, x_0\right)$.
+		\item  $\mathrm{Aut}_{\mathsf{Cov}_X}(p)\cong\mathrm{N}_{\pi_1\left(X, x_0\right)}(H) / H$.
+In particular, if $p$ is a normal covering, $\mathrm{Aut}_{\mathsf{Cov}_X}(p)\cong \pi_1\left(X, x_0\right) / H$. If $p$ is a universal covering, we have $G(\tilde{X}) \approx \pi_1(X)$.
+	\end{enumerate}
+}
+\dfn{Continuous Group Action}{
+	A \textbf{continuous group action} on a topological space $X$ is a group homomorphism $\phi:G\to \mathrm{Aut}_{\mathsf{Top}}(X)$, where $\mathrm{Aut}_{\mathsf{Top}}(X)$ is the group of homeomorphisms of $X$.
+}
+
+\dfn{Even Action}{
+Let $G$ be a group acting continuously on a topological space $E$. The action of $E$ is \textbf{even} if each point $y \in Y$ has some neighborhood $U$ such that $gU\cap U=\varnothing$ for all $g\in G-\{1_G\}$.
+}
+\prop{}{
+	If an action of a group $G$ on a space $E$ is even, then:
+	\begin{enumerate}[(i)]
+		\item The quotient map $p: E \rightarrow E / G$ is a normal covering.
+		\item If $E$ is path-connected, then $G$ is the group of deck transformations of the covering $p:E \rightarrow E / G$ .
+		\item If $E$ is path-connected and locally pathconnected, then $G$ is isomorphic to $\pi_1(E / G) / p_*\left(\pi_1(E)\right)$ 
+	\end{enumerate}
+}
+\prop{}{
+	For any continuous action of a topological group $G$ on a topological space $E$, the quotient map $p: E \rightarrow E / G$ is an open map.
+}
+\pf{
+	For any $g \in G$ and any subset $U \subseteq M$, we define a set $g \cdot U \subseteq M$ by
+$$
+g \cdot U=\{g \cdot x: x \in U\} .
+$$
+If $U \subseteq M$ is open, then $\pi^{-1}(\pi(U))$ is equal to the union of all sets of the form $g \cdot U$ as $g$ ranges over $G$. Since $p \mapsto g \cdot p$ is a homeomorphism, each such set is open, and therefore $\pi^{-1}(\pi(U))$ is open in $M$. Becaues $\pi$ is a quotient map, this implies that $\pi(U)$ is open in $M / G$, and therefore $\pi$ is an open map.
+}
+
 \prop{}{
 	Let $p: E \to X$ be a covering, let $x \in X$, and let $e, e^{\prime}$ be any two points in $p^{-1}(x)$.
 	\begin{enumerate}[(i)]
