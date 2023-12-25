@@ -125,6 +125,10 @@
 
 \noindent In this chapter we always assume that $(X,\tau)$ is a topological space.
 
+\dfn{Continuous Map}{
+	Let $(X,\tau_X)$ and $(Y,\tau_Y)$ be topological spaces. A map $f:X\to Y$ is \textbf{continuous} if for any open set $U\in\tau_Y$, $f^{-1}(U)\in\tau_X$.
+}
+
 \dfn{Discrete Topology}{
 	Let $X$ be a set. The \textbf{discrete topology} on $X$ is $2^X$.
 }
@@ -223,6 +227,14 @@ We can see that for any $x\in X$, neighborhood system $\mathcal{N}(x)$ is a filt
 }
 \prop{}{
 	The collection of all open neighbourhoods at a point forms a neighbourhood basis at that point.
+}
+\dfn{Sequential Filter Base}{
+	Let $X$ be a set. A \textbf{sequential filter base on $X$} is a nonempty collection $\mathcal{B}\subseteq 2^X$ such that
+	\begin{enumerate}[(i)]
+		\item $\varnothing\notin\mathcal{B}$.
+		\item $A,B\in\mathcal{B}\implies \exists C\in\mathcal{B},\ C\subseteq A\cap B$.
+		\item $A\in\mathcal{B}\implies \exists B\in\mathcal{B},\ B\subseteq A$.
+	\end{enumerate}
 }
 \dfn{Limit Point}{
 	Suppose that $A$ is a subset of $X$. A point $x\in X$ is a \textbf{limit point} of $A$, if every neighbourhood of $x$ contains at least one point of $A$ different from $x$ itself,
@@ -443,6 +455,21 @@ We have several separation axioms in topological spaces denoted by $\mathrm{T}_r
 \dfn{Hausdorff Space/$\mathrm{T}_2$ Space}{
 	A topological space $X$ is a \textbf{Hausdorff space}, separated space or $\mathrm{T}_2$ space if for any two distinct points $x,y\in X$ there exists a neighbourhood $U$ of $x$ and a neighbourhood $V$ of $y$ such that $U\cap V=\varnothing$.
 }
+\prop{Equivalent Definitions of Hausdorff Space}{
+	For a topological space $X$, the following are equivalent:
+	\begin{enumerate}[(i)]
+		\item $X$ is a Hausdorff space.
+		\item Limits of filters on $X$ are unique.
+	\end{enumerate}
+} 
+\prop{Properties of Hausdorff Space}{
+	Let $X$ be a Hausdorff space. Then
+	\begin{enumerate}[(i)]
+		\item Each compact subset of $X$ is closed.
+		\item If $(x_i)_{i=1}^{\infty}$ is a convergent sequence in $X$, the limit of $(x_i)_{i=1}^{\infty}$ is unique.
+		\item Subspaces and products of Hausdorff spaces are Hausdorff.
+	\end{enumerate}
+}
 \dfn{Normal Space/$\mathrm{T}_4$ Space}{
 	A topological space $X$ is a \textbf{normal space} or $\mathrm{T}_4$ space if, given any disjoint closed sets $E$ and $F$ in $X$, there are neighbourhoods $U$ of $E$ and $V$ of $F$ such that $U\cap V=\varnothing$.
 }
@@ -452,7 +479,7 @@ A subset $K$ of a topological space $X$ is said to be compact if it is compact a
 	A map $f:X\to Y$ is a \textbf{local homeomorphism} if for any $x\in X$, there exists a neighbourhood $U$ of $x$ such that $f(U)$ is open in $Y$ and $f|_U:U\to f(U)$ is a homeomorphism.
 }
 \prop{Local Homeomorphism Transfers Local Properties}{
-	A local homeomorphism $f: X \rightarrow Y$ transfers "local" topological properties in both directions:
+	A local homeomorphism $f: X \rightarrow Y$ transfers ``local" topological properties in both directions:
 	\begin{itemize}
 		\item $X$ is locally connected if and only if $f(X)$ is;
 		\item  $X$ is locally path-connected if and only if $f(X)$ is;
@@ -461,6 +488,10 @@ A subset $K$ of a topological space $X$ is said to be compact if it is compact a
 	\end{itemize}
 }
 \section{Basic Construction}
+\subsection{Initial Topology and Final Topology}
+\dfn{Final Topology}{
+	Let $\mathsf{J}$ be a discrete category and $F:\mathsf{J}\to\mathsf{Set}$ be a functor. 
+}
 \subsection{Subspace Topology}
 \dfn{Subspace Topology}{
 	Let $(X,\tau)$ be a topological space and $Y$ be a subset of $X$. Then
@@ -469,7 +500,33 @@ A subset $K$ of a topological space $X$ is said to be compact if it is compact a
 	\]
 	is said to be a \textbf{subspace topology} of $(X,\tau)$.
 }
-$(Y,\tau_Y)$ is a topological space. Moreover, $(Y,\tau_Y)$ is a subobject of $(X,\tau)$ in $\Top$. 
+$(Y,\tau_Y)$ is a topological space. Moreover, $(Y,\tau_Y)$ is a subobject of $(X,\tau)$ in $\Top$.
+
+\prop{Inculsion is Continuous}{
+	Let $(X,\tau)$ be a topological space and $A$ be a subset of $X$. The subspace topology $\tau_A$ is the coarsest topology on $A$ such that the inclusion map $i:A\to X$ is continuous.
+}
+\pf{
+	For any $U\in \tau$, we have
+	\[
+		i^{-1}(U)=U\cap A\in \tau_A,
+	\]
+	which implies $i$ is continuous. If there exists a topology $\tau'$ on $A$ such that $i$ is continuous, then for any $U\in \tau$, we have
+	\[
+		i^{-1}(U)=U\cap A\in \tau',
+	\]
+	which implies $\tau_A\subseteq \tau'$.
+}
+
+\prop{}{
+	If $f:X\to Y$ is a continuous map and $f(X)$ is endowed with the subspace topology, then $g:X\to f(X)$ is a continous map. 
+}
+\pf{
+	For any $U\in \tau_{f(X)}$, there exists $V\in \tau$ such that $U=V\cap f(X)$. Since $f$ is continuous, we have
+	\[
+		g^{-1}(U)=g^{-1}\left(V\cap f(X)\right)=f^{-1}(V)\in \tau,
+	\]
+	which implies $g$ is continuous.
+}
 
 \subsection{Quotient Topology}
 \dfn{Quotient Space}{
@@ -590,6 +647,19 @@ Local connectedness does not imply connectedness, e.g. two disjoint open interva
 		X=\bigcup_{F \in \mathcal{F}} F
 	\]
 }
+\dfn{Locally Compact Space}{
+	A topological space $X$ is called \textbf{locally compact} if every point $x\in X$ has a compact neighbourhood, i.e., there exists an open set $U$ and a compact set $K$ such that $x \in U \subseteq K$.
+}
+\prop{}{
+	If $X$ is a Hausdorff space, then the following are equivalent:
+	\begin{itemize}
+		\item $X$ is locally compact.
+		\item Every point of $X$ has a closed compact neighbourhood base.
+	\end{itemize}
+}
+\dfn{Profinite Space}{
+
+}
 
 \chapter{Basic Notions}
 \section{CW Complex}
@@ -636,7 +706,26 @@ with a weak topology satisfying a subset $U \subseteq X$ is closed iff $U \cap D
 			}\]
 	The map $\phi$ is called a \textbf{local trivialization} of the fiber bundle $E$ over $U$.
 }
-
+\dfn{Locally Constant Function}{
+	Let $f: X \to Y$ be a function from a topological space $X$ into a set $Y$. Given $x \in X$, $f$ is said to \textbf{locally constant at $x$} if there exists a neighborhood $U \subseteq X$ of $x$ such that $f$ is constant on $U$.\\
+	$f$ is called \textbf{locally constant} if it is locally constant at every point $x \in X$.
+}
+\prop{Properties of Locally Constant Functions}{
+	Let $f: X \to Y$ be a map from a topological space $(X,\tau)$ into a set $Y$. Then
+	\begin{enumerate}[(i)]
+		\item If $f$ is locally constant, then it is constant on any connected component of $X$.
+		\item If $Y$ is a discrete space, then $f$ is continuous if and only if it is locally constant.
+	\end{enumerate}
+}
+\proof{ 
+	\begin{enumerate}[(i)]
+		\item Suppose $f$ is locally constant. It is sufficient to show Let $f$ is constant when $X$ is connected. Take some $x_0\in X$, and define two sets: $U = f^{-1}(x_0)$ and $V=X-U$. For any $a\in U$, there is open neighborhood $K$ of such that $f(V)=\{f(x_0)\}$, which implies $K\subseteq U$. Hence $U$ is open. Similarly, for any $b\in V$, there is open neighborhood $L$ of such that $f(L)=\{f(b)\}$, which implies $L\subseteq V$. Hence $V$ is open. Since $U$ and $V$ are disjoint open sets and $U \cup V = X$, by the connectedness of $X$, either $U$ or $V$ must be empty. Since $x_0\in U$, we know that $V$ must be empty. Therefore, $f$ is constant on $X$.
+		\item $\Rightarrow$ (Continuous implies Locally Constant)
+		Let $f: X \rightarrow Y$ be continuous. Take a point $x \in X$. Because $Y$ is a discrete space, the singleton set $\{f(x)\}$ is open in $Y$. Then $f^{-1}(f(x))$ is open in $X$ (since $f$ is continuous). Therefore, there exists an open neighborhood $U$ of $x$ such that $U \subseteq f^{-1}(f(x))$. This implies that $f$ is constant on $U$. Thus $f$ is locally constant.\\
+		$\Leftarrow$ (Locally Constant implies Continuous)
+		Assume that $f$ is locally constant. Let $V$ be an arbitrary open subset of $Y$. We need to show that $f^{-1}(V)$ is open in $X$. Take any point $x \in f^{-1}(V)$. Then $f(x) \in V$. Because $f$ is locally constant, there exists an open neighborhood $U$ of $x$ such that $f(U)=\{f(x)\} \subseteq V$. So we have $U \subseteq f^{-1}(V)$. Therefore, $f^{-1}(V)$ is open in $X$.
+	\end{enumerate}
+}
 \dfn{Vector Bundle}{
 	A \textbf{vector bundle} over a topological space $X$ consists of
 	\begin{enumerate}[(i)]
@@ -968,6 +1057,14 @@ Note that generally a topological space is not the disjoint union of its connect
 }
 \chapter{Covering spaces}
 \section{Covering spaces}
+\dfn{Category of Pointed Topological Spaces}{
+	The \textbf{category of pointed topological spaces} $\Top_*$ is the coslice category $\left(\{*\}/\Top\right)$ defined explicitly as follows
+	\begin{itemize}
+		\item $\Obj(\Top_*)$ is the class of all pairs $(X,x)$, where $X$ is a topological space and $x\in X$;
+		\item $\Hom_{\Top_*}((X,x),(Y,y))$ is the class of all continuous maps $f:X\to Y$ such that $f(x)=y$. 
+	\end{itemize}
+	Morphisms in $\Top_*$ are called \textbf{based maps}.
+}
 \dfn{Covering}{
 	Let $X$ be a topological space. A \textbf{covering} of $X$ is a continuous map
 $$
@@ -975,13 +1072,15 @@ p: E \longrightarrow X
 $$
 such that there exists a discrete space $D$ and for every $x \in X$ an open neighborhood $U \subseteq X$, such that $p^{-1}(U)=\bigsqcup_{d \in D} V_d$ and $\left.p\right|_{V_d}: V_d \rightarrow U$ is a homeomorphism for every $d \in D$. Such open neighborhood $U$ is called a \textbf{fundamental neighborhood} for $x$. The open sets $V_d$ are called \textbf{sheets}.
 }
+A based map $p:(E,e)\to (X,x)$ is called a \textbf{covering map} if $p:E\to X$ is a covering. 
+
 A covering space is a fiber bundle with discrete fiber $D$, illustrated as follows
 \[\xymatrix{
 			p^{-1}(U)\ar[rd]_{p}\ar[rr]^{\phi}  & &U\times D\ar[ld]^{p_1}\\
 			&U&
 			}\]
-\prop{Covering Map}{
-	The projection $p:E\to X$ is a local homeomorphism.
+\prop{Covering Map is Local Homeomorphism}{
+	The covering $p:E\to X$ is a local homeomorphism.
 }
 \dfn{Lifting}{
 	Let $p:E\to X$ and $f:Y\to X$ be continuous maps. A lifting of $f$ along $p$ is a continuous map $\widetilde{f}:Y\to E$ such that the following diagram commutes
@@ -1064,7 +1163,7 @@ Let $p: E \rightarrow X$ be a covering and $f: Y \rightarrow X$ be a continuous 
 Taking $Y=\{*\}$ in the homotopy lifting property gives the following corollary.
 
 \cor{Unique Path Lifting}{
-	Let $p: E \to X$ be a covering. Suppose $x \in X$ and $e\in p^{-1}(x)$. A path $\gamma: I \to X$ with $\gamma(0)=x$ lifts uniquely to a path $\widetilde{\gamma}: I \to E$ such that $\widetilde{\gamma}(0)=e$ and $p \circ \widetilde{\gamma}=\gamma$. We may use $\widetilde{\gamma}^e$ to denote this unique lifting if we want to emphasize the starting point $e$.
+	Let $p: (E,e) \to (X,x)$ be a covering. A path $\gamma: I \to X$ with $\gamma(0)=x$ lifts uniquely to a path $\widetilde{\gamma}: I \to E$ such that $\widetilde{\gamma}(0)=e$ and $p \circ \widetilde{\gamma}=\gamma$. We may use $\widetilde{\gamma}^e$ to denote this unique lifting if we want to emphasize the starting point $e$.
 	\[
 	\begin{tikzcd}[ampersand replacement=\&]
 		\{*\} \arrow[r, "c_e"] \arrow[d, "c_0"', hook]                      \& E \arrow[d, "p"] \\ [+8pt]
@@ -1085,7 +1184,7 @@ Taking $Y=\{*\}$ in the homotopy lifting property gives the following corollary.
 
 \prop[Lifting]{Lifting of Homotopic Paths}{
 	\label{my_proposition}
-	Let $p: E \to X$ be a covering. Suppose $x \in X$ and $e\in p^{-1}(x)$. If $\gamma_0 \sim \gamma_1: I \to X$ are homotopic paths that both start from $x$, then the lifted paths $\widetilde{\gamma}_0, \widetilde{\gamma}_1: I \to E$ that both start at $e$ are also homotopic. Moreover, if $\gamma_0,\gamma_1$ have the same end point, then $\widetilde{\gamma}_0, \widetilde{\gamma}_1$ also have then same end point.\\
+	Let $p: (E,e) \to (X,x)$ be a covering. If $\gamma_0 \sim \gamma_1: I \to X$ are homotopic paths that both start from $x$, then the lifted paths $\widetilde{\gamma}_0, \widetilde{\gamma}_1: I \to E$ that both start at $e$ are also homotopic. Moreover, if $\gamma_0,\gamma_1$ have the same end point, then $\widetilde{\gamma}_0, \widetilde{\gamma}_1$ also have then same end point.\\
 	Define 
 	\begin{align*}
 		\eta(s,t)=\begin{cases}
@@ -1159,7 +1258,8 @@ Taking $Y=\{*\}$ in the homotopy lifting property gives the following corollary.
 	\]
 	is a bijection.
 }
-\cor{Covering of Spaces Induces Covering of Groupoids}{
+
+\prop[space_covering_induces_groupoid_covering]{Covering of Spaces Induces Covering of Groupoids}{
 	If $p : E \to X$ is a covering of spaces, then $p_*: \Pi_1(E) \to \Pi_1(X)$ is a covering of groupoid.
 }
 \pf{
@@ -1178,12 +1278,54 @@ Taking $Y=\{*\}$ in the homotopy lifting property gives the following corollary.
 	\]
 	where $\left(\widetilde{p\circ\gamma}\right)^e=\gamma$ holds since $\gamma$ is a lifting of $p\circ\gamma$ starting at $e$.
 }
+
 \cor[GroupEmbedding]{Fundamental Group Embedding for Covering Spaces}{
-	Suppose $p : E \to X$ is a covering of spaces and $e\in E$. Then $p_*: \pi_1(E, e) \to \pi_1(X, x)$ is a monomorphism. The image $p_*(\pi_1(E, e))$ consists of all equivalent classes of loops in $X$ that lift to loops in $E$ based at $e$.
+	Suppose $p: (E,e) \to (X,x)$ is a covering. Then $p_*: \pi_1(E, e) \to \pi_1(X, x)$ is a monomorphism. The image $p_*(\pi_1(E, e))$ consists of all equivalent classes of loops in $X$ that lift to loops in $E$ based at $e$.
 }
 \pf{ 
-	$p_*: \pi_1(E, e) \to \pi_1(X, x)$ as a map between sets is the restriction of the bijiection $p_*:\mathrm{St}(e)\to\mathrm{St}(p(e))$ to $\pi_1(E, e)$. Therefore it is injective, which implies $p_*$ is a monomorphism between groups.
+	According to \Cref{th:space_covering_induces_groupoid_covering}, $p^e:\mathrm{St}(e)\to\mathrm{St}(p(e))$ is a bijection. Note that $p_*: \pi_1(E, e) \to \pi_1(X, x)$ as a map between sets is the restriction of $p^e$ to $\pi_1(E, e)$. Therefore it is injective, which implies $p_*$ is a monomorphism between groups.
 }
+\prop{Change Basepoint in Fiber (Groupoid Version)}{
+	Let $p:\mathsf{E}\to\mathsf{B}$ be a covering of groupoid with $\mathsf{E}$ being connected. Suppose $e_1,e_2$ are two objects of $\mathsf{E}$ such that $p(e_1)=p(e_2)=x$, then $p(\mathrm{Aut}_\mathsf{E}(e_1))$ and $p(\mathrm{Aut}_\mathsf{E}(e_2))$ are conjugate subgroups in $\mathrm{Aut}_{\mathsf{B}}(x)$. This gives a bijection between $p^{-1}(x)$ and the conjugacy class of the subgroup $p(\mathrm{Aut}_\mathsf{E}(e_1))$ in $\mathrm{Aut}_{\mathsf{B}}(x)$.
+	\begin{align*}
+		p^{-1}(x) &\longrightarrow \mathrm{Cl}(p(\mathrm{Aut}_\mathsf{E}(e_1)))\\
+		e &\longmapsto p(\mathrm{Aut}_\mathsf{E}(e))
+	\end{align*}
+}
+\pf{ 
+	Since $\mathsf{E}$ is connected, there exists a arrow $\gamma$ in $\mathsf{E}$ from $e_1$ to $e_2$. Then we have a commutative diagram
+	\begin{center}
+		\[
+		\begin{tikzcd}[ampersand replacement=\&]
+			\mathrm{Aut}_\mathsf{E}(e_1) \arrow[r, "p"] \arrow[d, "\gamma\circ(-)\circ\gamma^{-1}"'] \& \mathrm{Aut}_\mathsf{B}(x) \arrow[d, "p(\gamma)\circ(-)\circ p(\gamma)^{-1}"] \\
+			\mathrm{Aut}_\mathsf{E}(e_2) \arrow[r, "p"'] \& \mathrm{Aut}_\mathsf{B}(x) 
+		\end{tikzcd}
+		\]
+	\end{center}
+	This implies $ p(\gamma)p(\mathrm{Aut}_\mathsf{E}(e_1))p(\gamma)^{-1}\subseteq p(\mathrm{Aut}_\mathsf{E}(e_2))$.
+	Similarly, we have a commutative diagram
+	\begin{center}
+		\[
+		\begin{tikzcd}[ampersand replacement=\&]
+			\mathrm{Aut}_\mathsf{E}(e_2) \arrow[r, "p"] \arrow[d, "\gamma^{-1}\circ(-)\circ\gamma"'] \& \mathrm{Aut}_\mathsf{B}(x) \arrow[d, "p(\gamma)^{-1}\circ(-)\circ p(\gamma)"] \\
+			\mathrm{Aut}_\mathsf{E}(e_1) \arrow[r, "p"'] \& \mathrm{Aut}_\mathsf{B}(x) 
+		\end{tikzcd}
+		\]
+	\end{center}
+	This implies $ p(\gamma)^{-1}p(\mathrm{Aut}_\mathsf{E}(e_2))p(\gamma)\subseteq p(\mathrm{Aut}_\mathsf{E}(e_1))$. Therefore, we have  $ p(\gamma)p(\mathrm{Aut}_\mathsf{E}(e_1))p(\gamma)^{-1}= p(\mathrm{Aut}_\mathsf{E}(e_2))$. The bijective property is clear from $p$ is bijective on star sets.
+}
+\cor{Change Basepoint in Fiber}{
+	Let $E$ be a path-connected topological space and $p:E\to X$ be a covering. Suppose $x\in X$ and $e_1,e_2\in p^{-1}(x)$. Then we have a bijection
+	\begin{align*}
+		p^{-1}(x) &\longrightarrow \mathrm{Cl}(p_*(\pi_1(E,e_1)))\\
+		e &\longmapsto p_*(\pi_1(E,e))
+	\end{align*}
+	If $\gamma$ is a path in $E$ from $e_1$ to $e_2$, then 
+	$$
+	p_*([\gamma])p_*(\pi_1(E,e_1))p_*([\gamma])^{-1}=p_*(\pi_1(E,e_2)).
+	$$
+}
+
 
 \dfn{Monodromy Action (Groupoid Version)}{
 	Let $p:\mathsf{E}\to\mathsf{B}$ be a covering of groupoids. The \textbf{monodromy of the covering $p$} is a functor $\mathrm{Fib}_{\mathsf{E}}:\mathsf{B}\to\mathsf{Set}$ defined as follows
@@ -1247,7 +1389,7 @@ Monodromy functor can be viewed as a permutation representations of $\Pi_1(X)$. 
 }
 
 \dfn{Monodromy Functor $\mathrm{Fib}$}{
-	Monodromy functor $\mathrm{Fib}$ is defined as follows
+	\textbf{Monodromy functor} $\mathrm{Fib}$ is defined as follows
 	\begin{equation*}
 		\begin{tikzcd}[ampersand replacement=\&]
 			\mathsf{Cov}_X\&[-25pt]\&[+10pt]\&[-30pt]\left[\Pi_1(X),\mathsf{Set}\right]\&[-30pt]\&[-30pt] \\ [-15pt] 
@@ -1339,12 +1481,12 @@ If $E$ is simply connected, then for any $e\in E$ we have $\pi(E,e)=[c_e]$ is tr
 		p:E(\rho)&\longrightarrow X\\
 		(x,\rho(e))&\longmapsto x.
 	\end{align*}
-	and check $p$ is actually a covering. The reconstructing functor is defined as
+	and check $p$ is actually a covering. The \textbf{reconstructing functor} $\mathrm{Rec}$ is defined as
 	\begin{equation*}
 		\begin{tikzcd}[ampersand replacement=\&]
 			\left[\Pi_1(X),\mathsf{Set}\right] \&[-25pt]\&[+10pt]\&[-30pt]\mathsf{Cov}_X\&[-20pt]\&[-30pt] \\ [-15pt] 
-			\rho_1  \arrow[dd, "f"{left}, Rightarrow] \& \&  \&  E(\rho_1)\arrow[dd, "\mathrm{Rec}_E(f)"]\&\ni\& (x,e)\arrow[dd,mapsto]\\ [-10pt] 
-											\&  \phantom{.}\arrow[r, "\mathrm{Rec}_E", squigarrow]\&\phantom{.}  \&   \\[-10pt] 
+			\rho_1  \arrow[dd, "f"{left}, Rightarrow] \& \&  \&  E(\rho_1)\arrow[dd, "\mathrm{Rec}(f)"]\&\ni\& (x,e)\arrow[dd,mapsto]\\ [-10pt] 
+											\&  \phantom{.}\arrow[r, "\mathrm{Rec}", squigarrow]\&\phantom{.}  \&   \\[-10pt] 
 			\rho_2 \& \& \& E(\rho_2)\&\ni\& (x, f_x(e))
 		\end{tikzcd}
 	\end{equation*}
@@ -1408,6 +1550,7 @@ If $E$ is simply connected, then for any $e\in E$ we have $\pi(E,e)=[c_e]$ is tr
 		\gamma &\longmapsto \gamma\cdot e
 	\end{align*}
 }
+\section{Universal Covering}
 \dfn{Universal Covering}{
 	Let $X$ be a topological space which is connected and locally path-connected. If $p: E \rightarrow X$ is a simply connected covering, then it is called a \textbf{universal covering} of $X$. If the universal covering of $X$ exists, it must be unique up to isomorphism.
 }
@@ -1444,7 +1587,7 @@ If $E$ is simply connected, then for any $e\in E$ we have $\pi(E,e)=[c_e]$ is tr
 	\begin{enumerate}[(i)]
 		\item This covering $p$ is normal if and only if $H\lhd\pi_1\left(X, x_0\right)$.
 		\item  $\mathrm{Aut}_{\mathsf{Cov}_X}(p)\cong\mathrm{N}_{\pi_1\left(X, x_0\right)}(H) / H$.
-In particular, if $p$ is a normal covering, $\mathrm{Aut}_{\mathsf{Cov}_X}(p)\cong \pi_1\left(X, x_0\right) / H$. If $p$ is a universal covering, we have $G(\tilde{X}) \approx \pi_1(X)$.
+In particular, if $p$ is a normal covering, $\mathrm{Aut}_{\mathsf{Cov}_X}(p)\cong \pi_1\left(X, x_0\right) / H$. If $p$ is a universal covering, we have $G(\tilde{X}) \cong \pi_1(X)$.
 	\end{enumerate}
 }
 \dfn{Continuous Group Action}{
