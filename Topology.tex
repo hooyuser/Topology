@@ -827,6 +827,237 @@ we see that compactness is an inherent notion to the topological space and does 
 	\end{itemize}
 \end{proposition}
 
+
+\section{Metric Spaces}
+\subsection{Basic notions}
+\begin{definition}{Metric Space}{metric_space}
+	Given a nonempty set $X$ and a mapping $d:X\times X\to \mathbb{R}$, we say $(X,d)$ is a \textbf{metric space} if $d$ satisfies the following conditions for all $x,y\in X$:
+	\begin{enumerate}
+		\item (identity of indiscernibles): $d(x,y)=0\iff x=y$,
+		\item (symmetry): $d(x,y)=d(y,x)$,
+		\item (triangle inequality): $d(x,y)\le d(x,z)+d(y,z)$.
+	\end{enumerate}	
+\end{definition}
+\begin{proposition}{Properties of Metric Space}{metric_space_properties}
+	Let $(X,d)$ be a metric space.
+	\begin{enumerate}
+		\item $d(x,y)\ge 0,\quad\forall x,y\in X$
+		\item $|d(x,z)-d(y,z)|\le d(x,y)$ for all $x,y,z\in X$.
+		\item $|d(x,y)-d(x',y')|\le d(x,x')+d(y,y')$ for all $x,x',y,y'\in X$.
+	\end{enumerate}
+\end{proposition}
+Metric space can induce a topology on the set $X$ by defining the neighberhood of a point $x$ as 
+\[
+	B_\epsilon(x)=\left\{y\in X\mid d(x,y)<\epsilon \right\}.
+\]
+Furthermore, the following proposition holds.
+
+\begin{proposition}{Hausdorffness of Metric Space}{metric_space_Hausdorff}
+	Metric space is Hausdorff.
+\end{proposition}
+This suggests us to study sequences in metric spaces since limits of sequences in Hausdorff spaces are unique. 
+\begin{definition}{Limit of Sequence}{metric_space_limit}
+	Let $\{x_n\}$ be a sequence in $X$ and $x\in X$. If
+	\[
+		\lim_{n\to\infty}d(x_n,x)=0,
+	\]
+	then $x$ is called the \textbf{limit} of $\{x_n\}$, denoted as $\lim_{x\to\infty}x_n=x$ or $x_n\to x\;(n\to\infty)$.
+\end{definition}
+
+\begin{proposition}{Properties of Convergent Sequences}{properties_of_convergent sequences}
+	Let $\{x_n\}$ be a convergent sequence in $X$.
+	\begin{enumerate}
+		\item the limit of $\{x_n\}$ is unique,
+		\item $\{x_n\}$ is bounded,
+		\item if $x_n\to x$, then any subsequence of $\{x_n\}$ also converges to $x$.
+	\end{enumerate}	
+\end{proposition}
+
+\begin{proposition}{Continuity of Metric}{continuity_of_metric}
+	Given a metric space $(X,d)$, the metric $d:X\times X\to \mathbb{R}$ is continuous, that is,
+	\[
+		x_n\to x,\; y_n\to y\implies d(x_n,y_n)\to d(x,y).
+	\]
+\end{proposition}
+\begin{definition}{$K$-Lipschitz Continuity}{K-Lipschitz_continuity}
+	Let $(X,d_X)$ and $(Y,d_Y)$ be two metric spaces. A map $f:X\to Y$ is called \textbf{$K$-Lipschitz continuous} if
+	\[
+		d_Y(f(x),f(y))\le Kd_X(x,y),\quad\forall x,y\in X.
+	\]
+\end{definition}
+\begin{proposition}{Continuity of Lipschitz Map}{continuity_of_Lipschitz_map}
+	A $K$-Lipschitz continuous map is continuous.
+\end{proposition}
+\begin{definition}{Short Map}{short_map}
+	Let $(X,d_X)$ and $(Y,d_Y)$ be two metric spaces. A map $f:X\to Y$ is called \textbf{short} if it is $1$-Lipschitz continuous, that is,
+	\[
+		d_Y(f(x),f(y))\le d_X(x,y),\quad\forall x,y\in X.
+	\]
+\end{definition}
+\begin{definition}{Isometry}{isometry}
+	Let $(X,d_X)$ and $(Y,d_Y)$ be two metric spaces. A map $f:X\to Y$ is called an \textbf{isometry} if
+	\[
+		d_Y(f(x),f(y))=d_X(x,y),\quad\forall x,y\in X.
+	\]	
+\end{definition}
+\begin{definition}{Category of Metric Spaces}{category_of_metric_spaces}
+	Denote the category of metric spaces by $\mathsf{Met}$. The objects of $\mathsf{Met}$ are metric spaces and the morphisms of $\mathsf{Met}$ are short maps.
+\end{definition}
+\begin{proposition}{Isomorphisms in $\mathsf{Met}$}{isomorphisms_in_Met}
+	The isomorphisms in $\mathsf{Met}$ are precisely bijective isometries.
+\end{proposition}
+\begin{proof}
+	Let $f:X\to Y$ be an isomorphism in $\mathsf{Met}$. Then $f$ is bijective and short. Since $f^{-1}:Y\to X$ is also short, we have
+	\[
+		d_X(x,y)=d_X(f^{-1}(f(x)),f^{-1}(f(y)))\le d_Y(f(x),f(y)),\quad\forall x,y\in X.
+	\]
+	So $f^{-1}$ is an isometry. Conversely, let $f:X\to Y$ be a bijective isometry. Then $f$ is short and $f^{-1}$ is also short. So $f$ is an isomorphism in $\mathsf{Met}$.
+\end{proof}
+\subsection{Completeness of Metric Spaces}
+\begin{definition}{Cauchy Sequence}{cauchy_sequence}
+	Let $\{x_n\}$ be a sequence in metric space $X$. $\{x_n\}$ is called a \textbf{Cauchy sequence} if for all $\epsilon>0$, there exsits $N>0$ such that for all $m,n>N$, $d(x_m,x_n)<\epsilon$.
+\end{definition}
+
+\begin{proposition}{Properties of Cauchy Sequences}{properties_of_Cauchy_sequences}
+	Cauchy sequences in metric spaces satisfie the following properties:
+	\begin{enumerate}
+		\item a convergent sequence is a Cauchy sequence,
+		\item Cauchy sequences are bounded,
+		\item If $\{x_n\}$ is a Cauchy sequence and a subsequence of $\{x_n\}$ converges to $x$, then $\{x_n\}$ also converges to $x$.
+	\end{enumerate}	
+\end{proposition}
+
+\begin{definition}{Complete Metric Space}{complete_metric_space}
+	A metric space is \textbf{complete} if and only if all Cauchy sequences are convergent.
+\end{definition}
+
+\begin{definition}{Pseudometric Space}{pseudometric_space}
+	A \textbf{pseudometric space} $(X, d)$ is a set $X$ together with a non-negative real-valued function $d: X \times X \longrightarrow \mathbb{R}_{\geq 0}$, called a pseudometric, such that for every $x, y, z \in X$,
+	\begin{enumerate}
+		\item $d(x, x)=0$.
+		\item (symmetry): $d(x, y)=d(y, x)$
+		\item (triangle inequality): $d(x, z) \leq d(x, y)+d(y, z)$
+	\end{enumerate}
+\end{definition}
+
+\begin{definition}{Metric Space Induced by a Pseudometric}{metric_space_induced_by_a_pseudometric}
+	Let $(X,d)$ be a pseudometric space. Define an equivalence relation $\sim$ on $X$ as follows: for any $x,y\in X$, $x\sim y$ if and only if $d(x,y)=0$. Denote by $\widehat{X}$ the quotient set $X/\sim$. Define a metric $\hat{d}$ on $\widehat{X}$ as follows: for any $x,y\in X$, define
+	\[
+		d^*([x],[y]):=d(x,y).
+	\]
+\end{definition}
+\begin{proof}
+	We need to check that $d^*$ is well-defined. Suppose $[x]=[x']$ and $[y]=[y']$, then $d(x,x')=0$ and $d(y,y')=0$. By the triangle inequality, we have
+	\begin{align*}
+		|d(x,y)-d(x',y')|\le d(x,x')+d(y,y')=0.
+	\end{align*}
+	So $d(x,y)=d(x',y')$. Thus, $d^*$ is well-defined. 
+	Then we can check that $d^*$ is a metric on $\widehat{X}$:
+	\begin{enumerate}
+		\item $d^*([x],[x])=d(x,x)=0$,
+		\item $d^*([x],[y])=d(x,y)=d(y,x)=d^*([y],[x])$,
+		\item $d^*([x],[z])=d(x,z)\le d(x,y)+d(y,z)=d^*([x],[y])+d^*([y],[z])$.
+	\end{enumerate}
+\end{proof}
+
+\begin{lemma}{}{}
+	Let $(X, d)$ be a metric space. If $S$ is a dense subset of $X$ such that every Cauchy sequence in $S$ converges in $X$, then $X$ is complete.
+\end{lemma}
+\begin{proof}
+	Let $\{x_n\}$ be a Cauchy sequence in $X$. Since $S$ is dense in $X$, for any $n\in\mathbb{N}$, there exsits $y_n\in S$ such that $d(x_n,y_n)<\frac{1}{n}$. Note that
+	\begin{align*}
+		d(y_n,y_m)\le d(y_n,x_n)+d(x_n,x_m)+d(x_m,y_m)<d(x_n,x_m)+\frac{2}{n}+\frac{2}{m}
+	\end{align*}
+	We see $\{y_n\}$ is a Cauchy sequence in $S$ and converges to some $y\in X$. Since $d(x_n,y_n)\to 0$, we have $x_n\to y$.
+\end{proof}
+
+\begin{definition}{Completion of Metric Space}{completion_of_metric_space}
+	We will give both the universal property and explicit construction of the completion of a metric space.\\
+	\textbf{$\bullet$ Universal property}\\
+	Given a metric space $(X,d)$, the \textbf{completion} of $(X,d)$ can be characterized by the following universal property: let $I: \mathsf{ComMet}\to\mathsf{Met}$ be the inclusion functor from the category of complete metric spaces to the category of metric spaces, then the \textbf{completion of $(X,d)$} is the initial object of the comma category $\left(\Delta X\downarrow I\right)$, denoted as $\iota:(X,d)\to\left(\widehat{X},\hat{d}\right)$. That is, for any $Y\in\mathrm{Ob}(\mathsf{ComMet})$ and any morphism $f:X\to I(Y)$, there exsits a unique morphism $\hat{f}:\widehat{X}\to Y$ such that the following diagram commutes:
+	\[
+		\begin{tikzcd}
+			I\left(\widehat{X}\right) \arrow[rr, "I\left(\hat{f}\right)", dashed] &                                        & I(Y) \\
+																			  & X \arrow[lu, "\iota"] \arrow[ru, "f"'] &     
+	\end{tikzcd}
+	\]
+	\textbf{$\bullet$ Explicit construction}\\
+	The existence of the completion of $(X,d)$ can be proved by explicit construction. Denote by $\mathrm{CauSeq}[X]$ the set of all Cauchy sequences in $X$. Define a map
+	\begin{align*}
+		d_c:\mathrm{CauSeq}[X]\times\mathrm{CauSeq}[X]&\longrightarrow\mathbb{R}_{\ge 0}\\
+		\left(\{x_n\},\{y_n\}\right)&\longmapsto\lim_{n\to\infty}d(x_n,y_n).
+	\end{align*}
+	Since 
+	\begin{align*}
+		|d(x_n,y_n)-d(x_m,y_m)|\le d(x_n,x_m)+d(y_n,y_m),
+	\end{align*}
+    we see $d(x_n,y_n)$ is a Cauchy sequence in $\mathbb{R}$, which means the limit $\lim_{n\to\infty}d(x_n,y_n)$ exists. We can check that $d_c$ is a pseudometric on $\mathrm{CauSeq}[X]$:
+	\begin{enumerate}[(i)]
+		\item $d_c(\{x_n\},\{x_n\})=\lim_{n\to\infty}d(x_n,x_n)=0$,
+		\item $d_c(\{x_n\},\{y_n\})=\lim_{n\to\infty}d(x_n,y_n)=\lim_{n\to\infty}d(y_n,x_n)=d_c(\{y_n\},\{x_n\})$,
+		\item $d_c(\{x_n\},\{z_n\})=\lim_{n\to\infty}d(x_n,z_n)\le\lim_{n\to\infty}d(x_n,y_n)+\lim_{n\to\infty}d(y_n,z_n)=d_c(\{x_n\},\{y_n\})+d_c(\{y_n\},\{z_n\})$.
+	\end{enumerate}
+	The pseudometric $d_c$ induces a metric $\hat{d}:=d_c^*$ on $\widehat{X}:=\mathrm{CauSeq}[X]/\sim$
+	\begin{align*}
+		\hat{d}:\widehat{X}\times\widehat{X}&\longrightarrow\mathbb{R}_{\ge 0}\\
+		\left([\left\{x_n\right\}],[\left\{y_n\right\}]\right)&\longmapsto\lim_{n\to\infty}d(x_n,y_n).
+	\end{align*}
+	Define 
+	\begin{align*}
+		\iota:X &\longrightarrow\widehat{X}\\
+		x&\longmapsto[\left\{x,x,x,\cdots\right\}].
+	\end{align*}
+	$\iota$ is an isometry because
+	\[
+		\hat{d}\left(\iota\left(x\right),\iota\left(y\right)\right)=\lim_{k\to\infty}d(x,y)=d(x,y),\quad\forall x,y\in X.
+	\]
+\end{definition}
+\begin{prf} 
+	We can verify that the explicitly constructed map $\iota:(X,d)\to\left(\widehat{X},\hat{d}\right)$ is the completion of $(X,d)$ by checking the universal property. 
+	\begin{itemize}
+		\item We can utilize lemma to show $\widehat{X}$ is complete. Suppose $\left[\left\{x_n\right\}\right]\in \widehat{X}$. Since $\left\{x_n\right\}$ is a Cauchy sequence, there exists a $N>0$ such that for all $n,m>N$, $d(x_m,x_n)<\epsilon$. So whenever $m>N$, we have
+	\[
+		\hat{d}\left(\iota\left(x_m\right),[\left\{x_n\right\}]\right)=\lim_{n\to\infty}d(x_m,x_n)<\epsilon.
+	\]
+	Thus we see there exists a sequence $\left\{\iota(x_n)\right\}$ in $\iota(X)$ such that 
+	\[
+		\lim_{m\to \infty}\hat{d}\left(\iota\left(x_m\right),[\left\{x_n\right\}]\right)\le \epsilon.
+	\]
+	That implies 
+	\[
+		\lim_{m\to \infty}\iota\left(x_m\right)= [\left\{x_n\right\}]
+	\]
+	and accordingly $\iota\left(X\right)$ is dense in $\widehat{X}$.\\
+	To show $\widehat{X}$ is complete, it is sufficient to show every Cauchy sequence in $\iota(X)$ converges in $\widehat{X}$. Suppose $\left\{\iota(x_n)\right\}$ is a Cauchy sequence in $\widehat{X}$. Given that $\iota$ is an isometry, $\left\{x_n\right\}$ must be a Cauchy sequence in $X$. Hence for the same reason as above, we have
+	\[
+		\lim_{m\to \infty}\iota\left(x_m\right)= [\left\{x_n\right\}]\in \widehat{X}.
+	\]
+	Therefore, we show that $\widehat{X}$ is complete.
+	\item Let $Y$ be a complete metric space and $f:X\to I(Y)$ be a morphism in $\mathsf{Met}$. Define a map
+	\begin{align*}
+		\hat{f}:\widehat{X}&\longrightarrow Y\\
+		[\left\{x_n\right\}]&\longmapsto\lim_{n\to\infty}f(x_n)
+	\end{align*}
+	We can check that $\hat{f}$ is well-defined. Suppose $[\left\{x_n\right\}]=[\left\{y_n\right\}]$, then $\lim_{n\to\infty}d(x_n,y_n)=0$. Since $f$ is a short map, we have
+	\begin{align*}
+		d_Y\left(\hat{f}\left([\left\{x_n\right\}]\right),\hat{f}\left([\left\{y_n\right\}]\right)\right)&=d_Y\left(\lim_{n\to\infty}f(x_n),\lim_{n\to\infty}f(y_n)\right)\\
+		&=\lim_{n\to\infty}d_Y(f(x_n),f(y_n))\\
+		&\le \lim_{n\to\infty}d(x_n,y_n)=0,
+	\end{align*}
+	which implies $\hat{f}\left([\left\{x_n\right\}]\right)=\hat{f}\left([\left\{y_n\right\}]\right)$. It is straightforward to check that $\hat{f}$ is a short map. The commutative diagram holds because
+	\begin{align*}
+		\hat{f}\circ\iota(x)&=\hat{f}\left([\left\{x,x,x,\cdots\right\}]\right)\\
+		&=\lim_{n\to\infty}f(x)\\
+		&=f(x).
+	\end{align*}
+	Suppose there exists another short map $g:\widehat{X}\to Y$ such that $g\circ\iota=f$. Then $g$ and $\hat{f}$ coincide on $\iota(X)$, which is dense in $\widehat{X}$. Since $g$ and $\hat{f}$ are continuous, they must coincide on $\widehat{X}$. So $\hat{f}$ is unique.
+	\end{itemize}
+\end{prf}
+
+\begin{proposition}{Subspace of Complete Metric Space is Complete iff Closed}{}
+	Let $(M, d)$ be a complete metric space and $(S, d)$ be a subspace of $(M, d)$. Then $S$ is complete if and only if $S$ is closed.
+\end{proposition}
+
 \chapter{Basic Notions}
 \section{CW Complex}
 A $n$-cell is a $n$-dimensional closed disc
