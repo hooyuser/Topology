@@ -95,6 +95,7 @@
 
 % Start the document
 \begin{document}
+\begin{titlepage}
 \begin{center}
 	~\\
 	\vspace{6em}
@@ -109,15 +110,19 @@
 	\vspace{5in}
 	{\large Latest Update: \today}
 \end{center}
-\newpage
+\end{titlepage}
 
 \tableofcontents
+\thispagestyle{empty}
 % Create a new 1st level heading
 
 \chapter{General Topology}
+\thispagestyle{empty}
+\setcounter{page}{1}
+
 \section{Topological Space}
 \subsection{Axiomatic foundations of topological spaces}
-\dfn{Topological Space}{
+\begin{definition}{Topological Space}{}
 	A \textbf{topological space} is an ordered pair $(X,\tau)$, where $X$ is a set and $\tau\subseteq2^X $ is a collection of subsets of $X$, satisfying the following axioms:
 	\begin{enumerate}[(i)]
 		\item $\varnothing\in \tau$, $X\in \tau$.
@@ -125,23 +130,27 @@
 		\item If $A_i\in\tau\;(i=1,2,\cdots,n)$, then $\bigcap\limits_{i=1}^nA_i\in \tau$.
 	\end{enumerate}
 	\noindent The elements of $\tau$ are called \textbf{open sets} and the collection $\tau$ is called a \textbf{topology} on $X$.
-}
+\end{definition}
+
 
 \noindent In this chapter we always assume that $(X,\tau)$ is a topological space.
 
-\dfn{Continuous Map}{
+\begin{definition}{Continuous Map}{}
 	Let $(X,\tau_X)$ and $(Y,\tau_Y)$ be topological spaces. A map $f:X\to Y$ is \textbf{continuous} if for any open set $U\in\tau_Y$, $f^{-1}(U)\in\tau_X$.
-}
+\end{definition}
 
-\dfn{Discrete Topology}{
+
+\begin{definition}{Discrete Topology}{}
 	Let $X$ be a set. The \textbf{discrete topology} on $X$ is $2^X$.
-}
+\end{definition}
+
 The discrete topology is the finest possible topology on the set $X$.
 
-\dfn{Closed Set}{
+\begin{definition}{Closed Set}{}
 	$A\in 2^X$ is a \textbf{closed set} if and only if $A^{\complement}$ is an open set.
-}
-\dfn{Closed Set Axioms}{
+\end{definition}
+
+\begin{definition}{Closed Set Axioms}{}
 	Assume that $\mathcal{C}\subseteq2^X $ is a collection of subsets of $X$. $\mathcal{C}$ is a topology via closed sets on $X$ if and only if
 	\begin{enumerate}[(i)]
 		\item $\varnothing\in \mathcal{C}$, $X\in \mathcal{C}$.
@@ -149,9 +158,10 @@ The discrete topology is the finest possible topology on the set $X$.
 		\item If $A_i\in\mathcal{C}\;(i=1,2,\cdots,n)$, then $\bigcup\limits_{i=1}^nA_i\in \mathcal{C}$.
 	\end{enumerate}
 	We can define open set via closed set: $A\in 2^X$ is a open set if and only if $A^{\complement}$ is an close set.
-}
+\end{definition}
 
-\pf{
+
+\begin{prf}
 	Topology $\tau$ via open sets $\rightarrow$ topology $\mathcal{C}$ via closed sets.\\
 	We can check the closed sets induced by $\tau$ satisfy the closed set axioms:
 	\begin{enumerate}[(i)]
@@ -159,13 +169,15 @@ The discrete topology is the finest possible topology on the set $X$.
 		\item $A_i\in\mathcal{C}\;(i\in I)\implies A_i^{\complement}\in\tau\;(i\in I)\implies\bigcup\limits_{i\in I}A_i^{\complement}\in \tau\implies \left(\bigcap\limits_{i\in I}A_i\right)^{\complement}\in \tau\implies\bigcap\limits_{i\in I}A_i\in\mathcal{C}$.
 		\item $A_i\in\mathcal{C}\;(i=1,\cdots,n)\implies A_i^{\complement}\in\tau\;(i=1,\cdots,n)\implies\bigcap\limits_{i=1}^nA_i^{\complement}\in \tau\implies \left(\bigcup\limits_{i=1}^nA_i\right)^{\complement}\in \tau\implies\bigcup\limits_{i=1}^nA_i\in\mathcal{C}$.
 	\end{enumerate}
-}
+\end{prf}
 
-\dfn{Neighborhood}{
+
+\begin{definition}{Neighborhood}{}
 	Given a point $x\in X$, a set $N\subseteq X$ is the \textbf{neighborhood} of $x$ if there exists an open set $O\in\tau$ such that $x\in O\subseteq N$. The collection of all neighborhoods of $x$ is denoted by $\mathcal{N}(x)$.
-}
+\end{definition}
 
-\dfn{Neighborhood Axiom}{
+
+\begin{definition}{Neighborhood Axiom}{}
 	Suppose that $x\in X$. $\mathcal{N}(x)$ is called a \textbf{neighborhood system} for $x$ if and only if
 	\begin{enumerate}[(i)] 
 		\item $N\in\mathcal{N}(x)\implies x\in N$
@@ -174,8 +186,9 @@ The discrete topology is the finest possible topology on the set $X$.
 		\item $N\in\mathcal{N}(x)\implies \exists M\in\mathcal{N}(x),\forall y\in M,N\in\mathcal{N}(y)\hspace{1pt}$
 	\end{enumerate}
 	$\{\mathcal{N}(x)\}_{x\in X}$ is a topology via neighborhoods on $X$. We can define open set via neighborhoods: $A\in 2^X$ is a open set if and only if for any $a\in A$, $A\in\mathcal{N}(a)$.
-}
-\pf{
+\end{definition}
+
+\begin{prf}
 	Topology $\tau$ via open sets $\rightarrow$ topology $\{\mathcal{N}(x)\}_{x\in X}$ via neighborhoods.\\
 	We can check the neighborhoods induced by $\tau$ satisfy the neighborhood axioms:
 	\begin{enumerate}[(i)]
@@ -188,9 +201,10 @@ The discrete topology is the finest possible topology on the set $X$.
 		      \]
 		      We affirm that $O$ is the set $M$ that we are looking for.
 	\end{enumerate}
-}
+\end{prf}
 
-\dfn{Filter}{
+
+\begin{definition}{Filter}{}
 	A subset $F$ of a poset $(P,\le)$ is called a \textbf{filter} if it is upward-closed and downward-directed; that is:
 	\begin{enumerate}[(i)]
 		\item (Nontriviality) $F\ne \varnothing$.
@@ -198,60 +212,68 @@ The discrete topology is the finest possible topology on the set $X$.
 		\item (Downward-directed) If $A \in F$ and $B \in F$, then there exists $C \in F$ such that $C \le A$ and $C \le B$.
 	\end{enumerate}
 	If $F$ is a filter and $F \ne P$, then $F$ is said to be a \textbf{proper filter}. 
-}
+\end{definition}
 
-\dfn{Filter on a Set}{
+
+\begin{definition}{Filter on a Set}{}
 	Let $X$ be a set. A \textbf{filter on $X$} is a proper filter of $(2^X,\subseteq)$. Writing explicitly, a nonempty collection $\mathcal{F}\subseteq 2^X$ is a filter on $X$ if
 	\begin{enumerate}[(i)]
 		\item $\varnothing\notin\mathcal{F}$.
 		\item $A\in\mathcal{F}$ and $A\subseteq B\subseteq X\implies B\in\mathcal{F}$.
 		\item $A,B\in\mathcal{F}\implies A\cap B\in\mathcal{F}$.
 	\end{enumerate}
-}
+\end{definition}
+
 Note that (iii) is equivalent to: $A,B\in\mathcal{F}\implies \exists C\in\mathcal{F},\ C\subseteq A\cap B$, given the upward-closed condition (ii).
 
 We can see that for any $x\in X$, neighborhood system $\mathcal{N}(x)$ is a filter on $X$, called the \textbf{neighborhood filter} of $x$.
 
-\dfn{Filter Base}{
+\begin{definition}{Filter Base}{}
 	Let $X$ be a set. A \textbf{filter base on $X$} is a nonempty collection $\mathcal{B}\subseteq 2^X$ such that
 	\begin{enumerate}[(i)]
 		\item $\varnothing\notin\mathcal{B}$.
 		\item $A,B\in\mathcal{B}\implies \exists C\in\mathcal{B},\ C\subseteq A\cap B$.
 	\end{enumerate}
-}
-\dfn{Filter Generated by a Filter Base}{
+\end{definition}
+
+\begin{definition}{Filter Generated by a Filter Base}{}
 	Let $X$ be a set. Given a filter base $\mathcal{B}$ on $X$, the \textbf{filter generated by $\mathcal{B}$} is the collection
 	\[
 		\mathcal{F}=\{A\subseteq X\mid \exists B\in\mathcal{B},\ B\subseteq A\}.
 	\]
 	If a filter base $\mathcal{B}$ generates a filter $\mathcal{F}$, we say that $\mathcal{B}$ is a base of $\mathcal{F}$.
-}
-\dfn{Neighborhood Base}{
+\end{definition}
+
+\begin{definition}{Neighborhood Base}{}
 	Let $X$ be a topological space. A \textbf{neighborhood base} for a point $x\in X$ is a base of the neighborhood filter $\mathcal{N}(x)$. Equivalently, $\mathcal{B}\subseteq\mathcal{N}(x)$ is a neighborhood base for $x$ if and only if for any $N\in\mathcal{N}(x)$, there exists $B\in\mathcal{B}$ such that $B\subseteq N$.
-}
-\prop{}{
+\end{definition}
+
+\begin{proposition}{}{}
 	The collection of all open neighbourhoods at a point forms a neighbourhood basis at that point.
-}
-\dfn{Sequential Filter Base}{
+\end{proposition}
+
+\begin{definition}{Sequential Filter Base}{}
 	Let $X$ be a set. A \textbf{sequential filter base on $X$} is a nonempty collection $\mathcal{B}\subseteq 2^X$ such that
 	\begin{enumerate}[(i)]
 		\item $\varnothing\notin\mathcal{B}$.
 		\item $A,B\in\mathcal{B}\implies \exists C\in\mathcal{B},\ C\subseteq A\cap B$.
 		\item $A\in\mathcal{B}\implies \exists B\in\mathcal{B},\ B\subseteq A$.
 	\end{enumerate}
-}
-\dfn{Limit Point}{
+\end{definition}
+
+\begin{definition}{Limit Point}{}
 	Suppose that $A$ is a subset of $X$. A point $x\in X$ is a \textbf{limit point} of $A$, if every neighbourhood of $x$ contains at least one point of $A$ different from $x$ itself,
 	or alternatively, if for any open set $O$ containing $x$,
 	\[
 		O\cap(A-\{x\})\ne\varnothing.
 	\]
 	The set of all limit points of $A$ is said to be the \textbf{derived set} of $A$, denoted by $A'$.
-}
+\end{definition}
 
 
 
-\prop{}{
+
+\begin{proposition}{}{}
 	Suppose that $A$ and $B$ are subsets of $X$.
 	\begin{enumerate}[(i)]
 		\item $\varnothing'=\varnothing$
@@ -260,19 +282,22 @@ We can see that for any $x\in X$, neighborhood system $\mathcal{N}(x)$ is a filt
 		\item $A'' \subseteq A' \cup A $
 		\item $a \in A' \Longrightarrow a \in(A-\{a\})' $
 	\end{enumerate}
-}
-\pf{~\\ \vspace{-1em}
+\end{proposition}
+
+\begin{prf}~\\ \vspace{-1em}
 	\begin{enumerate}
 		\item For any point $x\in X$ and for any neighborhood $N\in\mathcal{N}(x)$, we have $N\cap(\varnothing-\{x\})=\varnothing$. It implies that empty set has no limit points.
 		\item Omitted.
 	\end{enumerate}
-}
+\end{prf}
 
-\dfn{Closure}{
+
+\begin{definition}{Closure}{}
 	Suppose that $A$ is a subset of $X$. The \textbf{closure} of $A$ is the smallest closed set containing $A$, denoted by $\overline{A}$.
-}
+\end{definition}
 
-\prop{Equivalent Definitions of Closure}{
+
+\begin{proposition}{Equivalent Definitions of Closure}{}
 	The following propositions are equivalent:
 	\begin{enumerate}[(i)] 
 		\item $S$ is the closure of $A$.
@@ -280,14 +305,16 @@ We can see that for any $x\in X$, neighborhood system $\mathcal{N}(x)$ is a filt
 		\item $S=A\cup A'$.
 		\item $S=\{x\in X: \forall N\in\mathcal{N}(x),N\cap A\ne\varnothing\}$.
 	\end{enumerate}
-}
+\end{proposition}
 
-\pf{~\\ \vspace{-1em}
+
+\begin{prf}~\\ \vspace{-1em}
 	\begin{enumerate}[(i)] 
 		\item Omitted.
 	\end{enumerate}
-}
-\prop{}{
+\end{prf}
+
+\begin{proposition}{}{}
 	Suppose that $A$ and $B$ are subsets of $X$.
 	\begin{enumerate}[(i)] 
 		\item $\overline{\varnothing}=\varnothing$.
@@ -295,26 +322,30 @@ We can see that for any $x\in X$, neighborhood system $\mathcal{N}(x)$ is a filt
 		\item $A\subset\overline{A}$.
 		\item $\overline{\left(\overline{A}\right)}=\overline{A}$.
 	\end{enumerate}
-}
+\end{proposition}
 
-\pf{~\\ \vspace{-1em}
+
+\begin{prf}~\\ \vspace{-1em}
 	\begin{enumerate}[(i)] 
 		\item Omitted.
 	\end{enumerate}
-}
+\end{prf}
 
-\dfn{Frontier}{
+
+\begin{definition}{Frontier}{}
 	Suppose that $A$ is a subset of $X$. The \textbf{frontier} of $A$ denoted by $\partial A$ is defined as
 	\[
 		\partial A=\overline{A}\cap\overline{A^{\complement}}.
 	\] A point $x$ is called an \textbf{boundary point} of $A$ if $x\in \partial A$.
-}
+\end{definition}
 
-\dfn{Interior}{
+
+\begin{definition}{Interior}{}
 	Suppose that $A$ is a subset of $X$. The \textbf{interior} of $A$ is the largest open set contained by $A$, denoted by $A^{\circ}$. A point $x$ is called an \textbf{interior point} of $A$ if $x\in A^{\circ}$.
-}
+\end{definition}
 
-\prop{}{
+
+\begin{proposition}{}{}
 	The following propositions are equivalent:
 	\begin{enumerate}[(i)] 
 		\item $S$ is the interior of $A$.
@@ -322,13 +353,15 @@ We can see that for any $x\in X$, neighborhood system $\mathcal{N}(x)$ is a filt
 		\item $S=A-\partial A$.
 		\item $S=\{x\in X:\exists N\in\mathcal{N}(x),N_x\subseteq A\}$.
 	\end{enumerate}
-}
-\pf{~\\ \vspace{-1em}
+\end{proposition}
+
+\begin{prf}~\\ \vspace{-1em}
 	\begin{enumerate}[(i)] 
 		\item Omitted.
 	\end{enumerate}
-}
-\prop{}{
+\end{prf}
+
+\begin{proposition}{}{}
 	Suppose that $A$ and $B$ are subsets of $X$.
 	\begin{enumerate}[(i)] 
 		\item $\varnothing^{\circ}=\varnothing$.
@@ -336,29 +369,33 @@ We can see that for any $x\in X$, neighborhood system $\mathcal{N}(x)$ is a filt
 		\item $A\supset A^{\circ}$.
 		\item $\left(A^{\circ}\right)^{\circ}=A^{\circ}$.
 	\end{enumerate}
-}
+\end{proposition}
 
-\pf{~\\ \vspace{-1em}
+
+\begin{prf}~\\ \vspace{-1em}
 	\begin{enumerate}[(i)] 
 		\item Omitted.
 	\end{enumerate}
-}
+\end{prf}
 
-\prop{}{
+
+\begin{proposition}{}{}
 	The following propositions are equivalent:
 	\begin{enumerate}[(i)] 
 		\item $F$ is a closed set.
 		\item $F'\subseteq F$.
 		\item $\overline{F}=F$.
 	\end{enumerate}
-}
-\pf{~\\ \vspace{-1em}
+\end{proposition}
+
+\begin{prf}~\\ \vspace{-1em}
 	\begin{enumerate}[(i)] 
 		\item Omitted.
 	\end{enumerate}
-}
+\end{prf}
 
-\prop{}{
+
+\begin{proposition}{}{}
 	The following propositions are equivalent:
 	\begin{enumerate}[(i)] 
 		\item $F$ is an open set.
@@ -366,43 +403,50 @@ We can see that for any $x\in X$, neighborhood system $\mathcal{N}(x)$ is a filt
 		\item $F^\circ=F$.
 		\item $\forall x\in F,F\in \mathcal{N}(x)$.
 	\end{enumerate}
-}
-\pf{~\\ \vspace{-1em}
+\end{proposition}
+
+\begin{prf}~\\ \vspace{-1em}
 	\begin{enumerate}[(i)] 
 		\item Omitted.
 	\end{enumerate}
-}
+\end{prf}
 
-\prop{}{
+
+\begin{proposition}{}{}
 	Suppose that $A$ is a subset of $X$.
 	\begin{enumerate}[(i)] 
 		\item $(\overline{A})^{\complement}=(A^{\complement})^{\circ}$
 		\item $(A^{\circ})^{\complement}=\overline{A^{\complement}}$
 	\end{enumerate}
-}
-\pf{~\\ \vspace{-1em}
+\end{proposition}
+
+\begin{prf}~\\ \vspace{-1em}
 	\begin{enumerate}[(i)] 
 		\item Omitted.
 	\end{enumerate}
-}
+\end{prf}
 
-\dfn{Dense Set}{
+
+\begin{definition}{Dense Set}{}
 	A subset $A$ of a topological space $X$ is called dense in $X$ if  $\overline{A}=X$.
-}
-\prop{}{
+\end{definition}
+
+\begin{proposition}{}{}
 	The following propositions are equivalent:
 	\begin{enumerate}[(i)] 
 		\item $A$ is dense in $X$.
 		\item For any point $x \in X$ and for any neighborhood $N\in\mathcal{N}(x)$, $N\cap A\ne \varnothing$.
 	\end{enumerate}
-}
-\pf{~\\ \vspace{-1em}
+\end{proposition}
+
+\begin{prf}~\\ \vspace{-1em}
 	\begin{enumerate}[(i)] 
 		\item Omitted.
 	\end{enumerate}
-}
+\end{prf}
 
-\dfn{Generated Topology}{
+
+\begin{definition}{Generated Topology}{}
 	Suppose that $X$ is a set and $\mathcal{S}\subseteq 2^X$ is a collection of subsets of $X$. The \textbf{topology generated by $\mathcal{B}$} is denoted by $\tau(\mathcal{S})$ and has the following equivalent definitions:
 	\begin{enumerate}[(i)] 
 		\item $\tau(\mathcal{S})$ is the smallest topology on $X$ containing $\mathcal{S}$.
@@ -416,31 +460,35 @@ We can see that for any $x\in X$, neighborhood system $\mathcal{N}(x)$ is a filt
 			\tau(\mathcal{S})=\left\{A\in 2^X \midv A=\bigcup_{i\in I} B_i,B_i\in\mathcal{B}\right\}.
 		\]
 	\end{enumerate}
-}
+\end{definition}
 
-\dfn{Base}{
+
+\begin{definition}{Base}{}
 	Suppose $(X,\tau)$ is a topological space and $\mathcal{B}\subseteq \tau $ is a collection of open sets of $X$. $\mathcal{B}$ is a \textbf{base} for $(X,\tau)$ if every open set of the topology can be represented as the union of some $B_i$ in $\mathcal{B}$, namely
 	\[
 		\tau=\left\{A\in 2^X:A=\bigcup_{i\in I} B_i,B_i\in\mathcal{B}\right\}.
 	\]
-}
-\prop{}{
+\end{definition}
+
+\begin{proposition}{}{}
 	Suppose $(X,\tau)$ is a topological space and $\mathcal{B}\subseteq \tau $ is a collection of open sets of $X$. The following propositions are equivalent:
 	\begin{enumerate}[(i)] 
 		\item $\mathcal{B}$ is a base for $X$.
 		\item $\forall U\in \tau$, $\forall x\in U$, $\exists B\in\mathcal{B}$ such that $x\in B\subseteq U$. 
 	\end{enumerate}
-}
+\end{proposition}
 
-\prop{}{
+
+\begin{proposition}{}{}
 	If $\mathcal{B}$ is a base for $(X,\tau)$, it satisfies the following properties:
 \begin{enumerate}[(i)] 
 	\item $\mathcal{B}$ covers $X$,
 	\item $\forall B_1,B_2\in\mathcal{B}$, $\forall x\in B_1\cap B_2$, $\exists B_3\in \mathcal{B}$ such that $x\in B_3\subseteq B_1\cap B_2$.
 \end{enumerate}
-}
+\end{proposition}
 
-\prop{}{
+
+\begin{proposition}{}{}
 	Suppose $X$ is a set and $\mathcal{B}\subseteq 2^X $ is a collection of subsets of $X$. If
 \begin{enumerate}[(i)] 
 	\item $\mathcal{B}$ covers $X$,
@@ -451,54 +499,65 @@ then there exists unique topology
 	\tau=\left\{A\in 2^X:A=\bigcup_{i\in I} B_i,B_i\in\mathcal{B}\right\}
 \]
 on $X$ such that $\mathcal{B}$ is a base for $(X,\tau)$.
-}
+\end{proposition}
 
-\prop{Characterisation Of Continuity Via Subbasis}{
+
+\begin{proposition}{Characterisation Of Continuity Via Subbasis}{}
 	Let $f: X \rightarrow Y$ be a function between topological spaces $X, Y$, and let $\mathcal{B}$ be a subbasis of the topology of $Y$. If $f^{-1}(V)$ is open in $X$ for all $V \in \mathcal{B}$, then $f$ is continuous.
-}
+\end{proposition}
 
-\dfn{Separable Space}{
+
+\begin{definition}{Separable Space}{}
 	A topological space is called \textbf{separable} if it contains a countable, dense subset.
-}
+\end{definition}
 
-\dfn{First-Countable Space}{
+
+\begin{definition}{First-Countable Space}{}
 	A \textbf{first-countable} space is a topological space such that for any point $x$ in the space, there exists a countable neighbourhood base at $x$.
-}
-\ex{Metric Space is First-Countable}{
+\end{definition}
+
+\begin{example}{Metric Space is First-Countable}{}
 	Let $(X,d)$ be a metric space. For any $x\in X$, we can choose a countable neighbourhood base $\{B_{1/n}(x)\}_{n=1}^\infty$ at $x$.
-}
-\dfn{Second-Countable Space}{
+\end{example}
+
+\begin{definition}{Second-Countable Space}{}
 	A \textbf{second-countable} space, also called a completely separable space, is a topological space whose topology has a countable base.
-}
+\end{definition}
+
 
 We have several separation axioms in topological spaces denoted by $\mathrm{T}_r$, $r=0,1,2,2\frac{1}{2},3,3\frac{1}{2},4,5,6$.
-\dfn{Hausdorff Space/$\mathrm{T}_2$ Space}{
+\begin{definition}{Hausdorff Space/$\mathrm{T}_2$ Space}{}
 	A topological space $X$ is a \textbf{Hausdorff space}, separated space or $\mathrm{T}_2$ space if for any two distinct points $x,y\in X$ there exists a neighbourhood $U$ of $x$ and a neighbourhood $V$ of $y$ such that $U\cap V=\varnothing$.
-}
-\prop{Equivalent Definitions of Hausdorff Space}{
+\end{definition}
+
+\begin{proposition}{Equivalent Definitions of Hausdorff Space}{}
 	For a topological space $X$, the following are equivalent:
 	\begin{enumerate}[(i)]
 		\item $X$ is a Hausdorff space.
 		\item Limits of filters on $X$ are unique.
 	\end{enumerate}
-} 
-\prop{Properties of Hausdorff Space}{
+\end{proposition}
+ 
+\begin{proposition}{Properties of Hausdorff Space}{}
 	Let $X$ be a Hausdorff space. Then
 	\begin{enumerate}[(i)]
 		\item Each compact subset of $X$ is closed.
 		\item If $(x_i)_{i=1}^{\infty}$ is a convergent sequence in $X$, the limit of $(x_i)_{i=1}^{\infty}$ is unique.
 		\item Subspaces and products of Hausdorff spaces are Hausdorff.
 	\end{enumerate}
-}
-\dfn{Normal Space/$\mathrm{T}_4$ Space}{
+\end{proposition}
+
+\begin{definition}{Normal Space/$\mathrm{T}_4$ Space}{}
 	A topological space $X$ is a \textbf{normal space} or $\mathrm{T}_4$ space if, given any disjoint closed sets $E$ and $F$ in $X$, there are neighbourhoods $U$ of $E$ and $V$ of $F$ such that $U\cap V=\varnothing$.
-}
+\end{definition}
+
 
 A subset $K$ of a topological space $X$ is said to be compact if it is compact as a subspace (in the subspace topology).
-\dfn{Local Homeomorphism}{
+\begin{definition}{Local Homeomorphism}{}
 	A map $f:X\to Y$ is a \textbf{local homeomorphism} if for any $x\in X$, there exists a neighbourhood $U$ of $x$ such that $f(U)$ is open in $Y$ and $f|_U:U\to f(U)$ is a homeomorphism.
-}
-\prop{Local Homeomorphism Transfers Local Properties}{
+\end{definition}
+
+\begin{proposition}{Local Homeomorphism Transfers Local Properties}{}
 	A local homeomorphism $f: X \rightarrow Y$ transfers ``local" topological properties in both directions:
 	\begin{itemize}
 		\item $X$ is locally connected if and only if $f(X)$ is;
@@ -506,26 +565,30 @@ A subset $K$ of a topological space $X$ is said to be compact if it is compact a
 		\item  $X$ is locally compact if and only if $f(X)$ is;
 		\item  $X$ is first-countable if and only if $f(X)$ is.
 	\end{itemize}
-}
+\end{proposition}
+
 \section{Basic Construction}
 \subsection{Initial Topology and Final Topology}
-\dfn{Final Topology}{
+\begin{definition}{Final Topology}{}
 	Let $\mathsf{J}$ be a discrete category and $F:\mathsf{J}\to\mathsf{Set}$ be a functor. 
-}
+\end{definition}
+
 \subsection{Subspace Topology}
-\dfn{Subspace Topology}{
+\begin{definition}{Subspace Topology}{}
 	Let $(X,\tau)$ be a topological space and $Y$ be a subset of $X$. Then
 	\[
 		\tau_Y:=\{Y\cap U\mid U\in \tau\}.
 	\]
 	is said to be a \textbf{subspace topology} of $(X,\tau)$.
-}
+\end{definition}
+
 $(Y,\tau_Y)$ is a topological space. Moreover, $(Y,\tau_Y)$ is a subobject of $(X,\tau)$ in $\Top$.
 
-\prop{Inculsion is Continuous}{
+\begin{proposition}{Inculsion is Continuous}{}
 	Let $(X,\tau)$ be a topological space and $A$ be a subset of $X$. The subspace topology $\tau_A$ is the coarsest topology on $A$ such that the inclusion map $i:A\to X$ is continuous.
-}
-\pf{
+\end{proposition}
+
+\begin{prf}
 	For any $U\in \tau$, we have
 	\[
 		i^{-1}(U)=U\cap A\in \tau_A,
@@ -535,46 +598,52 @@ $(Y,\tau_Y)$ is a topological space. Moreover, $(Y,\tau_Y)$ is a subobject of $(
 		i^{-1}(U)=U\cap A\in \tau',
 	\]
 	which implies $\tau_A\subseteq \tau'$.
-}
+\end{prf}
 
-\prop{Continuous Map onto Image}{
+
+\begin{proposition}{Continuous Map onto Image}{}
 	If $f:X\to Y$ is a continuous map and $f(X)$ is endowed with the subspace topology, then $g:X\to f(X)$ is a continous map. 
-}
-\pf{
+\end{proposition}
+
+\begin{prf}
 	For any $U\in \tau_{f(X)}$, there exists $V\in \tau$ such that $U=V\cap f(X)$. Since $f$ is continuous, we have
 	\[
 		g^{-1}(U)=g^{-1}\left(V\cap f(X)\right)=f^{-1}(V)\in \tau,
 	\]
 	which implies $g$ is continuous.
-}
+\end{prf}
 
 
-\prop{Subspace of Subspace is Subspace}{
+
+\begin{proposition}{Subspace of Subspace is Subspace}{}
 	Let $(X, \tau)$ be a topological space. Let $K \subseteq Y \subseteq X$ and $\tau_Y$ be the subspace topology on $Y$. Then the subspace topology on $K$ induced by $\tau$ equals the subspace topology on $K$ induced by $\tau_H$.
-}
+\end{proposition}
+
 \subsection{Quotient Topology}
-\dfn{Quotient Space}{
+\begin{definition}{Quotient Space}{}
 	Let $(X,\tau)$ be a topological space and $\sim$ be a equivalence relation on $X$. Let $\pi:X\to X/\sim$ be the projection.
 	The \textbf{quotient space} of $X$ is the set $X/\sim$ equiped with the following topology
 	\[
 		\tau_\sim:=\{A\in 2^{X/\sim}\mid \pi^{-1}(A)\in \tau\},
 	\]
 	which is called \textbf{quotient topology}.
-}
+\end{definition}
+
 
 It is easy to check that $\pi$ is a continuous surjection from $(X,\tau)$ to $(X/\sim\,,\tau_\sim)$.
 
-\prop{}{
+\begin{proposition}{}{}
 	For any topological space $(Y,\sigma)$ and any continuous mapping $f:X\to Y$ such that $a\sim b$ implies $f(a) = f(b)$ for all $a,b \in X$, there exists a unique continuous mapping $\bar{f}:X/\sim\;\to Y$ such that the following diagram commutes.
 
 	\[\xymatrix{
 		X\ar[r]^{f\quad}\ar[d]_{\pi}  &Y\\
 		X/\sim\ar@{-->}[ru]_{\exists!\bar{f}}&
 		}\]
-}
+\end{proposition}
 
 
-\pf{
+
+\begin{prf}
 	Define
 	\begin{align*}
 		\bar{f}:X/\sim & \longrightarrow Y, \\
@@ -592,31 +661,34 @@ It is easy to check that $\pi$ is a continuous surjection from $(X,\tau)$ to $(X
 	\[
 		g([x])=g(\pi(x))=f(x)\implies g=\bar{f}.
 	\]
-}
+\end{prf}
+
 
 
 \subsection{Product Topology}
-\dfn{Product Topology}{
+\begin{definition}{Product Topology}{}
 	Let $\left\{(X_\alpha,\tau_\alpha)\right\}_{\alpha\in I}$ be a collection of topological spaces. Let $X=\prod_{\alpha\in I}X_\alpha$ and $\pi_\alpha:X\to X_\alpha$ be the projections. The \textbf{product} of $\left\{(X_\alpha,\tau_\alpha)\right\}_{\alpha\in I}$ is the set $X$ equiped with the following topology
 	\[
 		\tau:=\left\{\prod_{\alpha\in I}U_\alpha\mid U_\alpha\in \tau_\alpha\text{ for any }\alpha\in I\right\},
 	\]
 	which is called \textbf{product topology}. 
-}
+\end{definition}
+
 
 \subsection{Disjoint Union Topology}
-\dfn{Disjoint Union Topology}{
+\begin{definition}{Disjoint Union Topology}{}
 	Let $\left\{(X_\alpha,\tau_\alpha)\right\}_{\alpha\in I}$ be a collection of topological spaces. Let $X=\sqcup_{\alpha\in I}X_\alpha$ and $i_\alpha:X_\alpha\to X$ be the inclusions. The \textbf{disjoint union} of $\left\{(X_\alpha,\tau_\alpha)\right\}_{\alpha\in I}$ is the set $X$ equiped with the following topology
 	\[
 		\tau:=\left\{U\in 2^{X}\mid i_{\alpha}^{-1}(U)\in \tau_\alpha\text{ for any }\alpha\in I\right\},
 	\]
 	which is called \textbf{disjoint union topology}. 
-}
+\end{definition}
+
 
 \subsection{Pushout}
 
 
-\dfn{Wedge Sum}{
+\begin{definition}{Wedge Sum}{}
 	Let $X$ and $Y$ be topological spaces. The \textbf{smash product} of $X$ and $Y$ is the following pushout in $\Top$
 	\[\xymatrix{
 	\{*\}\ar[r]^{c_y}\ar[d]_{c_x}  &Y\ar[d]_{}\\
@@ -629,25 +701,30 @@ It is easy to check that $\pi$ is a continuous surjection from $(X,\tau)$ to $(X
 		\{*\} \arrow[r] \& \bigvee\limits_{\alpha\in I} X_\alpha \arrow[ul, phantom, "\ulcorner", very near start] 
 	\end{tikzcd}
 	\]
-}
+\end{definition}
+
 
 
 \section{Connectedness}
-\dfn{Connected Topological Space}{
+\begin{definition}{Connected Topological Space}{}
 	A topological space $X$ is \textbf{connected} if it is not the union of two disjoint nonempty open sets.
-}
-\dfn{Locally Connected Topological Space}{
-	A space $X$ is called \textbf{locally connected at $x\in X$} if every neighborhood of $x$ contains a connected open neighborhood of $x$, that is, if the point $x$ has a neighborhood base consisting of connected open sets. A \textbf{locally connected space} is a topological space that is locally connected at each of its points.
-}
-Local connectedness does not imply connectedness, e.g. two disjoint open intervals in $\mathbb {R}$ for example; and connectedness does not imply local connectedness, e.g. the topologist's sine curve $$\left\{\left(x, \sin \frac{1}{x}\right): x \in(0,1]\right\} \cup\{(0,0)\}.$$
-\dfn{Path-Connected Topological Space}{
-	A topological space $X$ is \textbf{path-connected} if for every $x,y\in X$, there is a continuous function $f:[0,1]\to X$ such that $f(0)=x$ and $f(1)=y$.
-}
-\dfn{Locally Path-Connected Topological Space}{
-	A space $X$ is called \textbf{locally path-connected at $x\in X$} if every neighborhood of $x$ contains a path-connected open neighborhood of $x$, that is, if the point $x$ has a neighborhood base consisting of path-connected open sets. A \textbf{locally path-connected space} is a topological space that is locally path-connected at each of its points.
-}
+\end{definition}
 
-\prop{}{
+\begin{definition}{Locally Connected Topological Space}{}
+	A space $X$ is called \textbf{locally connected at $x\in X$} if every neighborhood of $x$ contains a connected open neighborhood of $x$, that is, if the point $x$ has a neighborhood base consisting of connected open sets. A \textbf{locally connected space} is a topological space that is locally connected at each of its points.
+\end{definition}
+
+Local connectedness does not imply connectedness, e.g. two disjoint open intervals in $\mathbb {R}$ for example; and connectedness does not imply local connectedness, e.g. the topologist's sine curve $$\left\{\left(x, \sin \frac{1}{x}\right): x \in(0,1]\right\} \cup\{(0,0)\}.$$
+\begin{definition}{Path-Connected Topological Space}{}
+	A topological space $X$ is \textbf{path-connected} if for every $x,y\in X$, there is a continuous function $f:[0,1]\to X$ such that $f(0)=x$ and $f(1)=y$.
+\end{definition}
+
+\begin{definition}{Locally Path-Connected Topological Space}{}
+	A space $X$ is called \textbf{locally path-connected at $x\in X$} if every neighborhood of $x$ contains a path-connected open neighborhood of $x$, that is, if the point $x$ has a neighborhood base consisting of path-connected open sets. A \textbf{locally path-connected space} is a topological space that is locally path-connected at each of its points.
+\end{definition}
+
+
+\begin{proposition}{}{}
 	Here are some propositions about connectedness.
 	\begin{itemize}
 		\item Continuous image of a connected space is connected. 
@@ -658,10 +735,11 @@ Local connectedness does not imply connectedness, e.g. two disjoint open interva
 		\item Every manifold is locally path-connected.
 	\end{itemize}
 	
-}
+\end{proposition}
+
 
 \section{Compactness}
-\dfn{Compact Topological Space}{
+\begin{definition}{Compact Topological Space}{}
 	Formally, a topological space $X$ is called \textbf{compact} if each of its open covers has a finite subcover. That is, $X$ is compact if for every collection $\mathcal{C}$ of open subsets of $X$ such that
 	\[
 		X=\bigcup_{C \in \mathcal{C}} C
@@ -670,11 +748,24 @@ Local connectedness does not imply connectedness, e.g. two disjoint open interva
 	\[
 		X=\bigcup_{F \in \mathcal{F}} F
 	\]
-}
-\dfn{Compact Subset}{
+\end{definition}
+
+\begin{definition}{Compact Subset}{}
 	A subset $A$ of a topological space $X$ is called \textbf{compact} if it is compact as a subspace in the subspace topology.
-}
-\prop{Sufficient Condition for Compactness}{
+\end{definition}
+
+
+\begin{lemma}{}{}
+	Let $X$ be a topological space and $S \subseteq T \subseteq X$. Regard $T$ as a topological space with the subspace topology induced by $X$. Then $S$ is a compact subset of $T$ if and only if $S$ is a compact subset of $X$.
+\end{lemma}
+
+\begin{prf}
+	For any collection of sets $\{V_\alpha\}$ open in $X$ that covers $S$, it restricts to a collection of sets $\{T\cap V_\alpha\}$ open in $T$ that still covers $S$. If we have a finite subcover $\{V_{\alpha_i}\}_{i=1}^n$ of $S$ in $X$, then $\{T\cap V_{\alpha_i}\}_{i=1}^n$ is a finite subcover of $S$ in $T$. Conversely, for any collection of open sets $\{W_\alpha\}$ open in $T$ that covers $S$, we can find a collection of sets $\{V_\alpha\}$ open in $X$ such that $W_\alpha=T\cap V_\alpha$. If we have a finite subcover $\{W_{\alpha_i}\}_{i=1}^n$ of $S$ in $T$, then $\{V_{\alpha_i}\}_{i=1}^n$ is a finite subcover of $S$ in $X$.
+\end{prf}
+
+we see that compactness is an inherent notion to the topological space and does not depend on how the space is embedded in a larger space.
+
+\begin{proposition}{Sufficient Condition for Compactness}{}
 	Let $X$ be a topological space. 
 	\begin{enumerate}[(i)]
 		\item closed subset of a compact space is compact.
@@ -685,48 +776,57 @@ Local connectedness does not imply connectedness, e.g. two disjoint open interva
 		\item In a metrizable space, a subset is compact if and only if it is sequentially compact.
 		\item A finite set endowed with any topology is compact.
 	\end{enumerate}
-}
+\end{proposition}
 
-\dfn{Compact Continuous Mapping}{
+
+\begin{definition}{Compact Continuous Mapping}{}
 	Let $f:X\to Y$ be a continuous mapping between topological spaces $X$ and $Y$. We say that $f$ is \textbf{compact} if for any compact open set $V$ of $Y$, $f^{-1}(V)$ is compact in $X$.
-}
-\dfn{Retrocompact Subset}{
+\end{definition}
+
+\begin{definition}{Retrocompact Subset}{}
 	We say that a subset $A$ of a topological space $X$ is \textbf{retrocompact} if the inclusion map $i:A\hookrightarrow X$ is a compact continuous mapping.
-}
-\dfn{Constructible Subset}{
+\end{definition}
+
+\begin{definition}{Constructible Subset}{}
 	Let $X$ be a topological space. Let $E \subset X$ be a subset of $X$.
 	\begin{enumerate}[(i)]
 		\item We say $E$ is \textbf{constructible} in $X$ if $E$ is a finite union of subsets of the form $U \cap V^{\complement}$ where $U, V \subseteq X$ are open and retrocompact in $X$.
 		\item We say $E$ is \textbf{locally constructible} in $X$ if there exists an open covering $X=\bigcup V_i$ such that each $E \cap V_i$ is constructible in $V_i$.
 	\end{enumerate}
-}
+\end{definition}
 
 
-\dfn{Locally Compact Space}{
+
+\begin{definition}{Locally Compact Space}{}
 	A topological space $X$ is called \textbf{locally compact} if every point $x\in X$ has a compact neighbourhood, i.e., there exists an open set $U$ and a compact set $K$ such that $x \in U \subseteq K$.
-}
-\prop{}{
+\end{definition}
+
+\begin{proposition}{}{}
 	If $X$ is a Hausdorff space, then the following are equivalent:
 	\begin{itemize}
 		\item $X$ is locally compact.
 		\item Every point of $X$ has a closed compact neighbourhood base.
 	\end{itemize}
-}
-\dfn{Profinite Space}{
+\end{proposition}
 
-}
+\begin{definition}{Profinite Space}{}
+
+\end{definition}
+
 \section{Irreducibility}
-\dfn{Irreducible Topological Space}{
+\begin{definition}{Irreducible Topological Space}{}
 	A topological space $X$ is called \textbf{irreducible} if it is nonempty, and it is not the union of two proper closed subsets. In other words, a nonempty topological space $X$ is irreducible if whenever $X=Y \cup Z$ with $Y$ and $Z$ closed in $X$, we have $Y=X$ or $Z=X$.
-}
-\prop{Properties of Irreducible Topological Space}{
+\end{definition}
+
+\begin{proposition}{Properties of Irreducible Topological Space}{}
 	Let $X$ be a topological space. Then
 	\begin{itemize}
 		\item If $X$ is irreducible, then any nonempty open set is dense. 
 		\item If $Z$ is an irreducible subspace of $X$ (with the subspace topology), then the closure $\bar{Z}$ in $X$ is irreducible as well.
 		\item If $X$ is irreducible, then it is connected.
 	\end{itemize}
-}
+\end{proposition}
+
 \chapter{Basic Notions}
 \section{CW Complex}
 A $n$-cell is a $n$-dimensional closed disc
@@ -757,7 +857,7 @@ we obtain the CW complex $X$
 with a weak topology satisfying a subset $U \subseteq X$ is closed iff $U \cap D^n_i$ is closed for each cell $D^n_i$.
 
 \section{Fiber Bundle}
-\dfn{Fiber Bundle}{
+\begin{definition}{Fiber Bundle}{}
 	A \textbf{fiber bundle} over a topological space $X$ consists of
 	\begin{enumerate}[(i)]
 		 \item a topological space $E$ (total space)
@@ -771,18 +871,21 @@ with a weak topology satisfying a subset $U \subseteq X$ is closed iff $U \cap D
 			&U&
 			}\]
 	The map $\phi$ is called a \textbf{local trivialization} of the fiber bundle $E$ over $U$.
-}
-\dfn{Locally Constant Function}{
+\end{definition}
+
+\begin{definition}{Locally Constant Function}{}
 	Let $f: X \to Y$ be a function from a topological space $X$ into a set $Y$. Given $x \in X$, $f$ is said to \textbf{locally constant at $x$} if there exists a neighborhood $U \subseteq X$ of $x$ such that $f$ is constant on $U$.\\
 	$f$ is called \textbf{locally constant} if it is locally constant at every point $x \in X$.
-}
-\prop{Properties of Locally Constant Functions}{
+\end{definition}
+
+\begin{proposition}{Properties of Locally Constant Functions}{}
 	Let $f: X \to Y$ be a map from a topological space $(X,\tau)$ into a set $Y$. Then
 	\begin{enumerate}[(i)]
 		\item If $f$ is locally constant, then it is constant on any connected component of $X$.
 		\item If $Y$ is a discrete space, then $f$ is continuous if and only if it is locally constant.
 	\end{enumerate}
-}
+\end{proposition}
+
 \proof{ 
 	\begin{enumerate}[(i)]
 		\item Suppose $f$ is locally constant. It is sufficient to show Let $f$ is constant when $X$ is connected. Take some $x_0\in X$, and define two sets: $U = f^{-1}(x_0)$ and $V=X-U$. For any $a\in U$, there is open neighborhood $K$ of such that $f(V)=\{f(x_0)\}$, which implies $K\subseteq U$. Hence $U$ is open. Similarly, for any $b\in V$, there is open neighborhood $L$ of such that $f(L)=\{f(b)\}$, which implies $L\subseteq V$. Hence $V$ is open. Since $U$ and $V$ are disjoint open sets and $U \cup V = X$, by the connectedness of $X$, either $U$ or $V$ must be empty. Since $x_0\in U$, we know that $V$ must be empty. Therefore, $f$ is constant on $X$.
@@ -792,7 +895,7 @@ with a weak topology satisfying a subset $U \subseteq X$ is closed iff $U \cap D
 		Assume that $f$ is locally constant. Let $V$ be an arbitrary open subset of $Y$. We need to show that $f^{-1}(V)$ is open in $X$. Take any point $x \in f^{-1}(V)$. Then $f(x) \in V$. Because $f$ is locally constant, there exists an open neighborhood $U$ of $x$ such that $f(U)=\{f(x)\} \subseteq V$. So we have $U \subseteq f^{-1}(V)$. Therefore, $f^{-1}(V)$ is open in $X$.
 	\end{enumerate}
 }
-\dfn{Vector Bundle}{
+\begin{definition}{Vector Bundle}{}
 	A \textbf{vector bundle} over a topological space $X$ consists of
 	\begin{enumerate}[(i)]
 		 \item a topological space $E$ (total space)
@@ -809,7 +912,8 @@ with a weak topology satisfying a subset $U \subseteq X$ is closed iff $U \cap D
 		\item for any $x\in U$, $\left.\phi\right|_{\pi^{-1}(x)}:\pi^{-1}(x)\to \{x\}\times \mathbb{R}^k$ is a linear isomorphism.
 	\end{enumerate}
 	The map $\phi$ is called a \textbf{local trivialization} of the vector bundle $E$ over $U$.	
-}
+\end{definition}
+
 Since the map 
 \[
 	\begin{aligned}
@@ -819,53 +923,61 @@ Since the map
 \]
 is locally constant, it must be constant on each connected component of $X$. If $\mathrm{kv}(x)=k$ for all $x\in X$, then $k$ is called the \textbf{rank} of the vector bundle, and $E$ is said to be a \textbf{vector bundle of rank $k$}.
 
-\dfn{Vector Bundle Morphisms}{
+\begin{definition}{Vector Bundle Morphisms}{}
 	A morphism from the vector bundle $\pi_1: E_1\to X_1$ to the vector bundle $\pi_2: E_2\to X_2$ is a pair $(f,g)$ of continuous maps $f:E_1\to E_2$ and $g:X_1\to X_2$ such that the following diagram commutes
 	\[\xymatrix{
 		E_1\ar[d]_{\pi_1}\ar[r]^{f}  & E_2\ar[d]^{\pi_2}\\
 		X_1\ar[r]_{g}&X_2
 		}\]
 	and for each $x\in X_1$, the map $\left.f\right|_{\pi_1^{-1}(x)}:\pi_1^{-1}(x)\to \pi_2^{-1}(g(x))$ is a linear map.
-}
+\end{definition}
+
 
 All vector bundles together with bundle morphisms forms a category, denoted by $\mathsf{VecBun}$.
 
 \chapter{Fundamental Groupoid}
 \section{Homotopy}
-\dfn{Path}{	
+\begin{definition}{Path}{}	
 	A \textbf{path} in a topological space $X$ is defined as a continuous function $\gamma:[0,1]\to X$. $\gamma$ is said to be from $x$ to $y$ if $\gamma(0)=x$ and $\gamma(1)=y$.
-}
+\end{definition}
+
 We say a path is a \textbf{loop} if $\gamma(0)=\gamma(1)$.
 
-\dfn{Homotopy}{
+\begin{definition}{Homotopy}{}
 	A \textbf{homotopy} between two continuous functions $f:X\to Y$ and $g:X\to Y$ is defined to be a continuous function $H: X \times[0,1] \rightarrow Y$ such that $H(x, 0)=f(x)$ and $H(x, 1)=g(x)$ for all $x \in X$.
-}
+\end{definition}
+
 Homotopy is an equivalence relation.
-\prop{Continuous Maps Preserve Homotopy}{
+\begin{proposition}{Continuous Maps Preserve Homotopy}{}
 	if $f_0:X\to Y$ and $f_1:X\to Y$ are homotopic and $g:Y\to Z$ is a continuous map between topological spaces, then $g\circ f_0:X\to Z$ and $g\circ f_1:X\to Z$ are homotopic.
-}
-\pf{ 
+\end{proposition}
+
+\begin{prf} 
 	Let $H:X\times [0,1]\to Y$ be a homotopy between $f_0$ and $f_1$. Then $g\circ H:X\times [0,1]\to Z$ is a homotopy between $g\circ f_0$ and $g\circ f_1$ since $g\circ H$ is continuous and
 	\[
 	(g\circ H)(x,0)=g\circ f_0(x)\quad\text{and}\quad (g\circ H)(x,1)=g\circ f_1(x)	
 	\]
 	for all $x\in X$.
-}
-\dfn{Relative Homotopy}{
+\end{prf}
+
+\begin{definition}{Relative Homotopy}{}
 	Let $H: X \times[0,1] \rightarrow Y$ be a homotopy from $f:X\to Y$ to $g:X\to Y$ and $K$ be a subset of $X$. We say $H$ is \textbf{homotopy relative to $K$} if $H(k, t)=f(k)=g(k)$ for all $k \in K$ and $t \in[0,1]$. 
-}
-\dfn{Homotopy Rel End Points}{
+\end{definition}
+
+\begin{definition}{Homotopy Rel End Points}{}
 	Let $x,y$ be two points in a topological space $X$. If $\gamma_1:[0,1]\to X$ and $\gamma_2:[0,1]\to X$ are two paths from $x$ to $y$, then a \textbf{homotopy rel end points from $\gamma_1$ to $\gamma_2$} is defined as a homotopy relative to $\{x, y\}$ from $\gamma_1$ to $\gamma_2$.
-}
-\dfn{Equivalent Paths}{
+\end{definition}
+
+\begin{definition}{Equivalent Paths}{}
 	Let $X$ be a topological space. Suppose $\gamma_0,\gamma_1: [0,1] \longrightarrow X$ are paths from $x$ to $y$. $\gamma_0$ and $\gamma_1$ are \textbf{equivalent} if they are homotopic rel end points. That is, there must exist a homotopy $H: [0,1] \times [0,1] \longrightarrow X$ such that
 	$$
 	H(s, 0)=\gamma_0(s), \quad H(s, 1)=\gamma_1(s), \quad H(0, t)=x, \quad H(1, t)=y
 	$$
 	for all $s,t \in [0,1]$. Write $[\gamma]$ for the equivalence class of $\gamma$. Write $\gamma\sim \psi$ if $\gamma$ is equivalent to $\psi$.
-}
+\end{definition}
 
-\dfn{Composition Of Paths}{
+
+\begin{definition}{Composition Of Paths}{}
 	Let $x,y,z$ be $3$ points in a topological space $X$. Suppose $\gamma: [0,1] \longrightarrow X$ is a path from $x$ to $y$ and $\psi: [0,1] \longrightarrow X$ is a path from $y$ to $z$. The \textbf{composition of path $\gamma$ and $\psi$} denoted by $\gamma\cdot \psi$ is defined to be a path from $x$ to $z$ as follows
 	\begin{align*}
 		\gamma\cdot \psi:[0,1] &\longrightarrow X\\
@@ -874,14 +986,16 @@ Homotopy is an equivalence relation.
 			\psi(2t-1)&\text{if }t\in\left(\left.\frac{1}{2},1\right]\right. .
 		\end{cases}
 	\end{align*}
-}
-\dfn{Composition Of Equivalent Classes Of Paths}{
+\end{definition}
+
+\begin{definition}{Composition Of Equivalent Classes Of Paths}{}
 	Suppose $\gamma: [0,1] \longrightarrow X$ is a path from $x$ to $y$ and $\psi: [0,1] \longrightarrow X$ is a path from $y$ to $z$. The \textbf{composition of $[\gamma]$ and $[\psi]$} denoted by $[\gamma]\cdot [\psi]$ is defined as follows
 	\[
 		[\gamma]\cdot [\psi]:=[\gamma\cdot \psi].
 	\]
-}
-\pf{
+\end{definition}
+
+\begin{prf}
 	We will show that the composition of equivalent classes of paths is                                                                  well-defined, namely 
 	\[
 		\gamma_0\sim \gamma_1,\;\psi_0\sim \psi_1\implies [\gamma_0\cdot \psi_0] = [\gamma_1\cdot\psi_1].
@@ -912,21 +1026,24 @@ Homotopy is an equivalence relation.
 		\end{cases}=\left(\gamma_1\cdot \psi_1\right)(s).
 	\end{aligned}\]
 	Thus we have $\gamma_0\cdot \psi_0\sim \gamma_1\cdot \psi_1$, which implies $\cdot$ is well-defined.
-}
-\dfn{Inverse Of Path}{
+\end{prf}
+
+\begin{definition}{Inverse Of Path}{}
 	Let $\gamma: [0,1] \longrightarrow X$ is a path from $x$ to $y$. The \textbf{inverse of path $f$} denoted by $\gamma^{-}$ is defined to be a path from $y$ to $x$ as follows
 	\begin{align*}
 		\gamma^{-}:[0,1]&\longrightarrow X\\
 		s &\longmapsto \gamma(1-s).
 	\end{align*}
-}
-\dfn{Inverse Of Equivalent Class Of Paths}{
+\end{definition}
+
+\begin{definition}{Inverse Of Equivalent Class Of Paths}{}
 	Let $X$ be a topological space and $\gamma:[0,1]\to X$ be a path. Then the \textbf{inverse of path $\gamma$} denoted by $[\gamma]^{-1}$ is defined as follows
 	\begin{align*}
 		[\gamma]^{-1}:=[\gamma^{-}].
 	\end{align*}
-}
-\pf{
+\end{definition}
+
+\begin{prf}
 	We will show that the inverse of equivalent classes of paths is well-defined, namely 
 	\[
 		\gamma_1\sim \gamma_2\implies [\gamma_1]^{-1} = [\gamma_2]^{-1}.
@@ -938,9 +1055,10 @@ Homotopy is an equivalence relation.
 		r(s,1)&=H(1-s,1)=\gamma_2(1-s)=\gamma_2^{-}(s).
 	\end{align*}
 	Thus we have $\gamma_1^{-}\sim \gamma_2^{-}$, which implies $[\gamma]^{-1}$ is well-defined.
-}
+\end{prf}
 
-\dfn{Path-Component}{
+
+\begin{definition}{Path-Component}{}
 	Given a topological space $X$, we can define an equivalence relation $\sim$ on $X$: $x \sim y$ if and only if there exists a path from $x$ to $y$. Then we define
 $$
 \pi_0(X):=X / \sim.
@@ -955,18 +1073,21 @@ $\pi_0$ can be viewed as a functor from $\mathsf{Top}$ to $\mathsf{Set}$
 		Y \& \& \& \pi_0(Y)\&\ni\&\left[f(x)\right]
 	\end{tikzcd}
 \end{equation*}
-}
-\prop{}{
+\end{definition}
+
+\begin{proposition}{}{}
 	The functor $\pi_0:\mathsf{Top}\to \mathsf{Set}$ preserves pruduct, i.e. $$
 	\pi_0\left(\prod_{i\in I} X_\alpha\right)\cong\prod_{\alpha\in I} \pi_0\left(X_\alpha\right).
 	$$
-}
-\prop{}{
+\end{proposition}
+
+\begin{proposition}{}{}
 	The functor $\pi_0:\mathsf{Top}\to \mathsf{Set}$ preserves copruduct, i.e. $$
 	\pi_0\left(\coprod_{i\in I} X_\alpha\right)\cong\coprod_{\alpha\in I} \pi_0\left(X_\alpha\right).
 	$$
-}
-\pf{
+\end{proposition}
+
+\begin{prf}
 	The universal property of coproducts gives
 	\[
 		\begin{tikzcd}[ampersand replacement=\&]
@@ -991,14 +1112,16 @@ $\pi_0$ can be viewed as a functor from $\mathsf{Top}$ to $\mathsf{Set}$
 		\pi_0(\iota)\left([(x,\alpha_1)]\right)=\pi_0(\iota)\left([(y,\alpha_1)]\right)\implies [x]=[y]\implies ([x],\alpha_1)=([y],\alpha_1),
 	\]
 	which implies $\varphi$ is injective. Therefore, $\varphi$ is an isomorphism.
-}
+\end{prf}
+
 Note that generally a topological space is not the disjoint union of its connected components. For example, consider $\mathbb{Q}$ with the subspace topology of the Euclidean topology. The connected components of $\mathbb{Q}$ are singletons and disjoint union of them is $\mathbb{Q}$ with the discrete topology.
 
 \section{Fundamental groupoid}
-\dfn{Fundamental Group}{
+\begin{definition}{Fundamental Group}{}
 	Given a topological space $X$ and a point $x\in X$, define $\pi_1(X, x)$ to be the set of equivalence classes of loops that start and end at $x$. $(\pi_1(X, x),\cdot)$ is a group, called the fundamental group of $X$, where the group operation $\cdot$ is defined as $[g]\cdot[f]:=[g\cdot f]$.
-}
-\pf{
+\end{definition}
+
+\begin{prf}
 	First we will show that $\cdot$ is associative, that is, $[h]\cdot\left([g]\cdot[f]\right)=\left([h]\cdot[g]\right)\cdot[f]$ or equivalently $[h\cdot(g\cdot f)]=[(h\cdot g)\cdot f]$. It is sufficient to show that $h\cdot(g\cdot f)\sim (h\cdot g)\cdot f$. Define $H:[0,1]\times[0,1]\to X$ as
 	\[
 		H(s,t)=\begin{cases}
@@ -1040,12 +1163,14 @@ Note that generally a topological space is not the disjoint union of its connect
 	We can show that $c_x\cdot f\sim f$ and $f\cdot c_x\sim f$, which means $[c_x]$ is the identity of the group $\pi_1(X,x)$. 
 
 	Given any $[f]\in \pi_1(X,x)$, it is easy to check $\left[f\right]^{-1}\in \pi_1(X,x)$ and $[f]^{-1}\cdot[f]=[f]\cdot[f]^{-1}=[c_x]$.
-}
+\end{prf}
 
-\dfn{Fundamental Groupoid}{
+
+\begin{definition}{Fundamental Groupoid}{}
 	Let $X$ be a topological space. Define $\Pi_1(X)$ to a category, where $\Obj(\Pi_1(X))=X$ and $\Hom_{\Pi_1(X)}(x,y)=\{[f]\mid f:[0,1]\to X \text{ is a path from $x$ to $y$}\}$. $\Pi_1(X)$ is a groupoid and called the fundamental groupoid of $X$.
-}
-\dfn{Fundamental Groupoid Functor}{
+\end{definition}
+
+\begin{definition}{Fundamental Groupoid Functor}{}
 	Define $\Pi_1:\Top\to\Grpd$ as follows
 	\[
 	\begin{tikzcd}[ampersand replacement=\&]
@@ -1057,8 +1182,9 @@ Note that generally a topological space is not the disjoint union of its connect
 		Y \& \& \& \Pi_1(Y)\&\ni\&\left[f\circ \gamma\right]
 	\end{tikzcd}
 	\]
-}
-\pf{
+\end{definition}
+
+\begin{prf}
 	First, we will show that $\Pi_1(f)$ is well-defined, namely for any two paths $\gamma_1$ and $\gamma_2$ in $X$,
 	\[
 		\gamma_1\sim \gamma_2 \implies [f\circ \gamma_1] = [f\circ \gamma_2].
@@ -1079,112 +1205,132 @@ Note that generally a topological space is not the disjoint union of its connect
 		[(g\circ f)\circ \gamma]=[g\circ (f\circ \gamma)],
 	\]
 	which clearly holds. 
-}
-\dfn{Connected Groupoid}{
+\end{prf}
+
+\begin{definition}{Connected Groupoid}{}
 	A groupoid $\mathsf{G}$ is called \textbf{connected} if for any two objects $x,y$ of $\mathsf{G}$, $\Hom_{\mathsf{G}}(x,y)\ne \varnothing$.
-}
-\prop{Fundamental Groupoid of a Path-Connected Space is Connected}{
+\end{definition}
+
+\begin{proposition}{Fundamental Groupoid of a Path-Connected Space is Connected}{}
 	Let $X$ be a topological space. Then $\Pi_1(X)$ is connected if and only if $X$ is path-connected.
-}
-\pf{
+\end{proposition}
+
+\begin{prf}
 	$\Hom_{\Pi_1(X)}(x,y)\ne \varnothing$ if and only if there exists a path from $x$ to $y$.
-}
-\dfn{Simply Connected Space}{
+\end{prf}
+
+\begin{definition}{Simply Connected Space}{}
 	A topological space $X$ is called \textbf{simply connected} if it is path-connected and $\pi_1(X,x_0)$ is trivial for some $x_0\in X$.
-}
-\dfn{Locally Simply Connected Space}{
+\end{definition}
+
+\begin{definition}{Locally Simply Connected Space}{}
 	A topological space $X$ is called \textbf{locally simply connected} if for every $x\in X$ there exists an open 
 	neighborhood $U$ of $x$ such that $U$ is simply connected.
-}
-\dfn{Semi-locally Simply Connected Space}{
+\end{definition}
+
+\begin{definition}{Semi-locally Simply Connected Space}{}
 	A topological space $X$ is called \textbf{semi-locally simply connected} if for every $x\in X$ there exists an open neighborhood $U$ of $x$ with the property that every loop in $U$ can be contracted to a single point within $X$.
 
 	Equivalently, $X$ is semi-locally simply connected if for every $x\in X$ there exists an open neighborhood $U$ of $x$ such that the inclusion map $i:U\to X$ induces the trivial homomorphism $i_*:\pi_1(U,x)\to \pi_1(X,x)$.
 	
-}
-\prop{}{
+\end{definition}
+
+\begin{proposition}{}{}
 	The following implications hold:
 	\begin{itemize}
 		\item simply connectedness $\implies$ semi-locally simply connected $+$ path-connected.
 		\item locally simply connected $\implies$ semi-locally simply connected $+$ locally path-connected.
 	\end{itemize}
-}
+\end{proposition}
+
 \section{Homotopy Equivalence}
-\dfn{Homotopy Equivalence}{
+\begin{definition}{Homotopy Equivalence}{}
 	Let $X$ and $Y$ be topological spaces. A continuous map $f:X\to Y$ is called a \textbf{homotopy equivalence} if there exists a continuous map $g:Y\to X$ such that $g\circ f\simeq \mathrm{id}_X$ and $f\circ g\simeq \mathrm{id}_Y$. In this case, we say $X$ and $Y$ are \textbf{homotopy equivalent} and write $X\simeq Y$.
-}
-\dfn{Deformation Retraction}{
+\end{definition}
+
+\begin{definition}{Deformation Retraction}{}
 	Let $X$ be a topological space and $A\subseteq X$. A \textbf{deformation retraction} of $X$ onto $A$ is a homotopy $H:X\times [0,1]\to X$ such that
 	\begin{itemize}
 		\item $H(x,0)=x$ for all $x\in X$;
 		\item $H(x,1)\in A$ for all $x\in X$;
 		\item $H(a,1)=a$ for all $a\in A$.
 	\end{itemize}
-}
+\end{definition}
+
 
 \chapter{Continuous Group Action}
-\dfn{Compact Open Topology}{
+\begin{definition}{Compact Open Topology}{}
 	Let $X$ be a topological space and $K$ be a compact subset of $X$. The \textbf{compact open topology} on $\mathrm{Hom}_{\mathsf{Top}}(X,Y)$ is the topology generated by the subbasis
 	\[
 		\mathcal{S}:=\left\{f\in \mathrm{Hom}_{\mathsf{Top}}(X,Y)\midv K\text{ is compact in }X,\;V\text{ is open in }Y,\;f(K)\subseteq V\right\}.
 	\]
-}
+\end{definition}
 
-\dfn{Group Action on Topological Space}{
+
+\begin{definition}{Group Action on Topological Space}{}
 	A \textbf{group action} on a topological space $X$ is a group homomorphism $\rho:G\to \mathrm{Aut}_{\mathsf{Top}}(X)$, where $\mathrm{Aut}_{\mathsf{Top}}(X)$ is the group of all homeomorphisms from $X$ to itself.
-}
+\end{definition}
 
-\dfn{Continuous Topological Group Action on Topological Space}{
+
+\begin{definition}{Continuous Topological Group Action on Topological Space}{}
 	A \textbf{continuous topological group action} on a topological space $X$ is a group homomorphism $\rho:G\to \mathrm{Aut}_{\mathsf{Set}}(X)$, where $G$ is a topological group, such that the following map induced by $\rho$ 
 	\begin{align*}
 		\varrho:G\times X&\longrightarrow X\\
 		(g,x)&\longmapsto \rho(g)(x)
 	\end{align*}
 	is continuous. In this case, we have $\mathrm{im}\rho \subseteq \mathrm{Aut}_{\mathsf{Top}}(X)$.
-}
+\end{definition}
 
-\prop{}{
+
+\begin{proposition}{}{}
 	Let $X$ be a locally compact Hausdorff space and $G$ be a topological group.
-}
+\end{proposition}
 
-\dfn{Orbit Space}{
+
+\begin{definition}{Orbit Space}{}
 	Let $G$ be a group acting on a topological space $X$. The \textbf{orbit space} of $X$ under the action of $G$ is the quotient space $X / G$ obtained by identifying all points in $X$ that are in the same orbit. $X / G$ is equipped with the quotient topology: a subset $U\subseteq X / G$ is open if and only if $\pi^{-1}(U)$ is open in $X$, where $\pi:X\to X / G$ is the quotient map.
-}
+\end{definition}
 
 
-\prop{}{
+
+\begin{proposition}{}{}
 	For any continuous action of a topological group $G$ on a topological space $E$, the quotient map $p: E \rightarrow E / G$ is an open map.
-}
-\pf{
+\end{proposition}
+
+\begin{prf}
 	For any $g \in G$ and any subset $U \subseteq M$, we define a set $g \cdot U \subseteq M$ by
 $$
 g \cdot U=\{g \cdot x: x \in U\} .
 $$
 If $U \subseteq M$ is open, then $\pi^{-1}(\pi(U))$ is equal to the union of all sets of the form $g \cdot U$ as $g$ ranges over $G$. Since $p \mapsto g \cdot p$ is a homeomorphism, each such set is open, and therefore $\pi^{-1}(\pi(U))$ is open in $M$. Becaues $\pi$ is a quotient map, this implies that $\pi(U)$ is open in $M / G$, and therefore $\pi$ is an open map.
-}
+\end{prf}
 
 
-\dfn{Even Action}{
+
+\begin{definition}{Even Action}{}
 Let $G$ be a group acting continuously on a topological space $E$. The action of $E$ is \textbf{even} if each point $y \in Y$ has some neighborhood $U$ such that $gU\cap U=\varnothing$ for all $g\in G-\{1_G\}$. In other words, $U \cap gU \neq \varnothing$ implies $g=1_G$.
-}
+\end{definition}
+
 
 \chapter{Covering spaces}
 \section{Lifting Properties}
-\dfn{Category of Pointed Topological Spaces}{
+\begin{definition}{Category of Pointed Topological Spaces}{}
 	The \textbf{category of pointed topological spaces} $\Top_*$ is the coslice category $\left(\{*\}/\Top\right)$ defined explicitly as follows
 	\begin{itemize}
 		\item $\Obj(\Top_*)$ is the class of all pairs $(X,x)$, where $X$ is a topological space and $x\in X$;
 		\item $\Hom_{\Top_*}((X,x),(Y,y))$ is the class of all continuous maps $f:X\to Y$ such that $f(x)=y$. 
 	\end{itemize}
 	Morphisms in $\Top_*$ are called \textbf{based maps}.
-}
-\dfn{Covering}{
+\end{definition}
+
+\begin{definition}{Covering}{}
 	Let $X$ be a topological space. A \textbf{covering} of $X$ is a continuous map
 $$
 p: E \longrightarrow X
 $$
 such that there exists a discrete space $D$ and for every $x \in X$ an open neighborhood $U \subseteq X$, such that $p^{-1}(U)=\bigsqcup_{d \in D} V_d$ and $\left.p\right|_{V_d}: V_d \rightarrow U$ is a homeomorphism for every $d \in D$. Such open neighborhood $U$ is called a \textbf{fundamental neighborhood} for $x$. The open sets $V_d$ are called \textbf{sheets}.
-}
+\end{definition}
+
 A based map $p:(E,e)\to (X,x)$ is called a \textbf{covering map} if $p:E\to X$ is a covering. 
 
 A covering space is a fiber bundle with discrete fiber $D$, illustrated as follows
@@ -1192,23 +1338,26 @@ A covering space is a fiber bundle with discrete fiber $D$, illustrated as follo
 			p^{-1}(U)\ar[rd]_{p}\ar[rr]^{\phi}  & &U\times D\ar[ld]^{p_1}\\
 			&U&
 			}\]
-\prop{Covering Map is Local Homeomorphism}{
+\begin{proposition}{Covering Map is Local Homeomorphism}{}
 	The covering $p:E\to X$ is a local homeomorphism.
-}
-\dfn{Lifting}{
+\end{proposition}
+
+\begin{definition}{Lifting}{}
 	Let $p:E\to X$ and $f:Y\to X$ be continuous maps. A lifting of $f$ along $p$ is a continuous map $\widetilde{f}:Y\to E$ such that the following diagram commutes
 	\[\xymatrix{
 			& E\ar[d]^{p}\\
 			Y\ar[ur]^{\widetilde{f}}\ar[r]_{f} &X
 			}\]
-}
+\end{definition}
 
 
 
-\lemm{}{
+
+\begin{lemma}{}{}
 	Let $p: E \rightarrow X$ be a covering. Then the diagonal $D=\{(e, e) \in E \times E \mid e\in E\}$ is open and closed in $Z=\{(e_1, e_2) \in E \times E \mid p(e_1)=p(e_2)\}$.
-}
-\pf{
+\end{lemma}
+
+\begin{prf}
 	Given any $(e,e)\in D$, suppose $U$ is a fundamental neighborhood of $p(e)$ and $V_e$ is the corresponding sheet such that $\left.p\right|_{V_e}:V_e\to U$ is a homeomorphism. Then for any $e_1,e_2\in V_e$, we have
 	\[
 		p(e_1)=p(e_2)\implies e_1=e_2,
@@ -1216,9 +1365,10 @@ A covering space is a fiber bundle with discrete fiber $D$, illustrated as follo
 	which implies $Z \cap\left(V_e \times V_e\right)=W_e$ is contained in $D$. Note $W_e$ is an open neighbourhood of $(e, e)$ in $Z$. We see $D$ is open in $Z$.
 
 	Given any $(e_1,e_2)\in Z-D$, suppose $U$ is a fundamental neighborhood of $p(e_1)=p(e_2)$ and $V_{e_1}$ and $V_{e_2}$ are the sheets such that $\left.p\right|_{V_{e_1}}:V_{e_1}\to U$, $\left.p\right|_{V_{e_2}}:V_{e_2}\to U$ are a homeomorphisms. Since $e_1 \ne e_2$, we have $V_{e_1} \cap V_{e_2}=\varnothing$ and $\left(V_{e_1}\times V_{e_2}\right)\cap D=\varnothing$. Hence $Z \cap\left(V_{e_1} \times V_{e_2} \right)$  is contained in $Z-D$. Note that $Z \cap\left(V_{e_1} \times V_{e_2} \right)$ is an open neighbourhood of $(e_1,e_2)$ in $Z$. This shows that $Z- D$ is also open.
-}
+\end{prf}
 
-\prop[uniqueness_of_liftings]{Uniqueness of Liftings}{
+
+\begin{proposition}{Uniqueness of Liftings}{uniqueness_of_liftings}
 Let $p: E \rightarrow X$ be a covering and $f: Y \rightarrow X$ be a continuous map. Suppose $Y$ is connected. If $\widetilde{f}_1, \widetilde{f}_2: Y \rightarrow E$ be liftings of $f: Y \rightarrow X$ such that $\widetilde{f}_1(y_0)=\widetilde{f}_2(y_0)$ for some $y_0\in Y$, then $\widetilde{f}_1=\widetilde{f}_2$.
 \[
 	\begin{tikzcd}[ampersand replacement=\&]
@@ -1227,8 +1377,9 @@ Let $p: E \rightarrow X$ be a covering and $f: Y \rightarrow X$ be a continuous 
 	\end{tikzcd}
 	\]
 	In other words, given that the outer square of the diagram commutes, if there exists a diagonal arrow $\widetilde{f}:Y\to E$ such that the whole diagram commutes, then $\widetilde{f}$ is unique.
-}
-\pf{
+\end{proposition}
+
+\begin{prf}
 	Suppose $Z=\{(e_1, e_2) \in E \times E \mid p(e_1)=p(e_2)\}$ and $D=\{(e, e) \in E \times E \mid e\in E\}$. We can define a continuous map
 	\begin{align*}
 		g: Y &\longrightarrow Z\\
@@ -1239,11 +1390,12 @@ Let $p: E \rightarrow X$ be a covering and $f: Y \rightarrow X$ be a continuous 
 		\left\{\left(\widetilde{f}_1(y), \widetilde{f}_2(y)\right) \midv y \in Y\right\} \subseteq\{(e, e) \in E \times E \mid e\in E\}.
 		\]
 	Therefore, we show that	$\widetilde{f}_1=\widetilde{f}_2$.
-}
+\end{prf}
 
 
 
-\dfn{Homotopy Lifting Property}{
+
+\begin{definition}{Homotopy Lifting Property}{}
 	Define the inclusion $\iota_0:Y\to Y\times I,y\mapsto(y,0)$, namely $\iota_0=\mathrm{id}\times c_0$. A map $p: E \rightarrow X$ has the \textbf{homotopy lifting property} for the space $Y$ if the following holds: 
 	\begin{itemize}
 		\item for each homotopy $f_\bullet: Y \times I \rightarrow X$, and
@@ -1257,12 +1409,14 @@ Let $p: E \rightarrow X$ be a covering and $f: Y \rightarrow X$ be a continuous 
 	\end{tikzcd}
 	\]
 	We call $\widetilde{f}_{\bullet}$ a lifting of $f_{\bullet}$ with initial condition $\widetilde{f}_0$. The map $p$ is called a \textbf{fibration} if it has the homotopy lifting property for all spaces.
-}
+\end{definition}
 
-\thm{Covering is Fibration}{
+
+\begin{theorem}{Covering is Fibration}{}
 	A covering $p: E \rightarrow B$ is a fibration. Moreover, the homotopy lifting is unique.
-}
-\pf{
+\end{theorem}
+
+\begin{prf}
 	First we can show homotopy lifting is unique if it exists. Suppose there exist two homotopies $\widetilde{f}_{\bullet}$ and $\widetilde{g}_{\bullet}$ either of which lifts $f_{\bullet}$ with initial condition $\widetilde{f}_0$. Then we have the following commutative diagram.
 	\[
 	\begin{tikzcd}[ampersand replacement=\&]
@@ -1271,11 +1425,12 @@ Let $p: E \rightarrow X$ be a covering and $f: Y \rightarrow X$ be a continuous 
 	\end{tikzcd}
 	\]
 	Since $\{y\}\times I$ is connected, according to the uniqueness of liftings, we see $\widetilde{f}_{\bullet}\circ i_y=\widetilde{g}_{\bullet}\circ i_y$. Note that $y$ is arbitrary, we have $\widetilde{f}_{\bullet}=\widetilde{g}_{\bullet}$.
-}
+\end{prf}
+
 
 Taking $Y=\{*\}$ in the homotopy lifting property gives the following corollary.
 
-\cor{Unique Path Lifting}{
+\begin{corollary}{Unique Path Lifting}{}
 	Let $p: (E,e) \to (X,x)$ be a covering. A path $\gamma: I \to X$ with $\gamma(0)=x$ lifts uniquely to a path $\widetilde{\gamma}: I \to E$ such that $\widetilde{\gamma}(0)=e$ and $p \circ \widetilde{\gamma}=\gamma$. We may use $\widetilde{\gamma}^e$ to denote this unique lifting if we want to emphasize the starting point $e$.
 	\[
 	\begin{tikzcd}[ampersand replacement=\&]
@@ -1283,8 +1438,9 @@ Taking $Y=\{*\}$ in the homotopy lifting property gives the following corollary.
 		 I \arrow[r, "\gamma"'] \arrow[ru, "\widetilde{\gamma}", dashed] \& X               
 	\end{tikzcd}
 	\]
-}
-\pf{
+\end{corollary}
+
+\begin{prf}
 	We can also prove it independently. Suppose $\mathcal{F}=\left\{U_\alpha\right\}_{\alpha\in A}$ is a collection of fundamental neighborhoods such that $\cup_{\alpha\in A}U_\alpha=X$. Let $f:I\to X$ be a path with $f(0)=x$. Then $\left\{f^{-1}(U_\alpha)\right\}_{\alpha\in A}$ is an open cover of $I$, so has a finite subcover $\left\{f^{-1}(U_{i})\right\}_{i=1}^m$. Let $0=t_0<t_1<\cdots<t_n=1$ be such that $f([t_{k-1},t_k])\subseteq U_{i_k}$ where $1\le i_k \le m$. \\
 	We will construct a sequence of maps $\widetilde{f}_k:[t_{k-1},t_k]\to E$ by induction on $k$. Suppose $k=0$. Note that $f(0)=x\in U_{i_0}$ and there exists a homeomorphism $\left.p\right|_{V_0}: E\supseteq V_0\to U_{i_0}$ such that $\left.p\right|_{V_0}(e)=x$. We can define $\widetilde{f}_0=\left(\left.p\right|_{V_0}\right)^{-1}\circ f|_{[t_0,t_1]}$ and check that $\widetilde{f}_0$ is a lifting of $f|_{[t_0,t_1]}$ such that $\widetilde{f}_0(0)=e$. \\
 	Suppose we have constructed $\widetilde{f}_0,\widetilde{f}_1,\cdots,\widetilde{f}_{k-1}$. Note that $f(t_{k})=p\left(\widetilde{f}_{k-1}(t_k)\right)\in U_{i_k}$ and there exists a homeomorphism $\left.p\right|_{V_k}: E\supseteq V_k\to U_{i_k}$ such that $\left.p\right|_{V_{k}}\left(\widetilde{f}_{k-1}(t_k)\right)=f(t_k)$. We can define $\widetilde{f}_k=\left(\left.p\right|_{V_k}\right)^{-1}\circ f|_{[t_k,t_{k+1}]}$ and check that $\widetilde{f}_k$ is a lifting of $f|_{[t_k,t_{k+1}]}$ such that $\widetilde{f}_k(t_{k})=\widetilde{f}_{k-1}(t_{k})$. \\
@@ -1293,9 +1449,10 @@ Taking $Y=\{*\}$ in the homotopy lifting property gives the following corollary.
 		\widetilde{f}(t)=\widetilde{f}_k(t)\text{ for }t_{k}\le t\le t_{k+1},	
 	\]
 	we can connect the sequence of maps $\widetilde{f}_k$ to get a path $\widetilde{f}:I\to E$ such that $\widetilde{f}(0)=e$ and $p\circ \widetilde{f}=f$. Since $I$ is connected, we know $\widetilde{f}$ is unique.
-}
+\end{prf}
 
-\prop[Lifting]{Lifting of Homotopic Paths}{
+
+\begin{proposition}{Lifting of Homotopic Paths}{Lifting}
 	\label{my_proposition}
 	Let $p: (E,e) \to (X,x)$ be a covering. If $\gamma_0 \sim \gamma_1: I \to X$ are homotopic paths that both start from $x$, then the lifted paths $\widetilde{\gamma}_0, \widetilde{\gamma}_1: I \to E$ that both start at $e$ are also homotopic. Moreover, if $\gamma_0,\gamma_1$ have the same end point, then $\widetilde{\gamma}_0, \widetilde{\gamma}_1$ also have then same end point.\\
 	Define 
@@ -1313,8 +1470,9 @@ Taking $Y=\{*\}$ in the homotopy lifting property gives the following corollary.
 		I \times I \arrow[r, "\gamma_\bullet"'] \arrow[ru, "\widetilde{\gamma}_\bullet", dashed] \& X               
 	\end{tikzcd}
 	\]
-}
-\pf{
+\end{proposition}
+
+\begin{prf}
 	We have the following diagram
 	\[
 	\begin{tikzcd}[ampersand replacement=\&]
@@ -1359,14 +1517,16 @@ Taking $Y=\{*\}$ in the homotopy lifting property gives the following corollary.
 	\end{center}
 	The homeomorphism $g$ maps the leftmost square to the rightmost square, and its restriction to $I\times\{0\}$ is also a homeomorphism which maps the orange line within the leftmost square to the orange line within the rightmost square.\\
 	Suppose the unique homotopy lifting of $\gamma_{\bullet}\circ g$ is $h:I\times I \to E$, then we can take $\widetilde{\gamma}_\bullet=h\circ g^{-1}$ and check that it is a homotopy lifting of $\gamma_\bullet$ that makes the whole diagram commute. Suppose there exists another homotopy lifting $\widetilde{\gamma}_\bullet^\prime$ of $\gamma_\bullet$. Then by the uniqueness of $h$ we have $\widetilde{\gamma}_\bullet^\prime\circ g=\widetilde{\gamma}_\bullet\circ g=h$, which implies $\widetilde{\gamma}_\bullet^\prime=\widetilde{\gamma}_\bullet$.
-}
+\end{prf}
+
 
 \Cref{th:uniqueness_of_liftings} assert that under the assumption that $Y$ is connected, the lifting of $f:(Y,y)\to(X,x)$ is unique if it exists. However, the connectedness of $Y$ is not necessary to guarantee the existence of lifting. The following proposition gives a sufficient condition for lifting to exist.
 
-\prop[lifting_criterion]{Lifting Criterion}{
+\begin{proposition}{Lifting Criterion}{lifting_criterion}
 	Given a covering $p:\left(E, e\right) \rightarrow\left(X, x\right)$ and a map $f:\left(Y, y\right) \rightarrow\left(X, x\right)$ with $Y$ connected and locally path-connected, a lift $\widetilde{f}:\left(Y, y\right) \rightarrow\left(E, e\right)$ of $f$ exists if and only if $f_*\left(\pi_1\left(Y, y\right)\right) \subseteq p_*\left(\pi_1\left(E, e\right)\right)$.
-}
-\pf{ 
+\end{proposition}
+
+\begin{prf} 
 	First note that $Y$ is path-connected because $Y$ is both connected and locally path-connected. If such lift $\widetilde{f}$ exists, then for any $f_*([\gamma])\in f_*\left(\pi_1\left(Y, y\right)\right)$, we have $$f_*([\gamma])=[f\circ\gamma]=[p\circ\widetilde{f}\circ\gamma]=p_*\left(\widetilde{f}_*([\gamma])\right)=p_*\left(\left[\widetilde{f}\circ\gamma\right]\right)\in p_*\left(\pi_1(E,e)\right),$$
 	which implies $f_*\left(\pi_1\left(Y, y\right)\right) \subseteq p_*\left(\pi_1\left(E, e\right)\right)$.
 
@@ -1380,29 +1540,34 @@ Taking $Y=\{*\}$ in the homotopy lifting property gives the following corollary.
 		[p\circ\psi]=\left[f\circ\left(\gamma_1\cdot \gamma_2^{-}\right)\right]=\left[\left(f\circ\gamma_1\right)\cdot\left(f\circ\gamma_2\right)^{-}\right].	
 	\]
 	Suppose $\psi=\psi_1\cdot\psi_2^{-}$. Then we see that $\left[\psi_1\right]=\left[\widetilde{f\circ\gamma_1}\right]$ and $\left[\psi_2\right]=\left[\widetilde{f\circ\gamma_2}\right]$. Therefore, we have $\widetilde{f\circ\gamma_1}(1)=\widetilde{f\circ\gamma_2}(1)=\psi\left(\frac{1}{2}\right)$. This shows that $\widetilde{f}$ is well-defined.
-}
+\end{prf}
+
 
 \section{Embedding of Fundamental Group}
 Given a covering $p:(E,e)\to (X,x)$, the fundamental group $\pi_1(E,e)$ can be embedded into the fundamental group $\pi_1(X,x)$ because each loop in $E$ based at $e$ can be projected to a loop in $X$ based at $x$. However, not all loops in $X$ based at $x$ can be lifted to loops in $E$ based at $e$. In general, a loop in $X$ based at $x$ will be lifted to a path connected two points in the fiber $p^{-1}(x)$, which actually gives a group action of $\pi_1(X,x)$ on the fiber $p^{-1}(x)$ and we will see that in the next section.
 
 
-\dfn{Star Set}{
+\begin{definition}{Star Set}{}
 	Let $\mathsf{C}$ be a category and $x$ is an object of $\mathsf{C}$. The \textbf{star set} of $x$ in $\mathsf{C}$ is defined as
 	$\mathrm{St}(x)=\mathrm{Obj}\left(x/\mathsf{C}\right)$.
-}
-\dfn{Covering of Groupoid}{
-	Let $\mathsf{E}$ and $\mathsf{B}$ be two groupoids. A functor $p:\mathsf{E}\to\mathsf{B}$ is a \textbf{covering of groupoid} if it is surjective on objects and for each object $e$ of $\mathsf{E}$ 
-	\[
-		p^{e}:\mathrm{St}(e)\to\mathrm{St}(p(e))
-	\]
-	is a bijection.
-}
+\end{definition}
 
-\prop[space_covering_induces_groupoid_covering]{Covering of Spaces Induces Covering of Groupoids}{
+\begin{definition}{Covering of Groupoid}{}
+	Let $\mathsf{E}$ and $\mathsf{B}$ be two groupoids. A functor $p:\mathsf{E}\to\mathsf{B}$ is a \textbf{covering of groupoid} if it is surjective on objects and for each object $e$ of $\mathsf{E}$, the map
+	\begin{align*}
+		p^{e}:\mathrm{St}(e)&\longrightarrow\mathrm{St}(p(e))\\
+		\left(e\xrightarrow{\gamma} e'\right)&\longmapsto \left(p(e)\xrightarrow{p(\gamma)} p(e')\right)
+	\end{align*}
+	is a bijection. In this case, the preimage of $\theta\in\mathrm{St}(p(e))$ under $p^{e}$ is denoted by $\widetilde{\theta}^e$.
+\end{definition}
+
+
+\begin{proposition}{Covering of Spaces Induces Covering of Groupoids}{space_covering_induces_groupoid_covering}
 	If $p : E \to X$ is a covering of spaces, then $p_*: \Pi_1(E) \to \Pi_1(X)$ is a covering of groupoid.
-}
-\pf{
-	This a corollary of \Cref{th:Lifting}. Suppose $p : E \to X$ is a covering of spaces and $e\in E$. Given a map $p_*^{e}:\mathrm{St}(e)\to\mathrm{St}(p(e))$, we can define
+\end{proposition}
+
+\begin{prf}
+	This a corollary of \Cref{th:Lifting}. Suppose $p : E \to X$ is a covering of spaces and $p_*: \Pi_1(E) \to \Pi_1(X)$ is the induced functor between fundamental groupoids. It is clear that $p_*$ is surjective on objects. Given any $e\in E$,	we have to prove the map $p_*^{e}:\mathrm{St}(e)\to\mathrm{St}(p(e))$ is a bijection. Let's define
 	\begin{align*}
 		q^e:\mathrm{St}(p(e))&\to \mathrm{St}(e)\\
 		[\gamma]&\mapsto [\widetilde{\gamma}^e]
@@ -1416,20 +1581,24 @@ Given a covering $p:(E,e)\to (X,x)$, the fundamental group $\pi_1(E,e)$ can be e
 		q^e\circ p_*^{e}([\gamma])=q^e([p\circ\gamma])=\left[\left(\widetilde{p\circ\gamma}\right)^e\right]=[\gamma],
 	\]
 	where $\left(\widetilde{p\circ\gamma}\right)^e=\gamma$ holds since $\gamma$ is a lifting of $p\circ\gamma$ starting at $e$.
-}
+\end{prf}
 
-\cor[GroupEmbedding]{Fundamental Group Embedding for Covering Spaces}{
+
+\begin{corollary}{Fundamental Group Embedding for Covering Spaces}{GroupEmbedding}
 	Suppose $p: (E,e) \to (X,x)$ is a covering. Then $p_*: \pi_1(E, e) \to \pi_1(X, x)$ is a monomorphism. The image $p_*(\pi_1(E, e))$ consists of all equivalent classes of loops in $X$ that lift to loops in $E$ based at $e$.
-}
-\pf{ 
+\end{corollary}
+
+\begin{prf} 
 	According to \Cref{th:space_covering_induces_groupoid_covering}, $p^e:\mathrm{St}(e)\to\mathrm{St}(p(e))$ is a bijection. Note that $p_*: \pi_1(E, e) \to \pi_1(X, x)$ as a map between sets is the restriction of $p^e$ to $\pi_1(E, e)$. Therefore it is injective, which implies $p_*$ is a monomorphism between groups.
-}
+\end{prf}
 
 
-\lemm[lemma_monodromy_action_same_image]{}{
+
+\begin{lemma}{}{lemma_monodromy_action_same_image}
 	Let $p:E\to X$ be a covering. Let $\psi_1$ and $\psi_2$ be paths in $E$ starting from $e$ and $\gamma_1=p\circ \psi_1$ and $\gamma_2=p\circ \psi_2$ be their projections to $X$. Then $\psi_1(1)=\psi_2(1)$ if and only if $\gamma_1(1)=\gamma_2(1)$ and $\left[\gamma_1 \cdot \gamma_2^{-}\right]\in p_* \left(\pi_1(E, e)\right)$.
-}
-\pf{
+\end{lemma}
+
+\begin{prf}
 	If $\psi_1(1)=\psi_2(1)$, then $p_*\left(\left[\psi_1 \cdot \psi_2^{-}\right]\right)=\left[p_*(\psi_1) \cdot p_*(\psi_2^{-})\right]=\left[\gamma_1 \cdot \gamma_2^{-}\right]$. Conversely, by \Cref{th:GroupEmbedding}, we can lift the loop $\gamma_1 \cdot \gamma_2^{-}$ to a loop $\xi$ in $E$ based at $e$. Since for any $t\in [0,1]$,
 	\[
 	p\circ\xi\left(\frac{1}{2}t\right)=\gamma_1 \cdot \gamma_2^{-}\left(\frac{1}{2}t\right)=\gamma_1(t),
@@ -1439,15 +1608,17 @@ Given a covering $p:(E,e)\to (X,x)$, the fundamental group $\pi_1(E,e)$ can be e
     p\circ \xi^{-}\left(\frac{1}{2}t\right)=\gamma_2 \cdot \gamma_1^{-}\left(\frac{1}{2}t\right)=\gamma_2(t).
 	\]
 	Therefore, both $\xi^{-}\left(\frac{1}{2}t\right)$ and $\psi_2(t)$ are liftings of $\gamma_2$ originating from $e$, which implies $\xi^{-}\left(\frac{1}{2}\right)=\psi_2(1)$. Since $\xi\left(\frac{1}{2}\right)=\xi^{-}\left(\frac{1}{2}\right)$, this demonstrates that $\psi_1(1)=\psi_2(1)$.
-}
-\prop{Change Basepoint in Fiber (Groupoid Version)}{
+\end{prf}
+
+\begin{proposition}{Change Basepoint in Fiber (Groupoid Version)}{}
 	Let $p:\mathsf{E}\to\mathsf{B}$ be a covering of groupoid with $\mathsf{E}$ being connected. Suppose $e_1,e_2$ are two objects of $\mathsf{E}$ such that $p(e_1)=p(e_2)=x$, then $p(\mathrm{Aut}_\mathsf{E}(e_1))$ and $p(\mathrm{Aut}_\mathsf{E}(e_2))$ are conjugate subgroups in $\mathrm{Aut}_{\mathsf{B}}(x)$. This gives a bijection between $p^{-1}(x)$ and the conjugacy class of the subgroup $p(\mathrm{Aut}_\mathsf{E}(e_1))$ in $\mathrm{Aut}_{\mathsf{B}}(x)$.
 	\begin{align*}
 		p^{-1}(x) &\longrightarrow \mathrm{Cl}(p(\mathrm{Aut}_\mathsf{E}(e_1)))\\
 		e &\longmapsto p(\mathrm{Aut}_\mathsf{E}(e))
 	\end{align*}
-}
-\pf{ 
+\end{proposition}
+
+\begin{prf} 
 	Since $\mathsf{E}$ is connected, there exists a arrow $\gamma$ in $\mathsf{E}$ from $e_1$ to $e_2$. Then we have a commutative diagram
 	\begin{center}
 		\[
@@ -1468,8 +1639,9 @@ Given a covering $p:(E,e)\to (X,x)$, the fundamental group $\pi_1(E,e)$ can be e
 		\]
 	\end{center}
 	This implies $ p(\gamma)^{-1}p(\mathrm{Aut}_\mathsf{E}(e_2))p(\gamma)\subseteq p(\mathrm{Aut}_\mathsf{E}(e_1))$. Therefore, we have  $ p(\gamma)p(\mathrm{Aut}_\mathsf{E}(e_1))p(\gamma)^{-1}= p(\mathrm{Aut}_\mathsf{E}(e_2))$. The bijective property is clear from $p$ is bijective on star sets.
-}
-\cor{Change Basepoint in Fiber}{
+\end{prf}
+
+\begin{corollary}{Change Basepoint in Fiber}{}
 	Let $E$ be a path-connected topological space and $p:E\to X$ be a covering. Suppose $x\in X$ and $e_1,e_2\in p^{-1}(x)$. Then we have a bijection
 	\begin{align*}
 		p^{-1}(x) &\longrightarrow \mathrm{Cl}(p_*(\pi_1(E,e_1)))\\
@@ -1479,10 +1651,11 @@ Given a covering $p:(E,e)\to (X,x)$, the fundamental group $\pi_1(E,e)$ can be e
 	$$
 	p_*([\gamma])p_*(\pi_1(E,e_1))p_*([\gamma])^{-1}=p_*(\pi_1(E,e_2)).
 	$$
-}
+\end{corollary}
+
 \section{Monodromy Action}
 
-\dfn{Monodromy Action (Groupoid Version)}{
+\begin{definition}{Monodromy Action (Groupoid Version)}{}
 	Let $p:\mathsf{E}\to\mathsf{B}$ be a covering of groupoids. The \textbf{monodromy of the covering $p$} is a functor $\mathrm{Fib}_{\mathsf{E}}:\mathsf{B}\to\mathsf{Set}$ defined as follows
 	\begin{equation*}
 		\begin{tikzcd}[ampersand replacement=\&]
@@ -1492,20 +1665,25 @@ Given a covering $p:(E,e)\to (X,x)$, the fundamental group $\pi_1(E,e)$ can be e
 			y \& \& \& p^{-1}(y)\&\ni\& e'
 		\end{tikzcd}
 	\end{equation*}
-	where $e'$ is the target of the morphism $(p^e)^{-1}(\gamma)\in\mathrm{St}(e)$.
-}
+	where $e'$ is the target of the morphism $\widetilde{\gamma}^e=(p^e)^{-1}(\gamma)\in\mathrm{St}(e)$.
+\end{definition}
+
+
 If we restricts $\mathrm{Fib}_{\mathsf{E}}$ to one object $x\in\mathsf{B}$, then we get a group action $\mathrm{Aut}_{\mathsf{B}}(x)\to\mathrm{Aut}_{\mathsf{Set}}(p^{-1}(x))$, which can also be written as
 \begin{align*}
 	\mathrm{Aut}_{\mathsf{B}}(x)\times p^{-1}(x) &\longrightarrow p^{-1}(x)\\
 	(\gamma, e) &\longmapsto \gamma\cdot e:=\mathrm{Fib}_{\mathsf{E}}(\gamma)(e)
 \end{align*}
-Given any $e\in p^{-1}(x)$, we have $\mathrm{Stab}_{\mathrm{Aut}_{\mathsf{B}}(x)}(e)=p(\mathrm{Aut}_{\mathsf{E}}(e))$ and the following $\mathrm{Aut}_{\mathsf{B}}(x)$-set isomorphism
-\begin{align*}
-	\mathrm{Aut}_{\mathsf{B}}(x)/p(\mathrm{Aut}_{\mathsf{E}}(e)) &\stackrel{\sim}{\longrightarrow} \mathrm{Aut}_{\mathsf{B}}(x)e\\
-	\gamma\hspace{1pt}p(\mathrm{Aut}_{\mathsf{E}}(e)) &\longmapsto \gamma\cdot e
-\end{align*}
 
-\dfn{Monodromy Action}{
+\begin{proposition}{Stabilizer of Monodromy Action (Groupoid Version)}{monodromy_action_isomorphism_groupoid_version}
+	Let $p:\mathsf{E}\to\mathsf{B}$ be a covering of groupoids. Given any $x\in\mathrm{Ob}\left(\mathsf{B}\right)$ and $e\in p^{-1}(x)$, we have $\mathrm{Stab}_{\mathrm{Aut}_{\mathsf{B}}(x)}(e)=p(\mathrm{Aut}_{\mathsf{E}}(e))$ and the following $\mathrm{Aut}_{\mathsf{B}}(x)$-set isomorphism
+	\begin{align*}
+		\mathrm{Aut}_{\mathsf{B}}(x)/p(\mathrm{Aut}_{\mathsf{E}}(e)) &\stackrel{\sim}{\longrightarrow} \mathrm{Aut}_{\mathsf{B}}(x)e\\
+		\gamma\hspace{1pt}p(\mathrm{Aut}_{\mathsf{E}}(e)) &\longmapsto \gamma\cdot e
+	\end{align*}
+\end{proposition}
+
+\begin{definition}{Monodromy Action}{}
 	Let $X$ be a topological space and $p:E\to X$ be a covering. The \textbf{monodromy of the covering $p$} is a functor $\mathrm{Fib}_E:\Pi_1(X)\to \mathsf{Set}$ defined as follows
 	\begin{equation*}
 		\begin{tikzcd}[ampersand replacement=\&]
@@ -1515,9 +1693,9 @@ Given any $e\in p^{-1}(x)$, we have $\mathrm{Stab}_{\mathrm{Aut}_{\mathsf{B}}(x)
 			y \& \& \& p^{-1}(y)\&\ni\& e'=\widetilde{\gamma}^e(1)
 		\end{tikzcd}
 	\end{equation*}
-}
-\pf
-{
+\end{definition}
+
+\begin{prf}
 	Since equivalent paths lift to equivalent paths, $\mathrm{Fib}_E([\gamma])$ is a well-defined map independent of the choice of $\gamma$ in equivalence class $[\gamma]$. To show $\mathrm{Fib}_E$ is a functor, we need to check that $\mathrm{Fib}_E([\gamma\cdot\psi])=\mathrm{Fib}_E([\psi])\circ\mathrm{Fib}_E([\gamma])$. Since both $\widetilde{\gamma}^e\cdot\widetilde{\psi}^{\widetilde{\gamma}^e(1)}$ and $\widetilde{(\gamma\cdot\psi)}^e$ are liftings of $\gamma\cdot\psi$ starting at $e$, we have $\widetilde{\gamma}^e\cdot\widetilde{\psi}^{\widetilde{\gamma}^e(1)}=\widetilde{(\gamma\cdot\psi)}^e$. Then
 	\begin{align*}
 		\mathrm{Fib}_E([\gamma\cdot\psi])(e)&=\widetilde{(\gamma\cdot\psi)}^e(1)\\
@@ -1526,11 +1704,11 @@ Given any $e\in p^{-1}(x)$, we have $\mathrm{Stab}_{\mathrm{Aut}_{\mathsf{B}}(x)
 		&=\mathrm{Fib}_E([\psi])\circ\mathrm{Fib}_E([\gamma])(e).
 	\end{align*}
 	Let $[c_x]$ be the identity element in $\pi_1(X,x)$, then $\mathrm{Fib}_E([c_x])$ is the identity map on $p^{-1}(x)$, hence $\mathrm{Fib}_E$ is a functor.
-}
+\end{prf}
 Monodromy functor can be viewed as a $\Pi_1(X)$-action or a permutation representations of $\Pi_1(X)$. Specially, $\pi_1(X, x)$ acts on the fiber $p^{-1}(x)$ and makes it a $\pi_1(X, x)$-set. 
 
 
-\dfn{Category of Coverings of $X$}{
+\begin{definition}{Category of Coverings of $X$}{}
 	Let $X$ be a topological space. The \textbf{category of coverings over $X$} is a category $\mathsf{Cov}_X$ defined as follows:
 	\begin{itemize}
 		\item The objects of $\mathsf{Cov}_X$ are all coverings of $X$.
@@ -1542,9 +1720,10 @@ Monodromy functor can be viewed as a $\Pi_1(X)$-action or a permutation represen
 			\end{tikzcd}
 		\end{equation*}
 	\end{itemize}
-}
+\end{definition}
 
-\dfn{Monodromy Functor $\mathrm{Fib}$}{
+
+\begin{definition}{Monodromy Functor $\mathrm{Fib}$}{}
 	\textbf{Monodromy functor} $\mathrm{Fib}$ is defined as follows
 	\begin{equation*}
 		\begin{tikzcd}[ampersand replacement=\&]
@@ -1563,12 +1742,14 @@ Monodromy functor can be viewed as a $\Pi_1(X)$-action or a permutation represen
 							 \& p^{-1}_2(y) \arrow[r, "{\mathrm{Fib}_{E_2}({[\gamma]})}"]                  \& p^{-1}_2(x)                
 				\end{tikzcd}
 	\end{equation*}
-}
-\pf{
+\end{definition}
+
+\begin{prf}
 	We need to first check the $\mathrm{Fib}(f)$ is natural. Suppose $e_1\in E_1$ and $e_2=f(e_1)\in E_2$. We need to show that $\mathrm{Fib}_{E_2}([\gamma])(e_2)=f(\mathrm{Fib}_{E_1}([\gamma])(e_1))$, i.e. $\widetilde{\gamma}^{e_2}(1)=f\circ \widetilde{\gamma}^{e_1}(1)$. Note that $p_2\circ \left(f\circ  \widetilde{\gamma}^{e_1}\right)=p_1\circ  \widetilde{\gamma}^{e_1}=\gamma$ and $f\circ  \widetilde{\gamma}^{e_1}(0)=f(e_1)=e_2$. We see both $f\circ  \widetilde{\gamma}^{e_1}$ and $\widetilde{\gamma}^{e_2}$ are liftings of $\gamma$ starting at $e_2$. Hence they are equal and we get $\widetilde{\gamma}^{e_2}(1)=f\circ \widetilde{\gamma}^{e_1}(1)$.\\
 	What left is to show that $\mathrm{Fib}$ is a functor. Suppose $f:E_1\to E_2$ and $g:E_2\to E_3$ are two morphisms in $\mathsf{Cov}_X$. Note $\mathrm{Fib}(f)$ is just a family of restrictions of $f$, it clear to see $\mathrm{Fib}(g\circ f)=\mathrm{Fib}(g)\circ \mathrm{Fib}(f)$. Also, $\mathrm{Fib}([c_x])=\mathrm{id}_{p^{-1}(x)}$ for any $x\in X$. Hence $\mathrm{Fib}$ is a functor.
-}
-\prop{Fundamental Groupoid of Covering Space}{
+\end{prf}
+
+\begin{proposition}{Fundamental Groupoid of Covering Space}{}
 Let $p:E \to X$ be a covering. Then $\Pi_1(E)$ is isomorphic to the category of elements 
 $$
 \Pi_1(E) \cong \int_{\Pi_1(X)} \operatorname{Fib}_E\cong  \left(\{*\} \downarrow \operatorname{Fib}_E\right)
@@ -1578,8 +1759,9 @@ whose
 	\item objects are pairs $(x, \widetilde{x})$ consisting of a point $x \in X$ and en element $\widetilde{x} \in \operatorname{Fib}_E(x)=p^{-1}(x)$;
 	\item morphisms between $(x, \widetilde{x})$ and $\left(y, \widetilde{y}\right)$ are morphisms $[\gamma]: x \rightarrow y$ in $\Pi_1(X)$ such that $\operatorname{Fib}_E([\gamma])(\widetilde{x})=\widetilde{y}$.
 \end{itemize}
-}
-\pf{
+\end{proposition}
+
+\begin{prf}
 	Define a functor $G:\Pi_1(E)\to \int_{\Pi_1(X)} \operatorname{Fib}_E$ as follows:
 	\begin{equation*}
 		\begin{tikzcd}[ampersand replacement=\&]
@@ -1607,37 +1789,47 @@ whose
 		\widetilde{\gamma}^{\widetilde{x}}(1)=\operatorname{Fib}_E([\gamma])(\widetilde{x})=\widetilde{y}.
 	\]
 	Now we can check $F\circ G=\mathrm{id}_{\Pi_1(E)}$ and $G\circ F=\mathrm{id}_{\int_{\Pi_1(X)} \operatorname{Fib}_E}$. Hence $G$ is an isomorphism.
-}
-\prop[connectedness_and_monodromy]{}{
+\end{prf}
+
+\begin{proposition}{}{connectedness_and_monodromy}
 	Let $X$ be a path-connected topological space and let $E \rightarrow X$ be a covering. Then
 	\begin{itemize}
 		\item $\mathrm{Fib}_E$ is a transitive action if and only if $E$ is path-connected.
 		\item $\mathrm{Fib}_E$ is a transitive and free action if and only if $E$ is simply connected.
 	\end{itemize}
-}
-\pf{$E$ is path-connected if and only if for any $e_1,e_2\in E$ there exists a path $\psi$ in $E$ such that $\psi(0)=e_1$ and $\psi(1)=e_2$. According to the isomorphism $\Pi_1(E) \cong \int_{\Pi_1(X)} \operatorname{Fib}_E$, we see this is equivalent to that for any $e_1,e_2\in E$ there exists a path $\gamma$ in $X$ from $p(e_1)$ to $p(e_2)$ which lfits to $\psi$. Again this is equivalent to that for any $e_1,e_2\in E$ there exists a path $\gamma$ in $X$ such that $\mathrm{Fib}_E([\gamma])(e_1)=e_2$, i.e $\mathrm{Fib}_E$ is a transitive action.
+\end{proposition}
+
+\begin{prf}$E$ is path-connected if and only if for any $e_1,e_2\in E$ there exists a path $\psi$ in $E$ such that $\psi(0)=e_1$ and $\psi(1)=e_2$. According to the isomorphism $\Pi_1(E) \cong \int_{\Pi_1(X)} \operatorname{Fib}_E$, we see this is equivalent to that for any $e_1,e_2\in E$ there exists a path $\gamma$ in $X$ from $p(e_1)$ to $p(e_2)$ which lfits to $\psi$. Again this is equivalent to that for any $e_1,e_2\in E$ there exists a path $\gamma$ in $X$ such that $\mathrm{Fib}_E([\gamma])(e_1)=e_2$, i.e $\mathrm{Fib}_E$ is a transitive action.
 
 If $E$ is simply connected, then for any $e\in E$ we have $\pi(E,e)=[c_e]$ is trivial. Let $x=p(e)$. According to the isomorphism $\Pi_1(E) \cong \int_{\Pi_1(X)} \operatorname{Fib}_E$, we see this is equivalent to that $[c_x]$ is the unique loop in $\pi(X,x)$ which can lift to a loop in $E$ based at $e$. Therefore, $[c_x]$ is the only element in $\pi_1(X,x)$ such that $\mathrm{Fib}_E([c_x])(e)=e$. Hence $\mathrm{Fib}_E$ is a free action. The converse is similar.
-}
+\end{prf}
 
 
-\prop{Stabilizer of Monodromy Action}{
+
+\begin{proposition}{Stabilizer of Monodromy Action}{}
 	Let $X$ be a topological space and $p:(E,e)\to (X,x)$ be a covering. The monodromy action $\mathrm{Fib}_E:\Pi_1(X)\to \mathsf{Set}$ on the hom set $\mathrm{Aut}_{\Pi_1(X)}(x)=\pi_1(X, x)$ is a group action $\mathrm{Fib}_E:\pi_1(X, x)\to \mathrm{Aut}_{\mathsf{Set}}(p^{-1}(x))$. The stabilizer subgroup of $\pi_1(X, x)$ at $e$ is $p_*(\pi_1(E, e))$
 	\[
 	\mathrm{Stab}_{\pi_1(X, x)}(e)=p_*(\pi_1(E, e)).
 	\]
+	and we have the following $\pi_1(X, x)$-set isomorphism
+	\begin{align*}
+		\pi_1(X, x)/p_*\left(\pi_1(E, e)\right) &\stackrel{\sim}{\longrightarrow} \pi_1(X, x)e\\
+		[\gamma]\hspace{1pt}p_*(\mathrm{Aut}_{\mathsf{E}}(e)) &\longmapsto \gamma\cdot e
+	\end{align*}
 	The index of $p_*(\pi_1(E, e))$ in $\pi_1(X, x)$ is the cardinality of the orbit of $e$ under the monodromy action. If $X$ and $E$ are path-connected, then monodromy action is transitive and we have
 	\[
 	\left[ \pi_1(X, x):p_*(\pi_1(E, e))\right]=\left|p^{-1}(x)\right|.
 	\]
-}
-\pf{
+\end{proposition}
+
+\begin{prf}
 	If $[\gamma]\in p_*(\pi_1(E, e))$, we can suppose $\gamma=p\circ \psi$ for some loop $\psi:I\to E$ starting at $e$. Then $\mathrm{Fib}_E([\gamma])(e) = \widetilde{\gamma}^{e}(1)=\psi(1)=e$. Conversely, if $[\gamma]\in\pi_1(X,x)$ and $\mathrm{Fib}_E([\gamma])(e)=e$, then $\widetilde{\gamma}^{e}(1)=e$. Thus we have $\left[\widetilde{\gamma}^{e}\right]\in \pi_1(E,e)$ and  $\gamma=p\circ \widetilde{\gamma}^{e}$, which implies $[\gamma]\in p_*(\pi_1(E, e))$. Therefore, we have $\mathrm{Stab}_{\pi_1(X, x)}(e)=p_*(\pi_1(E, e))$.
-}
+\end{prf}
+
 
 If $X$ is a topological space with certain connectedness conditions, then any $\Pi_1(X)$-set can be topologized as a covering space of $X$.
 
-\dfn{Reconstructing Functor $\mathrm{Rec}:\left[\Pi_1(X),\mathsf{Set}\right] \to\mathsf{Cov}_X$}{
+\begin{definition}{Reconstructing Functor $\mathrm{Rec}:\left[\Pi_1(X),\mathsf{Set}\right] \to\mathsf{Cov}_X$}{}
 	Let $X$ be a locally path-connected and semi-locally simply connected topological space and let $\rho:\Pi_1(X)\to \mathsf{Set}$ be a functor. We define a covering space $E(\rho)$ of $X$ as follows:
 	\begin{itemize}
 		\item The underlying set of $E(\rho)$ is $\coprod_{x\in X}\rho(x)=\left\{(x,e)\mid x\in X,e\in\rho(x)\right\}$.
@@ -1661,9 +1853,10 @@ If $X$ is a topological space with certain connectedness conditions, then any $\
 			\rho_2 \& \& \& E(\rho_2)\&\ni\& (x, f_x(e))
 		\end{tikzcd}
 	\end{equation*}
-}
+\end{definition}
 
-\thm[fundamental_thm_covering_spaces]{Fundamental Theorem of Covering Spaces}{
+
+\begin{theorem}{Fundamental Theorem of Covering Spaces}{fundamental_thm_covering_spaces}
 	Let $X$ be a locally path-connected and semi-locally simply connected topological space. Then the operations on
 	\begin{itemize}
 		\item extracting the monodromy $\operatorname{Fib}_E$ of a covering space $E$ over $X$
@@ -1676,36 +1869,54 @@ If $X$ is a topological space with certain connectedness conditions, then any $\
 		\end{tikzcd}
 	\end{equation*}
 	between the category of covering spaces, and the category of permutation groupoid representations of the fundamental groupoid of $X$.
-}
+\end{theorem}
+
 
 
 
 \section{Universal Covering}
 
-\prop[uniqueness_simply_connected_covering]{Uniqueness of Simply Connected Covering}{
+\begin{proposition}{Uniqueness of Simply Connected Covering}{uniqueness_simply_connected_covering}
 	If $X$ is a connected and locally path-connected topological space and $p_1:E_1\to X$ and $p_2:E_2\to X$ be two simply connected coverings, then $p_1$ and $p_2$ are isomorphic coverings.
-}
-\pf{
+\end{proposition}
+
+\begin{prf}
 	Let $p_1:E_1\to X$ and $p_2:E_2\to X$ be two simply connected coverings. Since $X$ is locally path-connected and $p_1,p_2$ are locally homeomorphisms, $E_1$ and $E_2$ are also locally path-connected. Suppose $p(e_1)=p(e_2)=x$ for some $e_1\in E_1$ and $e_2\in E_2$. Note $p_{1\,*}(\pi(E_1,e_1))=\{1_{\pi(X,x)}\}$. By \Cref{th:lifting_criterion}, there exists $f:(E_1,e_1)\to (E_2,e_2)$ such that $p_2\circ f=p_1$. Similarly, there exists $g:(E_2,e_2)\to (E_1,e_1)$ such that $p_1\circ g=p_2$. Since $p_1\circ (g\circ f)=p_2\circ f=p_1$ and $g\circ f(e_1)=e_1$, the uniqueness of lift guarantees $g\circ f=1_{E_1}$. Similarly we can show $f\circ g=1_{E_2}$. Therefore, $f$ is an isomorphism between $p_1$ and $p_2$.
-}
-\dfn{Universal Covering of Groupoids}{
+\end{prf}
+
+\begin{definition}{Universal Covering of Groupoids}{}
 	Let $p:\mathsf{E}\to \mathsf{B}$ be a covering of groupoids with $\mathsf{E}$, $\mathsf{B}$ being connected. $p$ is called a \textbf{universal covering of $\mathsf{B}$} if one of the following equivalent conditions holds:
 	\begin{itemize}
 		\item $p(\mathrm{Aut}_{\mathsf{E}}(e))$ is trivial
 		\item $\mathrm{Aut}_{\mathsf{B}}(x)$ acts freely on $p^{-1}(x)$
 	\end{itemize}
-}
-\prop{}{
-	If $p:\mathsf{E}\to \mathsf{B}$ is a universal covering of connected groupoids, then for any $x\in \mathsf{B}$, we have the following $\mathrm{Aut}_{\mathsf{B}}(x)$-set isomorphism: 
+\end{definition}
+
+\begin{proposition}{}{}
+	If $p:\mathsf{E}\to \mathsf{B}$ is a universal covering of connected groupoids, then for any $x\in \mathsf{B}$, $\mathrm{Aut}_{\mathsf{B}}(x)$ is isomorphic to $ p^{-1}(x)$ as $\mathrm{Aut}_{\mathsf{B}}(x)$-sets. For any $e\in E$, we can define a $\mathrm{Aut}_{\mathsf{B}}(x)$-equivariant isomorphism: 
 	\begin{align*}
-		\mathrm{Aut}_{\mathsf{B}}(x) &\stackrel{\sim}{\longrightarrow} p^{-1}(x)\\
+		\mathrm{Aut}_{\mathsf{B}}(x) &\stackrel{\sim}{\longrightarrow} p^{-1}(x)
+		\\
 		\gamma &\longmapsto \gamma\cdot e
 	\end{align*}
-}
-\dfn{Universal Covering}{
+	For any $\gamma,\psi\in \mathrm{Aut}_{\mathsf{B}}(x)$, we have $\gamma\cdot(\psi\cdot e)=(\gamma\circ \psi)\cdot e$, which is illustrated by the following equivaraint diagram 
+	\begin{equation*}
+		\begin{tikzcd}[ampersand replacement=\&]
+			\mathrm{Aut}_{\mathsf{B}}(x) \arrow[d, "{\sim}"'] \& \psi \arrow[d, mapsto , "{\sim}"'] \arrow[r, mapsto, "\gamma\circ "] \& \gamma\circ \psi  \arrow[d, mapsto, "{\sim}"] \\
+			p^{-1}\left(x\right)\& \psi \cdot e \arrow[r, mapsto, "{\gamma\cdot }"'] \&\gamma\cdot(\psi\cdot e)
+		\end{tikzcd}
+	\end{equation*}
+\end{proposition}
+
+\begin{prf}
+	Since $p$ is a universal covering of connected groupoids, $\mathrm{Aut}_{\mathsf{B}}(x)$ acts freely and transitively on $p^{-1}(x)$. Thus it is a corollary of \Cref{th:monodromy_action_isomorphism_groupoid_version}.
+\end{prf}
+
+\begin{definition}{Universal Covering}{}
 	Let $X$ be a topological space which is connected and locally path-connected. If $p: E \rightarrow X$ is a simply connected covering, then it is called a \textbf{universal covering} of $X$. If the universal covering of $X$ exists, it must be unique up to isomorphism.
-}
-\prop{Existence of Universal Covering}{
+\end{definition}
+
+\begin{proposition}{Existence of Universal Covering}{}
 	If $X$ is a topological space which is 
 	\begin{itemize}
 		\item connected,
@@ -1713,8 +1924,9 @@ If $X$ is a topological space with certain connectedness conditions, then any $\
 		\item semi-locally simply connected,
 	\end{itemize}
 	then the universal covering of $X$ exists.
-}
-\pf{
+\end{proposition}
+
+\begin{prf}
 	By \Cref{th:connectedness_and_monodromy} and \Cref{th:fundamental_thm_covering_spaces}, it is sufficient to show there exists a transitive and free $\Pi_1(X)$-action. In fact, for any $x\in X$, the Hom functor $\mathrm{Hom}_{\Pi_1(X)}(x,-)$ gives such a $\Pi_1(X)$-action, which can be described as follows
 	\begin{equation*}
 		\begin{tikzcd}[ampersand replacement=\&]
@@ -1731,62 +1943,71 @@ If $X$ is a topological space with certain connectedness conditions, then any $\
 	For any $[\psi_1],[\psi_2]\in\mathrm{Hom}(x,y)$, there exists a loop $[\xi]=[\psi_1^{-}\cdot\psi_2]\in \pi_1(y,X)$ such that $[\xi]*[\psi_1]=[\psi_2]$. Therefore, the action is transitive. 
 	
 	Given $[\gamma]\in\pi_1(y,X)$, if $[\gamma]*[\psi]=[\psi]$, then $[\psi\cdot\gamma]=[\psi]$, which implies $[\gamma]=[\psi^{-}]\cdot[\psi\cdot\gamma]=[\psi^{-}]\cdot[\psi]=[c_y]$. Therefore, the action is free.
-}
+\end{prf}
 
-\dfn{Normal Covering of Groupoids}{
+
+\begin{definition}{Normal Covering of Groupoids}{}
 	Let $p:\mathsf{E}\to \mathsf{B}$ be a covering of groupoids with $\mathsf{E}$, $\mathsf{B}$ being connected. If $p(\mathrm{Aut}_{\mathsf{E}}(e))\lhd \mathrm{Aut}_{\mathsf{B}}(p(e))$, then $p$ is called a \textbf{normal covering of $p$}.
-}
-\dfn{Normal Covering}{
+\end{definition}
+
+\begin{definition}{Normal Covering}{}
 	A covering $p: E \rightarrow X$ is called \textbf{normal} if for each $x \in X$ and any $e_1,e_2\in p^{-1}(x)$, there exists an isomorphism $\phi\in \mathrm{Aut}_{\mathsf{Cov}_X}(p)$ such that $\phi(e_1)=e_2$.
-}
-\prop{}{
+\end{definition}
+
+\begin{proposition}{}{}
 	Let $p:\left(E, e\right) \rightarrow\left(X, x\right)$ where $E$ is path-connected and $X$ is path-connected and locally path-connected. Let $H=p_*\left(\pi_1\left(E,e\right)\right) \subseteq \pi_1\left(X, x\right)$. Then
 	\begin{enumerate}[(i)]
 		\item This covering $p$ is normal if and only if $H\lhd\pi_1\left(X, x_0\right)$.
 		\item  $\mathrm{Aut}_{\mathsf{Cov}_X}(p)\cong\mathrm{N}_{\pi_1\left(X, x_0\right)}(H) / H$.
 In particular, if $p$ is a normal covering, $\mathrm{Aut}_{\mathsf{Cov}_X}(p)\cong \pi_1\left(X, x_0\right) / H$. If $p$ is a universal covering, we have $G(\tilde{X}) \cong \pi_1(X)$.
 	\end{enumerate}
-}
-\prop{}{
+\end{proposition}
+
+\begin{proposition}{}{}
 	If an action of a group $G$ on a space $E$ is even, then:
 	\begin{enumerate}[(i)]
 		\item The quotient map $p: E \rightarrow E / G$ is a normal covering.
 		\item If $E$ is path-connected, then $G$ is the group of deck transformations of the covering $p:E \rightarrow E / G$ .
 		\item If $E$ is path-connected and locally pathconnected, then $G$ is isomorphic to $\pi_1(E / G) / p_*\left(\pi_1(E)\right)$ 
 	\end{enumerate}
-}
+\end{proposition}
 
 
-\prop{}{
+
+\begin{proposition}{}{}
 	Let $p: E \to X$ be a covering, let $x \in X$, and let $e, e^{\prime}$ be any two points in $p^{-1}(x)$.
 	\begin{enumerate}[(i)]
 		\item $p_*\left(\pi_1\left(E, e^{\prime}\right)\right)$ is conjugate to $p_*\left(\pi_1(E, e)\right)$.
 		\item As $e'$ runs through $F_b$, the groups $p_*\left(\pi_1\left(E, e^{\prime}\right)\right)$ run through all conjugates of $p_*\left(\pi_1(E, e)\right)$ in $\pi_1(B, b)$.
 	\end{enumerate}
-}
-\pf{
+\end{proposition}
+
+\begin{prf}
 	
-}
+\end{prf}
+
 \chapter{Homology}
 \section{Simplicial homology}
 
-\dfn{Geometrically Independent}{
+\begin{definition}{Geometrically Independent}{}
 	Let $\left\{a_0, a_1, \cdots, a_k\right\}$ be points in $\mathbb{R}^n$. This set is said to be \textbf{geometrically independent} if the vectors
 $$
 a_1-a_0, \quad a_2-a_0, \quad \cdots, \quad a_k-a_0
 $$
 are linearly independent (as in linear algebra).
-}
+\end{definition}
 
-\dfn{Simplex}{
+
+\begin{definition}{Simplex}{}
 Let $\left\{a_0, a_1, \ldots, a_k\right\}$ be a geometrically independent set in $\mathbb{R}^n$. A $\textbf{$k$-simplex } \sigma$ spanned by these points is defined by
 $$
 \left\{x\in \mathbb{R}^n\;\left|\; x=\sum_{i=0}^k t_i a_i,\;\sum_{i=0}^k t_i=1,\;t_i \geq 0\text{ for }i = 0,1,\cdots, k\right.\right\}.
 $$
-}
+\end{definition}
+
 
 \noindent A $k$-simplex spanned by $a_0, a_1, \ldots, a_k$ is the convex hull of these points.
-\dfn{}{
+\begin{definition}{}{}
 Let $\sigma$ be a $k$-simplex spanned by $\left\{a_0, a_1, \ldots, a_k\right\}$.
 \begin{enumerate}[(i)] 
 	\item The points $a_0, a_1, \ldots, a_k$ are called the \textbf{vertices} of $\sigma$.
@@ -1797,46 +2018,54 @@ Let $\sigma$ be a $k$-simplex spanned by $\left\{a_0, a_1, \ldots, a_k\right\}$.
 	\item The union of all proper faces of $\sigma$ is called the \textbf{boundary} of $\sigma$, denoted by $\partial \sigma$.
 	\item $\sigma-\partial \sigma$ is called the \textbf{interior} of $\sigma$.
 \end{enumerate}
-}
-\dfn{Simplicial Complex}{
+\end{definition}
+
+\begin{definition}{Simplicial Complex}{}
 A \textbf{simplicial complex} $K$ is a collection of simplices in $\mathbb{R}^n$ (of possibly varying dimensions) such that
 \begin{enumerate}[(i)] 
 	\item Any face of a simplex in $K$ is also in $K$.
 	\item The intersection of any two simplices in $K$ is a face of each of the two simplices, whenever the the intersection is non-empty.
 \end{enumerate}
-}
+\end{definition}
 
-\dfn{Subcomplex}{
+
+\begin{definition}{Subcomplex}{}
 Let $K$ be a simplicial complex. If $L\subseteq K$ and $L$ is a simplicial complex, then $L$ is called a \textbf{subcomplex} of $K$.
-}
+\end{definition}
 
-\dfn{$p$-Skeleton}{
+
+\begin{definition}{$p$-Skeleton}{}
 Given a simplicial complex $K$, the collection of all simplices of $K$ of dimension at $\operatorname{most} p$ is called the $\textbf{$p$-skeleton}$ of $K$ and is denoted $K^{(p)}$.
-}
+\end{definition}
+
 For example, $K^{(0)}$ is the set of vertices of $K$. $K^{(p)}$ is a subcomplex of $K$.
 
-\dfn{Dimension Of A Simplicial Complex}{
+\begin{definition}{Dimension Of A Simplicial Complex}{}
 If there exists an integer $N$ such that
 $$
 K^{(N-1)} \neq K \quad \text { and } \quad K^{(p)}=K \text { for }p\ge N ,
 $$
 then $K$ is said to have \textbf{dimension} $N$. Otherwise it is said to have infinite dimension.
-}
-\dfn{Finite Simplicial Complex}{
-A simplicial complex $K$ is said to be \textbf{finite} if $K^{(0)}$ is finite.
-}
+\end{definition}
 
-\dfn{Realization Of A Simplicial Complex}{
+\begin{definition}{Finite Simplicial Complex}{}
+A simplicial complex $K$ is said to be \textbf{finite} if $K^{(0)}$ is finite.
+\end{definition}
+
+
+\begin{definition}{Realization Of A Simplicial Complex}{}
 The realization of a simplicial complex $K$ is a topological space $(|K|, \tau)$ such that
 \begin{enumerate}[(i)] 
 	\item $|K|$ is the union of all simplices in $K$, that is $|K|=\bigcup_{\sigma\in K}\sigma$.
 	\item $F\subseteq |K|$ is a closed set in $(|K|, \tau)\iff$ for all simplices $\sigma\in K$, $F\cap \sigma$ is a closed set in $(\sigma,\nu_\sigma)$, where $\nu_\sigma$ is the subspace topology of Euclidean topology.
 \end{enumerate}
-}
+\end{definition}
+
 For finite simplicial complexes $K$ with finite dimension, the topology $\tau$ coincides with the subspace topology of Euclidean topology. 
-\dfn{Triangulation}{
+\begin{definition}{Triangulation}{}
 	A \textbf{triangulation} of a topological space $X$ is a simplicial complex $K$ together with a homeomorphism $\phi:|K|\to X$.
-}
+\end{definition}
+
 All smooth manifolds are triangulable. For example, torus admits the following triangulation:
 \begin{center}
 	\begin{tikzpicture}[add_padding, x=1.5cm,y=1.5cm]
@@ -1874,7 +2103,7 @@ All smooth manifolds are triangulable. For example, torus admits the following t
 	\end{tikzpicture}
 \end{center}
 
-\dfn{Orientation Of Simplex}{
+\begin{definition}{Orientation Of Simplex}{}
 	Suppose $\sigma$ is a $k$-simplex spanned by $\left\{a_0, a_1, \ldots, a_k\right\}$. Let $V_{\sigma}$ to be the set of all ordered $k+1$-tuples of vertices of $\sigma$:
 	\begin{align*}
 		V_{\sigma}=\left\{\left(a_{s(0)},a_{s(1)},\cdots,a_{s(k)}\right)\mid s\in \mathrm{Sym}\left(\left\{0,1,\cdots,k\right\}\right)\right\}.
@@ -1887,59 +2116,69 @@ All smooth manifolds are triangulable. For example, torus admits the following t
 	\begin{align*}
 		\left[a_{s(0)},a_{s(1)},\cdots,a_{s(k)}\right].
 	\end{align*}
-}
-Every $k$-simplex has exactly $2$ orientations.
-\dfn{Oriented Simplex}{
-	Let $\sigma$ be a $k$-simplex spanned by $\left\{a_0, a_1, \ldots, a_k\right\}$. An \textbf{oriented $k$-simplex} is a pair $\left(\sigma, \left[a_{s(0)},a_{s(1)},\cdots,a_{s(k)}\right]\right)$, where $\sigma$ is a $k$-simplex and $\left[a_{s(0)},a_{s(1)},\cdots,a_{s(k)}\right]$ is an orientation of $\sigma$. The oriented $k$-simplex can be denoted by $\left\langle a_{s(0)},a_{s(1)},\cdots,a_{s(k)}\right\rangle$.
-}
+\end{definition}
 
-\dfn{Simplicial Chain Group}{
+Every $k$-simplex has exactly $2$ orientations.
+\begin{definition}{Oriented Simplex}{}
+	Let $\sigma$ be a $k$-simplex spanned by $\left\{a_0, a_1, \ldots, a_k\right\}$. An \textbf{oriented $k$-simplex} is a pair $\left(\sigma, \left[a_{s(0)},a_{s(1)},\cdots,a_{s(k)}\right]\right)$, where $\sigma$ is a $k$-simplex and $\left[a_{s(0)},a_{s(1)},\cdots,a_{s(k)}\right]$ is an orientation of $\sigma$. The oriented $k$-simplex can be denoted by $\left\langle a_{s(0)},a_{s(1)},\cdots,a_{s(k)}\right\rangle$.
+\end{definition}
+
+
+\begin{definition}{Simplicial Chain Group}{}
 	Let $K$ be a simplicial complex and $F(K)$ be the free abelian group generated by all the oriented $k$-simplices in $K$. The $k$\textbf{-chain group} of $K$, denoted by $C_k(K)$, is defined as $F(K)$ modulo the relations
 	\begin{align*}
 		\left\langle a_{0}, \cdots ,a_{i},\cdots,a_{j},\cdots a_{k}\right\rangle=-\left\langle a_{0},\cdots ,a_{j},\cdots,a_{i},\cdots,a_{k}\right\rangle.
 	\end{align*}
-}
+\end{definition}
+
 $C_k(K)$ is a free abelian group.
-\dfn{Boundary Homomorphism}{
+\begin{definition}{Boundary Homomorphism}{}
 	Given a simplicial complex $K$, we can define the boundary homomorphism $\partial_k:C_k(K)\rightarrow C_{k-1}(K)$ on the basis of $C_k(K)$ by
 	\begin{align*}
 		\partial_k\left\langle a_{0},a_{1},\cdots,a_{k}\right\rangle=\sum_{i=0}^k(-1)^{i}\left\langle a_{0},a_{1},\cdots,a_{i-1},a_{i+1},\cdots,a_{k}\right\rangle,
 	\end{align*}
 	and then extend it to the whole $C_k(K)$ linearly.
-}
+\end{definition}
 
-\dfn{Cycle Group}{
+
+\begin{definition}{Cycle Group}{}
 	Let $K$ be a simplicial complex. The $k$-cycle group of $K$, denoted by $Z_k(K)$,  is defined as $\ker\partial_k$.
-}
+\end{definition}
 
-\dfn{Boundary Group}{
+
+\begin{definition}{Boundary Group}{}
 	Let $K$ be a simplicial complex. The $k$-boundary group of $K$, denoted by $B_k(K)$, is defined as $\mathrm{im}\,\partial_{k+1}$.
-}
+\end{definition}
 
-\prop{Chain Complex}{
+
+\begin{proposition}{Chain Complex}{}
 	Let $K$ be a simplicial complex. Then we have $\partial_k\circ\partial_{k+1}=0$ or equivalently $B_k(K)\subseteq Z_k(K)$. Therefore we have a chain complex 
 	\begin{align*}
 		\cdots\stackrel{\partial_{k+2}}{\longrightarrow}  C_{k+1}(K)\stackrel{\partial_{k+1}}{\longrightarrow} C_{k}(K)\stackrel{\partial_{k}}{\longrightarrow} \cdots\stackrel{\partial_{2}}{\longrightarrow}  C_1(K)\stackrel{\partial_{1}}{\longrightarrow} C_0(K)\stackrel{\partial_{0}}{\longrightarrow}  0
 	\end{align*}
 	in $\mathsf{Ch}(\mathsf{Ab})$. 
-}
+\end{proposition}
 
-\dfn{Simplical Homology Group}{
+
+\begin{definition}{Simplical Homology Group}{}
 	For a simplicial complex $K$, the $k$-th homology group, $H_k(K)$ is defined to be the quotient group $Z_k(K) / B_k(K)$. An element of $H_k(K)$ is called a $k$-dimensional homology class of $K$. We say cycles $z_1, z_2\in Z_k(K)$ are homologous, written as $z_1\sim z_2$, if $z_1-z_2 \in B_k(K)$. 
-}
+\end{definition}
+
 
 \section{Singular homology}
-\dfn{Standard Simplex}{
+\begin{definition}{Standard Simplex}{}
 	For $n \geq 0$, the \textbf{standard $n$-simplex} $\Delta^n$ is the set $\Delta^n \subseteq \mathbb{R}^{n+1}$ defined by
 $$
 \Delta^n=\left\{\left(t_0, \cdots, t_n\right) \in \mathbb{R}^{n+1}\,\middle\vert\, \sum_{i=0}^n t_i=1, t_i \geq 0 \text { for all } i\right\} .
 $$
 Assume that $(e_0,\cdots,e_n)$ is the standand orthonormal basis of $\mathbb{R}^{n+1}$. Another way to describe $\Delta^n$ is to say that it is the $n$-simplex with vertices $\{e_0,\cdots,e_n\}$.
-}
-\dfn{Singular Simplex}{
+\end{definition}
+
+\begin{definition}{Singular Simplex}{}
 	Let $X$ be a topological space. A \textbf{singular $n$-simplex} in $X$ is a continuous map $\sigma: \Delta^n \rightarrow X$. All the singular simplices in $X$ constitute $\mathrm{Hom}_{\mathsf{Top}}\left(\Delta^n, X\right)$.
-}
-\dfn{Singular Chain Group Functor $C_k$}{
+\end{definition}
+
+\begin{definition}{Singular Chain Group Functor $C_k$}{}
 	Given a topological space $X$, the \textbf{singular $k$-chain group} $C_k(X)$ of $X$ is the free abelian group generated by the singular simplices in $X$. \\
 	The singular chain group functor $C_k:\mathsf{Top}\to\mathsf{Ab}$ can be defined as the composition of hom functor and free functor
 	\begin{align*}
@@ -1953,19 +2192,21 @@ Assume that $(e_0,\cdots,e_n)$ is the standand orthonormal basis of $\mathbb{R}^
 			Y \& \& \& C_k(Y)\&\ni\&f\circ \sigma
 		\end{tikzcd}
 	\end{equation*}
-}
+\end{definition}
 
-\dfn{Face Inclusion}{
+
+\begin{definition}{Face Inclusion}{}
 	For any $k\ge 0$, we can define the \textbf{$i$-th face inclusion} by
 	\begin{align*}
 		l_i: \Delta^{k} &\longrightarrow  \Delta^{k+1}\\
 		(t_0, \cdots, t_k) &\longmapsto (t_0, \cdots, t_{i-1}, 0, t_{i}, \cdots, t_{k})
 	\end{align*}
 	for $0\leq i\leq k+1$. 
-}
+\end{definition}
+
 Suppose $\{e_0,\cdots,e_{k+1}\}$ is the vertices of $\Delta^{k+1}$. $l_i$ embeds the face opposite to $e_i$ into $\Delta^{k+1}$.
 
-\prop{}{
+\begin{proposition}{}{}
 	If $k\ge 2$, the following diagram commutes:
 	\begin{equation*}
 		\begin{tikzcd}[ampersand replacement=\&]
@@ -1976,8 +2217,9 @@ Suppose $\{e_0,\cdots,e_{k+1}\}$ is the vertices of $\Delta^{k+1}$. $l_i$ embeds
 		\end{tikzcd}			
 	\end{equation*}
 	for $0\le i\le j-1\le k-1$. That is, $l_j\circ l_i=l_i\circ l_{j-1}$.
-}
-\pf{
+\end{proposition}
+
+\begin{prf}
 	If $i<j-1$, then
 	\[
 	\begin{aligned}
@@ -1989,28 +2231,33 @@ Suppose $\{e_0,\cdots,e_{k+1}\}$ is the vertices of $\Delta^{k+1}$. $l_i$ embeds
 		&=(l_j \circ l_i)(t_0, \cdots, t_{k-2}).
 	\end{aligned}
 	\]
-}
+\end{prf}
 
-\dfn{Boundary Homomorphism}{
+
+\begin{definition}{Boundary Homomorphism}{}
 	Given a topological space $X$, we can define the boundary map $\partial_k:C_k(X)\rightarrow C_{k-1}(X)$ on $\sigma:\Delta^k\to X$ by
 	\begin{align*}
 		\partial_k\left(\sigma\right)=\sum_{i=0}^k(-1)^{i}\sigma\circ l_i,
 	\end{align*}
 	and then extend it to the whole $C_k(X)$ linearly.
-}
+\end{definition}
 
-\dfn{Singular Cycle Group}{
+
+\begin{definition}{Singular Cycle Group}{}
 	Let $X$ be a topological. The $k$-cycle group of $K$, denoted by $Z_k(X)$,  is defined as $\ker\partial_k$.
-}
+\end{definition}
 
-\dfn{Singular Boundary Group}{
+
+\begin{definition}{Singular Boundary Group}{}
 	Let $X$ be a topological. The $k$-boundary group of $K$, denoted by $B_k(X)$, is defined as $\mathrm{im}\,\partial_{k+1}$.
-}
+\end{definition}
 
-\prop{}{
+
+\begin{proposition}{}{}
 	Let $X$ be a topological space. Then we have $B_k(X)\subseteq Z_k(X)$ or equivalently $\partial_k\circ\partial_{k+1}=0$.
-}
-\pf{
+\end{proposition}
+
+\begin{prf}
 	\[
 	\begin{aligned}
 		\left(\partial_k\circ\partial_{k+1}\right)(\sigma)&=\partial_{k}\circ\left(\sum_{j=0}^{k+1}(-1)^{j}\sigma\circ l_j\right)\\
@@ -2024,9 +2271,10 @@ Suppose $\{e_0,\cdots,e_{k+1}\}$ is the vertices of $\Delta^{k+1}$. $l_i$ embeds
 		&=0.
 	\end{aligned}
 	\]
-}
+\end{prf}
 
-\dfn{Singular Chain Complex Functor $C_.$}{
+
+\begin{definition}{Singular Chain Complex Functor $C_.$}{}
 	 We have a chain complex $C_{\boldsymbol{\cdot}}(X)$
 	\begin{align*}
 		\cdots\stackrel{\partial_{k+2}}{\longrightarrow}  C_{k+1}(X)\stackrel{\partial_{k+1}}{\longrightarrow} C_{k}(X)\stackrel{\partial_{k}}{\longrightarrow} \cdots\stackrel{\partial_{2}}{\longrightarrow}  C_1(X)\stackrel{\partial_{1}}{\longrightarrow} C_0(X)\stackrel{\partial_{0}}{\longrightarrow}  0
@@ -2039,8 +2287,9 @@ Suppose $\{e_0,\cdots,e_{k+1}\}$ is the vertices of $\Delta^{k+1}$. $l_i$ embeds
 			Y \& \& \& C_{\boldsymbol{\cdot}}(Y)
 		\end{tikzcd}
 	\end{equation*}
-}
-\pf{
+\end{definition}
+
+\begin{prf}
 	To show that $C_{\boldsymbol{\cdot}}$ is a functor, we need to check that the following diagram commutes
 	\begin{equation*}
 		\begin{tikzcd}[ampersand replacement=\&]
@@ -2062,9 +2311,10 @@ Suppose $\{e_0,\cdots,e_{k+1}\}$ is the vertices of $\Delta^{k+1}$. $l_i$ embeds
 		&=(f_\sharp\circ\partial_k)(\sigma).
 	\end{aligned}
 	\]
-}
+\end{prf}
 
-\dfn{Singular Homology Group Functor $H_k$}{
+
+\begin{definition}{Singular Homology Group Functor $H_k$}{}
 	Given a topological space $X$, the \textbf{$k$-th homology group} $H_k(X)$ is defined to be the quotient group $Z_k(X) / B_k(X)$. \\
 	The $k$-th singular homology group functor $H_k:\mathsf{Top}\to\mathsf{Ab}$ is the composition of the singular complex functor with the homology functor
 	\begin{align*}
@@ -2078,16 +2328,18 @@ Suppose $\{e_0,\cdots,e_{k+1}\}$ is the vertices of $\Delta^{k+1}$. $l_i$ embeds
 			Y \& \& \& H_k(Y)\&\ni\&f\circ \sigma+B_k(Y)
 		\end{tikzcd}
 	\end{equation*}
-}
+\end{definition}
 
-\prop{}{
+
+\begin{proposition}{}{}
 For any topological space $X$, we have a natural isomorphism 
 $$
 H_k(X)\cong\bigoplus_{\alpha\in \pi_0(X)} H_k\left(X_\alpha\right),
 $$ 
 where $X_\alpha$ are path-components of $X$. Especially, we have $H_0(X)\cong \mathbb{Z}^{\oplus \pi_0(X)}$. 
-}
-\pf{
+\end{proposition}
+
+\begin{prf}
 	First we apply the functor $C_k:\mathsf{Top}\to\mathsf{Ab}$ to the inclusions $i_\alpha:X_\alpha \hookrightarrow X$ to get $\left(i_\alpha\right)_\sharp$
 	\begin{align*}
 		\left(i_\alpha\right)_\sharp: C_k(X_\alpha)&\longrightarrow C_k(X)\\
@@ -2117,12 +2369,14 @@ where $X_\alpha$ are path-components of $X$. Especially, we have $H_0(X)\cong \m
 	H_k(X)=H_k'(C_k(X))\cong H_k'\left(\bigoplus_{\alpha\in \pi_0(X)} C_k\left(X_\alpha\right)\right).
 	$$ 
 	In general, for any AB5 category $\mathsf{A}$, the homology functor $H_k:C_\text{\hspace{-1pt}\huge$.$\hspace{-1pt}}(\mathsf{A})\to \mathsf{A}$ preserves coproduct. In particular, $\mathsf{Ab}$ is an AB5 category. Therefore, we completes the proof.
-}
+\end{prf}
 
-\prop{Homotopy Induces Chain Homotopy}{
+
+\begin{proposition}{Homotopy Induces Chain Homotopy}{}
 	If two maps $f,g :X\to Y$ are homotopic, then there exists a chain homotopy between $f_\sharp$ and $g_\sharp$.
-}
-\pf{
+\end{proposition}
+
+\begin{prf}
 	Suppose $I=[0,1]$ and
 	\begin{align*}
 		i_0: X &\longrightarrow X\times I\\
@@ -2150,18 +2404,21 @@ where $X_\alpha$ are path-components of $X$. Especially, we have $H_0(X)\cong \m
 		&= 1
 	\end{aligned}
 	\]
-}
+\end{prf}
 
-\prop{Homotopy Invariance Of Singular Homology}{
+
+\begin{proposition}{Homotopy Invariance Of Singular Homology}{}
 	If two maps $f,g :X\to Y$ are homotopic, then we have $H_k(f)=H_k(g)$, or equivalently, $f_*\cong g_*$.
-}
+\end{proposition}
+
 
 \section{Axiomatic homology theory}
-\dfn{The Category Of Pairs Of Topological Spaces $\mathsf{Top}_{(2)}$}{
+\begin{definition}{The Category Of Pairs Of Topological Spaces $\mathsf{Top}_{(2)}$}{}
 	The object of $\mathsf{Top}_{(2)}$ are pairs $(X, A)$ of topological spaces, where $A$ is a subspace of $X$. The morphisms between $(X, A)$ and $(Y, B)$ are continuous maps $f:X\to Y$ such that $f(A)\subseteq B$.
-}
+\end{definition}
 
-\dfn{The Functor $K$}{
+
+\begin{definition}{The Functor $K$}{}
 	functor $K:\mathsf{Top}_{(2)}\to\mathsf{Top}_{(2)}$ is defined as follows:
 	\begin{equation*}
 		\begin{tikzcd}[ampersand replacement=\&]
@@ -2170,9 +2427,10 @@ where $X_\alpha$ are path-components of $X$. Especially, we have $H_0(X)\cong \m
 			(Y,B) \& \& \& (B, \varnothing)
 		\end{tikzcd}
 	\end{equation*}
-}
+\end{definition}
 
-\dfn{Eilenberg–STeenrod Axioms}{
+
+\begin{definition}{Eilenberg–STeenrod Axioms}{}
 	A homology theory on a topological space refers to the following data that satisfies the given axioms:
 	\begin{itemize}
 		\item Functors $H_n:\mathsf{Top}_{(2)}\to \mathsf{Ab}$, $n\in\mathbb{Z}$,
@@ -2193,7 +2451,8 @@ H_n\left(\coprod_{\alpha\in I} X\right)\cong\bigoplus_{\alpha\in I} H_n\left(X_\
 		\cdots \to H_n(A) \,\xrightarrow{i_*}\, H_n(X) \,\xrightarrow{j_*}\, H_n (X,A) \,\xrightarrow{\partial}\, H_{n-1}(A) \to \cdots
 		$$
 	\end{itemize}
-}
+\end{definition}
+
 
 
 
