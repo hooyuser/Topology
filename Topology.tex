@@ -557,7 +557,7 @@ A subset $K$ of a topological space $X$ is said to be compact if it is compact a
 	A map $f:X\to Y$ is a \textbf{local homeomorphism} if for any $x\in X$, there exists a neighbourhood $U$ of $x$ such that $f(U)$ is open in $Y$ and $f|_U:U\to f(U)$ is a homeomorphism.
 \end{definition}
 
-\begin{proposition}{Local Homeomorphism Transfers Local Properties}{}
+\begin{proposition}{Local Homeomorphism Transfers Local Properties}{local_homeomorphism_transfers_local_properties}
 	A local homeomorphism $f: X \rightarrow Y$ transfers ``local" topological properties in both directions:
 	\begin{itemize}
 		\item $X$ is locally connected if and only if $f(X)$ is;
@@ -1514,7 +1514,8 @@ Note that generally a topological space is not the disjoint union of its connect
 
 
 \chapter{Covering spaces}
-\section{Lifting Properties}
+\section{Covering Spaces}
+
 \begin{definition}{Category of Pointed Topological Spaces}{}
 	The \textbf{category of pointed topological spaces} $\Top_*$ is the coslice category $\left(\{*\}/\Top\right)$ defined explicitly as follows
 	\begin{itemize}
@@ -1542,6 +1543,25 @@ A covering space is a fiber bundle with discrete fiber $D$, illustrated as follo
 \begin{proposition}{Covering Map is Local Homeomorphism}{}
 	The covering $p:E\to X$ is a local homeomorphism.
 \end{proposition}
+
+\begin{definition}{Star Set}{}
+	Let $\mathsf{C}$ be a category and $x$ is an object of $\mathsf{C}$. The \textbf{star set} of $x$ in $\mathsf{C}$ is defined as
+	$\mathrm{St}(x)=\mathrm{Obj}\left(x/\mathsf{C}\right)$.
+\end{definition}
+
+\begin{definition}{Covering of Groupoid}{}
+	Let $\mathsf{E}$ and $\mathsf{B}$ be two groupoids. A functor $p:\mathsf{E}\to\mathsf{B}$ is a \textbf{covering of groupoid} if it is surjective on objects and for each object $e$ of $\mathsf{E}$, the map
+	\begin{align*}
+		p^{e}:\mathrm{St}(e)&\longrightarrow\mathrm{St}(p(e))\\
+		\left(e\xrightarrow{\gamma} e'\right)&\longmapsto \left(p(e)\xrightarrow{p(\gamma)} p(e')\right)
+	\end{align*}
+	is a bijection. In this case, the preimage of $\theta\in\mathrm{St}(p(e))$ under $p^{e}$ is denoted by $\widetilde{\theta}^e$.
+\end{definition}
+
+
+
+\section{Lifting Properties}
+
 
 \begin{definition}{Lifting}{}
 	Let $p:E\to X$ and $f:Y\to X$ be continuous maps. A lifting of $f$ along $p$ is a continuous map $\widetilde{f}:Y\to E$ such that the following diagram commutes
@@ -1635,7 +1655,7 @@ Taking $Y=\{*\}$ in the homotopy lifting property gives the following corollary.
 	Let $p: (E,e) \to (X,x)$ be a covering. A path $\gamma: I \to X$ with $\gamma(0)=x$ lifts uniquely to a path $\widetilde{\gamma}: I \to E$ such that $\widetilde{\gamma}(0)=e$ and $p \circ \widetilde{\gamma}=\gamma$. We may use $\widetilde{\gamma}^e$ to denote this unique lifting if we want to emphasize the starting point $e$.
 	\[
 	\begin{tikzcd}[ampersand replacement=\&]
-		\{*\} \arrow[r, "c_e"] \arrow[d, "c_0"', hook]                      \& E \arrow[d, "p"] \\ [+8pt]
+		\{*\} \arrow[r, "c_e", hook] \arrow[d, "c_0"', hook]                      \& E \arrow[d, "p"] \\ [+8pt]
 		 I \arrow[r, "\gamma"'] \arrow[ru, "\widetilde{\gamma}", dashed] \& X               
 	\end{tikzcd}
 	\]
@@ -1723,8 +1743,37 @@ Taking $Y=\{*\}$ in the homotopy lifting property gives the following corollary.
 
 \Cref{th:uniqueness_of_liftings} assert that under the assumption that $Y$ is connected, the lifting of $f:(Y,y)\to(X,x)$ is unique if it exists. However, the connectedness of $Y$ is not necessary to guarantee the existence of lifting. The following proposition gives a sufficient condition for lifting to exist.
 
+
+\begin{corollary}{Covering of Spaces Induces Covering of Groupoids}{space_covering_induces_groupoid_covering}
+	If $p : E \to X$ is a covering of spaces, then $p_*: \Pi_1(E) \to \Pi_1(X)$ is a covering of groupoid.
+\end{corollary}
+
+\begin{prf}
+	This a corollary of \Cref{th:Lifting}. Suppose $p : E \to X$ is a covering of spaces and $p_*: \Pi_1(E) \to \Pi_1(X)$ is the induced functor between fundamental groupoids. It is clear that $p_*$ is surjective on objects. Given any $e\in E$,	we have to prove the map $p_*^{e}:\mathrm{St}(e)\to\mathrm{St}(p(e))$ is a bijection. Let's define
+	\begin{align*}
+		q^e:\mathrm{St}(p(e))&\to \mathrm{St}(e)\\
+		[\gamma]&\mapsto [\widetilde{\gamma}^e]
+	\end{align*}
+	which is well-defined since homotopic paths with the same starting point lift to homotopic paths with the same starting point. Then we can check that
+	\[
+		p_*^{e}\circ q^e([\gamma])=p([\widetilde{\gamma}^e])=[p\circ\widetilde{\gamma}^e]=[\gamma]
+	\]
+	and
+	\[
+		q^e\circ p_*^{e}([\gamma])=q^e([p\circ\gamma])=\left[\left(\widetilde{p\circ\gamma}\right)^e\right]=[\gamma],
+	\]
+	where $\left(\widetilde{p\circ\gamma}\right)^e=\gamma$ holds since $\gamma$ is a lifting of $p\circ\gamma$ starting at $e$.
+\end{prf}
+
+
 \begin{proposition}{Lifting Criterion}{lifting_criterion}
 	Given a covering $p:\left(E, e\right) \rightarrow\left(X, x\right)$ and a map $f:\left(Y, y\right) \rightarrow\left(X, x\right)$ with $Y$ connected and locally path-connected, a lift $\widetilde{f}:\left(Y, y\right) \rightarrow\left(E, e\right)$ of $f$ exists if and only if $f_*\left(\pi_1\left(Y, y\right)\right) \subseteq p_*\left(\pi_1\left(E, e\right)\right)$.
+	\[
+	\begin{tikzcd}[ampersand replacement=\&]
+		\{*\} \arrow[r, "c_e",hook] \arrow[d, "c_y"', hook]                      \& E \arrow[d, "p"] \\ [+8pt]
+		Y \arrow[r, "f"'] \arrow[ru, "\widetilde{f}", dashed] \& X               
+	\end{tikzcd}
+	\]
 \end{proposition}
 
 \begin{prf} 
@@ -1748,41 +1797,6 @@ Taking $Y=\{*\}$ in the homotopy lifting property gives the following corollary.
 Given a covering $p:(E,e)\to (X,x)$, the fundamental group $\pi_1(E,e)$ can be embedded into the fundamental group $\pi_1(X,x)$ because each loop in $E$ based at $e$ can be projected to a loop in $X$ based at $x$. However, not all loops in $X$ based at $x$ can be lifted to loops in $E$ based at $e$. In general, a loop in $X$ based at $x$ will be lifted to a path connected two points in the fiber $p^{-1}(x)$, which actually gives a group action of $\pi_1(X,x)$ on the fiber $p^{-1}(x)$ and we will see that in the next section.
 
 
-\begin{definition}{Star Set}{}
-	Let $\mathsf{C}$ be a category and $x$ is an object of $\mathsf{C}$. The \textbf{star set} of $x$ in $\mathsf{C}$ is defined as
-	$\mathrm{St}(x)=\mathrm{Obj}\left(x/\mathsf{C}\right)$.
-\end{definition}
-
-\begin{definition}{Covering of Groupoid}{}
-	Let $\mathsf{E}$ and $\mathsf{B}$ be two groupoids. A functor $p:\mathsf{E}\to\mathsf{B}$ is a \textbf{covering of groupoid} if it is surjective on objects and for each object $e$ of $\mathsf{E}$, the map
-	\begin{align*}
-		p^{e}:\mathrm{St}(e)&\longrightarrow\mathrm{St}(p(e))\\
-		\left(e\xrightarrow{\gamma} e'\right)&\longmapsto \left(p(e)\xrightarrow{p(\gamma)} p(e')\right)
-	\end{align*}
-	is a bijection. In this case, the preimage of $\theta\in\mathrm{St}(p(e))$ under $p^{e}$ is denoted by $\widetilde{\theta}^e$.
-\end{definition}
-
-
-\begin{proposition}{Covering of Spaces Induces Covering of Groupoids}{space_covering_induces_groupoid_covering}
-	If $p : E \to X$ is a covering of spaces, then $p_*: \Pi_1(E) \to \Pi_1(X)$ is a covering of groupoid.
-\end{proposition}
-
-\begin{prf}
-	This a corollary of \Cref{th:Lifting}. Suppose $p : E \to X$ is a covering of spaces and $p_*: \Pi_1(E) \to \Pi_1(X)$ is the induced functor between fundamental groupoids. It is clear that $p_*$ is surjective on objects. Given any $e\in E$,	we have to prove the map $p_*^{e}:\mathrm{St}(e)\to\mathrm{St}(p(e))$ is a bijection. Let's define
-	\begin{align*}
-		q^e:\mathrm{St}(p(e))&\to \mathrm{St}(e)\\
-		[\gamma]&\mapsto [\widetilde{\gamma}^e]
-	\end{align*}
-	which is well-defined since homotopic paths with the same starting point lift to homotopic paths with the same starting point. Then we can check that
-	\[
-		p_*^{e}\circ q^e([\gamma])=p([\widetilde{\gamma}^e])=[p\circ\widetilde{\gamma}^e]=[\gamma]
-	\]
-	and
-	\[
-		q^e\circ p_*^{e}([\gamma])=q^e([p\circ\gamma])=\left[\left(\widetilde{p\circ\gamma}\right)^e\right]=[\gamma],
-	\]
-	where $\left(\widetilde{p\circ\gamma}\right)^e=\gamma$ holds since $\gamma$ is a lifting of $p\circ\gamma$ starting at $e$.
-\end{prf}
 
 
 \begin{corollary}{Fundamental Group Embedding for Covering Spaces}{GroupEmbedding}
@@ -1811,7 +1825,7 @@ Given a covering $p:(E,e)\to (X,x)$, the fundamental group $\pi_1(E,e)$ can be e
 	Therefore, both $\xi^{-}\left(\frac{1}{2}t\right)$ and $\psi_2(t)$ are liftings of $\gamma_2$ originating from $e$, which implies $\xi^{-}\left(\frac{1}{2}\right)=\psi_2(1)$. Since $\xi\left(\frac{1}{2}\right)=\xi^{-}\left(\frac{1}{2}\right)$, this demonstrates that $\psi_1(1)=\psi_2(1)$.
 \end{prf}
 
-\begin{proposition}{Change Basepoint in Fiber (Groupoid Version)}{}
+\begin{proposition}{Change Basepoint in Fiber (Groupoid Version)}{change_basepoint_in_fiber_groupoid_version}
 	Let $p:\mathsf{E}\to\mathsf{B}$ be a covering of groupoid with $\mathsf{E}$ being connected. Suppose $e_1,e_2$ are two objects of $\mathsf{E}$ such that $p(e_1)=p(e_2)=x$, then $p(\mathrm{Aut}_\mathsf{E}(e_1))$ and $p(\mathrm{Aut}_\mathsf{E}(e_2))$ are conjugate subgroups in $\mathrm{Aut}_{\mathsf{B}}(x)$. This gives a bijection between $p^{-1}(x)$ and the conjugacy class of the subgroup $p(\mathrm{Aut}_\mathsf{E}(e_1))$ in $\mathrm{Aut}_{\mathsf{B}}(x)$.
 	\begin{align*}
 		p^{-1}(x) &\longrightarrow \mathrm{Cl}(p(\mathrm{Aut}_\mathsf{E}(e_1)))\\
@@ -1842,18 +1856,28 @@ Given a covering $p:(E,e)\to (X,x)$, the fundamental group $\pi_1(E,e)$ can be e
 	This implies $ p(\gamma)^{-1}p(\mathrm{Aut}_\mathsf{E}(e_2))p(\gamma)\subseteq p(\mathrm{Aut}_\mathsf{E}(e_1))$. Therefore, we have  $ p(\gamma)p(\mathrm{Aut}_\mathsf{E}(e_1))p(\gamma)^{-1}= p(\mathrm{Aut}_\mathsf{E}(e_2))$. The bijective property is clear from $p$ is bijective on star sets.
 \end{prf}
 
-\begin{corollary}{Change Basepoint in Fiber}{}
+\begin{corollary}{Change Basepoint in Fiber}{corollary_change_basepoint_in_fiber}
 	Let $E$ be a path-connected topological space and $p:E\to X$ be a covering. Suppose $x\in X$ and $e_1,e_2\in p^{-1}(x)$. Then we have a bijection
 	\begin{align*}
-		p^{-1}(x) &\longrightarrow \mathrm{Cl}(p_*(\pi_1(E,e_1)))\\
+		\Psi:p^{-1}(x) &\xlongrightarrow{\sim} \mathrm{Cl}(p_*(\pi_1(E,e_1)))\\
 		e &\longmapsto p_*(\pi_1(E,e))
 	\end{align*}
 	If $\gamma$ is a path in $E$ from $e_1$ to $e_2$, then 
 	$$
 	p_*([\gamma])p_*(\pi_1(E,e_1))p_*([\gamma])^{-1}=p_*(\pi_1(E,e_2)).
 	$$
+	And we have
+	$$
+	p_*([\gamma])\in\mathrm{N}_{\pi_1(X,x)}(p_*(\pi_1(E,e_1)))\iff p_*(\pi_1(E,e_1))=p_*(\pi_1(E,e_2)).
+	$$
 \end{corollary}
+\begin{prf} 
+	This is a direct consequence of \Cref{th:change_basepoint_in_fiber_groupoid_version}. For the last statement on normalizer, we have
+	\begin{align*}
+		p_*([\gamma])\in\mathrm{N}_{\pi_1(X,x)}(\Psi(e_1))\iff \Psi(e_1)=p_*([\gamma])\Psi(e_1)p_*([\gamma])^{-1} \iff \Psi(e_1)=\Psi(e_2).
+	\end{align*}
 
+\end{prf}
 \section{Monodromy Action}
 
 \begin{definition}{Monodromy Action (Groupoid Version)}{}
@@ -1884,6 +1908,43 @@ If we restricts $\mathrm{Fib}_{\mathsf{E}}$ to one object $x\in\mathsf{B}$, then
 	\end{align*}
 \end{proposition}
 
+\begin{proposition}{Lifting Criterion (Groupoid Version)}{lifting_criterion_groupoid_version}
+	Given a covering of connected groupoids $p:\mathsf{E} \rightarrow\mathsf{B} $ and a functor $f:\mathsf{Y} \rightarrow\mathsf{B}$ with $\mathsf{Y}$ being a connected groupoid. Choose a base point $y\in \mathrm{Ob}(\mathsf{Y})$ and $e\in \mathrm{Ob}(\mathsf{E})$ such that $f(y)=p(e)$.
+	Then the followings are equivalent:
+	\begin{itemize}
+		\item $f\left(\mathrm{Aut}_\mathsf{Y}(y)\right)\subseteq p\left(\mathrm{Aut}_\mathsf{E}(e)\right)$
+		\item If the outer square of the following diagram commutes, then there exists a functor $\widetilde{f}:\mathsf{Y}\to \mathsf{E}$ such that the whole diagram commutes.
+	\[
+	\begin{tikzcd}[ampersand replacement=\&]
+		\mathsf{1} \arrow[r, "c_e", hook] \arrow[d, "c_y"', hook]                      \& \mathsf{E} \arrow[d, "p"] \\ [+7pt]
+		\mathsf{Y} \arrow[r, "f"'] \arrow[ru, "\widetilde{f}", dashed] \&\mathsf{X}              
+	\end{tikzcd}
+	\]
+	\end{itemize}
+	If the above conditions are satisfied, then the functor $\widetilde{f}$ is unique.
+\end{proposition}
+\begin{prf} 
+	 If $\widetilde{f}$ exists, $f=p\circ \widetilde{f}$ directly imply that for any $\alpha\in \mathrm{Aut}_\mathsf{Y}(y)$, we have
+	 \[
+		f(\alpha)=p\left(\widetilde{f}(\alpha)\right)=p(\tilde{\alpha})
+	 \]
+	 where $\tilde{\alpha}= \widetilde{f}(\alpha)\in \mathrm{Aut}_\mathsf{E}(e)$. This shows that $f\left(\mathrm{Aut}_\mathsf{Y}(y)\right)\subseteq p\left(\mathrm{Aut}_\mathsf{E}(e)\right)$.
+	 
+	 For the converse, given any object $y'$ of $\mathsf{Y}$ and a morphism $\alpha: y\to y'$ in $\mathsf{Y}$, let $\tilde{\alpha}$ be the unique element of  $\mathrm{St}\left(e\right)$ such that $p(\tilde{\alpha})=f(\alpha)$ and we can define a map
+	 \begin{align*}
+		\widetilde{f}:\mathrm{St}(y)&\longrightarrow\mathrm{St}(e)\\
+		\left(y\xrightarrow{\alpha} y'\right)&\longmapsto \left(e\xrightarrow{\tilde{\alpha}} \mathrm{Fib}_{\mathsf{E}}(f(\alpha))\left(e\right) \right)
+	\end{align*}
+	 The inclusion $f\left(\mathrm{Aut}_\mathsf{Y}(y)\right)\subseteq p\left(\mathrm{Aut}_\mathsf{E}(e)\right)$ ensures that given $y$ and $y'$, $\mathrm{Fib}_{\mathsf{E}}(f(\alpha))\left(e\right)$ is independent of the choice of $\alpha$ which connects $y$ and $y'$. In fact, given another map $\beta: y \to y'$, $\alpha^{-1} \circ \beta$ is an element of $\mathrm{Aut}_\mathsf{Y}\left( x\right)$. Therefore
+	$$
+	f(\alpha)^{-1} \circ f\left(\beta\right)=f\left(\alpha^{-1} \circ \beta\right)=p(\psi)
+	$$
+	for some $\psi \in \mathrm{Aut}_\mathsf{E}\left( e\right)$. Thus
+	$$
+	p(\tilde{\alpha} \circ \psi)=p(\tilde{\alpha}) \circ p(\psi)=f(\alpha) \circ f(\alpha)^{-1} \circ f\left(\beta\right)=f\left(\beta\right) .
+	$$
+	This means that $\tilde{\alpha} \circ \beta$ is the unique element in $\mathrm{St}\left(e\right)$ such that $p\left(\tilde{\alpha} \circ \psi\right)=f\left(\beta\right)$, and its target is the target of $\tilde{\alpha}$, as required. Therefore,	$\widetilde{f}$ so specified is a well-defined functor. The uniqueness of $\widetilde{f}$ can be easily checked from the commutativity of the diagram.
+\end{prf}
 \begin{definition}{Monodromy Action}{}
 	Let $X$ be a topological space and $p:E\to X$ be a covering. The \textbf{monodromy of the covering $p$} is a functor $\mathrm{Fib}_E:\Pi_1(X)\to \mathsf{Set}$ defined as follows
 	\begin{equation*}
@@ -2082,14 +2143,14 @@ If $X$ is a topological space with certain connectedness conditions, then any $\
 \end{proposition}
 
 \begin{prf}
-	Let $p_1:E_1\to X$ and $p_2:E_2\to X$ be two simply connected coverings. Since $X$ is locally path-connected and $p_1,p_2$ are locally homeomorphisms, $E_1$ and $E_2$ are also locally path-connected. Suppose $p(e_1)=p(e_2)=x$ for some $e_1\in E_1$ and $e_2\in E_2$. Note $p_{1\,*}(\pi(E_1,e_1))=\{1_{\pi(X,x)}\}$. By \Cref{th:lifting_criterion}, there exists $f:(E_1,e_1)\to (E_2,e_2)$ such that $p_2\circ f=p_1$. Similarly, there exists $g:(E_2,e_2)\to (E_1,e_1)$ such that $p_1\circ g=p_2$. Since $p_1\circ (g\circ f)=p_2\circ f=p_1$ and $g\circ f(e_1)=e_1$, the uniqueness of lift guarantees $g\circ f=1_{E_1}$. Similarly we can show $f\circ g=1_{E_2}$. Therefore, $f$ is an isomorphism between $p_1$ and $p_2$.
+	Let $p_1:E_1\to X$ and $p_2:E_2\to X$ be two simply connected coverings. According to \Cref{th:local_homeomorphism_transfers_local_properties}, since $X$ is locally path-connected and $p_1,p_2$ are locally homeomorphisms, $E_1$ and $E_2$ are also locally path-connected. Suppose $p(e_1)=p(e_2)=x$ for some $e_1\in E_1$ and $e_2\in E_2$. Note $p_{1\,*}(\pi(E_1,e_1))=\{1_{\pi(X,x)}\}$. By \Cref{th:lifting_criterion}, there exists $f:(E_1,e_1)\to (E_2,e_2)$ such that $p_2\circ f=p_1$. Similarly, there exists $g:(E_2,e_2)\to (E_1,e_1)$ such that $p_1\circ g=p_2$. Since $p_1\circ (g\circ f)=p_2\circ f=p_1$ and $g\circ f(e_1)=e_1$, the uniqueness of lift guarantees $g\circ f=1_{E_1}$. Similarly we can show $f\circ g=1_{E_2}$. Therefore, $f$ is an isomorphism between $p_1$ and $p_2$.
 \end{prf}
 
 \begin{definition}{Universal Covering of Groupoids}{}
 	Let $p:\mathsf{E}\to \mathsf{B}$ be a covering of groupoids with $\mathsf{E}$, $\mathsf{B}$ being connected. $p$ is called a \textbf{universal covering of $\mathsf{B}$} if one of the following equivalent conditions holds:
 	\begin{itemize}
-		\item $p(\mathrm{Aut}_{\mathsf{E}}(e))$ is trivial
-		\item $\mathrm{Aut}_{\mathsf{B}}(x)$ acts freely on $p^{-1}(x)$
+		\item $p(\mathrm{Aut}_{\mathsf{E}}(e))$ is trivial for some $e\in \mathrm{Ob}(\mathsf{E})$
+		\item $\mathrm{Aut}_{\mathsf{B}}(x)$ acts freely on $p^{-1}(x)$ via the monodromy action.
 	\end{itemize}
 \end{definition}
 
@@ -2172,22 +2233,37 @@ The group of deck transformations of a covering $p: E \rightarrow X$ acts on $E$
 	An element $h \in G$ permutes the sheets, since they are the path components of $p^{-1}(U)$. The equivalence classes with respect to $G$ are therefore open in the quotient topology of $E / G$ and are mapped bijectively and continuously under $\pi$. Since $p$ is open, so is $\pi$. Hence $\pi$ is trivial over $U$. Since $X$ is locally path connected, it has an open covering by such sets $U$.
 \end{prf}
 
+\begin{proposition}{}{}
+	Let $p:\mathsf{E}\to \mathsf{B}$ be a covering of groupoids with $\mathsf{E}$, $\mathsf{B}$ being connected. Let $e\in\mathrm{Ob}(\mathsf{E})$ and $H=p(\mathrm{Aut}_{\mathsf{E}}(e))$. Then we have $\mathrm{Aut}_{\mathsf{Cov}_\mathsf{B}}(p)\cong \mathrm{N}_{\mathrm{Aut}_{\mathsf{B}}(b)}(H)/H$.
+\end{proposition}
+
+
 \begin{definition}{Normal Covering of Groupoids}{}
-	Let $p:\mathsf{E}\to \mathsf{B}$ be a covering of groupoids with $\mathsf{E}$, $\mathsf{B}$ being connected. If $p(\mathrm{Aut}_{\mathsf{E}}(e))\lhd \mathrm{Aut}_{\mathsf{B}}(p(e))$, then $p$ is called a \textbf{normal covering of $p$}.
+	Let $p:\mathsf{E}\to \mathsf{B}$ be a covering of groupoids with $\mathsf{E}$, $\mathsf{B}$ being connected. If $p(\mathrm{Aut}_{\mathsf{E}}(e))\lhd \mathrm{Aut}_{\mathsf{B}}(p(e))$, then $p$ is called a \textbf{normal covering}.
 \end{definition}
+
+
 
 \begin{definition}{Normal Covering}{}
 	A covering $p: E \rightarrow X$ is called \textbf{normal} if for each $x \in X$ and any $e_1,e_2\in p^{-1}(x)$, there exists an isomorphism $\phi\in \mathrm{Aut}_{\mathsf{Cov}_X}(p)$ such that $\phi(e_1)=e_2$.
 \end{definition}
 
 \begin{proposition}{Equivalent Conditions for Normal Covering}{}
-	Let $p:\left(E, e\right) \rightarrow\left(X, x\right)$ where $E$ is path-connected and $X$ is path-connected and locally path-connected. Let $H=p_*\left(\pi_1\left(E,e\right)\right) \subseteq \pi_1\left(X, x\right)$. Then
-	\begin{enumerate}[(i)]
-		\item This covering $p$ is normal if and only if $H\lhd\pi_1\left(X, x_0\right)$.
-		\item  $\mathrm{Aut}_{\mathsf{Cov}_X}(p)\cong\mathrm{N}_{\pi_1\left(X, x_0\right)}(H) / H$.
-In particular, if $p$ is a normal covering, $\mathrm{Aut}_{\mathsf{Cov}_X}(p)\cong \pi_1\left(X, x_0\right) / H$. If $p$ is a universal covering, we have $\mathrm{Aut}_{\mathsf{Cov}_X}(p) \cong \pi_1(X)$.
-	\end{enumerate}
+	Let $p:\left(E, e\right) \rightarrow\left(X, x\right)$ where $E$ is path-connected and $X$ is path-connected and locally path-connected. Let $G=\pi_1\left(X, x\right)$ and $H=p_*\left(\pi_1\left(E,e\right)\right) \subseteq G$. Then $p$ is normal if and only if $H\lhd\pi_1\left(X, x\right)$.
 \end{proposition}
+
+\begin{prf}
+	If $p$ is a normal covering, then for any $[\gamma]\in \pi_1\left(X, x\right)$, there exists $\phi\in \mathrm{Aut}_{\mathsf{Cov}_X}(p)$ such that $\phi(e)=\widetilde{\gamma}^e(1)$. Since $p$ is a covering, we have $\widetilde{\gamma}^e(1)=e$. Therefore, $H\lhd\pi_1\left(X, x\right)$. Conversely, if $H\lhd\pi_1\left(X, x\right)$, then for any $[\gamma]\in H$ and $e\in E$, we have $\widetilde{\gamma}^e(1)=e$. Therefore, $p$ is a normal covering. 
+	
+	
+	According to \Cref{th:corollary_change_basepoint_in_fiber}, we have $\mathrm{Stab}_{\pi_1(X, x)}(e)=p_*(\pi_1(E, e))$. Therefore, we have
+	
+\end{prf}
+\begin{proposition}{Deck Transformation}{}
+	Let $p:\left(E, e\right) \rightarrow\left(X, x\right)$ where $E$ is path-connected and $X$ is path-connected and locally path-connected. Let $G=\pi_1\left(X, x\right)$ and $H=p_*\left(\pi_1\left(E,e\right)\right) \subseteq G$. Then $\mathrm{Aut}_{\mathsf{Cov}_X}(p)\cong\mathrm{Aut}_{G\text{-}\mathsf{Set}}(p^{-1}(x))\cong\mathrm{N}_{G}(H) / H$.
+	In particular, if $p$ is a normal covering, $\mathrm{Aut}_{\mathsf{Cov}_X}(p)\cong G / H$. If $p$ is a universal covering, we have $\mathrm{Aut}_{\mathsf{Cov}_X}(p) \cong G$.
+\end{proposition}
+
 
 \begin{proposition}{}{}
 	If an action of a group $G$ on a space $E$ is even, then:
