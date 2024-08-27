@@ -567,31 +567,6 @@ The closure of $A$ is the disjoint union of $A'$ and $\mathrm{isolated}(A)$, whe
 \end{definition}
 
 
-We have several separation axioms in topological spaces denoted by $\mathrm{T}_r$, $r=0,1,2,2\frac{1}{2},3,3\frac{1}{2},4,5,6$.
-\begin{definition}{Hausdorff Space/$\mathrm{T}_2$ Space}{}
-	A topological space $X$ is a \textbf{Hausdorff space}, separated space or $\mathrm{T}_2$ space if for any two distinct points $x,y\in X$ there exists a neighbourhood $U$ of $x$ and a neighbourhood $V$ of $y$ such that $U\cap V=\varnothing$.
-\end{definition}
-
-\begin{proposition}{Equivalent Definitions of Hausdorff Space}{}
-	For a topological space $X$, the following are equivalent:
-	\begin{enumerate}[(i)]
-		\item $X$ is a Hausdorff space.
-		\item Limits of filters on $X$ are unique.
-	\end{enumerate}
-\end{proposition}
-
-\begin{proposition}{Properties of Hausdorff Space}{}
-	Let $X$ be a Hausdorff space. Then
-	\begin{enumerate}[(i)]
-		\item Each compact subset of $X$ is closed.
-		\item If $(x_i)_{i=1}^{\infty}$ is a convergent sequence in $X$, the limit of $(x_i)_{i=1}^{\infty}$ is unique.
-		\item Subspaces and products of Hausdorff spaces are Hausdorff.
-	\end{enumerate}
-\end{proposition}
-
-\begin{definition}{Normal Space/$\mathrm{T}_4$ Space}{}
-	A topological space $X$ is a \textbf{normal space} or $\mathrm{T}_4$ space if, given any disjoint closed sets $E$ and $F$ in $X$, there are neighbourhoods $U$ of $E$ and $V$ of $F$ such that $U\cap V=\varnothing$.
-\end{definition}
 
 
 A subset $K$ of a topological space $X$ is said to be compact if it is compact as a subspace (in the subspace topology).
@@ -614,6 +589,27 @@ A subset $K$ of a topological space $X$ is said to be compact if it is compact a
 \end{definition}
 \begin{proposition}{}{}
 	Let $f:X\to Y$ be an open map. If $U$ is an open subset of $X$, then $f|_U:U\to f(U)$ is an open map.
+\end{proposition}
+
+\begin{definition}{Closed Map}{}
+	A map $f:X\to Y$ is an \textbf{closed map} if for any closed set $U\subseteq X$, $f(U)$ is closed in $Y$.
+\end{definition}
+
+\begin{definition}{Proper Map}{}
+	A map $f:X\to Y$ is an \textbf{proper map} if for any compact subset set $V\subseteq Y$, $f^{-1}(V)$ is compact.
+\end{definition}
+
+\begin{proposition}{}{}
+	A topological space $X$ is compact if and only if the map from $X$ to a single point $X\to\{*\}$ is proper.
+\end{proposition}
+
+\begin{lemma}{Closed Map Lemma}{}
+	Every continuous map $f: X \rightarrow Y$ from a compact space $X$ to a Hausdorff space $Y$ is closed and proper.
+\end{lemma}
+
+
+\begin{proposition}{}{}
+	If $f: X \rightarrow Y$ is a proper continuous map and $Y$ is a compactly generated Hausdorff space (this includes Hausdorff spaces that are either first-countable or locally compact), then $f$ is closed.
 \end{proposition}
 
 \section{Basic Construction}
@@ -752,7 +748,43 @@ It is easy to check that $\pi$ is a continuous surjection from $(X,\tau)$ to $(X
 	\]
 \end{definition}
 
+\section{Separation Axiom}
 
+We have several separation axioms in topological spaces denoted by $\mathrm{T}_r$, $r=0,1,2,2\frac{1}{2},3,3\frac{1}{2},4,5,6$.
+
+\begin{definition}{$\mathrm{T}_1$ Space}
+	A topological space $X$ is a \textbf{$\mathrm{T}_1$ space} if and only if every single-point set is a closed set.
+\end{definition}
+
+
+\begin{definition}{Hausdorff Space/$\mathrm{T}_2$ Space}{}
+	A topological space $X$ is a \textbf{Hausdorff space}, separated space or $\mathrm{T}_2$ space if for any two distinct points $x,y\in X$ there exists a neighbourhood $U$ of $x$ and a neighbourhood $V$ of $y$ such that $U\cap V=\varnothing$.
+\end{definition}
+
+\begin{proposition}{Equivalent Definitions of Hausdorff Space}{}
+	For a topological space $X$, the following are equivalent:
+	\begin{enumerate}[(i)]
+		\item $X$ is a Hausdorff space.
+		\item Limits of filters on $X$ are unique.
+	\end{enumerate}
+\end{proposition}
+
+\begin{proposition}{Properties of Hausdorff Space}{}
+	Let $X$ be a Hausdorff space. Then
+	\begin{enumerate}[(i)]
+		\item Each compact subset of $X$ is closed. So $X$ is a $\mathrm{T}_1$ space.
+		\item If $(x_i)_{i=1}^{\infty}$ is a convergent sequence in $X$, the limit of $(x_i)_{i=1}^{\infty}$ is unique.
+		\item Subspaces and products of Hausdorff spaces are Hausdorff.
+	\end{enumerate}
+\end{proposition}
+
+\begin{definition}{Normal Space}{}
+	A topological space $X$ is a \textbf{normal space} space if, given any disjoint closed sets $E$ and $F$ in $X$, there are neighbourhoods $U$ of $E$ and $V$ of $F$ such that $U\cap V=\varnothing$.
+\end{definition}
+
+\begin{definition}{$\mathrm{T}_4$ Space}{}
+	A topological space $X$ is a $\mathrm{T}_4$ space if it is both $\mathrm{T}_1$ are normal.
+\end{definition}
 
 \section{Connectedness}
 \begin{definition}{Connected Topological Space}{}
@@ -1630,7 +1662,7 @@ Note that generally a topological space is not the disjoint union of its connect
 \end{proposition}
 
 \begin{prf}
-	It is enough to prove the existence and commutation for products and equalizers. Let $R_i, i \in I$ be a collection of topological rings. Take the usual product $R=\prod R_i$ with the product topology. Since $R \times R=\prod\left(R_i \times R_i\right)$ as a topological space (because products commutes with products in any category), we see that addition and multiplication on $R$ are continuous. Let $a, b: R \rightarrow R^{\prime}$ be two homomorphisms of topological rings. Then as the equalizer we can simply take the equalizer of $a$ and $b$ as maps of topological spaces, which is the same thing as the equalizer as maps of rings endowed with the induced topology.
+	To show $\mathsf{TopGrp}$ is complete, it is sufficient to prove the existence and commutativity for products and equalizers. Let $R_i, i \in I$ be a collection of topological rings. Take the usual product $R=\prod R_i$ with the product topology. Since $R \times R=\prod\left(R_i \times R_i\right)$ as a topological space (because products commutes with products in any category), we see that addition and multiplication on $R$ are continuous. Let $a, b: R \rightarrow R^{\prime}$ be two homomorphisms of topological rings. Then as the equalizer we can simply take the equalizer of $a$ and $b$ as maps of topological spaces, which is the same thing as the equalizer as maps of rings endowed with the induced topology.
 \end{prf}
 
 
@@ -1676,15 +1708,15 @@ Note that generally a topological space is not the disjoint union of its connect
 \end{corollary}
 
 \begin{proposition}{Neighborhood Basis at $1_G$ Determines the Topology of $G$}{}
-	Given a topological group $G$, if $\mathcal{N}$ is a neighborhood basis of the identity element $1_G$, then for all $x \in X$,
+	Given a topological group $G$, if $\mathcal{N}$ is a neighborhood basis of the identity element $1_G$, then for all $g \in G$,
 	\[
-		x \mathcal{N}:=\{x N: N \in \mathcal{N}\}
+		g \mathcal{N}:=\{g N: N \in \mathcal{N}\}
 	\]
-	is a neighborhood basis of $x$ in $G$. In particular, the topology on $G$ is completely determined by any neighborhood basis at the identity element.
+	is a neighborhood basis of $g$ in $G$. In particular, the topology on $G$ is completely determined by any neighborhood basis at the identity element.
 \end{proposition}
 
 \begin{prf}
-	Let $x \in G$ and $V$ be any neighborhood of $x$. There exists an open set $U$ such that $x\in U\subseteq V$. By \Cref{th:translation_invariance_cor}, $x^{-1} U$ is an open neighborhood of $1_G$. Since $\mathcal{N}$ is a neighborhood basis of $1_G$, there exists $N \in \mathcal{N}$ such that $N \subseteq x^{-1} U$. Then there exists $x N \in x \mathcal{N}$ such that $x N \subseteq U$. Hence $x \mathcal{N}$ is a neighborhood basis of $x$.
+	Let $g\in G$ and $V$ be any neighborhood of $g$. There exists an open set $U$ such that $g\in U\subseteq V$. By \Cref{th:translation_invariance_cor}, $g^{-1} U$ is an open neighborhood of $1_G$. Since $\mathcal{N}$ is a neighborhood basis of $1_G$, there exists $N \in \mathcal{N}$ such that $N \subseteq g^{-1} U$. Then there exists $g N \in g \mathcal{N}$ such that $g N \subseteq U$. Hence $g \mathcal{N}$ is a neighborhood basis of $g$.
 \end{prf}
 
 
@@ -1727,7 +1759,7 @@ Note that generally a topological space is not the disjoint union of its connect
 	is continuous and has a continuous inverse $\rho(g^{-1})$. Hence $\rho(g)\in \mathrm{Aut}_{\mathsf{Top}}(X)$.
 \end{prf}
 
-From the definition, we see if $varpho:G\times X\to X$ is continuous topological group action on topological space $X$, it is also a group action on $X$ by homeomorphisms. If $G$ is discrete, then the converse holds.
+From the definition, we see if $\varrho:G\times X\to X$ is continuous topological group action on topological space $X$, it is also a group action on $X$ by homeomorphisms. If $G$ is discrete, then the converse holds.
 
 \begin{proposition}{Discrete Group Acts Continuously on Topological Space $\iff$ Acts by Homeomorphisms}{}
 	Let $G$ be a group acting on the underlying set of a topological space $X$ through a group homomorphism $\rho:G\to \mathrm{Aut}_{\mathsf{Set}}(X)$. Then the following are equivalent:
@@ -1748,6 +1780,19 @@ From the definition, we see if $varpho:G\times X\to X$ is continuous topological
 	Since $\rho(g)$ is a homeomorphism, $\rho(g)^{-1}(U)$ is open for any open set $U$. Since $G$ is discrete,  each $\left\{g\right\}\times \rho(g)^{-1}(U)$ is open in $G\times X$. Hence $\varrho^{-1}(U)$ as a union of open sets is open in $G\times X$, which implies $\varrho$ is continuous.
 \end{prf}
 
+\begin{definition}{Proper Topological Group Action}{}
+	A continuous topological group action $G$ on a topological space $X$ is said to be a \textbf{proper} if the map
+	\begin{align*}
+		G \times X &\longrightarrow X \times X\\
+		(g, x) &\longmapsto(g x, x)
+	\end{align*}
+	
+	is a proper map.
+\end{definition}
+
+\begin{proposition}{Proper Group Action Has Compact Stabilizer Groups}{}
+	A proper topological group action $G\acts X$ has compact stabilizer groups $\mathrm{Stab}_G(x)$ at all points $x\in X$.
+\end{proposition}
 
 \begin{definition}{Orbit Space}{}
 	Let $G$ be a group acting on a topological space $X$. The \textbf{orbit space} of $X$ under the action of $G$ is the quotient space $G\backslash X $ obtained by identifying all points in $X$ that are in the same orbit. $G\backslash X $ is equipped with the quotient topology: a subset $U\subseteq G\backslash X $ is open if and only if $\pi^{-1}(U)$ is open in $X$, where $\pi:X\to  G\backslash X$ is the quotient map.
@@ -1767,8 +1812,67 @@ From the definition, we see if $varpho:G\times X\to X$ is continuous topological
 	If $U \subseteq M$ is open, then $\pi^{-1}(\pi(U))$ is equal to the union of all sets of the form $g \cdot U$ as $g$ ranges over $G$. Since $p \mapsto g \cdot p$ is a homeomorphism, each such set is open, and therefore $\pi^{-1}(\pi(U))$ is open in $M$. Becaues $\pi$ is a quotient map, this implies that $\pi(U)$ is open in $G\backslash M$, and therefore $\pi$ is an open map.
 \end{prf}
 
+\begin{lemma}{}{}
+	Given a topological space $X$ and a continuous topological group action $G \acts X$. If $X$ is second countable, then $G\backslash X$ is also second countable.
+\end{lemma}
+\begin{prf}
+	Let $\mathcal{U}$ be a countable topological basis for $X$. We are going to prove that $\mathcal{V}=\{\pi(U): U \in \mathcal{U}\}$ forms a topological basis for $G \backslash X$. Indeed, given any open subset $V \subseteq G \backslash X$, we can express $\pi^{-1}(V)$ as a union of elements from $\mathcal{U}$
+	\[
+		\pi^{-1}(V)=\bigcup_{i \in I} U_i\quad (U_i \in \mathcal{U}).
+	\]
+	Since $\pi$ is surjective, we see
+	\[
+		V=\pi\left(\pi^{-1}(V)\right)=\pi\left(\bigcup_{i \in I} U_i\right)=\bigcup_{i \in I}\pi\left(U_i\right)
+	\]
+	is a union of elements from $\mathcal{V}$.
+\end{prf}
 
+An important special case of orbit spaces is the left coset space of a topological group. Given a topological group $G$, then $G/H$ is the orbit space of the right action of $H$ on $G$.
 
+\begin{proposition}{}{}
+	Let $H$ be a subgroup of a Hausdorff topological group $G$. Then we have
+	\begin{itemize}
+		\item $G$ is locally compact $\implies$ $G/H$ is locally compact.
+		\item $H$ is closed $\iff$ $G/H$ is Hausdorff.
+	\end{itemize}
+\end{proposition}
+
+\begin{proposition}{}{}
+	Let $G$ be a second countable locally compact Hausdorff group and $X$ be a locally compact space. Given a continuous transitive topological group action $G \acts X$, we have the following $G$-set isomorphism
+	$$
+		\begin{aligned}
+			G / \operatorname{Stab}_G(x) & \longrightarrow X \\
+			g\operatorname{Stab}_G(x)    & \longmapsto g x
+		\end{aligned}
+	$$
+	which in the meantime is a homeomorphism.
+\end{proposition}
+
+\begin{definition}{Locally Finite Subset Family on Topological Space}{}
+	Suppose $X$ is a topological space and $(A_i)_{i\in I}$ is a family of subsets of $X$. We say $(A_i)_{i\in I}$ is \textbf{locally finite on $X$} if each point of $X$ has a neighborhood $U$ such that $\{i\in I\mid U\cap A_i\ne \varnothing\}$ is a finite set.
+\end{definition}
+
+\begin{definition}{Discrete Subgroup of Topological Groups}
+	A subgroup $H$ of a topological group $G$ is {discrete} if one of the following equivalent conditions holds:
+	\begin{enumerate}[(i)]
+		\item $H$ as a topological space is discrete.
+		\item $\{1_G\}$ is an open set of $H$.
+		\item there exists an open subset $U$ of $G$ such that $U\cap H=\{1_G\}$.
+	\end{enumerate}
+
+\end{definition}
+
+\begin{proposition}{Discrete Subgroups of Hausdorff Topological Groups are Closed}{}
+	Discrete subgroups of Hausdorff topological groups are closed.
+\end{proposition}
+\begin{prf}
+	Suppose $H$ is a discrete subgroup of the Hausdorff topological group $G$. We need to show $G-H$ is open. It is sufficient to show that for any $g \in G-H$ there is an open neighborhood of $g$ that does not intersect $H$. Select an open neighborhood $U \ni 1_G$ such that $U \cap H=\{1_G\}$. Note that the map
+	\begin{align*}
+		m:G\times G & \longrightarrow G       \\
+		(g_1,g_2)   & \longmapsto g_1g_2^{-1}
+	\end{align*}
+	is continuous and $m(g,g)=1_G$. There exists an open neighborhood $N \ni (g,g)$ such that $m(N) \subseteq U$. By the construction of product topology, $N$ is the union of Cartesian products of open sets in $G$. So there is an open neighborhood $V_1\times V_2$ of $(g,g)$ such that $V_1,V_2$ are open neighborhood of $g$ and $V_1\times V_2\subseteq N$. Take $V=V_1\cap V_2$ and we see $VV^{-1}=m(V\times V)\subseteq m(N)\subseteq U$.Therefore, for any $x, y \in V$, we have $x y^{-1} \in H$ if and only if $x=y$. Hence, $|V \cap H| \leq 1$. If $V \cap H=\varnothing$, the open neighberhood $V\ni g$ is the desired one and we are done. Otherwise, suppose $V \cap H=\{x\}$. Since $G$ is a Hausdorff space, there exists an open set $W$ such that $g \in W$ and $x \notin W$. Then the open neighberhood $W \cap V \ni g$ is the desired one.
+\end{prf}
 
 \section{Topological Ring}
 \begin{definition}{Topological Ring}{}
