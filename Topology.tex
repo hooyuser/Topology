@@ -553,6 +553,20 @@ The closure of $A$ is the disjoint union of $A'$ and $\mathrm{isolated}(A)$, whe
 
 \subsection{Other Basic Concepts}
 
+\begin{definition}{Continuous Map}{continuous_map}
+	Let $f:X\to Y$ be a map between topological spaces. $f$ is \textbf{continuous} if for any open set $U\in\tau_Y$, $f^{-1}(U)\in\tau_X$.
+\end{definition}
+
+\begin{definition}{Topological Properties Preserved by Continuous Maps}{}
+	If $f:X\to Y$ is a continuous map between topological spaces, then we have
+	\begin{enumerate}[(i)]
+		\item If $A$ is compact, then $f(A)$ is compact.
+		\item If $A$ is connected, then $f(A)$ is connected.
+		\item If $A$ is path-connected, then $f(A)$ is path-connected.
+		\item If $A$ is separable, then $f(A)$ is separable.
+	\end{enumerate}
+\end{definition}
+
 \begin{definition}{Limit of Sequence of Points in Topological Space}{}
 	Let $X$ be a topological space. A point $x\in X$ is the \textbf{limit} of a sequence $\{x_n\}_{n=1}^\infty$ in $X$ if for any neighborhood $U\in\mathcal{N}(x)$, there exists $N\in\mathbb{N}$ such that $x_n\in U$ for all $n\ge N$. If $\{x_n\}_{n=1}^\infty$ has a limit in $X$, we say that the sequence \textbf{converges} in $X$.
 \end{definition}
@@ -574,7 +588,7 @@ The closure of $A$ is the disjoint union of $A'$ and $\mathrm{isolated}(A)$, whe
 	A \textbf{second-countable} space, also called a completely separable space, is a topological space whose topology has a countable base.
 \end{definition}
 
-\begin{proposition}{}{}
+\begin{proposition}{Second-Countablity Implies First-Countablity and Separability}{}
 	Every second-countable space is first-countable and separable.
 \end{proposition}
 \begin{prf}
@@ -591,7 +605,7 @@ The closure of $A$ is the disjoint union of $A'$ and $\mathrm{isolated}(A)$, whe
 	is a countable subset of $X$. To see $D$ is dense in $X$, for any point $x \in X$ and for any neighborhood $N\in\mathcal{N}(x)$, we have $x_{B_N}\in B_N \cap D\subseteq N \cap D $. Therefore $D$ is dense in $X$.
 \end{prf}
 
-\begin{theorem}{Urysohn's metrization theorem}{}
+\begin{theorem}{Urysohn's Metrization Theorem}{}
 	Every Hausdorff second-countable regular space is metrizable.
 \end{theorem}
 
@@ -645,22 +659,10 @@ The closure of $A$ is the disjoint union of $A'$ and $\mathrm{isolated}(A)$, whe
 	A map $f:X\to Y$ is an \textbf{closed map} if for any closed set $U\subseteq X$, $f(U)$ is closed in $Y$.
 \end{definition}
 
-\begin{definition}{Proper Map}{proper_map}
-	A map $f:X\to Y$ is an \textbf{proper map} if for any compact subset set $V\subseteq Y$, $f^{-1}(V)$ is compact.
-\end{definition}
-
-\begin{proposition}{}{}
-	A topological space $X$ is compact if and only if the map from $X$ to a single point $X\to\{*\}$ is proper.
-\end{proposition}
-
 \begin{lemma}{Closed Map Lemma}{}
 	Every continuous map $f: X \rightarrow Y$ from a compact space $X$ to a Hausdorff space $Y$ is closed and proper.
 \end{lemma}
 
-
-\begin{proposition}{}{}
-	If $f: X \rightarrow Y$ is a proper continuous map and $Y$ is a compactly generated Hausdorff space (this includes Hausdorff spaces that are either first-countable or locally compact), then $f$ is closed.
-\end{proposition}
 
 \section{Basic Construction}
 \subsection{Initial Topology and Final Topology}
@@ -979,7 +981,7 @@ we see that compactness is an inherent notion to the topological space and does 
 \end{definition}
 
 \begin{definition}{Constructible Subset}{}
-	Let $X$ be a topological space. Let $E \subset X$ be a subset of $X$.
+	Let $X$ be a topological space. Let $E \subseteq X$ be a subset of $X$.
 	\begin{enumerate}[(i)]
 		\item We say $E$ is \textbf{constructible} in $X$ if $E$ is a finite union of subsets of the form $U \cap V^{\complement}$ where $U, V \subseteq X$ are open and retrocompact in $X$.
 		\item We say $E$ is \textbf{locally constructible} in $X$ if there exists an open covering $X=\bigcup V_i$ such that each $E \cap V_i$ is constructible in $V_i$.
@@ -1008,6 +1010,84 @@ we see that compactness is an inherent notion to the topological space and does 
 	A topological space $X$ is \textbf{sequentially compact} if every sequence in $X$ has a convergent subsequence.
 \end{definition}
 
+\section{Properness}
+\begin{definition}{Proper Map}{proper_map}
+	A map $f:X\to Y$ is an \textbf{proper map} if for any compact subset set $V\subseteq Y$, $f^{-1}(V)$ is compact.
+\end{definition}
+
+\begin{proposition}{}{}
+	A topological space $X$ is compact if and only if the map from $X$ to a single point $X\to\{*\}$ is proper.
+\end{proposition}
+
+\begin{lemma}{}{}
+	A topological space $X$ is compact if and only if the projection map $X\times Z\rightarrow Z$ is closed for any topological space $Z$.
+\end{lemma}
+\begin{prf}
+	If $X$ is not compact, there exists an open covering $X=\bigcup_{i \in I} U_i$ such that no finite number of $U_i$ cover $X$. Let $Z$ be the subset of the power set $2^I$ of $I$ consisting of $I$ and all nonempty finite subsets of $I$
+	\[ 
+	Z=\{J \subseteq I \mid J \neq \emptyset \text { and } J \text { is finite}\,\} \cup\{I\}.
+	\] 
+	Define a topology on $Z$ with as a basis for the topology the following sets:
+	\begin{enumerate}[(i)]
+		\item All subsets of $Z -\{I\}$.
+		\item For every finite subset $K$ of $I$ the set $U_K:=\{J \subseteq I \mid J \in Z, K \subseteq J\}$.
+	\end{enumerate}
+	It is easy to check this is the basis for a topology. Consider the subset of $ X\times Z $ defined by the formula
+
+	$$
+	M=\left\{(x, J) \mid x \in \bigcap_{i \in J} U_i^\complement,\;J \in Z\right\}
+	$$
+
+
+	If $(x, J) \notin M$, then $x \in U_i$ for some $i \in J$. Hence $ U_i\times U_{\{i\}} \subseteq   X\times Z$ is an open subset containing $(x,J)$ and not intersecting $M$. Hence $M$ is closed. The projection of $M$ to $Z$ is $Z-\{I\}$ which is not closed. Hence $ X\times Z \rightarrow Z$ is not closed.
+
+	Assume $X$ is compact. Let $Z$ be a topological space. Let $M \subseteq  X\times Z$ be closed. Let $z \in Z$ be a point which is not in $\mathrm{pr}_2(M)$. By the Tube Lemma, there exists an open $U \subseteq Z$ such that $X\times U$ is contained in the complement of $M$. Hence $\mathrm{pr}_2(M)$ is closed.
+\end{prf}
+
+
+\begin{definition}{Universally Closed Map}{universally_closed_map}
+	Let $f : X \rightarrow Y$ be a continuous map. We say that $f$ is \textbf{universally closed} if one of the following equivalent conditions holds:
+	\begin{enumerate}[(i)]
+		\item $f$ is a closed map and for any $y\in Y$, $f^{-1}(y)$ is compact.
+		\item For any topological space $Z$ and any continuous map $g : Z \rightarrow Y$, the map $f' : X \times_Y Z \rightarrow Z$ defined by $f'(x, z) = z$ is a closed map.
+		\[
+			\begin{tikzcd}
+				X\times_Y Z \arrow[r, "f'"] \arrow[d, "g'"'] & Z \arrow[d, "g"] \\
+				X \arrow[r, "f"']                            & Y               
+			\end{tikzcd}
+		\]     
+		\item For any topological space $Z$, the map $f \times \mathrm{id}_Z : X \times Z \rightarrow Y \times Z$ is a closed map.
+		\[
+			\begin{tikzcd}
+				X \arrow[d, "f"'] & X\times Z \arrow[r] \arrow[l] \arrow[d, "f\times\mathrm{id}_Z"] & Z \arrow[d, "\mathrm{id}_Z"] \\
+				Y                 & Y\times Z \arrow[r] \arrow[l]                                   & Z                           
+				\end{tikzcd}
+		\]
+		\item $f$ is a closed and proper map.
+	\end{enumerate}
+\end{definition}
+\begin{prf}
+	(iv)$\implies$(i): Suppose $f$ is proper. For any $y\in Y$, since $\{y\}$ is compact, $f^{-1}(y)$ is compact.\\
+
+	(ii)$\implies$(iii): Take $g:Y\times Z\to Y$ to be the projection.\\
+
+	(iii)$\implies$(iv): First we show $f$ is closed. By taking $Z=\{*\}$, $f$ can be identified with the map $ X \times\{*\}\rightarrow Y\times \{*\}$ which is assumed closed. Choose any compact subset $K \subseteq Y$. Let $Z$ be any topological space. Because $Z \times X \rightarrow Z \times Y$ is closed we see the map $Z \times f^{-1}(K) \rightarrow Z \times K \quad$ is closed $\quad$ (if $\quad T \quad$ is closed in $Z \times f^{-1}(K)$, write $T=Z \times f^{-1}(K) \cap T^{\prime}$ for some closed $T^{\prime} \subseteq Z \times X$ ). Because $K$ is compact, $K \times Z \rightarrow Z$ is closed by Lemma 5.17.3. Hence the composition $Z \times f^{-1}(K) \rightarrow Z \times K \rightarrow Z$ is closed and therefore $f^{-1}(K)$ must be compact by Lemma 5.17.3 again.
+\end{prf}
+
+\begin{proposition}{}{}
+	If $f: X \rightarrow Y$ is a continuous map and $Y$ is a compactly generated Hausdorff space (this includes Hausdorff spaces that are either first-countable or locally compact), then the following are equivalent:
+	\begin{enumerate}[(i)]
+		\item $f$ is proper.
+		\item $f$ is \hyperref[th:universally_closed_map]{universally closed}.
+	\end{enumerate}
+\end{proposition}
+
+\begin{prf}
+	We only prove the case where $Y$ is a locally compact Hausdorff space.\\
+	(i) $\Rightarrow$ (ii): Suppose $f$ is proper. It is sufficient to show that $f$ is a closed map. For any closed set $A\subseteq X$, it is sufficient to show that for any $y\in Y-f(A)$, there exists an neighborhood $W$ of $y$ such that $W\cap f(A)=\varnothing$. Since $Y$ is locally compact, there exists an compact neighborhood $K$ of $y$. Since $f$ is proper, $f^{-1}(K)$ is compact. Since $A\cap f^{-1}(K)$ is closed subset of compact space $f^{-1}(K)$, it is compact, which implies $f\left(A\cap f^{-1}(K)\right)=f(A)\cap K$ is compact. Note that $K$ is Hausdorff, $f(A)\cap K$ is closed subset of $K$, and $y\in K-f(A)\cap K$.
+	By the \hyperref[th:properties_of_hausdorff_space]{property of Hausdorff space}, there exists an open neighborhoods $U$ of $y$ and $V$ of $f(A)\cap K$ in $K$ such that $U\cap V=\varnothing$. Since $U\subseteq K - f(A)$, we have $U\cap f(A)=\varnothing$. Suppose $U=O \cap K$ where $O$ is open in $Y$. Let $W:=O\cap K^{\circ}\subseteq U$. Note that $y\in  K^{\circ}$. We see $W$ is an open neighborhood of $y$ in $Y$ such that $W\cap f(A)=\varnothing$. Therefore, $f$ is a closed map. 
+\end{prf}
+
 \section{Irreducibility}
 \begin{definition}{Irreducible Topological Space}{}
 	A topological space $X$ is called \textbf{irreducible} if it is nonempty, and it is not the union of two proper closed subsets. In other words, a nonempty topological space $X$ is irreducible if whenever $X=Y \cup Z$ with $Y$ and $Z$ closed in $X$, we have $Y=X$ or $Z=X$.
@@ -1027,7 +1107,7 @@ we see that compactness is an inherent notion to the topological space and does 
 \subsection{Basic notions}
 \begin{definition}{Metric Space}{metric_space}
 	Given a nonempty set $X$ and a mapping $d:X\times X\to \mathbb{R}$, we say $(X,d)$ is a \textbf{metric space} if $d$ satisfies the following conditions for all $x,y\in X$:
-	\begin{enumerate}
+	\begin{enumerate}[(i)]
 		\item (identity of indiscernibles): $d(x,y)=0\iff x=y$,
 		\item (symmetry): $d(x,y)=d(y,x)$,
 		\item (triangle inequality): $d(x,y)\le d(x,z)+d(y,z)$.
@@ -1035,7 +1115,7 @@ we see that compactness is an inherent notion to the topological space and does 
 \end{definition}
 \begin{proposition}{Properties of Metric Space}{metric_space_properties}
 	Let $(X,d)$ be a metric space.
-	\begin{enumerate}
+	\begin{enumerate}[(i)]
 		\item $d(x,y)\ge 0,\quad\forall x,y\in X$
 		\item $|d(x,z)-d(y,z)|\le d(x,y)$ for all $x,y,z\in X$.
 		\item $|d(x,y)-d(x',y')|\le d(x,x')+d(y,y')$ for all $x,x',y,y'\in X$.
@@ -1061,7 +1141,7 @@ This suggests us to study sequences in metric spaces since limits of sequences i
 
 \begin{proposition}{Properties of Convergent Sequences}{properties_of_convergent sequences}
 	Let $\{x_n\}$ be a convergent sequence in $X$.
-	\begin{enumerate}
+	\begin{enumerate}[(i)]
 		\item the limit of $\{x_n\}$ is unique,
 		\item $\{x_n\}$ is bounded,
 		\item if $x_n\to x$, then any subsequence of $\{x_n\}$ also converges to $x$.
@@ -1115,7 +1195,7 @@ This suggests us to study sequences in metric spaces since limits of sequences i
 
 \begin{proposition}{Properties of Cauchy Sequences}{properties_of_Cauchy_sequences}
 	Cauchy sequences in metric spaces satisfie the following properties:
-	\begin{enumerate}
+	\begin{enumerate}[(i)]
 		\item a convergent sequence is a Cauchy sequence,
 		\item Cauchy sequences are bounded,
 		\item If $\{x_n\}$ is a Cauchy sequence and a subsequence of $\{x_n\}$ converges to $x$, then $\{x_n\}$ also converges to $x$.
@@ -1188,9 +1268,9 @@ This suggests us to study sequences in metric spaces since limits of sequences i
 	\end{align*}
 	we see $d(x_n,y_n)$ is a Cauchy sequence in $\mathbb{R}$, which means the limit $\lim_{n\to\infty}d(x_n,y_n)$ exists. We can check that $d_c$ is a pseudometric on $\mathrm{CauSeq}[X]$:
 	\begin{enumerate}[(i)]
-		\item $d_c(\{x_n\},\{x_n\})=\lim_{n\to\infty}d(x_n,x_n)=0$,
-		\item $d_c(\{x_n\},\{y_n\})=\lim_{n\to\infty}d(x_n,y_n)=\lim_{n\to\infty}d(y_n,x_n)=d_c(\{y_n\},\{x_n\})$,
-		\item $d_c(\{x_n\},\{z_n\})=\lim_{n\to\infty}d(x_n,z_n)\le\lim_{n\to\infty}d(x_n,y_n)+\lim_{n\to\infty}d(y_n,z_n)=d_c(\{x_n\},\{y_n\})+d_c(\{y_n\},\{z_n\})$.
+		\item $d_c(\{x_n\},\{x_n\})=\lim\limits_{n\to\infty}d(x_n,x_n)=0$,
+		\item $d_c(\{x_n\},\{y_n\})=\lim\limits_{n\to\infty}d(x_n,y_n)=\lim\limits_{n\to\infty}d(y_n,x_n)=d_c(\{y_n\},\{x_n\})$,
+		\item $d_c(\{x_n\},\{z_n\})=\lim\limits_{n\to\infty}d(x_n,z_n)\le\lim\limits_{n\to\infty}d(x_n,y_n)+\lim\limits_{n\to\infty}d(y_n,z_n)=d_c(\{x_n\},\{y_n\})+d_c(\{y_n\},\{z_n\})$.
 	\end{enumerate}
 	The pseudometric $d_c$ induces a metric $\hat{d}:=d_c^*$ on $\widehat{X}:=\mathrm{CauSeq}[X]/\sim$
 	\begin{align*}
@@ -2386,7 +2466,7 @@ Taking $Y=\{*\}$ in the homotopy lifting property gives the following corollary.
 	\]
 	Suppose $\psi=\psi_1\cdot\psi_2^{-}$. Then we see that $\left[\psi_1\right]=\left[\widetilde{f\circ\gamma_1}\right]$ and $\left[\psi_2\right]=\left[\widetilde{f\circ\gamma_2}\right]$. Therefore, we have $\widetilde{f\circ\gamma_1}(1)=\widetilde{f\circ\gamma_2}(1)=\psi\left(\frac{1}{2}\right)$. This shows that $\widetilde{f}$ is well-defined.
 
-	To see that $\tilde{f}$ is continuous, let $U \subset X$ be an open neighborhood of $f(y)$ having a lift $\tilde{U} \subset \tilde{X}$ containing $\tilde{f}(y)$ such that $p: \widetilde{U} \rightarrow U$ is a homeomorphism. Choose a path-connected open neighborhood $V$ of $y$ with $f(V) \subset U$. For paths from $y_0$ to points $y^{\prime} \in V$ we can take a fixed path $\gamma$ from $y_0$ to $y$ followed by paths $\eta$ in $V$ from $y$ to the points $y^{\prime}$. Then the paths $(f \circ\gamma) \cdot(f\circ \eta)$ in $X$ have lifts $(\widetilde{f \circ\gamma}) \cdot(\widetilde{f \circ\eta})$ where $\widetilde{f \circ\eta}=p^{-1} \circ f \circ\eta$ and $p^{-1}: U \rightarrow \widetilde{U}$ is the inverse of $p: \widetilde{U} \rightarrow U$. Thus $\tilde{f}(V) \subseteq \widetilde{U}$ and $\tilde{f}|_V=p^{-1} \circ f$, hence $\tilde{f}$ is continuous at $y$.
+	To see that $\tilde{f}$ is continuous, let $U \subseteq X$ be an open neighborhood of $f(y)$ having a lift $\tilde{U} \subseteq \tilde{X}$ containing $\tilde{f}(y)$ such that $p: \widetilde{U} \rightarrow U$ is a homeomorphism. Choose a path-connected open neighborhood $V$ of $y$ with $f(V) \subseteq U$. For paths from $y_0$ to points $y^{\prime} \in V$ we can take a fixed path $\gamma$ from $y_0$ to $y$ followed by paths $\eta$ in $V$ from $y$ to the points $y^{\prime}$. Then the paths $(f \circ\gamma) \cdot(f\circ \eta)$ in $X$ have lifts $(\widetilde{f \circ\gamma}) \cdot(\widetilde{f \circ\eta})$ where $\widetilde{f \circ\eta}=p^{-1} \circ f \circ\eta$ and $p^{-1}: U \rightarrow \widetilde{U}$ is the inverse of $p: \widetilde{U} \rightarrow U$. Thus $\tilde{f}(V) \subseteq \widetilde{U}$ and $\tilde{f}|_V=p^{-1} \circ f$, hence $\tilde{f}$ is continuous at $y$.
 \end{prf}
 
 
