@@ -16,9 +16,13 @@
 
 \usepackage{tabularray}
 
+
 \usepackage[all]{xy}
 \usepackage{tikz}
 \usepackage{quiver}
+
+\usepackage[T1]{fontenc}
+\usepackage{textcomp, lmodern}
 
 \newcommand{\midv}{\,\middle\vert\,}
 \newcommand{\Top}{\mathsf{Top}}
@@ -139,7 +143,7 @@
 \noindent In this chapter we always assume that $(X,\tau)$ is a topological space.
 
 \begin{definition}{Continuous Map}{}
-	Let $(X,\tau_X)$ and $(Y,\tau_Y)$ be topological spaces. A map $f:X\to Y$ is \textbf{continuous} if for any open set $U\in\tau_Y$, $f^{-1}(U)\in\tau_X$.
+	Let $(X,\tau_X)$ and $(Y,\tau |_Y)$ be topological spaces. A map $f:X\to Y$ is \textbf{continuous} if for any open set $U\in\tau |_Y$, $f^{-1}(U)\in\tau_X$.
 \end{definition}
 
 \begin{definition}{Discrete Topology}{}
@@ -309,7 +313,7 @@ We can see that for any $x\in X$, neighborhood system $\mathcal{N}(x)$ is a filt
 	If a filter base $\mathcal{B}$ generates a filter $\mathcal{F}$, we say that $\mathcal{B}$ is a base of $\mathcal{F}$.
 \end{definition}
 
-\begin{definition}{Neighborhood Base}{}
+\begin{definition}{Neighborhood Base}{neighborhood_base}
 	Let $X$ be a topological space. A \textbf{neighborhood base} for a point $x\in X$ is a base of the neighborhood filter $\mathcal{N}(x)$. Equivalently, $\mathcal{B}\subseteq\mathcal{N}(x)$ is a neighborhood base for $x$ if and only if for any $N\in\mathcal{N}(x)$, there exists $B\in\mathcal{B}$ such that $B\subseteq N$.
 \end{definition}
 
@@ -365,7 +369,7 @@ We can see that for any $x\in X$, neighborhood system $\mathcal{N}(x)$ is a filt
 	Suppose $A$ is a subset of $(X,\tau)$ and $x\in A$. Then the following propositions are equivalent:
 	\begin{enumerate}[(i)]
 		\item $x$ is an isolated point of $A$.
-		\item $\{x\}$ is an open set in $(A,\tau_A)$, where $\tau_A$ is the subspace topology on $A$.
+		\item $\{x\}$ is an open set in $(A,\tau|_A)$, where $\tau|_A$ is the subspace topology on $A$.
 		\item $x\notin A'$, i.e., $x$ is not a limit point of $A$.
 	\end{enumerate}
 \end{proposition}
@@ -549,13 +553,17 @@ The closure of $A$ is the disjoint union of $A'$ and $\mathrm{isolated}(A)$, whe
 
 \subsection{Other Basic Concepts}
 
+\begin{definition}{Limit of Sequence of Points in Topological Space}{}
+	Let $X$ be a topological space. A point $x\in X$ is the \textbf{limit} of a sequence $\{x_n\}_{n=1}^\infty$ in $X$ if for any neighborhood $U\in\mathcal{N}(x)$, there exists $N\in\mathbb{N}$ such that $x_n\in U$ for all $n\ge N$. If $\{x_n\}_{n=1}^\infty$ has a limit in $X$, we say that the sequence \textbf{converges} in $X$.
+\end{definition}
+
 \begin{definition}{Separable Space}{}
 	A topological space is called \textbf{separable} if it contains a countable, dense subset.
 \end{definition}
 
 
 \begin{definition}{First-Countable Space}{}
-	A \textbf{first-countable} space is a topological space such that for any point $x$ in the space, there exists a countable neighborhood base at $x$.
+	A \textbf{first-countable} space is a topological space such that for any point $x$ in the space, there exists a countable \hyperref[th:neighborhood_base]{neighborhood base} at $x$.
 \end{definition}
 
 \begin{example}{Metric Space is First-Countable}{}
@@ -566,6 +574,26 @@ The closure of $A$ is the disjoint union of $A'$ and $\mathrm{isolated}(A)$, whe
 	A \textbf{second-countable} space, also called a completely separable space, is a topological space whose topology has a countable base.
 \end{definition}
 
+\begin{proposition}{}{}
+	Every second-countable space is first-countable and separable.
+\end{proposition}
+\begin{prf}
+	Let $X$ be a second-countable space with a countable base $\mathcal{B}$. For any $x\in X$, and any neighborhood $N\in\mathcal{N}(x)$, there exists an open set $B_N\in \mathcal{B}$ such that $x\in B_N\subseteq N$. Hence 
+	\[  
+		R_x:=\left\{B_N \mid N\in\mathcal{N}(x)\right\} \subseteq \mathcal{B}
+	\] 
+	is a countable \hyperref[th:neighborhood_base]{neighborhood base} at $x$. Therefore $X$ is first-countable.
+
+	For any $B\in\mathcal{B}$, there exists $x_B\in B$. Hence
+	\[
+		D:=\{x_B\mid B\in\mathcal{B}\}
+	\]
+	is a countable subset of $X$. To see $D$ is dense in $X$, for any point $x \in X$ and for any neighborhood $N\in\mathcal{N}(x)$, we have $x_{B_N}\in B_N \cap D\subseteq N \cap D $. Therefore $D$ is dense in $X$.
+\end{prf}
+
+\begin{theorem}{Urysohn's metrization theorem}{}
+	Every Hausdorff second-countable regular space is metrizable.
+\end{theorem}
 
 \begin{definition}{Open Map}{}
 	A map $f:X\to Y$ between topological spaces is an \textbf{open map} if for any open set $U\subseteq X$, $f(U)$ is open in $Y$.
@@ -603,7 +631,7 @@ The closure of $A$ is the disjoint union of $A'$ and $\mathrm{isolated}(A)$, whe
 \end{prf}
 
 \begin{proposition}{Local Homeomorphism Transfers Local Properties}{local_homeomorphism_transfers_local_properties}
-	A local homeomorphism $f: X \rightarrow Y$ transfers ``local" topological properties in both directions:
+	A local homeomorphism $f: X \rightarrow Y$ transfers ``local'' topological properties in both directions:
 	\begin{itemize}
 		\item $X$ is locally connected if and only if $f(X)$ is;
 		\item  $X$ is locally path-connected if and only if $f(X)$ is;
@@ -644,27 +672,27 @@ The closure of $A$ is the disjoint union of $A'$ and $\mathrm{isolated}(A)$, whe
 \begin{definition}{Subspace Topology}{}
 	Let $(X,\tau)$ be a topological space and $Y$ be a subset of $X$. Then
 	\[
-		\tau_Y:=\{Y\cap U\mid U\in \tau\}.
+		\tau |_Y:=\{Y\cap U\mid U\in \tau\}.
 	\]
 	is said to be a \textbf{subspace topology} of $(X,\tau)$.
 \end{definition}
 
-$(Y,\tau_Y)$ is a topological space. Moreover, $(Y,\tau_Y)$ is a subobject of $(X,\tau)$ in $\Top$.
+$(Y,\tau |_Y)$ is a topological space. Moreover, $(Y,\tau |_Y)$ is a subobject of $(X,\tau)$ in $\Top$.
 
 \begin{proposition}{Inculsion is Continuous}{}
-	Let $(X,\tau)$ be a topological space and $A$ be a subset of $X$. The subspace topology $\tau_A$ is the coarsest topology on $A$ such that the inclusion map $i:A\to X$ is continuous.
+	Let $(X,\tau)$ be a topological space and $A$ be a subset of $X$. The subspace topology $\tau|_A$ is the coarsest topology on $A$ such that the inclusion map $i:A\to X$ is continuous.
 \end{proposition}
 
 \begin{prf}
 	For any $U\in \tau$, we have
 	\[
-		i^{-1}(U)=U\cap A\in \tau_A,
+		i^{-1}(U)=U\cap A\in \tau|_A,
 	\]
 	which implies $i$ is continuous. If there exists a topology $\tau'$ on $A$ such that $i$ is continuous, then for any $U\in \tau$, we have
 	\[
 		i^{-1}(U)=U\cap A\in \tau',
 	\]
-	which implies $\tau_A\subseteq \tau'$.
+	which implies $\tau|_A\subseteq \tau'$.
 \end{prf}
 
 
@@ -673,7 +701,7 @@ $(Y,\tau_Y)$ is a topological space. Moreover, $(Y,\tau_Y)$ is a subobject of $(
 \end{proposition}
 
 \begin{prf}
-	For any $U\in \tau_{f(X)}$, there exists $V\in \tau$ such that $U=V\cap f(X)$. Since $f$ is continuous, we have
+	For any $U\in \tau|_{f(X)}$, there exists $V\in \tau$ such that $U=V\cap f(X)$. Since $f$ is continuous, we have
 	\[
 		g^{-1}(U)=g^{-1}\left(V\cap f(X)\right)=f^{-1}(V)\in \tau,
 	\]
@@ -683,7 +711,7 @@ $(Y,\tau_Y)$ is a topological space. Moreover, $(Y,\tau_Y)$ is a subobject of $(
 
 
 \begin{proposition}{Subspace of Subspace is Subspace}{}
-	Let $(X, \tau)$ be a topological space. Let $K \subseteq Y \subseteq X$ and $\tau_Y$ be the subspace topology on $Y$. Then the subspace topology on $K$ induced by $\tau$ equals the subspace topology on $K$ induced by $\tau_H$.
+	Let $(X, \tau)$ be a topological space. Let $K \subseteq Y \subseteq X$ and $\tau |_Y$ be the subspace topology on $Y$. Then the subspace topology on $K$ induced by $\tau$ equals the subspace topology on $K$ induced by $\tau|_Y$.
 \end{proposition}
 
 \subsection{Quotient Topology}
@@ -774,7 +802,7 @@ It is easy to check that $\pi$ is a continuous surjection from $(X,\tau)$ to $(X
 
 We have several separation axioms in topological spaces denoted by $\mathrm{T}_r$, $r=0,1,2,2\frac{1}{2},3,3\frac{1}{2},4,5,6$.
 
-\begin{definition}{$\mathrm{T}_1$ Space}
+\begin{definition}{$\mathrm{T}_1$ Space}{}
 	A topological space $X$ is a \textbf{$\mathrm{T}_1$ space} if and only if every single-point set is a closed set.
 \end{definition}
 
@@ -790,14 +818,14 @@ We have several separation axioms in topological spaces denoted by $\mathrm{T}_r
 		\item Limits of filters on $X$ are unique.
 	\end{enumerate}
 \end{proposition}
-A countable sequence of points converges to a point if for every neighborhood of that point, there is a positive integer such that all points in the sequence after that integer are in the neighborhood.
+
 \begin{proposition}{Properties of Hausdorff Space}{properties_of_hausdorff_space}
 	Let $X$ be a Hausdorff space. Then
 	\begin{enumerate}[(i)]
 		\item Each compact subset of $X$ is closed. So $X$ is a $\mathrm{T}_1$ space.
 		\item If $(x_i)_{i=1}^{\infty}$ is a convergent sequence in $X$, the limit of $(x_i)_{i=1}^{\infty}$ is unique.
 		\item Subspaces and products of Hausdorff spaces are Hausdorff.
-		\item Suppose $x\in X$ and $A$ is a compact subset of $X$ such that $x\notin A$. Then there exist neighborhoods $U$ of $x$ and $V$ of $A$ such that $U\cap V=\varnothing$.
+		\item Suppose $x\in X$ and $Y$ is a compact subset of $X$ such that $x\notin Y$. Then there exist neighborhoods $U$ of $x$ and $V$ of $A$ such that $U\cap V=\varnothing$.
 	\end{enumerate}
 \end{proposition}
 \begin{prf}
@@ -821,11 +849,29 @@ A countable sequence of points converges to a point if for every neighborhood of
 	\end{enumerate}
 \end{prf}
 
+\begin{definition}{Completely Regular}{}
+	A topological space $X$ is called \textbf{completely regular} if points can be separated from closed sets via (bounded) continuous real-valued functions: for any closed set $A \subseteq X$ and any point $x \in X - A$, there exists a continuous function $f: X \rightarrow \mathbb{R}$ such that $f(x)=1$ and $\left.f\right|_A=0$. (Equivalently one can choose any two values instead of 0 and 1 and even require that $f$ be a bounded function.)
+\end{definition}
+
+\begin{definition}{Tychonoff Space/$\mathrm{T}_{3 \text{\textonehalf}}$ Space}{}
+	A topological space $X$ is a \textbf{Tychonoff space} or $\mathrm{T}_{3\text{\textonehalf}}$ space if it is a $\mathrm{T}_0$ space and completely regular.
+\end{definition}
+
+\begin{proposition}{}{}
+	Locally compact Hausdorff spaces are Tychonoff.
+\end{proposition}
+
+
 \begin{definition}{Normal Space}{}
 	A topological space $X$ is a \textbf{normal space} space if, given any disjoint closed sets $E$ and $F$ in $X$, there are neighborhoods $U$ of $E$ and $V$ of $F$ such that $U\cap V=\varnothing$.
 \end{definition}
+\begin{definition}{$\mathrm{T}_4$ Space}{}
+	A topological space $X$ is a $\mathrm{T}_4$ space if it is both $\mathrm{T}_1$ are normal.
+\end{definition}
+
+
 \begin{proposition}{}{}
-	Compact Hausdorff spaces are normal.
+	Compact Hausdorff spaces are $\mathrm{T}_4$.
 \end{proposition}
 \begin{prf}
 	Let $X$ be a compact Hausdorff topological space and let $A$ and $B$ be disjoint closed sets in $X$. By \Cref{th:sufficient_condition_for_compactness}, the compactness of $X$ implies the compactness of $A$ and $B$. By \Cref{th:properties_of_hausdorff_space}, for any $y\in B$ there exists an open set $U_y$ containing $X$ and an open neighborhood $V_y\ni y$ such that $U_y\cap V_y =\varnothing$. Since $B$ is compact, the open cover $\left\lbrace V_y\right\rbrace _{y\in B}$ of $B$ has a finite subcover $\{V_{y_j}\}_{j=1}^n$. The open sets 
@@ -835,9 +881,7 @@ U=\bigcap_{j=1}^n U_{y_j} \supseteq A,  \qquad V=\bigcup_{j=1}^n V_{y_j} \supset
 are then disjoint open sets, proving that $X$ is normal.
 \end{prf}
 
-\begin{definition}{$\mathrm{T}_4$ Space}{}
-	A topological space $X$ is a $\mathrm{T}_4$ space if it is both $\mathrm{T}_1$ are normal.
-\end{definition}
+
 
 \section{Connectedness}
 \begin{definition}{Connected Topological Space}{}
@@ -960,6 +1004,10 @@ we see that compactness is an inherent notion to the topological space and does 
 
 \end{definition}
 
+\begin{definition}{Sequentially Compact Space}{}
+	A topological space $X$ is \textbf{sequentially compact} if every sequence in $X$ has a convergent subsequence.
+\end{definition}
+
 \section{Irreducibility}
 \begin{definition}{Irreducible Topological Space}{}
 	A topological space $X$ is called \textbf{irreducible} if it is nonempty, and it is not the union of two proper closed subsets. In other words, a nonempty topological space $X$ is irreducible if whenever $X=Y \cup Z$ with $Y$ and $Z$ closed in $X$, we have $Y=X$ or $Z=X$.
@@ -1003,7 +1051,7 @@ Furthermore, the following proposition holds.
 	Metric space is Hausdorff.
 \end{proposition}
 This suggests us to study sequences in metric spaces since limits of sequences in Hausdorff spaces are unique.
-\begin{definition}{Limit of Sequence}{metric_space_limit}
+\begin{definition}{Limit of Sequence in Metric Space}{metric_space_limit}
 	Let $\{x_n\}$ be a sequence in $X$ and $x\in X$. If
 	\[
 		\lim_{n\to\infty}d(x_n,x)=0,
@@ -1854,7 +1902,7 @@ From the definition, we see if $\varrho:G\times X\to X$ is continuous topologica
 		(g, x) &\longmapsto(g x, x)
 	\end{align*}
 	
-	is a \hyperlink{th:proper_map}{proper map}.
+	is a \hyperref[th:proper_map]{proper map}.
 \end{definition}
 
 \begin{proposition}{Proper Group Action Has Compact Stabilizer Groups}{}
@@ -1998,7 +2046,7 @@ A covering space is a fiber bundle with discrete fiber $D$, illustrated as follo
 	The covering $p:E\to X$ is an open map.
 \end{corollary}
 \begin{prf}
-	Since \hyperlink{th:equivalent_definition_of_local_homeomorphism}{local homeomorphisms are open maps}, the result follows from \Cref{th:covering_map_is_local_homeomorphism}.
+	Since \hyperref[th:equivalent_definition_of_local_homeomorphism]{local homeomorphisms are open maps}, the result follows from \Cref{th:covering_map_is_local_homeomorphism}.
 
 \end{prf}
 
