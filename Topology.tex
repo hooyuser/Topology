@@ -397,7 +397,7 @@ We can see that for any $x\in X$, neighborhood system $\mathcal{N}(x)$ is a filt
 \subsection{Closure, Frontier, and Interior}
 
 \begin{definition}{Closure}{}
-	Suppose that $A$ is a subset of $X$. The \textbf{closure} of $A$ is the smallest closed set containing $A$, denoted by $\overline{A}$.
+	Suppose that $A$ is a subset of $X$. The \textbf{closure} of $A$ is the smallest closed set containing $A$, denoted by $\overline{A}$ or $\mathrm{cl}_X(A)$.
 \end{definition}
 
 The closure of $A$ is the disjoint union of $A'$ and $\mathrm{isolated}(A)$, where $\mathrm{isolated}(A)$ is the set of all isolated points of $A$.
@@ -739,9 +739,33 @@ $(Y,\tau |_Y)$ is a topological space. Moreover, $(Y,\tau |_Y)$ is a subobject o
 
 
 
-\begin{proposition}{Subspace of Subspace is Subspace}{}
+\begin{proposition}{Subspace of Subspace is Subspace}{subspace_of_subspace_is_subspace}
 	Let $(X, \tau)$ be a topological space. Let $K \subseteq Y \subseteq X$ and $\tau |_Y$ be the subspace topology on $Y$. Then the subspace topology on $K$ induced by $\tau$ equals the subspace topology on $K$ induced by $\tau|_Y$.
 \end{proposition}
+
+\begin{proposition}{Closure of Subset in Subspace}{}
+	Let $X$ be a topological space and $A\subseteq B\subseteq X$. If $B$ is dense in $X$ and $A$ is dense in $B$. Then 
+	\[
+	\mathrm{cl}_{B}(A)=\mathrm{cl}_{X}(A)\cap B.
+	\]
+\end{proposition}
+\begin{prf}
+	\begin{align*}
+		\mathrm{cl}_{B}(A)&=\bigcap\{F\subseteq B\mid F\text{ is closed in $B$ and }A\subseteq F\}\\
+		&=\bigcap\{F'\cap B\subseteq B\mid F'\text{ is closed in $X$ and }A\subseteq F'\}\\
+		&=B\cap\left(\bigcap \{F'\subseteq B\mid F'\text{ is closed in $X$ and }A\subseteq F'\}\right)\\
+		&=B\cap \mathrm{cl}_{X}(A).
+	\end{align*}
+	
+\end{prf}
+
+\begin{proposition}{Denseness is Transitive}{}
+	Let $X$ be a topological space and $A\subseteq B\subseteq X$. If $B$ is dense in $X$ and $A$ is dense in $B$. Then $A$ is dense in $X$.
+\end{proposition}
+\begin{prf}
+	If $B$ is dense in $X$ and $A$ is dense in $B$, then we have $\overline{B}=X$ and $\overline{A}\cap B=B$. Since $B\subseteq \overline{A}$ and $\overline{A}$ is closed in $X$, we have $\overline{B}\subseteq \overline{A}$, which implies $X\subseteq \overline{A}$. Since $\overline{A}\subseteq X$, we have $\overline{A}=X$.
+\end{prf}
+
 
 \subsection{Quotient Topology}
 \begin{definition}{Quotient Space}{}
@@ -1152,17 +1176,27 @@ Thus for every $b \in B$ there exists opens $U_b \subseteq X$ and $V_b \subseteq
 
 \section{Irreducibility}
 \begin{definition}{Irreducible Topological Space}{}
-	A topological space $X$ is called \textbf{irreducible} if it is nonempty, and it is not the union of two proper closed subsets. In other words, a nonempty topological space $X$ is irreducible if whenever $X=Y \cup Z$ with $Y$ and $Z$ closed in $X$, we have $Y=X$ or $Z=X$.
+	A topological space $X$ is called \textbf{irreducible} if it is nonempty, and it is not the union of two proper closed subsets. In other words, a nonempty topological space $X$ is irreducible if whenever $X=Y \cup Z$ with $Y$ and $Z$ closed in $X$, we have $Y=X$ or $Z=X$. A subset $Y$ of a topological space $X$ is called \textbf{irreducible} if the subspace topology on $Y$ is irreducible.
 \end{definition}
 
 \begin{proposition}{Properties of Irreducible Topological Space}{}
 	Let $X$ be a topological space. Then
-	\begin{itemize}
-		\item If $X$ is irreducible, then any nonempty open set is dense.
-		\item If $Z$ is an irreducible subspace of $X$ (with the subspace topology), then the closure $\bar{Z}$ in $X$ is irreducible as well.
+	\begin{enumerate}[(i)]
+		\item If $X$ is irreducible, then any nonempty open subset of $X$ is irreducible and dense.
+		\item If $Z$ is an irreducible subset of $X$, then the closure $\bar{Z}$ in $X$ is irreducible as well.
 		\item If $X$ is irreducible, then it is connected.
-	\end{itemize}
+	\end{enumerate}
 \end{proposition}
+\begin{prf}
+
+	\begin{enumerate}[(i)]
+		\item Suppose $U$ is a nonempty open subset of $X$. First we show $U$ is dense. Since $X=\overline{U}\cup (X-U)$ is a union of two closed subsets, we have either $X=\overline{U}$ or $X=X-U$. Since $U$ is nonempty, there must be $X=\overline{U}$. Therefore, $U$ is dense.
+		
+		Then we show $U$ is irreducible. Suppose $U=Y\cup Z$ with $Y$ and $Z$ closed in $U$. By definition of subspace topology, there exist closed sets $Y'$ and $Z'$ in $X$ such that $Y=Y'\cap U$ and $Z=Z'\cap U$. Let $W=Z'\cup (X-U)$, then $W$ is closed in $X$ and $X=Y'\cup W$ is a union of two closed subsets. Since $X$ is irreducible, we have either $X=Y'$ or $X=W$. If $X=Y'$, then $Y=U$. If $X=W$, then $X-(Z'\cup (X-U))=(X-Z')\cap U=\varnothing$, which means $U\subseteq Z'$. Since $Z=Z'\cap U$, we have $Z=U$. Therefore, $U$ is irreducible.
+		\item Suppose $A$ is an irreducible subset of $X$. If $\overline{A}=Y\cup Z$ with $Y$ and $Z$ closed in $\overline{A}$, we have $Y=Y'\cap \overline{A}$ and $Z=Z'\cap \overline{A}$ for some closed sets $Y'$ and $Z'$ in $X$. Since $A\subseteq \overline{A}$, we have $A=A\cap \overline{A}=(A\cap Y)\cup (A\cap Z)$, where $A \cap Y = A \cap (Y'\cap \overline{A})=A \cap Y'$ and $A \cap Z = A \cap (Z'\cap \overline{A})=A \cap Z'$ are closed set in $A$. Since $A$ is irreducible, we have either $A=A\cap Y$ or $A=A\cap Z$. Without loss of generality, assume $A=A\cap Y$. Then we have $A\subseteq Y$. Note $Y=Y'\cap \overline{A}$ is closed in $X$, the minimality of $\overline{A}$ implies $\overline{A}\subseteq Y$. Since $Y\subseteq \overline{A}$, we have $\overline{A}=Y$. Therefore, $\overline{A}$ is irreducible.
+	\end{enumerate}
+\end{prf}
+
 
 
 \section{Metric Spaces}
