@@ -236,9 +236,15 @@ The discrete topology is the finest possible topology on the set $X$.
 \end{proposition}
 
 
-\begin{proposition}{Characterisation Of Continuity Via Subbasis}{}
+
+
+\begin{proposition}{Characterisation of Continuity via Subbasis}{}
 	Let $f: X \rightarrow Y$ be a function between topological spaces $X, Y$, and let $\mathcal{B}$ be a subbasis of the topology of $Y$. If $f^{-1}(V)$ is open in $X$ for all $V \in \mathcal{B}$, then $f$ is continuous.
 \end{proposition}
+
+\begin{corollary}{Characterisation of Continuity via Basis}{}
+	Let $f: X \rightarrow Y$ be a function between topological spaces $X, Y$, and let $\mathcal{B}$ be a base of the topology of $X$. If $f^{-1}(V)$ is open in $X$ for all $V \in \mathcal{B}$, then $f$ is continuous.
+\end{corollary}
 
 \subsection{Neighborhood}
 \begin{definition}{Neighborhood}{}
@@ -609,7 +615,7 @@ The closure of $A$ is the disjoint union of $A'$ and $\mathrm{isolated}(A)$, whe
 	Every Hausdorff second-countable regular space is metrizable.
 \end{theorem}
 
-\begin{definition}{Open Map}{}
+\begin{definition}{Open Map}{open_map}
 	A map $f:X\to Y$ between topological spaces is an \textbf{open map} if for any open set $U\subseteq X$, $f(U)$ is open in $Y$.
 \end{definition}
 
@@ -708,6 +714,20 @@ The closure of $A$ is the disjoint union of $A'$ and $\mathrm{isolated}(A)$, whe
 
 $(Y,\tau |_Y)$ is a topological space. Moreover, $(Y,\tau |_Y)$ is a subobject of $(X,\tau)$ in $\Top$.
 
+
+\begin{proposition}{Closed Set in Topological Subspace}{}
+	Let $X$ be a topological space and $A$ be a subspace of $X$. A subset $V$ of $A$ is closed in $A$ if and only if $V=A\cap W$ for some closed set $W$ in $X$.
+\end{proposition}
+\begin{prf}
+	If $V$ is closed in $A$, then $A-V$ is open in $A$. Since $A-V=A\cap U$ for some open set $U$ in $X$, we have 
+	\[
+		V=A-\left(A\cap U\right)=(A-A)\cup \left(A-U\right)=A\cap (X-U)
+	\]
+	So $V=A\cap (X-U)$ for a closed set $X-U$ in $X$.
+
+	Conversely, if $V=A\cap W$ for some closed set $W$ in $X$, then $A-V=A\cap (X-W)$ is open in $A$. Hence $V$ is closed in $A$.
+\end{prf}
+
 \begin{proposition}{Inculsion is Continuous}{}
 	Let $(X,\tau)$ be a topological space and $A$ be a subset of $X$. The subspace topology $\tau|_A$ is the coarsest topology on $A$ such that the inclusion map $i:A\to X$ is continuous.
 \end{proposition}
@@ -743,8 +763,13 @@ $(Y,\tau |_Y)$ is a topological space. Moreover, $(Y,\tau |_Y)$ is a subobject o
 	Let $(X, \tau)$ be a topological space. Let $K \subseteq Y \subseteq X$ and $\tau |_Y$ be the subspace topology on $Y$. Then the subspace topology on $K$ induced by $\tau$ equals the subspace topology on $K$ induced by $\tau|_Y$.
 \end{proposition}
 
+\begin{definition}{Topological Embedding}{}
+	A map $f:X\to Y$ between topological spaces is a \textbf{topological embedding} if $f:X\to f(X)$ is a homeomorphism where $f(X)$ is endowed with the subspace topology.
+\end{definition}
+
+
 \begin{proposition}{Closure of Subset in Subspace}{}
-	Let $X$ be a topological space and $A\subseteq B\subseteq X$. If $B$ is dense in $X$ and $A$ is dense in $B$. Then 
+	Let $X$ be a topological space and $A\subseteq B\subseteq X$.Then 
 	\[
 	\mathrm{cl}_{B}(A)=\mathrm{cl}_{X}(A)\cap B.
 	\]
@@ -766,6 +791,25 @@ $(Y,\tau |_Y)$ is a topological space. Moreover, $(Y,\tau |_Y)$ is a subobject o
 	If $B$ is dense in $X$ and $A$ is dense in $B$, then we have $\overline{B}=X$ and $\overline{A}\cap B=B$. Since $B\subseteq \overline{A}$ and $\overline{A}$ is closed in $X$, we have $\overline{B}\subseteq \overline{A}$, which implies $X\subseteq \overline{A}$. Since $\overline{A}\subseteq X$, we have $\overline{A}=X$.
 \end{prf}
 
+
+\begin{proposition}{Closed Subset of Closed Subspace is Closed}{closed_subset_of_closed_subspace_is_closed}
+	Let $X$ be a topological space and $A\subseteq B\subseteq X$. Suppose $B$ is closed in $X$. Then $A$ is closed in $B$ if and only if $A$ is closed in $X$.
+\end{proposition}
+\begin{prf}
+	If $A$ is closed in $X$, since $A=B \cap A$, it follows that $A$ is closed in $B$.
+	
+	Conversely, if $A$ is closed in $B$, then $A=B\cap C$ for some closed set $C$ in $X$. Since $B$ is closed in $X$, we have $A$ is closed in $X$.
+\end{prf}
+
+
+\begin{proposition}{}{}
+	A topological embedding $f:X\to Y$ is a closed map if and only if $f(X)$ is closed in $Y$.
+\end{proposition}
+\begin{prf}
+	Suppose $f:X\to Y$ is a topological embedding. If $f$ is a closed map, since $X$ is closed in $X$, we see $f(X)$ is closed in $Y$.
+
+	Conversely, if $f(X)$ is closed in $Y$, then for any closed set $A\subseteq X$. Since $f:X\to f(X)$ is a homeomorphism, $f(A)$ is closed in $f(X)$. According to \Cref{th:closed_subset_of_closed_subspace_is_closed}, $f(A)$ is closed in $Y$. Hence $f$ is a closed map.
+\end{prf}
 
 \subsection{Quotient Topology}
 \begin{definition}{Quotient Space}{}
@@ -837,13 +881,66 @@ It is easy to check that $\pi$ is a continuous surjection from $(X,\tau)$ to $(X
 
 \subsection{Product Topology}
 \begin{definition}{Product Topology}{}
-	Let $\left\{(X_\alpha,\tau_\alpha)\right\}_{\alpha\in I}$ be a collection of topological spaces. Let $X=\prod_{\alpha\in I}X_\alpha$ and $\pi_\alpha:X\to X_\alpha$ be the projections. The \textbf{product} of $\left\{(X_\alpha,\tau_\alpha)\right\}_{\alpha\in I}$ is the set $X$ equiped with the following topology
+	Let $\left\{(X_\alpha,\tau_\alpha)\right\}_{\alpha\in I}$ be a collection of topological spaces. Let $X=\prod_{\alpha\in I}X_\alpha$ and $\pi_\alpha:X\to X_\alpha$ be the projections. The \textbf{product} of $\left\{(X_\alpha,\tau_\alpha)\right\}_{\alpha\in I}$ is the set $X$ equiped with the topology \hyperref[th:generated_topology]{generated} by
 	\[
-		\tau:=\left\{\prod_{\alpha\in I}U_\alpha\mid U_\alpha\in \tau_\alpha\text{ for any }\alpha\in I\right\},
+		\left\{\pi_\alpha^{-1}(U_\alpha)\subseteq\prod_{\alpha\in I}X_\alpha\mid U_\alpha\in \tau_\alpha\text{ for some }\alpha\in I\right\},
 	\]
 	which is called \textbf{product topology}.
 \end{definition}
 
+\begin{definition}{Basis of Product Topology}{basis_of_product_topology}
+	Let $\left\{(X_\alpha,\tau_\alpha)\right\}_{\alpha\in I}$ be a collection of topological spaces. The \textbf{natural subbasis} of the product topology on $\prod_{\alpha\in I}X_\alpha$ is the collection of sets 
+	\[
+		\left\{\pi_\alpha^{-1}(U_\alpha)\subseteq\prod_{\alpha\in I}X_\alpha\mid U_\alpha\in \tau_\alpha\text{ for some }\alpha\in I\right\}.
+	\]
+	The \textbf{natural basis} of the product topology on $\prod_{\alpha\in I}X_\alpha$ is the base generated by the natural subbasis, which are precisely sets of the form
+	\[
+		\prod_{\alpha\in I}U_\alpha,
+	\]
+	where $U_\alpha\in \tau_\alpha$ for all $\alpha\in I$ and $U_\alpha=X_\alpha$ for all but finitely many $\alpha\in I$.
+\end{definition}
+
+\begin{proposition}{Projections from Product Topology Spaces are Open}{projections_from_product_topology_spaces_are_open}
+	Let $\left\{(X_\alpha,\tau_\alpha)\right\}_{\alpha\in I}$ be a collection of topological spaces and $\left(\prod_{\alpha\in I}X_\alpha,\tau\right)$ be the product space. Then the projections $\mathrm{pr}_\alpha:X\to X_\alpha$ are open maps for all $\alpha\in I$.
+\end{proposition}
+\begin{prf}
+	For any $U\in \tau$, it can be written as follows
+	\[
+		U = \bigcup_{j \in J} \bigcap_{k  = 1}^{n_j} \mathrm{pr}_{\alpha_{k, j} }^{-1}\left(U_{k, j} \right),
+	\]
+	where $J$ is a index set, $n_j$ is a finite number, $\alpha_{k, j} \in I$, and $U_{k, j} \in \tau_{\alpha_{k, j}}$. Let
+	\[
+		V_{\alpha, k, j} = \begin{cases}
+			U_{k, j} & \text{ if } \alpha = \alpha_{k, j}, \\
+			 X_{\alpha} & \text{ if }\alpha \ne \alpha_{k, j} .
+			\end{cases}
+	\]
+	Then we have
+	\begin{align*}
+		\operatorname{pr}_\alpha(U)&=\bigcup_{j \in J} \operatorname{pr}_\alpha\left(\bigcap_{k=1}^{n_j} \operatorname{pr}_{\alpha_{k,j}}^{-1}\left(U_{k,j}\right)\right)\\
+		&=\bigcup_{j \in J} \operatorname{pr}_\alpha\left(\bigcap_{k=1}^{n_j} \prod_{\alpha\in I}V_{\alpha,k,j}\right)\\
+		&=\bigcup_{j \in J} \operatorname{pr}_\alpha\left(\prod_{\alpha\in I}\bigcap_{k=1}^{n_j} V_{\alpha,k,j}\right)\\
+		&=\bigcup_{j \in J} \bigcap_{k=1}^{n_j} V_{\alpha,k,j}\in \tau_\alpha.
+	\end{align*}
+\end{prf}
+\begin{corollary}{}{}
+	Let $X$, $Y$ be topological spaces and $X\times Y$ be the product space. If $A\subseteq X$ and $B\subseteq Y$, then 
+	\[
+		A\times B\text{ is open in }X\times Y\iff A\text{ is open in }X\text{ and }B\text{ is open in }Y.
+	\]
+\end{corollary}
+\begin{prf}
+	According to \Cref{th:projections_from_product_topology_spaces_are_open}, both $\operatorname{pr}_1:X\times Y\to X$ and $\operatorname{pr}_2:X\times Y\to Y$ are open maps.
+\end{prf}
+
+\begin{definition}{Box Topology}{}
+	Let $\left\{(X_\alpha,\tau_\alpha)\right\}_{\alpha\in I}$ be a collection of topological spaces. The \textbf{box topology} on the Cartesian product $\prod_{\alpha\in I}X_\alpha$ is the topology generated by the base
+	\[
+		\left\{\prod_{\alpha\in I}U_\alpha\mid U_\alpha\in \tau_\alpha\text{ for each }\alpha\in I\right\}.
+	\]
+\end{definition}
+
+For finite product, the product topology and the box topology coincide. However, for infinite product, the product topology is finer than the box topology.
 
 \subsection{Disjoint Union Topology}
 \begin{definition}{Disjoint Union Topology}{}
@@ -1479,6 +1576,7 @@ A collection $\mathcal{F}$ of sets is said to have the \textbf{finite intersecti
 	Let $(M, d)$ be a complete metric space and $(S, d)$ be a subspace of $(M, d)$. Then $S$ is complete if and only if $S$ is closed.
 \end{proposition}
 
+
 \chapter{Basic Notions}
 \section{CW Complex}
 A $n$-cell is a $n$-dimensional closed disc
@@ -1969,6 +2067,7 @@ Note that generally a topological space is not the disjoint union of its connect
 	Topological groups form a category $\mathsf{TopGrp}$, where the morphisms are continuous group homomorphisms.
 \end{definition}
 
+
 \noindent An isomorphism of topological groups is a group isomorphism that is also a homeomorphism of the underlying topological spaces.
 \begin{proposition}{}{}
 	The category $\mathsf{TopGrp}$ is complete. Limits in $\mathsf{TopGrp}$ commute with
@@ -1997,7 +2096,41 @@ Note that generally a topological space is not the disjoint union of its connect
 \end{prf}
 
 
-\begin{proposition}{Translation Invariance}{}
+\begin{lemma}{}{shrink_the_neighborhood_of_ab}
+	The map the map
+	\begin{align*}
+		m:G\times G & \longrightarrow G       \\
+		(g_1,g_2)   & \longmapsto g_1g_2^{-1}
+	\end{align*}
+	is continuous. For any $a ,b\in G$, for any neighborhood $W$ of $ab^{-1}$, there exists an open neighborhood $U$ of $a$ and an open neighborhood $V$ of $b$ such that 
+	\[
+	m(U\times V)=U V^{-1}\subseteq W.
+	\]
+\end{lemma}
+\begin{prf}
+	Let $W$ be a neighborhood of $ab^{-1}$. Since the group multiplication map $\mu:G\times G\to G$ is continuous, there exists an open neighborhood $N$ of $(a,b)$ in $G\times G$ such that $\mu(N)\subseteq W$. Using the \hyperref[th:basis_of_product_topology]{natural base of the product topology}, $N$ can be written as 
+	\[
+	N=\bigcup_{i\in I} U_i\times V_i
+	\]
+	for some index set $I$ and open sets $U_i, V_i\subseteq G$. Therefore, there exists $k\in I$ such that $(a,b)\in U_i\times V_k$, which implies $a\in U_k$ and $b\in V_k$, which completes the proof.
+\end{prf}
+
+\begin{proposition}{Closure of Subgroup of Topological Group is Subgroup}{}
+	Let $G$ be a topological group and $H$ be a subgroup of $G$. Then the closure $\overline{H}$ of $H$ is a subgroup of $G$.
+\end{proposition}
+\begin{prf}
+	 Define a continous map 
+	\begin{align*}
+		m:G\times G & \longrightarrow G \\
+		(g,h)         & \longmapsto gh^{-1}
+	\end{align*}
+	Let $a,b\in \overline{H}$ and $W$ be a neighborhood of $ab^{-1}$. According to \Cref{th:shrink_the_neighborhood_of_ab}, there exists an open neighborhood $U$ of $a$ and an open neighborhood $V$ of $b$ such that $m(U\times V)\subseteq W$. Since $a \in \overline{H}$ and $V$ is a neighborhood of $b$, we have $U\cap H\ne \varnothing$. Similarly, $V\cap H\ne \varnothing$. Therefore, there exists $x\in U \cap H$ and $y\in V\cap H$. Since $H$ is a subgroup, $xy^{-1}\in H$. Since $m(U\times V)\subseteq W$, we have $xy^{-1}\in W$. Hence $xy^{-1}\in W\cap H$.
+	Thus for any neighborhood $W$ of $ab^{-1}$, $W\cap H\ne \varnothing$. Therefore, $ab^{-1}\in \overline{H}$, which implies $\overline{H}$ is a subgroup of $G$.
+\end{prf}
+
+
+
+\begin{proposition}{Translation Invariance}{translation_invariance}
 	For any $a \in G$, left or right multiplication by $a$ yields a homeomorphism $G \rightarrow G$.
 \end{proposition}
 
@@ -2023,6 +2156,30 @@ Note that generally a topological space is not the disjoint union of its connect
 		\item $S$ is closed $\iff$ $a S$ is closed $\iff$ $a S$ is closed.
 	\end{itemize}
 \end{corollary}
+
+\begin{proposition}{Open Subgroup is Closed}{}
+	Let $G$ be a topological group and $H$ be an open subgroup of $G$. Then $H$ is closed in $G$.
+\end{proposition}
+\begin{prf}
+	If $H$ is an open subgroup of $G$, then	by \Cref{th:translation_invariance_cor}, $gH$ is open for any $g\in G$. 
+	Since
+	\[
+	G-H=\bigcup_{g\in G-H} gH,
+	\]
+	is a union of open sets, $G-H$ is open. Therefore, $H$ is closed.
+\end{prf}
+
+\begin{proposition}{Continuity of Group Homomorphism is Determined by One Point}{}
+	A group homomorphism between topological groups is continuous if and only if it is continous at one point.
+\end{proposition}
+\begin{prf}
+	Let $L_a: g\mapsto ag$ be the left multiplication map. Suppose $f:G\to H$ is a group homomorphism between topological groups. Note that for any $x,g\in G$, we have 
+	\[
+	 L_{f(x)}\circ f\circ L_{x^{-1}}(g)=f(x)f(x^{-1}g)=f(g)\implies L_{f(x)}\circ f\circ L_{x^{-1}}=f.
+	\]
+	If $f$ is continuous at $x_0 \in G$, then for any $g\in G$, we can take $x=gx_0^{-1}$ and check that $f$ is continuous at $x^{-1}g$. From $L_{f(x)}\circ f\circ L_{x^{-1}}=f$ and \Cref{th:translation_invariance}, we show $f$ is continuous at $g$. 
+\end{prf}
+
 
 \begin{proposition}{Neighborhood Basis at $1_G$ Determines the Topology of $G$}{}
 	Given a topological group $G$, if $\mathcal{N}$ is a neighborhood basis of the identity element $1_G$, then for all $g \in G$,
@@ -2064,6 +2221,32 @@ Note that generally a topological space is not the disjoint union of its connect
 	Let $\mathsf{I}$ be a \hyperref[th:filtered_category]{filtered} \hyperref[th:thin_category]{thin category} and $F:\mathsf{I}^{\mathrm{op}}\to \mathsf{TopGrp}$ be a functor. Similar to the \hyperref[th:inverse_limit_of_groups]{inverse limit in \textsf{Grp}}, we can unpack the information of $F$ into an inverse system $\left(\left(G_i\right)_{i \in I},\left(f_{i j}\right)_{i \leq j \in I}\right)$. The inverse limit of this inverse system is $\varprojlim F$, also denoted by $\varprojlim_{i\in I}G_i$.\\
 	To give a concrete construction of $\varprojlim_{i\in I}G_i$, we can take the inverse limit of the underlying group and endow it with the subspace topology induced by the product topology on $\prod_{i\in I}G_i$.
 \end{definition}
+
+\begin{definition}{Restricted Product of Locally Compact Groups}{}
+Let \( I \) be an index set and \( S\subseteq I \) a finite subset of \( I \). Suppose \( G_i \) is a locally compact group for each \( i \in I \), and \( K_i \subseteq G_i \) is an open compact subgroup for each \( i \in I - S \). The underlying set of the \textbf{restricted product} of the groups \( G_i \)  
+\[
+\prod_{i\in I}' G_i\,
+\]
+is the subset of $\prod_i G_i$ consisting of all elements \( (g_i)_{i \in I} \) such that \( g_i \in K_i \) for all but finitely many \( i \in I - S \). The restricted product is a subgroup of the product group $\prod_i G_i$, and is given the topology whose basis of open sets are those of the form
+\[
+\prod_{i\in I} A_i\,,
+\]
+where \( A_i \) is open in \( G_i \) and \( A_i = K_i \) for all but finitely many \( i \).
+\end{definition}
+
+\begin{example}{Topological Embedding into Restricted Product}{}
+	Let \( I \) be an index set and \( S\subseteq I \) a finite subset of \( I \). Suppose \( G_i \) is a locally compact group for each \( i \in I \), and \( K_i \subseteq G_i \) is an open compact subgroup for each \( i \in I - S \). Then for any $i\in I$, the group homomorphism
+	\begin{align*}
+		\iota_i:G_i &\longrightarrow \prod_{i\in I}' G_i \\
+		x &\longmapsto (\cdots, 1, 1, \underset{\hspace{-2.3em} \substack{\uparrow \\ \text{\footnotesize $i$th component}}\hspace{-2.3em}}{x},
+		1, 1,  \cdots)
+	\end{align*}
+	is a topological embedding, identifying $G_i$ as a closed subgroup of $\prod_{i\in I}' G_i$.
+\end{example}
+\begin{prf}
+	It is easy to check that $\iota_i$ is an injective group homomorphism. Since the product topology is the weakest topology that makes all projections continuous, $\iota_i$ is continuous. Since the image of $\iota_i$ is $\prod_{i\in I}' G_i$, $\iota_i$ is a topological embedding.
+\end{prf}
+
 
 
 \section{Continuous Topological Group Action}
@@ -2372,6 +2555,18 @@ An important special case of orbit spaces is the left coset space of a topologic
 		a   & \longmapsto -a
 	\end{align*}
 	are continuous maps.
+\end{definition}
+
+\begin{definition}{Restricted Product of Locally Compact Rings}{}
+	Let \( I \) be an index set and \( S\subseteq I \) a \textbf{finite} subset of \( I \). Suppose \( R_i \) is a locally compact ring for each \( i \in I \), and \( J_i \subseteq R_i \) is an open compact subring for each \( i \in I - S \). The underlying set of the \textbf{restricted product} of the rings \( R_i \)  
+	\[
+		\prod_{i\in I}' R_i\,
+	\]
+	is the subset of $\prod_i R_i$ consisting of all elements \( (r_i)_{i \in I} \) such that \( r_i \in J_i \) for all but finitely many \( i \in I - S \). The restricted product is a subring of the product ring $\prod_i R_i$, and is given the topology whose basis of open sets are those of the form
+	\[
+		\prod_{i\in I} A_i\,,
+	\]
+	where \( A_i \) is open in \( R_i \) and \( A_i = J_i \) for all but finitely many \( i \).
 \end{definition}
 
 
