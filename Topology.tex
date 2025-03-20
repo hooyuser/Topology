@@ -22,6 +22,7 @@
 \usepackage{quiver}
 
 \usepackage[T1]{fontenc}
+
 \usepackage{textcomp, lmodern}
 
 \newcommand{\midv}{\,\middle\vert\,}
@@ -119,13 +120,19 @@
 	\end{center}
 \end{titlepage}
 
+% table of contents
+\newpage
+\addtocontents{toc}{\protect\pagestyle{empty}}
+\addtocontents{toc}{\protect\thispagestyle{empty}}
+
 \tableofcontents
 \thispagestyle{empty}
-% Create a new 1st level heading
 
+
+% Start the main part of the document
 \chapter{General Topology}
-\thispagestyle{empty}
 \setcounter{page}{1}
+
 
 \section{Topological Space}
 \subsection{Axiomatic foundations of topological spaces}
@@ -4451,7 +4458,7 @@ Suppose $\{e_0,\cdots,e_{k+1}\}$ is the vertices of $\Delta^{k+1}$. $l_i$ embeds
 \end{definition}
 
 
-\chapter{Homotopy Groups}
+% \chapter{Homotopy Groups}
 
 
 
