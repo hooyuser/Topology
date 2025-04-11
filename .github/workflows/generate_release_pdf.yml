@@ -39,7 +39,9 @@ jobs:
       - name: Generate release tag
         id: tag
         run: |
-          echo "::set-output name=release_tag::latest_$(date +'%Y-%m-%d_%H-%M')"
+          # build a timestamped tag and write it to the GITHUB_OUTPUT file
+          ts="latest_$(date +'%Y-%m-%d_%H-%M')"
+          echo "release_tag=$ts" >> $GITHUB_OUTPUT
 
       - name: Release
         uses: softprops/action-gh-release@v1
@@ -62,7 +64,7 @@ jobs:
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: public    # must be a directory, not a file
+          path: public    # must be a directory
 
       - name: Deploy to GitHub Pages
         uses: actions/deploy-pages@v4
