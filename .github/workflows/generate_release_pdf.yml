@@ -5,7 +5,7 @@ on:
       - 'README.md'
 
 permissions:
-  contents: write      # for creating/deleting releases
+  contents: write      # for release creation
   pages: write         # for Pages deployment
   id-token: write      # required by configure-pages
 
@@ -31,7 +31,8 @@ jobs:
           script: |
             const { owner, repo } = context.repo;
             try {
-              const { data: { id } } = await github.rest.repos.getLatestRelease({ owner, repo });
+              const { data: { id } } =
+                await github.rest.repos.getLatestRelease({ owner, repo });
               await github.rest.repos.deleteRelease({ owner, repo, release_id: id });
             } catch {}
 
@@ -48,20 +49,20 @@ jobs:
           tag_name: ${{ steps.tag.outputs.release_tag }}
           files: ${{ env.TEX_FILE_NAME }}.pdf
 
-      # ───────────────────────────────────────────────────────────
-      # Deploy to GitHub Pages for inline PDF viewing:
+      # ────────────────────────────────────────────────────────────────────
+      # Now wrap the PDF into a directory for Pages…
+      - name: Prepare Pages content
+        run: |
+          mkdir -p public
+          cp "${{ env.TEX_FILE_NAME }}.pdf" public/
+
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v3
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ${{ env.TEX_FILE_NAME }}.pdf  # package Topology.pdf for Pages :contentReference[oaicite:2]{index=2}
+          path: public    # must be a directory, not a file
 
       - name: Deploy to GitHub Pages
         uses: actions/deploy-pages@v4
-        # with:
-          # artifact_name defaults to "github-pages"
-          # token defaults to ${{ github.token }}
-        # if you want the Pages URL in the job’s summary, add:
-        # id: deployment
