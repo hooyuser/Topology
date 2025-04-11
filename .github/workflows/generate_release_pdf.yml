@@ -3,10 +3,12 @@ on:
   push:
     paths-ignore:
       - 'README.md'
+
 permissions:
-  contents: write       # for release creation
-  pages: write          # for GitHub Pages
-  id-token: write       # required by configure-pages
+  contents: write      # for creating/deleting releases
+  pages: write         # for Pages deployment
+  id-token: write      # required by configure-pages
+
 env:
   TEX_FILE_NAME: Topology
 
@@ -27,10 +29,10 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const { owner, repo } = context.repo
+            const { owner, repo } = context.repo;
             try {
-              const { data: { id } } = await github.rest.repos.getLatestRelease({ owner, repo })
-              await github.rest.repos.deleteRelease({ owner, repo, release_id: id })
+              const { data: { id } } = await github.rest.repos.getLatestRelease({ owner, repo });
+              await github.rest.repos.deleteRelease({ owner, repo, release_id: id });
             } catch {}
 
       - name: Generate release tag
@@ -46,15 +48,20 @@ jobs:
           tag_name: ${{ steps.tag.outputs.release_tag }}
           files: ${{ env.TEX_FILE_NAME }}.pdf
 
-      # ──────────────────────────────────────────────────────────────────────
-      # Now deploy that same PDF to GitHub Pages for inline viewing:
+      # ───────────────────────────────────────────────────────────
+      # Deploy to GitHub Pages for inline PDF viewing:
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v3
 
-      - name: Upload PDF for Pages
-        uses: actions/upload-pages-artifact@v1
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          path: ${{ env.TEX_FILE_NAME }}.pdf
+          path: ${{ env.TEX_FILE_NAME }}.pdf  # package Topology.pdf for Pages :contentReference[oaicite:2]{index=2}
 
       - name: Deploy to GitHub Pages
-        uses: actions/deploy-pages@v1
+        uses: actions/deploy-pages@v4
+        # with:
+          # artifact_name defaults to "github-pages"
+          # token defaults to ${{ github.token }}
+        # if you want the Pages URL in the job’s summary, add:
+        # id: deployment
