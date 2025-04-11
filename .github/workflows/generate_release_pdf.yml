@@ -1,34 +1,46 @@
 name: Generate Release PDF
-on: 
+on:
   push:
     paths-ignore:
       - 'README.md'
+
+permissions:
+  contents: write      # for release creation
+  pages: write         # for Pages deployment
+  id-token: write      # required by configure-pages
+
 env:
   TEX_FILE_NAME: Topology
+
 jobs:
-  build_latex:
+  build_and_release:
     runs-on: ubuntu-latest
     steps:
       - name: Set up Git repository
         uses: actions/checkout@v2
+
       - name: Compile LaTeX document
         uses: xu-cheng/latex-action@v2
         with:
           root_file: ${{ env.TEX_FILE_NAME }}.tex
+
       - name: Delete old Release
         uses: actions/github-script@v5
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const { owner, repo } = context.repo
+            const { owner, repo } = context.repo;
             try {
-              const { data: { id } } = await github.rest.repos.getLatestRelease({ owner, repo })
-              await github.rest.repos.deleteRelease({ owner, repo, release_id: id })
+              const { data: { id } } =
+                await github.rest.repos.getLatestRelease({ owner, repo });
+              await github.rest.repos.deleteRelease({ owner, repo, release_id: id });
             } catch {}
+
       - name: Generate release tag
         id: tag
         run: |
-          echo "::set-output name=release_tag::latest_$(date +"%Y-%m-%d_%H-%M")"
+          echo "::set-output name=release_tag::latest_$(date +'%Y-%m-%d_%H-%M')"
+
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
@@ -36,3 +48,21 @@ jobs:
           body: Latest version of `${{ env.TEX_FILE_NAME }}.pdf`
           tag_name: ${{ steps.tag.outputs.release_tag }}
           files: ${{ env.TEX_FILE_NAME }}.pdf
+
+      # ────────────────────────────────────────────────────────────────────
+      # Now wrap the PDF into a directory for Pages…
+      - name: Prepare Pages content
+        run: |
+          mkdir -p public
+          cp "${{ env.TEX_FILE_NAME }}.pdf" public/
+
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v3
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: public    # must be a directory, not a file
+
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v4
