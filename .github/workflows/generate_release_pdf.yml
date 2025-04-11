@@ -12,5 +12,3 @@ jobs:
     uses: hooyuser/pdf-ci-templates/.github/workflows/pdf-release.yml@main
     with:
       TEX_FILE_NAME: Topology
-    secrets:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
