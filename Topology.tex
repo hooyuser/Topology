@@ -558,6 +558,15 @@ The closure of $A$ is the disjoint union of $A'$ and $\mathrm{isolated}(A)$, whe
 		\item Omitted.
 	\end{enumerate}
 \end{prf}
+\subsection{Net}
+\begin{definition}{Net}{net}
+	A \textbf{net} in a topological space $X$ is a function $x_\bullet: I \to X$, where $I$ is a directed set. The net $x_\bullet$ is denoted by $\left(x_i\right)_{i \in I}$, where $x_i = x_\bullet(i)$ for each $i \in I$.
+\end{definition}
+
+\begin{definition}{Limit of Net}{}
+	A net $\left(x_i\right)_{i \in I}$ in a topological space $X$ is said to be \textbf{eventually in a set} $A \subseteq X$ if there exists $i_0 \in I$ such that for all $i \geq i_0$, $x_i \in A$. If a net $\left(x_i\right)_{i \in I}$ is eventually in every neighborhood of a point $x \in X$, we say that the net $\left(x_i\right)_{i \in I}$ \textbf{converges to} $x$ and write $x_i \to x$.
+\end{definition}
+
 
 
 \section{Basic Concepts}
@@ -675,7 +684,7 @@ The closure of $A$ is the disjoint union of $A'$ and $\mathrm{isolated}(A)$, whe
 
 The discrete topology is the finest possible topology on the set $X$.
 
-\begin{proposition}{Properties of Discrete Spaces}{}
+\begin{proposition}{Properties of Discrete Spaces}{properties_of_discrete_spaces}
 	Let $X$ be a discrete space. Then
 	\begin{enumerate}[(i)]	
 		\item $X$ is first-countable, totally disconnected and metrizable.
@@ -786,10 +795,11 @@ The discrete topology is the finest possible topology on the set $X$.
 
 
 \begin{proposition}{Equivalent Definition of Open Map}{equivalent_definition_of_open_map}
-	Let $f:X\to Y$ be a map between topological spaces. The following propositions are equivalent:
+	Let $f:X\to Y$ be a map between topological spaces and $\mathcal{B}$ be a basis for the topology on $X$. The following propositions are equivalent:
 	\begin{enumerate}[(i)]
 		\item $f$ is an open map.
 		\item For any $x\in X$ and for any open neighborhood $N\in\mathcal{N}(x)$, $f(N)$ is a neighborhood of $f(x)$.
+		\item For any $B\in\mathcal{B}$, $f(B)$ is open in $Y$.
 	\end{enumerate}
 \end{proposition}
 \begin{prf}
@@ -845,6 +855,22 @@ The discrete topology is the finest possible topology on the set $X$.
 	\]
 \end{definition}
 
+\begin{proposition}{}{}
+	Let $(X,\tau)$ be a topological space and $\left(f_i: X \to Y_i\right)_{i \in I}$ be a family of continuous maps. Then the following propositions are equivalent:
+	\begin{enumerate}[(i)]
+		\item $\tau$ is the initial topology on $X$ with respect to the family $\left(f_i\right)_{i \in I}$.
+		\item For any net $\left(x_\alpha\right)_{\alpha \in A}$ in $X$ and every $x\in X$,
+		\[
+		x_\alpha\longrightarrow x\text{ in }(X,\tau)
+		\;\Longleftrightarrow\;
+		\forall i\in I:\; f_i(x_\alpha)\longrightarrow f_i(x)\text{ in }Y_i .
+		\]
+	\end{enumerate}
+\end{proposition}
+\begin{prf}
+	(i)$\implies$(ii). If $\tau$ is the initial topology on $X$ with respect to $\left(f_i\right)_{i \in I}$, then for each $i\in I$, $f_i$ is continuous. Therefore, if $x_\alpha\longrightarrow x$ in $(X,\tau)$, then for each $i\in I$, $f_i(x_\alpha)\longrightarrow f_i(x)$ in $Y_i$. Conversely, if for each $i\in I$, $f_i(x_\alpha)\longrightarrow f_i(x)$ in $Y_i$, then for any open set $U\in \tau$, there exists an index $i\in I$ such that $f_i^{-1}(U)$ is open in $(X,\tau)$. Since $f_i(x_\alpha)\longrightarrow f_i(x)$, there exists $\alpha_0\in A$ such that for all $\alpha\geq \alpha_0$, $f_i(x_\alpha)\in U$. Hence, $x_\alpha\longrightarrow x$ in $(X,\tau)$.\\
+	(ii)$\implies$(i). 
+\end{prf}
 
 \begin{proposition}{Characteristic Property of Initial Topology}{}
 	Suppose $(Z,\tau_Z), (X,\tau_X),(Y_i,\tau_i)$ are topological spaces and $f_i: X \to Y_i$ are continuous maps. 
@@ -1061,15 +1087,21 @@ It is easy to check that $\pi$ is a continuous surjection from $(X,\tau)$ to $(X
 	\]
 \end{prf}
 
-\begin{definition}{Quotient Map between Topological Spaces}{}
+\begin{definition}{Quotient Map between Topological Spaces}{quotient_map}
 	A map $\pi:(X,\tau)\to (Y,\sigma)$ between topological spaces is a \textbf{quotient map} if $\pi$ is surjective and $\sigma$ is the final topology on $Y$ with respect to $\pi$, namely
 	\[
 	\sigma=\{U\in 2^Y\mid \pi^{-1}(U)\in \tau\}.
 	\]
 \end{definition}
+\begin{remark}
+	An equivalent definition of quotient map is that $\pi$ is a surjection such that for any subset $U\subseteq Y$, 
+	\[
+	U\text{ is open in }Y \iff \pi^{-1}(U)\text{ is open in }X.
+	\]
+\end{remark}
 
 \begin{proposition}{Criterion for Hausdorffness of Quotient Space}{criterion_for_Hausdorffness_of_quotient_space}
-	Suppose $X$, $Y$ are topological spaces and $\pi: X \rightarrow Y$ is an open quotient map. Then $Y$ is Hausdorff if and only if the set $\mathcal{R}=\left\{\left(x_1, x_2\right): \pi\left(x_1\right)=\pi\left(x_2\right)\right\}$ is closed in $X \times X$.
+	Suppose $X$, $Y$ are topological spaces and $\pi: X \rightarrow Y$ is an \hyperref[th:open_map]{open} quotient map. Then $Y$ is Hausdorff if and only if the set $\mathcal{R}=\left\{\left(x_1, x_2\right): \pi\left(x_1\right)=\pi\left(x_2\right)\right\}$ is closed in $X \times X$.
 \end{proposition}
 
 \begin{prf}
@@ -1079,17 +1111,38 @@ It is easy to check that $\pi$ is a continuous surjection from $(X,\tau)$ to $(X
 \end{prf}
 
 \begin{corollary}{}{}
-	Suppose $\sim$ is an equivalence relation on a space $X$. If the quotient map $X \rightarrow X / \sim$ is an open map, then $X / \sim$ is Hausdorff if and only if $\sim$ is a closed subset of $X \times X$.
+	Suppose $\sim$ is an equivalence relation on a space $X$. If the quotient map $X \rightarrow X / \sim$ is an \hyperref[th:open_map]{open map}, then $X / \sim$ is Hausdorff if and only if $\sim$ is a closed subset of $X \times X$.
 \end{corollary}
 \begin{prf}
 	Apply \Cref{th:criterion_for_Hausdorffness_of_quotient_space} to the open quotient map $X \rightarrow X / \sim$.
 \end{prf}
 
+\begin{proposition}{}{}
+	Suppose $(\pi_i:X_i \to Y_i)$ is a family of open quotient maps between topological spaces. The universal property of product spaces gives a continous map
+	\begin{align*}
+		\pi: \prod_{i \in I} X_i & \longrightarrow \prod_{i \in I} Y_i, \\
+		(x_i)_{i \in I}          & \longmapsto (\pi_i(x_i))_{i \in I}
+	\end{align*}
+	Then $\pi$ is an \hyperref[th:open_map]{open} quotient map.
+\end{proposition}
+\begin{prf}
+	Since $\pi$ is a continous surjection, it is sufficient to show that for any subset $U\in \prod_{i \in I} X_i$,
+	\[
+		\pi^{-1}(U)\text{ is open in }\prod_{i \in I} X_i \implies U\text{ is open in }\prod_{i \in I} Y_i.
+	\]
+	The surjectivity of $\pi$ implies that 
+	\[
+	\pi(\pi^{-1}(U))=U.
+	\]
+	According to \Cref{th:openness_of_product_map}, since each $\pi_i$ is a surjective open map, $\pi$ is an open map. Therefore, $U$ is open in $\prod_{i \in I} Y_i$.
+
+\end{prf}
+
 \subsection{Product Topology}
-\begin{definition}{Product Topology}{}
+\begin{definition}{Product Topology}{product_topology}
 	Let $\left\{(X_\alpha,\tau_\alpha)\right\}_{\alpha\in I}$ be a collection of topological spaces. Let $X=\prod_{\alpha\in I}X_\alpha$ and $\pi_\alpha:X\to X_\alpha$ be the projections. The \textbf{product} of $\left\{(X_\alpha,\tau_\alpha)\right\}_{\alpha\in I}$ is the set $X$ equiped with the topology \hyperref[th:generated_topology]{generated} by
 	\[
-		\left\{\pi_\alpha^{-1}(U_\alpha)\subseteq\prod_{\alpha\in I}X_\alpha\mid U_\alpha\in \tau_\alpha\text{ for some }\alpha\in I\right\},
+		\left\{\pi_\alpha^{-1}(U_\alpha)\subseteq\prod_{\alpha\in I}X_\alpha\;\middle|\; U_\alpha\in \tau_\alpha\text{ for some }\alpha\in I\right\},
 	\]
 	which is called \textbf{product topology}.
 \end{definition}
@@ -1097,7 +1150,7 @@ It is easy to check that $\pi$ is a continuous surjection from $(X,\tau)$ to $(X
 \begin{definition}{Basis of Product Topology}{basis_of_product_topology}
 	Let $\left\{(X_\alpha,\tau_\alpha)\right\}_{\alpha\in I}$ be a collection of topological spaces. The \textbf{natural subbasis} of the product topology on $\prod_{\alpha\in I}X_\alpha$ is the collection of sets 
 	\[
-		\left\{\pi_\alpha^{-1}(U_\alpha)\subseteq\prod_{\alpha\in I}X_\alpha\mid U_\alpha\in \tau_\alpha\text{ for some }\alpha\in I\right\}.
+		\left\{\pi_\alpha^{-1}(U_\alpha)\subseteq\prod_{\alpha\in I}X_\alpha\;\middle|\; U_\alpha\in \tau_\alpha\text{ for some }\alpha\in I\right\}.
 	\]
 	The \textbf{natural basis} of the product topology on $\prod_{\alpha\in I}X_\alpha$ is the base generated by the natural subbasis, which are precisely sets of the form
 	\[
@@ -1106,8 +1159,24 @@ It is easy to check that $\pi$ is a continuous surjection from $(X,\tau)$ to $(X
 	where $U_\alpha\in \tau_\alpha$ for all $\alpha\in I$ and $U_\alpha=X_\alpha$ for all but finitely many $\alpha\in I$.
 \end{definition}
 
+\begin{proposition}{}{}
+	Let $\{(X_\alpha,\tau_\alpha)\}_{\alpha\in I}$ be a collection of topological spaces. Suppose 
+	\[
+	   x=(x_\alpha)_{\alpha\in I}\in \prod_{\alpha\in I}X_\alpha,
+	\]
+	and $\mathcal{V}_\alpha=\left(V_{\alpha, j_\alpha}\right)_{j_\alpha\in J_\alpha}$ is a neighborhood basis of $x_\alpha$ in $X_\alpha$ for each $\alpha\in I$, then the collection
+	\[
+		\mathcal{N}_x =\left\{\prod_{\alpha\in I}U_{\alpha} \;\middle|\; U_\alpha\in \mathcal{V}_\alpha\cup\{X_\alpha\},\;\text{ and }U_{\alpha}=X_\alpha\text{ for all but finitely many }\alpha\in I\right\}
+	\]
+	is a neighborhood basis of $x$ in $\prod_{\alpha\in I}X_\alpha$.
+\end{proposition}
+
 \begin{proposition}{Projections from Product Topology Spaces are Open}{projections_from_product_topology_spaces_are_open}
-	Let $\left\{(X_\alpha,\tau_\alpha)\right\}_{\alpha\in I}$ be a collection of topological spaces and $\left(\prod_{\alpha\in I}X_\alpha,\tau\right)$ be the product space. Then the projections $\mathrm{pr}_\alpha:X\to X_\alpha$ are open maps for all $\alpha\in I$.
+	Let $\left\{(X_\alpha,\tau_\alpha)\right\}_{\alpha\in I}$ be a collection of topological spaces and $\left(\prod_{\alpha\in I}X_\alpha,\tau\right)$ be the product space. Then the projections 
+	\[
+	\mathrm{pr}_\alpha:\prod_{\alpha\in I}X_\alpha \to X_\alpha
+	\]
+	are \hyperref[th:open_map]{open maps} for all $\alpha\in I$.
 \end{proposition}
 \begin{prf}
 	For any $U\in \tau$, it can be written as follows
@@ -1137,6 +1206,27 @@ It is easy to check that $\pi$ is a continuous surjection from $(X,\tau)$ to $(X
 \end{corollary}
 \begin{prf}
 	According to \Cref{th:projections_from_product_topology_spaces_are_open}, both $\operatorname{pr}_1:X\times Y\to X$ and $\operatorname{pr}_2:X\times Y\to Y$ are open maps.
+\end{prf}
+
+\begin{proposition}{}{openness_of_product_map}
+	Suppose $(\pi_i:X_i \to Y_i)$ is a family of open maps between topological spaces. Define
+	\begin{align*}
+		\pi: \prod_{i \in I} X_i & \longrightarrow \prod_{i \in I} Y_i, \\
+		(x_i)_{i \in I}          & \longmapsto (\pi_i(x_i))_{i \in I}
+	\end{align*}
+	If all but finitely many $\pi_i$ are surjective, then $\pi$ is an open map.
+\end{proposition}
+\begin{prf}
+	Suppose $\mathcal{B}$ is the \hyperref[th:basis_of_product_topology]{natural basis} of $\prod_{i \in I} X_i$. To show that $\pi$ is an open map, it suffices to show that for any $B\in \mathcal{B}$, $\pi(B)$ is open in $\prod_{i \in I} Y_i$. Note 
+	\[
+	B=\prod_{i\in I}U_i,
+	\]
+	where $U_i\in \tau_i$ for all $\alpha\in I$ and $U_i=X_i$ for all but finitely many $\alpha\in I$. We have
+	\begin{align*}
+		\pi(B) &= \pi\left(\prod_{i\in I}U_i\right) \\
+		&= \prod_{i\in I}\pi_i(U_i) 
+	\end{align*}
+	Since all $\pi_i$ are open maps, $\pi_i(U_i)$ is open in $Y_i$ for all $i\in I$. Since all but finitely many $\pi_i$ are surjective, we have $\pi_i(U_i)=Y_i$ for all but finitely many $i\in I$. Therefore, $\pi(B)$ is open in $\prod_{i \in I} Y_i$.
 \end{prf}
 
 \begin{definition}{Box Topology}{}
@@ -1185,6 +1275,45 @@ For finite product, the product topology and the box topology coincide. However,
 	\]
 	The topology of $\varprojlim F$ is the initial topology with respect to the family of projections $\left(\pi_i:\varprojlim F\to F(i)\right)_{i\in \mathrm{Ob}(\mathsf{J})}$.
 \end{definition}
+
+\begin{definition}{Stone Space}{}
+A \textbf{Stone space} or \textbf{profinite space} is a compact, totally disconnected, Hausdorff space.
+\end{definition}
+
+\begin{proposition}{Equivalent Characterization of Stone Space}{equivalent_characterization_of_stone_space}
+	Let $X$ be a topological space. The following are equivalent:
+	\begin{enumerate}[(i)]
+		\item $X$ is a Stone space.
+		\item $X$ is isomorphic to an inverse limit of finite discrete spaces.
+	\end{enumerate}
+\end{proposition}
+
+\begin{prf}
+	(ii) $\implies$ (i). Let $\left((X_i)_{i\in I},\;(f_{j,i}:X_i \leftarrow X_j)_{i\le j}\right)$ be an inverse system of finite discrete spaces and
+	\[
+	X:=\varprojlim_{i\in I}X_i
+	\]
+	be the inverse limit of them. 
+	\begin{itemize}
+\item \emph{Compact:}  Since each $X_i$ is finite, it is compact. According to \Cref{th:sufficient_condition_for_compactness}, $\prod_{i\in I}X_i$ is compact. For any $i\le j$ in $I$, the graph of $f_{ji}:X_j\to X_i$ is
+	\[
+	\Gamma_{ji}=\{(x,f_{ji}(x))\mid x\in X_j\}\subseteq X_j\times X_i.
+	\]
+    Since $X_j\times X_i$ is a finite discrete space, any subset of it is closed. So $\Gamma_{ji}$ is closed in $X_j\times X_i$. Consider the map
+	\begin{align*}
+		\pi_{j,i}:X &\longrightarrow X_j\times X_i,\\
+		(x_k)_{k\in I} &\longmapsto (x_j,x_i).
+	\end{align*}	 
+	Then we have
+	\[
+	\varprojlim_{i\in I}X_i=\bigcap_{i \le j} \left\{(x_k)_{k\in I}\in X\mid x_j=f_{ji}(x_i)\right\}=\bigcap_{i \le j} \pi_{ji}^{-1}(\Gamma_{ji}).
+	\]
+	Since $\pi_{ji}$ is continuous, $\pi_{ji}^{-1}(\Gamma_{ji})$ is closed in $X$. Therefore, $\varprojlim_{i\in I}X_i$ as the intersection of these closed sets is closed in $X$. Since closed subsets of compact spaces are compact, $X$ must be compact.
+	\item \emph{Hausdorff:}  Finite discrete spaces are Hausdorff. From \Cref{th:properties_of_hausdorff_space} we see products of
+      Hausdorff spaces are Hausdorff. And $\varprojlim_{i\in I}X_i$ as a subspace of the Hausdorff space $\prod_{i\in I}X_i$ is Hausdorff.
+	  \item \emph{Totally disconnected:} According to \Cref{th:properties_of_discrete_spaces}, discrete spaces are totally disconnected. According to \Cref{th:properties_of_totally_disconnected_space}, the product of totally disconnected spaces is totally disconnected. Hence $\prod_{i\in I}X_i$ is totally disconnected. Since subspaces of totally disconnected spaces are totally disconnected, $\varprojlim_{i\in I}X_i$ is totally disconnected.
+	\end{itemize}
+\end{prf}
 
 
 \section{Separation Axiom}
@@ -1323,6 +1452,17 @@ Local connectedness does not imply connectedness, e.g. two disjoint open interva
 
 \end{proposition}
 
+\begin{definition}{Totally Disconnected Space}{}
+	A topological space $X$ is \textbf{totally disconnected} if the only connected subsets of $X$ are singletons.
+\end{definition}
+
+\begin{proposition}{Properties of Totally Disconnected Space}{properties_of_totally_disconnected_space}
+	\begin{enumerate}[(i)]
+		\item Subspaces, products, and coproducts of totally disconnected spaces are totally disconnected.
+	
+		\item Totally disconnected spaces are T1 spaces.
+	\end{enumerate}
+\end{proposition}
 
 \section{Compactness}
 \begin{definition}{Compact Topological Space}{compact_topological_space}
@@ -1408,7 +1548,7 @@ Thus for every $b \in B$ there exists opens $U_b \subseteq X$ and $V_b \subseteq
 		\item A finite union of compact sets is compact.
 		\item A continuous image of a compact space is compact.
 		\item The intersection of any non-empty collection of compact subsets of a Hausdorff space is compact.
-		\item The product of any collection of compact spaces is compact.
+		\item (Tychonoff's theorem) The product of any collection of compact spaces is compact.
 		\item A finite set endowed with any topology is compact.
 	\end{enumerate}
 \end{proposition}
@@ -1448,17 +1588,7 @@ Thus for every $b \in B$ there exists opens $U_b \subseteq X$ and $V_b \subseteq
 	\end{itemize}
 \end{proposition}
 
-\begin{definition}{Stone Space}{}
-A \textbf{Stone space} or \textbf{profinite space} is a compact, totally disconnected, Hausdorff space.
-\end{definition}
 
-\begin{proposition}{Equivalent Characterization of Stone Space}{equivalent_characterization_of_stone_space}
-	Let $X$ be a topological space. The following are equivalent:
-	\begin{enumerate}[(i)]
-		\item $X$ is a Stone space.
-		\item $X$ is isomorphic to an inverse limit of finite discrete spaces.
-	\end{enumerate}
-\end{proposition}
 
 \begin{definition}{Sequentially Compact Space}{}
 	A topological space $X$ is \textbf{sequentially compact} if every sequence in $X$ has a convergent subsequence.
@@ -2676,6 +2806,7 @@ Note that generally a topological space is not the disjoint union of its connect
 		\sigma:G/N & \longrightarrow G/N \\
 		gN         & \longmapsto g^{-1}N
 	\end{align*}
+	Under the quotient topology, the group multiplication map $\mu$ and the inversion map $\sigma$ are continuous, which makes $G/N$ a topological group.
 \end{definition}
 
 \subsection{Limit}
@@ -2692,7 +2823,7 @@ Note that generally a topological space is not the disjoint union of its connect
 \subsection{Inverse Limit}
 \begin{definition}{Inverse Limit in $\mathsf{TopGrp}$}{}
 	Let $\mathsf{I}$ be a \hyperref[th:filtered_category]{filtered} \hyperref[th:thin_category]{thin category} and $F:\mathsf{I}^{\mathrm{op}}\to \mathsf{TopGrp}$ be a functor. Similar to the \hyperref[th:inverse_limit_of_groups]{inverse limit in \textsf{Grp}}, we can unpack the information of $F$ into an inverse system $\left(\left(G_i\right)_{i \in I},\left(f_{i j}\right)_{i \leq j \in I}\right)$. The inverse limit of this inverse system is $\varprojlim F$, also denoted by $\varprojlim_{i\in I}G_i$.\\
-	To give a concrete construction of $\varprojlim_{i\in I}G_i$, we can take the inverse limit of the underlying group and endow it with the subspace topology induced by the product topology on $\prod\limits_{i\in I}G_i$.
+	To give a concrete construction of $\varprojlim_{i\in I}G_i$, we can take the inverse limit of the underlying group and endow it with the subspace topology induced by the \hyperref[th:product_topology]{product topology} on $\prod\limits_{i\in I}G_i$.
 \end{definition}
 
 \begin{proposition}{Neighborhood Basis of Inverse Limit}{}
