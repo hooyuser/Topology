@@ -1609,6 +1609,7 @@ Thus for every $b \in B$ there exists opens $U_b \subseteq X$ and $V_b \subseteq
 	A topological space $X$ is called \textbf{locally compact} if every point $x\in X$ has a compact neighborhood, i.e., there exists an open set $U$ and a compact set $K$ such that $x \in U \subseteq K$.
 \end{definition}
 
+
 \begin{proposition}{Equivalent Characterization of Locally Compactness for Hausdorff Space}{equivalent_characterization_of_locally_compactness}
 	If $X$ is a Hausdorff space, then the following are equivalent:
 	\begin{itemize}
@@ -1617,6 +1618,17 @@ Thus for every $b \in B$ there exists opens $U_b \subseteq X$ and $V_b \subseteq
 	\end{itemize}
 \end{proposition}
 
+
+\begin{proposition}{Properties of Locally Compact Space}{properties_of_locally_compact_space}
+	Suppose $X_1, X_2, \cdots, X_n$ are locally compact spaces. Then the product space $X_1 \times X_2 \times \cdots \times X_n$ is locally compact.
+\end{proposition}
+\begin{prf}
+	Fix $x=(x_1,x_2,\cdots,x_n)\in X_1\times X_2\times\cdots\times X_n$. For each $i=1,2,\cdots,n$, since $X_i$ is locally compact, there exists an open set $U_i$ and a compact set $K_i$ such that
+	\[
+	x_i\in U_i\subseteq K_i.
+	\]
+	Let $U=U_1\times U_2\times\cdots\times U_n$ and $K=K_1\times K_2\times\cdots\times K_n$. By Tychonoff's theorem, $K$ is compact. Thus $U$ is an open neighborhood of $(x_1,x_2,\cdots,x_n)$ and $K$ is a compact neighborhood of $(x_1,x_2,\cdots,x_n)$. Hence the product space is locally compact.
+\end{prf}
 
 
 \begin{definition}{Sequentially Compact Space}{}
@@ -2600,10 +2612,18 @@ Note that generally a topological space is not the disjoint union of its connect
 
 \noindent An isomorphism of topological groups is a group isomorphism that is also a homeomorphism of the underlying topological spaces.
 \begin{proposition}{}{}
-	The category $\mathsf{TopGrp}$ is complete. And we have
+	The category $\mathsf{TopGrp}$ is bicomplete. And we have
 	\begin{itemize}
-		\item forgetful functor $\mathsf{TopGrp}\to\mathsf{Top}$ creates limits.
-		\item forgetful functor $\mathsf{TopGrp}\to\mathsf{Grp}$ creates limits.
+		\item forgetful functor $U_{\mathsf{Grp}}:\mathsf{TopGrp}\to\mathsf{Grp}$ has both
+		left and right adjoints: $D \;\dashv\; U_{\mathsf{Grp}} \;\dashv\; I$
+		\[
+		\begin{tikzcd}
+		\mathsf{TopGrp} \arrow[r, "U_{\mathsf{Grp}}"] & \mathsf{Grp} \arrow[l, "D"', bend right=67] \arrow[l, "I"', bend left=67]
+		\end{tikzcd}
+		\]
+		$D$ endows a group with the discrete topology, and $I$ endows a group with the trivial topology.
+		\item forgetful functor $U_{\mathsf{Top}}:\mathsf{TopGrp}\to\mathsf{Top}$ creates limits.
+		\item forgetful functor $U_{\mathsf{Grp}}:\mathsf{TopGrp}\to\mathsf{Grp}$ creates limits.
 	\end{itemize}
 \end{proposition}
 
@@ -2864,13 +2884,26 @@ Note that generally a topological space is not the disjoint union of its connect
 	which implies $v'\circ \pi=v\circ \pi$ is continuous. By \Cref{th:equivalent_characterization_of_quotient_map}, since $\pi$ is a quotient map, $v'$ is continuous.
 \end{remark}
 
+\begin{proposition}{Universal Property of Quotient of Topological Group}{}
+	Let $G$ and $H$ be topological groups and $N$ be a normal subgroup of $G$. Let $\pi:G\to G/N$ be the canonical projection. Let $f:G\to H$ be a continuous group homomorphism such that 
+	\[
+	N \subseteq \ker f.
+	\]
+	Then there exists a unique continuous group homomorphism $\bar{f}:G/N\to H$ such that the following diagram commutes:
+	\[	\begin{tikzcd}
+		G \arrow[r, "f"] \arrow[
+d, "\pi"'] & H \\
+		G/N  \arrow[ru, "\overline{f}"']&
+	\end{tikzcd}
+	\]
+\end{proposition}
 
 \subsection{Limit}
 \begin{definition}{Limit in $\mathsf{TopGrp}$}{}
-	Let $F:\mathsf{J}\to \mathsf{TopGrp}$ be a functor and $U_{\mathsf{Grp}}:\mathsf{TopGrp}\to \mathsf{Grp}$. The underlying group of $\varprojlim F$ is $\varprojlim  U_{\mathsf{Grp}}\circ F$. The topology on $\varprojlim F$ is the final topology with respect to the collection of canonical projection maps $\{\mathrm{pr}_j\}_{j\in\mathrm{Ob}\left(\mathsf{J}\right)}$,  where $\mathrm{pr}_i$ is the projection map
+	Let $F:\mathsf{J}\to \mathsf{TopGrp}$ be a functor and $U_{\mathsf{Grp}}:\mathsf{TopGrp}\to \mathsf{Grp}$. The underlying group of $\varprojlim F$ is $\varprojlim  U_{\mathsf{Grp}}\circ F$. The topology on $\varprojlim F$ is the initial topology with respect to the collection of canonical projection maps $\{\mathrm{pr}_j\}_{j\in\mathrm{Ob}\left(\mathsf{J}\right)}$,  where $\mathrm{pr}_i$ is the projection map
 	\begin{align*}
 		\mathrm{pr}_j:\varprojlim F & \longrightarrow F(j) \\
-		(x_j)_{\mathrm{Ob}\left(\mathsf{J}\right)}  & \longmapsto x_j
+		(x_j)_{j\in \mathrm{Ob}\left(\mathsf{J}\right)}  & \longmapsto x_j
 	\end{align*}
 \end{definition}
 
@@ -2890,23 +2923,190 @@ Note that generally a topological space is not the disjoint union of its connect
 	is a neighborhood basis of $1_{\varprojlim F}$.
 \end{proposition}
 
-
+\subsection{Colimit}
+\begin{definition}{Colimit in $\mathsf{TopGrp}$}{}
+	Let $F:\mathsf{J}\to \mathsf{TopGrp}$ be a functor and $U_{\mathsf{Grp}}:\mathsf{TopGrp}\to \mathsf{Grp}$. The underlying group of $\varinjlim F$ is $\varinjlim  U_{\mathsf{Grp}}\circ F$. The topology on $\varinjlim F$ is the final topology with respect to the collection of canonical projection maps $\{\ell_j\}_{j\in\mathrm{Ob}\left(\mathsf{J}\right)}$,  where $\ell_j$ is the projection map
+	\begin{align*}
+		\ell_j:  F(j)&\longrightarrow \varinjlim F \\
+		(x_j)_{\mathrm{Ob}\left(\mathsf{J}\right)}  & \longmapsto x_j
+	\end{align*}
+\end{definition}
 
 \subsection{Restricted Product}
 \begin{definition}{Restricted Product of Locally Compact Groups}{}
-Let \( I \) be an index set and \( S\subseteq I \) a finite subset of \( I \). Suppose \( G_i \) is a locally compact group for each \( i \in I \), and \( K_i \subseteq G_i \) is an open compact subgroup for each \( i \in I - S \). The underlying set of the \textbf{restricted product} of the groups \( G_i \)  
+Let \( I \) be an index set and \( F\subseteq I \) be a finite subset of \( I \). Suppose \( G_i \) is a locally compact group for each \( i \in I \), and \( K_i \subseteq G_i \) is an open compact subgroup for each \( i \in I - F \). The underlying set of the \textbf{restricted product} of the groups \( G_i \)  
 \[
-\prod_{i\in I}' G_i\,
+\prod_{i\in I}^{\prime} G_i \,
 \]
-is the subset of $\prod_i G_i$ consisting of all elements \( (g_i)_{i \in I} \) such that \( g_i \in K_i \) for all but finitely many \( i \in I - S \). The restricted product is a subgroup of the product group $\prod_i G_i$, and is given the topology whose basis of open sets are those of the form
+is the subset of $\prod_{i\in I} G_i$ consisting of all elements \( (g_i)_{i \in I} \) such that \( g_i \in K_i \) for all but finitely many \( i \in I - S \). The restricted product is a subgroup of the product group $\prod_i G_i$. The topology of the restricted product is given by one of the following equivalent definitions:
+\begin{enumerate}[(i)]
+	\item \textbf{basis}: $\prod_{i\in I}^{\prime} G_i$ has basis of open sets of the form
 \[
-\prod_{i\in I} A_i\,,
+\prod_{i\in I} U_i\,,
 \]
-where \( A_i \) is open set in \( G_i \) and \( A_i = K_i \) for all but finitely many \( i \).
+where \( U_i \) is an open set in \( G_i \) and \( U_i = K_i \) for all but finitely many \( i \in I-F\).
+\item \textbf{neighborhood basis}: the identity of $\prod_{i\in I}^{\prime} G_i$ has neighborhood basis at \( (g_i)_{i \in I} \) consisting of sets of the form
+\[
+\prod_{i\in I} N_i\,,
+\]
+where \( N_i \) is a neighborhood of \( 1_{G_i}\in G_i \) and \( N_i = K_i \) for all but finitely many \( i \in I-F\).
+\end{enumerate}
 \end{definition}
 
+\begin{proposition}{Restricted Product as a Direct Limit}{}
+	Let \( I \) be an index set and \( F\subseteq I \) be a finite subset of \( I \). Suppose \( G_i \) is a locally compact group for each \( i \in I \), and \( K_i \subseteq G_i \) is an open compact subgroup for each \( i \in I - F \). Let
+	\[
+	G:=\prod_{i\in I}' G_i
+	\]
+	be the restricted product of the groups \( G_i \) with respect to the open compact subgroups \( K_i \).
+
+	Define 
+	\[
+		\mathcal S \;=\;\left\{\,S\subseteq I \;\middle| \;
+						S \text{ is finite and } F\subseteq S\right\}.
+	\]
+	Then $(\mathcal S, \subseteq)$ is a directed set. 
+	Consider the subgroup $G_S$ of $G$ defined by
+	\[
+		G_S:=\prod_{i\in S} G_i \times \prod_{i\in I-S} K_i.
+	\]
+	$G_S$ is endowed with the subspace topology from $G$. Then the family $\left( G_S \right)_{S\in \mathcal S}$ together with
+the inclusion maps 
+    \[
+		\left(i_{S,T}:G_S\hookrightarrow G_T\right)_{S\subseteq T}
+	\]
+	is a directed system of topological groups. And the restricted product \( G \) together with the inclusion maps 
+	\[
+		\left(i_S:G_S\hookrightarrow G\right)_{S\in \mathcal S}
+	\]
+	is the direct limit of this directed system in $\mathsf{TopGrp}$:
+	\[		
+	G \cong \varinjlim_{S\in \mathcal S} G_S
+	\]
+\end{proposition}
+\begin{prf}
+	\noindent\textbf{1. $G$ is the set-theoretic union of the $G_S$.} \\
+	Given any $g=(g_i)_{i\in I}\in G$, define
+	\[
+	S_g\;:=\;F\;\cup\;\left\{\,i\in I- F \mid g_i\notin K_i\right\}.
+	\]
+	Then we have $S_g \in \mathcal{S}$ and $g\in G_{S_g}$. Thus we obtain $G\subseteq \bigcup_{S\in \mathcal S} G_S$. Conversely, for any $S\in \mathcal{S}$, we have $G_S\subseteq G$. Therefore,
+	As a set, the restricted product is the union of the subgroups \( G_S \) for all \( S \in \mathcal{S} \):
+	\[
+	   G=\bigcup_{S\in \mathcal S} G_S .
+	\]
+	\smallskip
+	\noindent\textbf{2. The subspace topology $\tau_{\mathrm{sub}}$ on $G_S$ is the product topology $\tau_{\mathrm{prod}}$ on $G_S$.}\\
+	First, we prove $\tau_{\mathrm{sub}} \subseteq \tau_{\mathrm{prod}}$. Note that $\tau_{\mathrm{sub}}$ has basis of open sets of the form
+	\[	
+	G_S\cap \left(\prod_{i\in T} U_i \times \prod_{i\in I-T} K_i\right),
+	\]
+    where $T\in\mathcal S$, $U_i$ is open set of $G_i$ and $U_i\ne K_i$ for any $i\in T-F$. We can rewrite this as
+	\[
+	G_S\cap \left(\prod_{i\in T} U_i \times \prod_{i\in I-T} K_i\right)=\prod_{i\in S\cap T} U_i\times \prod_{i\in T - S} (U_i\cap K_i)\times \prod_{i\in I- T} K_i=\prod_{i\in I} H_i
+	\]
+	where
+	\begin{align*}
+		H_i=\begin{cases}
+			U_i & \text{if } i\in S\cap T\\
+			U_i\cap K_i & \text{if } i\in T-S\\
+			K_i & \text{if } i\in I-T
+		\end{cases}\,.
+	\end{align*}
+	So we see that $S\cup T$ is finite, and for any $i\in I-S\cup T$, we have $H_i = K_i$. Then $\prod_{i\in I} H_i$ is a basic open set of  $\tau_{\mathrm{prod}}$.
+
+	Then we prove $\tau_{\mathrm{prod}} \subseteq \tau_{\mathrm{sub}}$. Note that $\tau_{\mathrm{prod}}$ has basis of open sets of the form
+	\[
+	\prod_{i\in I} V_i,
+	\]
+	where $V_i$ is an open set in $G_i$ and $V_i = K_i$ for all but finitely many $i \in I-S$. Since $V_i = K_i$ for all but finitely many $i \in I-F$, $\prod_{i\in I} V_i$ is also a basic open set of $G$. Note that 
+	\[
+	\prod_{i\in I} V_i=G_S\cap\left(\prod_{i\in I} V_i\right).
+	\]
+    We see $\prod_{i\in I} V_i$ is a basic open set of $\tau_{\mathrm{sub}}$. Thus we have $\tau_{\mathrm{sub}} \subseteq \tau_{\mathrm{prod}}$. Therefore, we conclude that $\tau_{\mathrm{sub}} = \tau_{\mathrm{prod}}$.
+	
+	\smallskip
+	\noindent\textbf{3. The topology $\tau$ on $G$ is the final topology $\tau_{\mathrm{fin}}$ for the family
+	$(i_S)_{S\in\mathcal S}$.} \\
+	First, we prove $\tau\subseteq \tau_{\mathrm{fin}}$. $G$ has basis of open sets of the form
+	\[
+	\prod_{i\in I} U_i\,,
+	\]
+	where \( U_i \) is an open set in \( G_i \) and \( U_i = K_i \) for all but finitely many \( i \in I-F\). Suppose \( U \) is such a basic open set of $G$. Then for each $S \in \mathcal{S}$, $i^{-1}_S(U)=U\cap G_S$ is an open set of $G_S$. Thus $\tau \subseteq \tau_{\mathrm{fin}}$. 
+	
+	Then we prove $\tau_{\mathrm{fin}}\subseteq \tau$. If $U \in \tau_{\mathrm{fin}}$, then for each $S \in \mathcal{S}$, $i^{-1}_S(U)=U\cap G_S$ is open in $G_S$. Given any $g\in U$, we have $g\in G_{S_g}$. So $U\cap G_{S_g}$ is a neighborhood of $g$ in $G_S$. Since the topology on $G_S$ is the product topology, $G_S$ has a neighbor basis at the point $g$ of all sets of the form
+	\[
+	\prod_{i\in I} N_i
+	\]
+	where $N_i$ is an open neighborhood of $x$ in $G_i$ and $N_i=K_i$ for all but finitely many $i\in I-S$. Thus we have
+	\[
+	g \in \prod_{i\in I} N_i \subseteq U\cap G_{S_g}
+	\]
+	where $N_i$ is an open neighborhood of $x$ in $G_i$ for each $i\in I$ and $N_i=K_i$ for all but finitely many $i\in I-F$. Let $N:=\prod_{i\in I} N_i$. Thus $N$ is an open neighborhood of $g$ in $G$ such that $N \subseteq U$. Therefore, $U$ is an open set in $G$ and we have $\tau_{\mathrm{fin}}\subseteq \tau$. Combining it with $\tau \subseteq \tau_{\mathrm{fin}}$ we get $\tau =\tau_{\mathrm{fin}}$.
+
+	\smallskip
+\noindent\textbf{4. Universal property.}\\
+Let $H$ be a topological group and suppose we are given a compatible
+family of continuous homomorphisms
+\[
+  (\varphi_S\colon G_S\to H)_{S\in\mathcal S},
+  \qquad
+  \varphi_T\circ i_{S,T}=\varphi_S \text{ whenever }S\subseteq T.
+\]
+
+\noindent\emph{Definition of the candidate map.}
+Define a map
+\begin{align*}
+	\Phi\colon G &\longrightarrow H \\
+	g &\longmapsto \varphi_{S_g}(g)
+\end{align*}
+For any $g,h\in G$, let $T:= S_{g} \cup S_{h}$. Then we have 
+\[
+S_g\subseteq T,\quad S_h\subseteq T,\quad S_{gh}\subseteq T
+\]
+and
+\begin{align*}
+	\Phi(gh)&=\varphi_{S_{gh}}(gh)\\
+	&=\varphi_T(i_{S_{gh},T}(gh))\\
+	&=\varphi_T(gh)\\
+	&=\varphi_T(g)\varphi_T(h)\\
+	&=\varphi_T\left(i_{S_g,T}(g)\right)\varphi_T\left(i_{S_h,T}(h)\right)\\
+	&=\varphi_{S_g}(g)\varphi_{S_h}(h)\\
+	&=\Phi(g)\Phi(h).
+\end{align*}
+Hence, $\Phi$ is a group homomorphism.
+
+\emph{Continuity.}
+Let $S$ be any element of $\mathcal{S}$. Since for any $g\in G_{S}$, we have $S_g\subseteq S$, we can check that
+\[
+\Phi\circ i_S(g)=\Phi(g)=\varphi_{S_g}(g)=\varphi_S(g).
+\]
+So we have $\Phi\circ i_S=\varphi_S$, which is continuous by assumption. Because the topology on $G$ is final for $(i_S)_{S\in \mathcal{S}}$, this implies
+$\Phi$ is continuous.
+
+\emph{Uniqueness.}
+If $\Psi\colon G\to H$ is another continuous homomorphism with
+$\Psi\circ i_S=\varphi_S$ for all $S\in\mathcal{S}$, then for every $g\in G$ we have
+\[
+\Psi(g)=\Psi(i_{S_g}(g))=\varphi_{S_g}(g)=\Phi(g)
+\]
+which shows that $\Psi$ and $\Phi$ agree on all elements of $G$. Hence, we conclude that the map $\Phi$ is unique.
+\end{prf}
+
+\begin{proposition}{Properties of Restricted Product}{}
+	Let \( I \) be an index set and \( F\subseteq I \) be a finite subset of \( I \). Suppose \( G_i \) is a locally compact group for each \( i \in I \), and \( K_i \subseteq G_i \) is an open compact subgroup for each \( i \in I - F \). Then the restricted product \( \prod_{i\in I}' G_i \) has the following properties:
+	\begin{enumerate}[(i)]
+		\item The restricted product is a locally compact group.
+	\end{enumerate}
+\end{proposition}
+\begin{prf}
+	\begin{enumerate}[(i)]
+		\item 
+	\end{enumerate}
+\end{prf}
+
 \begin{example}{Topological Embedding into Restricted Product}{}
-	Let \( I \) be an index set and \( S\subseteq I \) a finite subset of \( I \). Suppose \( G_i \) is a locally compact group for each \( i \in I \), and \( K_i \subseteq G_i \) is an open compact subgroup for each \( i \in I - S \). Then for any $v\in I$, the group homomorphism
+	Let \( I \) be an index set and \( F\subseteq I \) a finite subset of \( I \). Suppose \( G_i \) is a locally compact group for each \( i \in I \), and \( K_i \subseteq G_i \) is an open compact subgroup for each \( i \in I - F \). Then for any $v\in I$, the group homomorphism
 	\begin{align*}
 		\iota_v:G_v &\longrightarrow \prod_{i\in I}' G_i \\
 		x &\longmapsto (\cdots, 1, 1, \underset{\hspace{-2.3em} \substack{\uparrow \\ \text{\footnotesize $v$th component}}\hspace{-2.3em}}{x},
