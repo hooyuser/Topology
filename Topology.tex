@@ -2647,7 +2647,7 @@ Note that generally a topological space is not the disjoint union of its connect
 
 
 \begin{lemma}{}{shrink_the_neighborhood_of_ab}
-	The map 
+	Let $G$ be a topological group. The map 
 	\begin{align*}
 		m:G\times G & \longrightarrow G       \\
 		(g_1,g_2)   & \longmapsto g_1g_2^{-1}
@@ -2662,7 +2662,14 @@ Note that generally a topological space is not the disjoint union of its connect
 		\[
 		m(U\times U)=U U^{-1}\subseteq W.
 		\]
-		\item For any neighborhood $W$ of $1_G$, there exists an open neighborhood $U$ of $1_G$ such that $UU\subseteq W$.
+		\item For any neighborhood $W$ of $1_G$, there exists an open neighborhood $U$ of $1_G$ such that 
+		\[
+		m(U\times U^{-1})=U U\subseteq W.
+		\]
+		\item For any neighborhood $W$ of $1_G$, there exists an open neighborhood $U$ of $1_G$ such that 
+		\[
+		U^{(n)}=\left\{ g_1 g_2 \cdots g_n \mid g_i\in U \text{ for } i=1,2,\ldots,n\right\} \subseteq W.
+		\]
 	\end{enumerate}
 \end{lemma}
 \begin{prf}
@@ -2673,7 +2680,16 @@ Note that generally a topological space is not the disjoint union of its connect
 	\]
 	for some index set $I$ and open sets $U_i, V_i\subseteq G$. Therefore, there exists $k\in I$ such that $(a,b)\in U_i\times V_k$, which implies $a\in U_k$ and $b\in V_k$, which completes the proof.
 	\item Take $a=b$ in (i). For any neighborhood $W$ of $1_G$, there exists an open neighborhood $U_1$ of $a$ and an open neighborhood $U_2$ of $1_G$ such that $m(U_1\times U_2)\subseteq W$. Let $U=U_1\cap U_2$. Then $UU^{-1}= m(U\times U)\subseteq m(U_1\times U_2)\subseteq W$.
-	\item Take $a=b=1_G$ in (i). For any neighborhood $W$ of $1_G$, there exists an open neighborhood $U_1$ of $a$ and an open neighborhood $U_2$ of $1_G$ such that $m(U_1\times U_2)\subseteq W$. Let $U=U_1\cap U_2^{-1}$. Then we have $U^{-1}\subseteq U_2$ and $UU= m(U\times U^{-1})\subseteq m(U_1\times U_2)\subseteq W$.
+	\item Take $a=b=1_G$ in (i). For any neighborhood $W$ of $1_G$, there exists an open neighborhood $U_1$ of $1_G$ and an open neighborhood $U_2$ of $1_G$ such that $m(U_1\times U_2)\subseteq W$. Let $U=U_1\cap U_2^{-1}$ and $\mathrm{inv}:g\mapsto g^{-1}$. Then we have 
+	\[
+	U^{-1}=\mathrm{inv}(U_1\cap \mathrm{inv}^{-1}(U_2))=\mathrm{inv}(U_1)\cap U_2\subseteq U_2
+	\] 
+	and $UU=U(U^{-1})^{-1}=  m(U\times U^{-1})\subseteq m(U_1\times U_2)\subseteq W$.
+	\item We can prove this by induction on $n$. For $n=2$, it is just (iii). Suppose it holds for $n=k$. From (iii), there exists an open neighborhood $V$ of $1_G$ such that $VV\subseteq W$. By the induction hypothesis, there exists an open neighborhood $U_0$ of $1_G$ such that $U_0^{(k)}\subseteq V$. Let $U:=U_0\cap V$. Then $U$ is an open neighborhood of $1_G$ such that
+	\[
+		U^{(k+1)}=U^{(k)}U\subseteq U_0^{(k)} V\subseteq VV\subseteq W.
+	\]
+	This completes the proof.
 \end{enumerate}
 \end{prf}
 
@@ -2953,7 +2969,7 @@ where \( N_i \) is a neighborhood of \( 1_{G_i}\in G_i \) and \( N_i = K_i \) fo
 \end{enumerate}
 \end{definition}
 
-\begin{proposition}{Restricted Product as a Direct Limit}{}
+\begin{lemma}{Subgroup $G_S$ of the Restricted Product}{subgroup_G_S_of_the_restricted_product}
 	Let \( I \) be an index set and \( F\subseteq I \) be a finite subset of \( I \). Suppose \( G_i \) is a locally compact group for each \( i \in I \), and \( K_i \subseteq G_i \) is an open compact subgroup for each \( i \in I - F \). Let
 	\[
 	G:=\prod_{i\in I}' G_i
@@ -2965,39 +2981,19 @@ where \( N_i \) is a neighborhood of \( 1_{G_i}\in G_i \) and \( N_i = K_i \) fo
 		\mathcal S \;=\;\left\{\,S\subseteq I \;\middle| \;
 						S \text{ is finite and } F\subseteq S\right\}.
 	\]
-	Then $(\mathcal S, \subseteq)$ is a directed set. 
 	Consider the subgroup $G_S$ of $G$ defined by
 	\[
 		G_S:=\prod_{i\in S} G_i \times \prod_{i\in I-S} K_i.
 	\]
-	$G_S$ is endowed with the subspace topology from $G$. Then the family $\left( G_S \right)_{S\in \mathcal S}$ together with
-the inclusion maps 
-    \[
-		\left(i_{S,T}:G_S\hookrightarrow G_T\right)_{S\subseteq T}
-	\]
-	is a directed system of topological groups. And the restricted product \( G \) together with the inclusion maps 
-	\[
-		\left(i_S:G_S\hookrightarrow G\right)_{S\in \mathcal S}
-	\]
-	is the direct limit of this directed system in $\mathsf{TopGrp}$:
-	\[		
-	G \cong \varinjlim_{S\in \mathcal S} G_S
-	\]
-\end{proposition}
+	Endow $G_S$ with the subspace topology from $G$. Then the following hold:
+	\begin{enumerate}[(i)]
+		\item The subspace topology $\tau_{\mathrm{sub}}$ on $G_S$ coincides with the product topology $\tau_{\mathrm{prod}}$ on $G_S$.
+		\item $G_S$ is a locally compact group.
+	\end{enumerate}
+\end{lemma}
 \begin{prf}
-	\noindent\textbf{1. $G$ is the set-theoretic union of the $G_S$.} \\
-	Given any $g=(g_i)_{i\in I}\in G$, define
-	\[
-	S_g\;:=\;F\;\cup\;\left\{\,i\in I- F \mid g_i\notin K_i\right\}.
-	\]
-	Then we have $S_g \in \mathcal{S}$ and $g\in G_{S_g}$. Thus we obtain $G\subseteq \bigcup_{S\in \mathcal S} G_S$. Conversely, for any $S\in \mathcal{S}$, we have $G_S\subseteq G$. Therefore,
-	As a set, the restricted product is the union of the subgroups \( G_S \) for all \( S \in \mathcal{S} \):
-	\[
-	   G=\bigcup_{S\in \mathcal S} G_S .
-	\]
-	\smallskip
-	\noindent\textbf{2. The subspace topology $\tau_{\mathrm{sub}}$ on $G_S$ is the product topology $\tau_{\mathrm{prod}}$ on $G_S$.}\\
-	First, we prove $\tau_{\mathrm{sub}} \subseteq \tau_{\mathrm{prod}}$. Note that $\tau_{\mathrm{sub}}$ has basis of open sets of the form
+	\begin{enumerate}[(i)]
+		\item First, we prove $\tau_{\mathrm{sub}} \subseteq \tau_{\mathrm{prod}}$. Note that $\tau_{\mathrm{sub}}$ has basis of open sets of the form
 	\[	
 	G_S\cap \left(\prod_{i\in T} U_i \times \prod_{i\in I-T} K_i\right),
 	\]
@@ -3024,9 +3020,60 @@ the inclusion maps
 	\prod_{i\in I} V_i=G_S\cap\left(\prod_{i\in I} V_i\right).
 	\]
     We see $\prod_{i\in I} V_i$ is a basic open set of $\tau_{\mathrm{sub}}$. Thus we have $\tau_{\mathrm{sub}} \subseteq \tau_{\mathrm{prod}}$. Therefore, we conclude that $\tau_{\mathrm{sub}} = \tau_{\mathrm{prod}}$.
+	\item By \hyperref[th:sufficient_condition_for_compactness]{Tychonoff's theorem}, the product of compact spaces is compact. So 
+	\[
+	 \prod_{i\in I-S} K_i
+	\]
+	is compact. According to \Cref{th:properties_of_locally_compact_space}, since $G_S$ is a product of a finite number of locally compact groups, $G_S$ is locally compact.
+	\end{enumerate}
+	
+\end{prf}
+
+\begin{proposition}{Restricted Product as a Direct Limit}{restricted_product_as_direct_limit}
+	Let \( I \) be an index set and \( F\subseteq I \) be a finite subset of \( I \). Suppose \( G_i \) is a locally compact group for each \( i \in I \), and \( K_i \subseteq G_i \) is an open compact subgroup for each \( i \in I - F \). Let
+	\[
+	G:=\prod_{i\in I}' G_i
+	\]
+	be the restricted product of the groups \( G_i \) with respect to the open compact subgroups \( K_i \).
+
+	Define 
+	\[
+		\mathcal S \;=\;\left\{\,S\subseteq I \;\middle| \;
+						S \text{ is finite and } F\subseteq S\right\}.
+	\]
+	Then $(\mathcal S, \subseteq)$ is a directed set. 
+	Consider the subgroup $G_S$ of $G$ defined by
+	\[
+		G_S:=\prod_{i\in S} G_i \times \prod_{i\in I-S} K_i.
+	\]
+	Endow $G_S$ with the subspace topology from $G$. Then the family $\left( G_S \right)_{S\in \mathcal S}$ together with
+the inclusion maps 
+    \[
+		\left(i_{S,T}:G_S\hookrightarrow G_T\right)_{S\subseteq T}
+	\]
+	is a directed system of topological groups. And the restricted product \( G \) together with the inclusion maps 
+	\[
+		\left(i_S:G_S\hookrightarrow G\right)_{S\in \mathcal S}
+	\]
+	is the direct limit of this directed system in $\mathsf{TopGrp}$:
+	\[		
+	G \cong \varinjlim_{S\in \mathcal S} G_S
+	\]
+\end{proposition}
+\begin{prf}
+	\noindent\textbf{1. $G$ is the set-theoretic union of the $G_S$.} \\
+	Given any $g=(g_i)_{i\in I}\in G$, define
+	\[
+	S_g\;:=\;F\;\cup\;\left\{\,i\in I- F \mid g_i\notin K_i\right\}.
+	\]
+	Then we have $S_g \in \mathcal{S}$ and $g\in G_{S_g}$. Thus we obtain $G\subseteq \bigcup_{S\in \mathcal S} G_S$. Conversely, for any $S\in \mathcal{S}$, we have $G_S\subseteq G$. Therefore,
+	As a set, the restricted product is the union of the subgroups \( G_S \) for all \( S \in \mathcal{S} \):
+	\[
+	   G=\bigcup_{S\in \mathcal S} G_S .
+	\]
 	
 	\smallskip
-	\noindent\textbf{3. The topology $\tau$ on $G$ is the final topology $\tau_{\mathrm{fin}}$ for the family
+	\noindent\textbf{2. The topology $\tau$ on $G$ is the final topology $\tau_{\mathrm{fin}}$ for the family
 	$(i_S)_{S\in\mathcal S}$.} \\
 	First, we prove $\tau\subseteq \tau_{\mathrm{fin}}$. $G$ has basis of open sets of the form
 	\[
@@ -3034,9 +3081,9 @@ the inclusion maps
 	\]
 	where \( U_i \) is an open set in \( G_i \) and \( U_i = K_i \) for all but finitely many \( i \in I-F\). Suppose \( U \) is such a basic open set of $G$. Then for each $S \in \mathcal{S}$, $i^{-1}_S(U)=U\cap G_S$ is an open set of $G_S$. Thus $\tau \subseteq \tau_{\mathrm{fin}}$. 
 	
-	Then we prove $\tau_{\mathrm{fin}}\subseteq \tau$. If $U \in \tau_{\mathrm{fin}}$, then for each $S \in \mathcal{S}$, $i^{-1}_S(U)=U\cap G_S$ is open in $G_S$. Given any $g\in U$, we have $g\in G_{S_g}$. So $U\cap G_{S_g}$ is a neighborhood of $g$ in $G_S$. Since the topology on $G_S$ is the product topology, $G_S$ has a neighbor basis at the point $g$ of all sets of the form
+	Then we prove $\tau_{\mathrm{fin}}\subseteq \tau$. If $U \in \tau_{\mathrm{fin}}$, then for each $S \in \mathcal{S}$, $i^{-1}_S(U)=U\cap G_S$ is open in $G_S$. Given any $g\in U$, we have $g\in G_{S_g}$. So $U\cap G_{S_g}$ is a neighborhood of $g$ in $G_S$. According to \Cref{th:subgroup_G_S_of_the_restricted_product}, the topology on $G_S$ is the product topology, which implies that $G_S$ has a neighbor basis at the point $g$ of all sets of the form
 	\[
-	\prod_{i\in I} N_i
+	\prod_{i\in I} N_i,
 	\]
 	where $N_i$ is an open neighborhood of $x$ in $G_i$ and $N_i=K_i$ for all but finitely many $i\in I-S$. Thus we have
 	\[
@@ -3045,7 +3092,7 @@ the inclusion maps
 	where $N_i$ is an open neighborhood of $x$ in $G_i$ for each $i\in I$ and $N_i=K_i$ for all but finitely many $i\in I-F$. Let $N:=\prod_{i\in I} N_i$. Thus $N$ is an open neighborhood of $g$ in $G$ such that $N \subseteq U$. Therefore, $U$ is an open set in $G$ and we have $\tau_{\mathrm{fin}}\subseteq \tau$. Combining it with $\tau \subseteq \tau_{\mathrm{fin}}$ we get $\tau =\tau_{\mathrm{fin}}$.
 
 	\smallskip
-\noindent\textbf{4. Universal property.}\\
+\noindent\textbf{3. Universal property.}\\
 Let $H$ be a topological group and suppose we are given a compatible
 family of continuous homomorphisms
 \[
@@ -3101,7 +3148,11 @@ which shows that $\Psi$ and $\Phi$ agree on all elements of $G$. Hence, we concl
 \end{proposition}
 \begin{prf}
 	\begin{enumerate}[(i)]
-		\item 
+		\item Given any $g\in G$, define 
+	\[
+	S_g\;:=\;F\;\cup\;\left\{\,i\in I- F \mid g_i\notin K_i\right\}.
+	\]
+	From \Cref{th:restricted_product_as_direct_limit} we see $G_{S_g}$ is a locally compact group and $g\in G_{S_g}$. Thus  $G_{S_g}$ is a compact neighborhood of $g$ in $G$. This shows that $G$ is locally compact.
 	\end{enumerate}
 \end{prf}
 
